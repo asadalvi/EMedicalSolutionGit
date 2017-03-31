@@ -1,0 +1,241 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Dashboard - E Medical Data Entry System</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link href="~/Content/style.css" rel="stylesheet" />
+    <link href="~/Content/w3.css" rel="stylesheet" />
+    <link href="~/Content/jquery-ui.css" rel="stylesheet" />
+    <link href="~/Content/font-awesome.min.css" rel="stylesheet" />
+    <link href="~/Content/jquery.dataTables.min.css" rel="stylesheet" />
+
+    <script src="~/Scripts/jquery-3.1.1.js"></script>
+    <script src="~/Scripts/jquery-ui.js"></script>
+
+    <script>
+        $(document).on('click', '.w3-sidenav a', function () {
+            console.log('View Changed');
+            $('.w3-sidenav a').removeClass('w3-blue');
+            $(this).addClass('w3-blue');
+        });
+
+        $(document).ready(function () {
+            console.log('Making datepicker');
+            $(".datepicker").datepicker({
+                changeMonth: true,
+                changeYear: true
+            });
+        });
+
+
+    </script>
+
+
+    <style>
+        span.field-validation-error {
+            color: red;
+        }
+    </style>
+
+</head>
+
+<body class="w3-light-grey">
+
+    @if (Session["Name"] == null)
+    {
+        Response.Redirect("~/Security/Login");
+    }
+    <!-- Top container -->
+    <div class="w3-container w3-top w3-blue w3-large w3-padding" style="z-index: 4">
+        <button class="w3-btn w3-hide-large w3-padding-0 w3-hover-text-grey w3-right" onclick="w3_open();">
+            <i class="fa fa-bars"></i>Menu
+        </button>
+        <span class="w3-left" style="font-size: 24px">
+            <a href="~/Home/Dashboard"><i class="fa fa-heartbeat"></i></a> E-Medical Solution
+            </span>
+        <span class="w3-right"><a href="~/Security/Logout"><i class="fa fa-sign-out"></i>Logout</a></span>
+    </div>
+
+    <!-- Sidenav/menu -->
+    <nav class="w3-sidenav w3-collapse w3-white w3-animate-left" style="z-index: 3; width: 275px;" id="mySidenav">
+        <br>
+        <div class="w3-container w3-row">
+            <div class="w3-col s4">
+@*                @if (Session["Image"] != null)
+                {z
+                    <img src="@Url.Content("~/images/" + Session["role"].ToString() + "/" + System.IO.Path.GetFileName(Session["Image"].ToString()))" alt="Image" style="width: 46px" />
+                }
+                else
+                {
+                    *@
+                <img src="~/images/avatar.jpg" class="w3-circle w3-margin-right" style="width: 46px">
+                @*}*@
+            </div>
+            <div class="w3-col s8 w3-margin-top">
+                <span>Welcome <strong>@if (Session["Name"] != null)
+                                      { 
+                    @Session["Name"].ToString();
+                                      }
+                                      else
+                                      {
+                                          if (!Response.IsRequestBeingRedirected)
+                                          {
+                                              Response.Redirect("../../Security/Login");
+                                          }
+                                      }</strong></span><br>
+            </div>
+        </div>
+        <hr>
+        <a href="#" class="w3-padding-16 w3-hide-large w3-dark-grey w3-hover-black" onclick="w3_close()" title="close menu"><i
+            class="fa fa-remove"></i>Close Menu</a>
+        @if (Session["role"] != null)
+        {
+            if (Session["role"].ToString() == "4")
+            { 
+            <a href="~/Patients/Wizard" class="w3-padding"><i class="fa fa-wheelchair"></i>Patients Wizard</a>
+            <a href="~/Patients/Index" class="w3-padding"><i class="fa fa-wheelchair"></i>Patients</a>
+            <a href="~/Symptoms/Index" class="w3-padding"><i class="fa fa-newspaper-o"></i>Symptoms</a>
+            <a href="~/Diseases/Index" class="w3-padding"><i class="fa fa-newspaper-o"></i>Diseases</a>
+            <a href="~/Conditions/Index" class="w3-padding"><i class="fa fa-newspaper-o"></i>Interferring Conditions</a>
+            <a href="~/Patients/Index" class="w3-padding"><i class="fa fa-newspaper-o"></i>Medical Necessities</a>
+            <a href="~/Patients/Index" class="w3-padding"><i class="fa fa-newspaper-o"></i>Procedure Types</a>
+            <a href="~/Offices/Index" class="w3-padding"><i class="fa fa-building"></i>Offices</a>
+            <a href="~/Users/UsersList" class="w3-padding"><i class="fa fa-users"></i>Staff</a>
+            <a href="~/Users/UsersList" class="w3-padding"><i class="fa fa-users"></i>Users Management</a>
+            <a href='~/Doctor/ProfileInfo' class="w3-padding"><i class="fa fa-user"></i>Profile</a>
+            <a href="~/Doctor/ScheduleList" class="w3-padding"><i class="fa fa-calendar"></i>Schedule</a>
+            <a href="#" class="w3-padding"><i class="fa fa-video-camera"></i>Video Conference</a>
+            <a onclick="document.getElementById('video-modal').style.display='block'">Launch video</a>
+            }
+            else if (Session["role"].ToString() == "2")
+            {
+            <a href="~/Patient/Index" class="w3-padding"><i class="fa fa-user"></i>Patients</a>
+            <a href="~/Appointment/Index" class="w3-padding"><i class="fa fa-calendar"></i>Appointments</a>
+            <a href="~/Doctor/Index" class="w3-padding"><i class="fa fa-user-md"></i>Doctors</a>
+            <a href="~/Pharmacy/Index" class="w3-padding"><i class="fa fa-plus-square"></i>Pharmacies</a>
+            <a href="~/Lab/Index" class="w3-padding"><i class="fa fa-flask"></i>Laboratories</a>
+            <a href="~/Events/Index" class="w3-padding"><i class="fa fa-newspaper-o"></i>Events</a>
+            <a href="~/Consent/Index" class="w3-padding"><i class="fa fa-upload"></i>Upload Consent Form</a>
+            }
+            else if (Session["role"].ToString() == "3")
+            { 
+            <a href="~/Pharmacy/PrescriptionsToProcess" class="w3-padding"><i class="fa fa-medkit"></i>Prescriptions</a>
+            }
+            else if (Session["role"].ToString() == "4")
+            { 
+            <a href="~/Lab/SuggestedTestsList" class="w3-padding"><i class="fa fa-flask"></i>Tests</a>
+            }
+            else if (Session["role"].ToString() == "patient")
+            { 
+            <a href="~/Appointment/Index" class="w3-padding"><i class="fa fa-calendar"></i>Appointments</a>
+            <a href="~/Patient/HistoryList" class="w3-padding"><i class="fa fa-history"></i>History</a>
+            <a href="#" class="w3-padding"><i class="fa fa-video-camera"></i>Video Conference</a>
+            }
+        }
+
+    </nav>
+
+
+    <!-- Overlay effect when opening sidenav on small screens -->
+    <div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor: pointer"
+        title="close side menu" id="myOverlay">
+    </div>
+
+    <!-- !PAGE CONTENT! -->
+    <div class="w3-main" style="margin-left: 275px; margin-top: 50px;">
+
+
+        @RenderBody()
+        <!--Main Content-->
+        <!--Main Content-->
+
+        <!-- Footer -->
+        <footer class="w3-container w3-light-grey w3-bottom">
+            <div class="w3-container w3-row">
+                <div class="w3-col s4 w3-hide-small">
+                    <h6>&copy; <a href="http://www.fiverr.com/asadawan88">Eazisol</a>. All Rights Reserved.</h6>
+                </div>
+            </div>
+        </footer>
+        <!-- Footer -->
+
+        <!-- End page content -->
+    </div>
+    @RenderSection("Scripts", false)
+    <script>
+        // Get the Sidenav
+        var mySidenav = document.getElementById("mySidenav");
+
+        // Get the DIV with overlay effect
+        var overlayBg = document.getElementById("myOverlay");
+
+        // Toggle between showing and hiding the sidenav, and add overlay effect
+        function w3_open() {
+            if (mySidenav.style.display === 'block') {
+                mySidenav.style.display = 'none';
+                overlayBg.style.display = "none";
+            } else {
+                mySidenav.style.display = 'block';
+                overlayBg.style.display = "block";
+            }
+        }
+
+        // Close the sidenav with the close button
+        function w3_close() {
+            mySidenav.style.display = "none";
+            overlayBg.style.display = "none";
+        }
+
+        //Function for popup in Datatable crud options
+        function OpenPopup(pageUrl, oTable, title) {
+            //console.log(pageUrl);
+            var $pageContent = $('<div/>');
+            $pageContent.load(pageUrl, function () {
+                $('#popupForm', $pageContent).removeData('validator');
+                $('#popupForm', $pageContent).removeData('unobtrusiveValidation');
+                $.validator.unobtrusive.parse('form');
+
+            });
+
+            $dialog = $('<div class="popupWindow" style="overflow:auto"></div>')
+                      .html($pageContent)
+                      .dialog({
+                          autoOpen: false,
+                          resizable: true,
+                          model: true,
+                          title: title,
+                          close: function () {
+                              $dialog.dialog('destroy').remove();
+                          }
+                      })
+
+            $('.popupWindow').on('submit', '#popupForm', function (e) {
+                var url = $('#popupForm')[0].action;
+                console.log(url);
+                $.ajax({
+                    type: "POST",
+                    url: url,
+                    data: $('#popupForm').serialize(),
+                    success: function (data) {
+                        console.log(data);
+                        if (data.status) {
+                            $dialog.dialog('close');
+                            //location.reload();
+                            oTable.ajax.reload();
+                        }
+                    }
+                })
+
+                e.preventDefault();
+            })
+
+            $dialog.dialog('open');
+        }
+    </script>
+
+</body>
+</html>

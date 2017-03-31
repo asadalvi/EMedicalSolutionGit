@@ -1,0 +1,45 @@
+﻿@model EMedicalSolution.Models.User
+
+<h2>Delete Patient</h2>
+
+@using (Html.BeginForm("DeleteUser", "Users", FormMethod.Post, new { id = "popupForm" }))
+{
+    @Html.HiddenFor(a => a.ID)
+    <div class="w3-row w3-margin-top">
+        <div class="w3-half">
+            <b>User ID</b>
+        </div>
+        <div class="w3-half">
+            @Model.ID
+        </div>
+    </div>
+    <div class="w3-row w3-margin-top">
+        <div class="w3-half">
+            <b>Username</b>
+        </div>
+        <div class="w3-half">
+            @Model.Username
+        </div>
+    </div>
+    <div class="w3-row w3-margin-top">
+        <div class="w3-half">
+            <b>Role</b>
+        </div>
+        <div class="w3-half">
+            @Model.UserRole.Title
+        </div>
+    </div>
+    <div class="w3-row w3-margin-top">
+        <div class="w3-half">
+            <b>Employee</b>
+        </div>
+        <div class="w3-half">
+            @Model.Staff.FirstName @Model.Staff.LastName
+        </div>
+    </div>
+   
+    
+    <div class="w3-row w3-margin-top">
+        <input class="w3-btn-block w3-red" type="submit" value="Delete" />
+    </div>
+}

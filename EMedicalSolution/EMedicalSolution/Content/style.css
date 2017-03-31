@@ -1,0 +1,140 @@
+.hidden {
+    display: none;
+}
+
+html, body, h1, h2, h3, h4, h5 {
+    font-family: "Candara";
+}
+
+footer {
+    border-top: 2px #444 solid;
+}
+
+.fullWidth {
+    width: 100%;
+}
+
+.w3-main input, .w3-main select {
+    border: 1px solid #ccc!important;
+}
+
+.fa {
+    margin-right: 10px;
+}
+
+input[type=checkbox] {
+    transform: scale(2);
+}
+
+.w3-top span {
+    color: #ffffff;
+    font-size: 24px !important;
+    vertical-align: middle;
+    cursor: pointer;
+}
+
+#login-modal.w3-modal {
+    padding-top: 54px !important;
+}
+
+.w3-modal-content {
+    margin-bottom: 32px;
+}
+
+thead th {
+    background: #ececec;
+}
+
+th, td {
+    text-align: center !important;
+    vertical-align: middle !important;
+}
+
+    td img {
+        width: 65px;
+        height: 40px;
+        border: 1px #adadad solid;
+    }
+
+    td .w3-modal img {
+        width: 100%!important;
+        height: 100%!important;
+    }
+
+.dashboardDiv {
+    margin-bottom: 100px;
+}
+
+#doctor-profile-tab .w3-half {
+    padding: 5px;
+}
+
+#doctor-profile-tab img {
+    width: 45%;
+    border: 1px #adadad solid;
+}
+
+#patient-details img {
+    width: 45%;
+    border: 1px #adadad solid;
+}
+
+#patient-details .w3-third {
+    padding: 5px;
+}
+
+#laboratory-details img {
+    width: 45%;
+    border: 1px #adadad solid;
+}
+
+#laboratory-details .w3-half {
+    padding: 5px;
+}
+
+#laboratory-details textarea {
+    width: 100%;
+}
+
+#pharmacy-details img {
+    width: 45%;
+    border: 1px #adadad solid;
+}
+
+#pharmacy-details .w3-half {
+    padding: 5px;
+}
+
+#pharmacy-details textarea {
+    width: 100%;
+}
+
+#doctor-pharmacy-tab .w3-half, #doctor-pharmacy-tab .w3-third {
+    padding: 5px;
+}
+
+#doctor-laboratory-tab .w3-third, #doctor-laboratory-tab .w3-twothird {
+    padding: 5px;
+}
+
+#add-history, #add-test, #add-prescription {
+    padding: 16px;
+    border: 2px #444 solid;
+}
+
+    #add-history .w3-third, #add-test .w3-half, #add-prescription .w3-half {
+        padding: 5px;
+    }
+
+    #add-history .w3-btn, #add-test .w3-btn, #add-prescription .w3-btn {
+        margin-top: 22px;
+    }
+
+.ui-dialog {
+    top: 120px!important;
+}
+
+.ui-dialog-titlebar {
+    background: #2196F3!important;
+    color: white!important;
+}

@@ -1,0 +1,403 @@
+﻿@model EMedicalSolution.ViewModels.patientIntakeViewModel
+
+@{
+    ViewBag.Title = "Patient Wizard";
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
+}
+
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+<link href="~/Content/bootstrap-theme.min.css" rel="stylesheet" />
+
+<link href="~/Content/wizard/smart_wizard.css" rel="stylesheet" />
+
+<link href="~/Content/wizard/smart_wizard_theme_arrows.css" rel="stylesheet" />
+<link href="~/Content/wizard/smart_wizard_theme_circles.css" rel="stylesheet" />
+<link href="~/Content/wizard/smart_wizard_theme_dots.css" rel="stylesheet" />
+
+
+<div class="w3-container tablecontainer dashboardDiv" id="patients-tab">
+    <div class="w3-center w3-dark-gray">
+        <h2>Patients Wizard</h2>
+    </div>
+    <div class="w3-row w3-padding-16">
+
+
+
+
+        @*            <form class="form-inline">
+                <div class="form-group">
+                    <label>Choose Theme:</label>
+                    <select id="theme_selector" class="form-control">
+                        <option value="default">default</option>
+                        <option value="arrows">arrows</option>
+                        <option value="circles">circles</option>
+                        <option value="dots">dots</option>
+                    </select>
+                </div>
+
+                <label>External Buttons:</label>
+                <div class="btn-group navbar-btn" role="group">
+                    <button class="btn btn-default" id="prev-btn" type="button">Go Previous</button>
+                    <button class="btn btn-default" id="next-btn" type="button">Go Next</button>
+                    <button class="btn btn-danger" id="reset-btn" type="button">Reset Wizard</button>
+                </div>
+            </form>*@
+
+        <br />
+
+        <!-- SmartWizard html -->
+        <div id="smartwizard">
+            <ul>
+                <li>
+                    <a href="#step-1">
+                        Step 1<br />
+                        <small>Patient Info</small>
+                    </a>
+                </li>
+                <li>
+                    <a href="#step-2">
+                        Step 2<br />
+                        <small>Choice of Procedures</small>
+                    </a>
+                </li>
+                <li>
+                    <a href="#step-3">
+                        Step 3<br />
+                        <small>Intake Form</small>
+                    </a>
+                </li>
+                <li>
+                    <a href="#step-4">
+                        Step 4<br />
+                        <small>Upload Test Report</small>
+                    </a>
+                </li>
+                <li>
+                    <a href="#step-5">
+                        Step 5<br />
+                        <small>Medical Necessities</small>
+                    </a>
+                </li>
+                <li>
+                    <a href="#step-6">
+                        Step 6<br />
+                        <small>Order Form / Super Bill</small>
+                    </a>
+                </li>
+                <li>
+                    <a href="#step-7">
+                        Step 7<br />
+                        <small>Results interpretation</small>
+                    </a>
+                </li>
+
+            </ul>
+
+            <div>
+                <div id="step-1" class="">
+                     @Html.Partial("PatientsList")
+                </div >
+                <div id="step-2" class="">
+                    <h2>Step 2 Content</h2>
+                    @*@Html.Partial("procedureTypes")*@
+                    @if (Model != null && Model.objProcedureType != null)
+                    {
+                        foreach (var procedure in Model.objProcedureType)
+                        {
+                            <input type="checkbox" value="@procedure.ID" />
+                            @procedure.Title
+                            <br />
+                        }
+                    }
+                </div>
+                <div id="step-3" class="pre-scrollable">
+                        <h3>Symptoms</h3>
+                        @if (Model != null && Model.objSymptom != null)
+                        {
+                            <div class="col-sm-12">
+                                @foreach (var symptom in Model.objSymptom)
+                                {
+                                    <div class="col-sm-4">
+                                        <input type="checkbox" value="@symptom.ID" /> @symptom.Title
+                                    </div>
+                                    if (symptom.ID % 3 == 2)
+                                    {
+                                        <br />
+                                    }
+                                }
+                            </div>
+                        }
+                        <h3>Disease</h3>
+                        @if (Model != null && Model.objDisease != null)
+                        {
+                            <div class="col-lg-12">
+                                @foreach (var disease in Model.objDisease)
+                                {
+                                    <div class="col-lg-4">
+                                        <input type="checkbox" value="@disease.ID" /> @disease.Title
+                                    </div>
+                                    if (disease.ID % 3 == 2)
+                                    {
+                                        <br />
+                                    }
+                                }
+                            </div>
+                        }
+
+                    @*@Html.Partial("intake")*@
+                </div>
+                <div id="step-4" class="">
+                    <h2>Step 4 Content</h2>
+                    <div class="w3-row w3-margin-bottom" id="add-prescription">
+
+                        <div class="w3-half">
+
+                            <div class="editor-label">
+                                <label>Test Report</label>
+                            </div>
+
+                            <div class="input_fields_wrap">
+                                <div>
+                                    <input type="file" name="[0].filePath" id="filePath" />
+                                </div>
+                                <button class="add_field_button w3-btn w3-cyan">+ Add More</button>
+                            </div>
+
+                        </div>
+                    </div>
+
+
+                    <div class="panel panel-default">
+                        <div class="panel-heading">My Details</div>
+                        <table class="table">
+                            <tbody>
+                                <tr>
+                                    <th>Name:</th>
+                                    <td>Tim Smith</td>
+                                </tr>
+                                <tr>
+                                    <th>Email:</th>
+                                    <td>example@example.com</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div id="step-5" class="">
+                    <h2>Step 5 Content</h2>
+
+                    @if (Model != null && Model.objMedicalNecessity != null)
+                    {
+                        foreach (var necessity in Model.objMedicalNecessity)
+                        {
+
+                            <input type="checkbox" value="@necessity.ID" />  @(necessity.ICD10Code + " - " + necessity.Description)
+                            <br />
+                        }
+                    }
+                </div>
+                <div id="step-6" class="">
+                    <h2>Step 6 Content</h2>
+                    Order Form / Supper Bill
+
+                </div>
+                <div id="step-7" class="">
+                    <h2>Step 7 Content</h2>
+                    Result Interpretation by Specialist
+
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+@section Scripts {
+    <script src="~/Scripts/Wizard/jquery.smartWizard.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var numberOFSteps = 0;
+            var pHistoryId = 0;
+            // Step show event
+            $("#smartwizard").on("showStep", function (e, anchorObject, stepNumber, stepDirection, stepPosition) {
+                //alert("You are on step "+stepNumber+" now");
+                numberOFSteps = stepNumber;
+                if (stepPosition === 'first') {
+                    $("#prev-btn").addClass('disabled');
+                } else if (stepPosition === 'final') {
+                    $("#next-btn").addClass('disabled');
+                } else {
+                    $("#prev-btn").removeClass('disabled');
+                    $("#next-btn").removeClass('disabled');
+                }
+            });
+
+            // Toolbar extra buttons
+            var btnFinish = $('<button></button>').text('Finish')
+                                             .addClass('btn btn-info')
+                                             .on('click', function () { alert('Finish Clicked'); });
+            var btnCancel = $('<button></button>').text('Cancel')
+                                             .addClass('btn btn-danger')
+                                             .on('click', function () { $('#smartwizard').smartWizard("reset"); });
+
+
+            // Smart Wizard
+            $('#smartwizard').smartWizard({
+                selected: 0,
+                theme: 'default',
+                transitionEffect: 'fade',
+                showStepURLhash: true,
+                toolbarSettings: {
+                    toolbarPosition: 'both',
+                    toolbarExtraButtons: [btnFinish, btnCancel]
+                }
+            });
+
+
+            // External Button Events
+            $("#reset-btn").on("click", function () {
+                // Reset wizard
+                $('#smartwizard').smartWizard("reset");
+                return true;
+            });
+
+            $("#prev-btn").on("click", function () {
+                // Navigate previous
+                $('#smartwizard').smartWizard("prev");
+                return true;
+            });
+
+            $("#next-btn").on("click", function () {
+                // Navigate next
+                $('#smartwizard').smartWizard("next");
+                return true;
+            });
+            $('#smartwizard .sw-btn-group .sw-btn-next').on('click', function () {
+
+                if (numberOFSteps == 1) {
+                    var ID = 0;
+                    if ($("#pID").val() !== undefined && $("#pID").val() !== null && $("#pID").val() !== "") {
+                        ID = $("#pID").val();
+                    }
+                    var gender = "Male";
+                    var insurance = "1";
+                    var FirstName = $("#pFirstName").val();
+                    var LastName = $("#pLastName").val();
+                    var DOB = $("#pDOB").val();
+                    var IDNumber = $("#pTel").val();
+                    var Email = $("#pEmail").val();
+                    gender = $("input:radio[name=Gender]:checked").val();
+                    insurance = $("input:radio[name=insurance]:checked").val();
+                    patient = { ID: ID, FirstName: FirstName, LastName: LastName, DOB: DOB, IDNumber: IDNumber, Email: Email, Gender: gender, },
+                   $.ajax({
+                       type: 'post',
+                       dataType: 'json',
+                       cache: false,
+                       data: patient,
+                       url: '/Patients/patient?insurance=' + insurance,
+                       success: function (Data) {
+                           if (Data !== undefined) {
+                               pHistoryId = Data.pHistoryId;
+                               console.log("Successfully data saved", pHistoryId);
+                               alert("Successfully data saved");
+                           } else { alert("error in data saving"); }
+                       },
+                       error: function (jqXHR, textStatus, errorThrown) {
+                           alert('Error - ' + errorThrown);
+                       }
+                   });
+                } if (numberOFSteps == 2) {
+                    var type = [];
+                    $('.procedure_Type:checked').each(function () {
+                        type.push($(this).val());
+                    }),
+                        $.ajax({
+                            type: 'post',
+                            dataType: 'json',
+                            cache: false,
+                            url: '/Patients/procedureTypes?type=' + type + "&pHistoryId=" + pHistoryId,
+                            success: function (status) {
+                                if (status) {
+                                    alert("Successfully data saved");
+                                    $.ajax({
+                                        type: 'get',
+                                        dataType: 'json',
+                                        cache: false,
+                                        url: '/Patients/intake',
+                                        success: function (result) {
+                                            console.log("abc", result[0]["objSymptom"][0].Title);
+                                            if (result !== undefined) {
+                                                alert("Successfully data saved");
+                                                for (var j = 0; j < result.length; j++) {
+                                                    for (var i = 0; i < result.objSymptom[j].length; i++) {
+                                                        var symptom = result.objSymptom[i];
+                                                        $("#intakeDiv").append('<div class="quarter">'
+                                                       + '<input class="w3-radio procedure_Type" type="checkbox" name="procedureType" value=" ' + symptom.ID + ' " checked />'
+                                                       + symptom.Title + '</div>');
+                                                    }
+                                                }
+                                            } else { alert("error in data saving"); }
+                                        },
+                                        error: function (jqXHR, textStatus, errorThrown) {
+                                            alert(textStatus, jqXHR, 'Error - ' + errorThrown);
+                                        }
+                                    });
+                                } else { alert("error in data saving"); }
+                            },
+                            error: function (jqXHR, textStatus, errorThrown) {
+                                alert('Error - ' + errorThrown);
+                            }
+                        });
+                }
+                //if (numberOFSteps == 3) {
+                //    var vale = "test";
+                //    $.ajax({
+                //        type: 'post',
+                //        dataType: 'json',
+                //        cache: false,
+                //        url: '/Patients/intake',
+                //        success: function (status) {
+                //            if (status) {
+                //                alert("Successfully data saved");
+                //            } else { alert("error in data saving"); }
+                //        },
+                //        error: function (jqXHR, textStatus, errorThrown) {
+                //            alert('Error - ' + errorThrown);
+                //        }
+                //    });
+                //}
+            });
+
+            $("#theme_selector").on("change", function () {
+                // Change theme
+                $('#smartwizard').smartWizard("theme", "arrows"); //$(this).val());
+                return true;
+            });
+            $('#smartwizard').smartWizard("theme", "arrows");
+            // Set selected theme on page refresh
+            $("#theme_selector").change();
+            
+
+            //------------------- To add multiple reports ------------------
+            var max_fields = 10; //maximum input boxes allowed
+            var wrapper = $(".input_fields_wrap"); //Fields wrapper
+            var add_button = $(".add_field_button"); //Add button ID
+
+            var x = 0; //initlal text box count
+            $(add_button).click(function (e) { //on add input button click
+                e.preventDefault();
+                if (x < max_fields) { //max input box allowed
+                    x++; //text box increment
+                    $(wrapper).prepend('<div><input type="file" name="[' + x + '].filePath"/><a href="#" class="remove_field">Remove</a></div>'); //add input box
+                }
+            });
+
+            $(wrapper).on("click", ".remove_field", function (e) { //user click on remove text
+                e.preventDefault();
+                $(this).parent().remove();
+                x--;
+            })
+            //------------------- END of multiple reports ------------------
+        });
+    </script>
+}

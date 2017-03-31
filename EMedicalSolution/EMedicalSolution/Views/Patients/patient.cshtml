@@ -1,0 +1,74 @@
+﻿@model EMedicalSolution.Models.Patient
+
+
+@using (Html.BeginForm("patient", "Patients", FormMethod.Post, new { id = "popupForm" }))
+{
+    if (Model != null && Model.ID > 0)
+    {
+    @Html.HiddenFor(a => a.ID)
+    }
+    
+    <div class="w3-row w3-margin-top">
+        <label class="w3-text-green">First Name</label>
+        @Html.TextBoxFor(a => a.FirstName, new { @class = "w3-input w3-border"})
+        @Html.ValidationMessageFor(a => a.FirstName)
+    </div>
+    <div class="w3-row w3-margin-top">
+        <label class="w3-text-green">Last Name</label>
+        @Html.TextBoxFor(a => a.LastName, new { @class = "w3-input w3-border"})
+        @Html.ValidationMessageFor(a => a.LastName)
+    </div>
+    
+    <div class="w3-row w3-margin-top">
+        <label class="w3-text-green">Date of Birth</label>
+        @Html.TextBoxFor(a => a.DOB, new { @class = "w3-input w3-border" })
+        @Html.ValidationMessageFor(a => a.DOB)
+    </div>
+    
+    <div class="w3-row w3-margin-top">
+        <label class="w3-text-green">Gender</label>
+    </div>
+    <div class="w3-row w3-margin-top">
+        <div class="w3-half">
+            <input class="w3-radio" type="radio" name="Gender" value="Male" checked />
+            Male
+        </div>
+        <div class="w3-half">
+            <input class="w3-radio" type="radio" name="Gender" value="Female" />
+            Female
+        </div>
+    </div>
+    <div class="w3-row w3-margin-top">
+        <label class="w3-text-green">Insurance</label>
+    </div>
+    <div class="w3-row w3-margin-top">
+        <div class="w3-half">
+            <input class="w3-radio" type="radio" name="insurance" value="1" checked />
+            primary
+        </div>
+        <div class="w3-half">
+            <input class="w3-radio" type="radio" name="insurance" value="2" />
+            secondary
+        </div>
+    </div>
+
+        <div class="w3-row w3-margin-top">
+        <label class="w3-text-green">ID Number</label>
+        @Html.TextBoxFor(a => a.IDNumber, new { @class = "w3-input w3-border" })
+        @Html.ValidationMessageFor(a => a.IDNumber)
+    </div>
+    <div class="w3-row w3-margin-top">
+        <label class="w3-text-green">Tel</label>
+        @Html.TextBoxFor(a => a.Tel, new { @class = "w3-input w3-border"})
+        @Html.ValidationMessageFor(a => a.Tel)
+    </div>
+    
+        <div class="w3-row w3-margin-top">
+        <label class="w3-text-green">Email</label>
+        @Html.TextBoxFor(a => a.Email, new { @class = "w3-input w3-border"})
+        @Html.ValidationMessageFor(a => a.Email)
+    </div>
+    <div class="w3-row  w3-margin-top">
+        <input class="w3-btn-block w3-green" type="submit" value="Save" />
+    </div>
+}

@@ -1,0 +1,37 @@
+﻿@model EMedicalSolution.Models.User
+
+<h2>Save</h2>
+
+@using (Html.BeginForm("SaveUser", "Users", FormMethod.Post, new { id = "popupForm" }))
+{
+    if (Model != null && Model.ID > 0)
+    {
+    @Html.HiddenFor(a => a.ID)
+    }
+    
+    <div class="w3-row w3-margin-top">
+        <label class="w3-text-green">Username</label>
+        @Html.TextBoxFor(a => a.Username, new { @class = "w3-input w3-border" })
+        @Html.ValidationMessageFor(a => a.Username)
+    </div>
+    <div class="w3-row w3-margin-top">
+        <label class="w3-text-green">Password</label>
+        @Html.TextBoxFor(a => a.Password, new { @class = "w3-input w3-border", type="password" })
+        @Html.ValidationMessageFor(a => a.Password)
+    </div>
+    
+    <div class="w3-row w3-margin-top">
+        <label class="w3-text-green">Role</label>
+        @Html.DropDownList("RoleID", "Select Role")
+        @Html.ValidationMessageFor(a => a.RoleID)
+    </div>
+    <div class="w3-row w3-margin-top">
+        <label class="w3-text-green">Employee</label>
+        @Html.DropDownList("StaffID", "Select Employee")
+        @Html.ValidationMessageFor(a => a.RoleID)
+    </div>
+  
+    <div class="w3-row  w3-margin-top">
+        <input class="w3-btn-block w3-green" type="submit" value="Save" />
+    </div>
+}

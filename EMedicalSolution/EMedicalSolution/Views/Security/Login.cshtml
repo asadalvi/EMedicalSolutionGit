@@ -1,0 +1,70 @@
+﻿
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div id="id01" class="w3-modal">
+    <div class="w3-modal-content w3-card-8 w3-animate-zoom" style="max-width: 500px">
+
+        <div class="w3-center">
+            <img src="~/images/avatar.jpg" alt="Avatar" style="width: 15%" class="w3-circle w3-margin-top">
+            <h3>E-Medical Solution - Login</h3>
+        </div>
+        @using (Html.BeginForm("ValidateUser", "Security", FormMethod.Post, new { @class = "w3-container" }))
+        {
+            <div class="w3-section">
+                @if (ViewData["Error"] != null)
+                {
+                    <div class="w3-panel w3-red">
+                    <label id="lblError" >@ViewData["Error"].ToString()</label></div>
+                }
+
+                <input class="w3-input w3-border w3-margin-bottom" type="text" placeholder="Enter UserName"
+                    name="userName" required="required">
+
+                <input class="w3-input w3-border" type="password" placeholder="Enter Password" name="password"
+                    required="required">
+
+                <div class="w3-margin-top">
+                    <label><b>Role:</b></label>
+                </div>
+
+                <div class="w3-row w3-margin-top">
+
+                    <div class="w3-half">
+                        <input class="w3-radio" type="radio" name="role" value="1">
+                        <label class="w3-validate">Assistant</label>
+                    </div>
+
+                    <div class="w3-half">
+                        <input class="w3-radio" type="radio" name="role" value="2">
+                        <label class="w3-validate">Physician</label>
+                    </div>
+
+
+
+                </div>
+
+                <div class="w3-row w3-margin-top w3-margin-bottom">
+
+
+                     <div class="w3-half">
+                        <input class="w3-radio" type="radio" name="role" value="3">
+                        <label class="w3-validate">Specialist</label>
+                    </div>
+                    <div class="w3-half">
+                        <input class="w3-radio" type="radio" name="role" value="4">
+                        <label class="w3-validate">Admin</label>
+                    </div>
+                </div>
+
+                <button class="w3-btn-block w3-blue w3-section w3-padding" type="submit">Login</button>
+            </div>
+        }
+
+        <div style="display:none" class="w3-container w3-border-top w3-padding-16 w3-light-grey">
+            <span class="w3-right"><a href="#">Forgot Password?</a></span>
+        </div>
+
+    </div>
+</div>

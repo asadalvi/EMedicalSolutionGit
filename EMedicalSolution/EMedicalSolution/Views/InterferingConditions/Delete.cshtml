@@ -1,0 +1,28 @@
+﻿@model EMedicalSolution.Models.InterferingCondition
+
+<h2>Delete Condition</h2>
+
+@using (Html.BeginForm("Delete", "InterferingConditions", FormMethod.Post, new { id = "popupForm" }))
+{
+    @Html.HiddenFor(a => a.ID)
+    <div class="w3-row w3-margin-top">
+        <div class="w3-half">
+            <b>ID</b>
+        </div>
+        <div class="w3-half">
+            @Model.ID
+        </div>
+    </div>
+    <div class="w3-row w3-margin-top">
+        <div class="w3-half">
+            <b>Title</b>
+        </div>
+        <div class="w3-half">
+            @Model.Title
+        </div>
+    </div>
+    
+    <div class="w3-row w3-margin-top">
+        <input class="w3-btn-block w3-red" type="submit" value="Delete" />
+    </div>
+}

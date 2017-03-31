@@ -1,0 +1,114 @@
+E:\Clients project\EMedicalSolution\EMedicalSolution\bin\EMedicalSolution.dll
+E:\Clients project\EMedicalSolution\EMedicalSolution\bin\EMedicalSolution.pdb
+E:\Clients project\EMedicalSolution\EMedicalSolution\bin\EntityFramework.dll
+E:\Clients project\EMedicalSolution\EMedicalSolution\bin\Microsoft.Web.Infrastructure.dll
+E:\Clients project\EMedicalSolution\EMedicalSolution\bin\Newtonsoft.Json.dll
+E:\Clients project\EMedicalSolution\EMedicalSolution\bin\System.Net.Http.Formatting.dll
+E:\Clients project\EMedicalSolution\EMedicalSolution\bin\System.Web.Helpers.dll
+E:\Clients project\EMedicalSolution\EMedicalSolution\bin\System.Web.Http.dll
+E:\Clients project\EMedicalSolution\EMedicalSolution\bin\System.Web.Http.WebHost.dll
+E:\Clients project\EMedicalSolution\EMedicalSolution\bin\System.Web.Mvc.dll
+E:\Clients project\EMedicalSolution\EMedicalSolution\bin\System.Web.Razor.dll
+E:\Clients project\EMedicalSolution\EMedicalSolution\bin\System.Web.WebPages.Deployment.dll
+E:\Clients project\EMedicalSolution\EMedicalSolution\bin\System.Web.WebPages.dll
+E:\Clients project\EMedicalSolution\EMedicalSolution\bin\System.Web.WebPages.Razor.dll
+E:\Clients project\EMedicalSolution\EMedicalSolution\bin\EntityFramework.xml
+E:\Clients project\EMedicalSolution\EMedicalSolution\bin\Newtonsoft.Json.xml
+E:\Clients project\EMedicalSolution\EMedicalSolution\bin\System.Net.Http.Formatting.xml
+E:\Clients project\EMedicalSolution\EMedicalSolution\bin\System.Web.Helpers.xml
+E:\Clients project\EMedicalSolution\EMedicalSolution\bin\System.Web.Http.xml
+E:\Clients project\EMedicalSolution\EMedicalSolution\bin\System.Web.Http.WebHost.xml
+E:\Clients project\EMedicalSolution\EMedicalSolution\bin\System.Web.Mvc.xml
+E:\Clients project\EMedicalSolution\EMedicalSolution\bin\System.Web.Razor.xml
+E:\Clients project\EMedicalSolution\EMedicalSolution\bin\System.Web.WebPages.xml
+E:\Clients project\EMedicalSolution\EMedicalSolution\bin\System.Web.WebPages.Deployment.xml
+E:\Clients project\EMedicalSolution\EMedicalSolution\bin\System.Web.WebPages.Razor.xml
+E:\Clients project\EMedicalSolution\EMedicalSolution\obj\Debug\EMedicalSolution.csprojResolveAssemblyReference.cache
+E:\Clients project\EMedicalSolution\EMedicalSolution\obj\Debug\EMedicalSolution.dll
+E:\Clients project\EMedicalSolution\EMedicalSolution\obj\Debug\EMedicalSolution.pdb
+E:\Projects\EMedicalSolution\EMedicalSolution\bin\EMedicalSolution.dll
+E:\Projects\EMedicalSolution\EMedicalSolution\bin\EMedicalSolution.pdb
+E:\Projects\EMedicalSolution\EMedicalSolution\bin\EntityFramework.dll
+E:\Projects\EMedicalSolution\EMedicalSolution\bin\Microsoft.Web.Infrastructure.dll
+E:\Projects\EMedicalSolution\EMedicalSolution\bin\Newtonsoft.Json.dll
+E:\Projects\EMedicalSolution\EMedicalSolution\bin\System.Net.Http.Formatting.dll
+E:\Projects\EMedicalSolution\EMedicalSolution\bin\System.Web.Helpers.dll
+E:\Projects\EMedicalSolution\EMedicalSolution\bin\System.Web.Http.dll
+E:\Projects\EMedicalSolution\EMedicalSolution\bin\System.Web.Http.WebHost.dll
+E:\Projects\EMedicalSolution\EMedicalSolution\bin\System.Web.Mvc.dll
+E:\Projects\EMedicalSolution\EMedicalSolution\bin\System.Web.Razor.dll
+E:\Projects\EMedicalSolution\EMedicalSolution\bin\System.Web.WebPages.Deployment.dll
+E:\Projects\EMedicalSolution\EMedicalSolution\bin\System.Web.WebPages.dll
+E:\Projects\EMedicalSolution\EMedicalSolution\bin\System.Web.WebPages.Razor.dll
+E:\Projects\EMedicalSolution\EMedicalSolution\bin\EntityFramework.xml
+E:\Projects\EMedicalSolution\EMedicalSolution\bin\Newtonsoft.Json.xml
+E:\Projects\EMedicalSolution\EMedicalSolution\bin\System.Net.Http.Formatting.xml
+E:\Projects\EMedicalSolution\EMedicalSolution\bin\System.Web.Helpers.xml
+E:\Projects\EMedicalSolution\EMedicalSolution\bin\System.Web.Http.xml
+E:\Projects\EMedicalSolution\EMedicalSolution\bin\System.Web.Http.WebHost.xml
+E:\Projects\EMedicalSolution\EMedicalSolution\bin\System.Web.Mvc.xml
+E:\Projects\EMedicalSolution\EMedicalSolution\bin\System.Web.Razor.xml
+E:\Projects\EMedicalSolution\EMedicalSolution\bin\System.Web.WebPages.xml
+E:\Projects\EMedicalSolution\EMedicalSolution\bin\System.Web.WebPages.Deployment.xml
+E:\Projects\EMedicalSolution\EMedicalSolution\bin\System.Web.WebPages.Razor.xml
+E:\Projects\EMedicalSolution\EMedicalSolution\obj\Debug\EMedicalSolution.csprojResolveAssemblyReference.cache
+E:\Projects\EMedicalSolution\EMedicalSolution\obj\Debug\EMedicalSolution.dll
+E:\Projects\EMedicalSolution\EMedicalSolution\obj\Debug\EMedicalSolution.pdb
+C:\Users\Naveed\Downloads\EMedicalSolution\EMedicalSolution\EMedicalSolution\bin\EMedicalSolution.dll.config
+C:\Users\Naveed\Downloads\EMedicalSolution\EMedicalSolution\EMedicalSolution\bin\EMedicalSolution.dll
+C:\Users\Naveed\Downloads\EMedicalSolution\EMedicalSolution\EMedicalSolution\bin\EMedicalSolution.pdb
+C:\Users\Naveed\Downloads\EMedicalSolution\EMedicalSolution\EMedicalSolution\bin\EntityFramework.dll
+C:\Users\Naveed\Downloads\EMedicalSolution\EMedicalSolution\EMedicalSolution\bin\Microsoft.Web.Infrastructure.dll
+C:\Users\Naveed\Downloads\EMedicalSolution\EMedicalSolution\EMedicalSolution\bin\Newtonsoft.Json.dll
+C:\Users\Naveed\Downloads\EMedicalSolution\EMedicalSolution\EMedicalSolution\bin\System.Net.Http.Formatting.dll
+C:\Users\Naveed\Downloads\EMedicalSolution\EMedicalSolution\EMedicalSolution\bin\System.Web.Helpers.dll
+C:\Users\Naveed\Downloads\EMedicalSolution\EMedicalSolution\EMedicalSolution\bin\System.Web.Http.dll
+C:\Users\Naveed\Downloads\EMedicalSolution\EMedicalSolution\EMedicalSolution\bin\System.Web.Http.WebHost.dll
+C:\Users\Naveed\Downloads\EMedicalSolution\EMedicalSolution\EMedicalSolution\bin\System.Web.Mvc.dll
+C:\Users\Naveed\Downloads\EMedicalSolution\EMedicalSolution\EMedicalSolution\bin\System.Web.Razor.dll
+C:\Users\Naveed\Downloads\EMedicalSolution\EMedicalSolution\EMedicalSolution\bin\System.Web.WebPages.Deployment.dll
+C:\Users\Naveed\Downloads\EMedicalSolution\EMedicalSolution\EMedicalSolution\bin\System.Web.WebPages.dll
+C:\Users\Naveed\Downloads\EMedicalSolution\EMedicalSolution\EMedicalSolution\bin\System.Web.WebPages.Razor.dll
+C:\Users\Naveed\Downloads\EMedicalSolution\EMedicalSolution\EMedicalSolution\bin\EntityFramework.xml
+C:\Users\Naveed\Downloads\EMedicalSolution\EMedicalSolution\EMedicalSolution\bin\Newtonsoft.Json.xml
+C:\Users\Naveed\Downloads\EMedicalSolution\EMedicalSolution\EMedicalSolution\bin\System.Net.Http.Formatting.xml
+C:\Users\Naveed\Downloads\EMedicalSolution\EMedicalSolution\EMedicalSolution\bin\System.Web.Helpers.xml
+C:\Users\Naveed\Downloads\EMedicalSolution\EMedicalSolution\EMedicalSolution\bin\System.Web.Http.xml
+C:\Users\Naveed\Downloads\EMedicalSolution\EMedicalSolution\EMedicalSolution\bin\System.Web.Http.WebHost.xml
+C:\Users\Naveed\Downloads\EMedicalSolution\EMedicalSolution\EMedicalSolution\bin\System.Web.Mvc.xml
+C:\Users\Naveed\Downloads\EMedicalSolution\EMedicalSolution\EMedicalSolution\bin\System.Web.Razor.xml
+C:\Users\Naveed\Downloads\EMedicalSolution\EMedicalSolution\EMedicalSolution\bin\System.Web.WebPages.xml
+C:\Users\Naveed\Downloads\EMedicalSolution\EMedicalSolution\EMedicalSolution\bin\System.Web.WebPages.Deployment.xml
+C:\Users\Naveed\Downloads\EMedicalSolution\EMedicalSolution\EMedicalSolution\bin\System.Web.WebPages.Razor.xml
+C:\Users\Naveed\Downloads\EMedicalSolution\EMedicalSolution\EMedicalSolution\obj\Debug\EMedicalSolution.dll
+C:\Users\Naveed\Downloads\EMedicalSolution\EMedicalSolution\EMedicalSolution\obj\Debug\EMedicalSolution.pdb
+C:\Users\Naveed\Downloads\EMedicalSolution\EMedicalSolution\EMedicalSolution\obj\Debug\EMedicalSolution.csprojResolveAssemblyReference.cache
+E:\Clients project\Electronic Medical Data Entry\EMedicalSolution-naveed\EMedicalSolution\EMedicalSolution\bin\EMedicalSolution.dll.config
+E:\Clients project\Electronic Medical Data Entry\EMedicalSolution-naveed\EMedicalSolution\EMedicalSolution\bin\EMedicalSolution.dll
+E:\Clients project\Electronic Medical Data Entry\EMedicalSolution-naveed\EMedicalSolution\EMedicalSolution\bin\EMedicalSolution.pdb
+E:\Clients project\Electronic Medical Data Entry\EMedicalSolution-naveed\EMedicalSolution\EMedicalSolution\bin\EntityFramework.dll
+E:\Clients project\Electronic Medical Data Entry\EMedicalSolution-naveed\EMedicalSolution\EMedicalSolution\bin\Microsoft.Web.Infrastructure.dll
+E:\Clients project\Electronic Medical Data Entry\EMedicalSolution-naveed\EMedicalSolution\EMedicalSolution\bin\Newtonsoft.Json.dll
+E:\Clients project\Electronic Medical Data Entry\EMedicalSolution-naveed\EMedicalSolution\EMedicalSolution\bin\System.Net.Http.Formatting.dll
+E:\Clients project\Electronic Medical Data Entry\EMedicalSolution-naveed\EMedicalSolution\EMedicalSolution\bin\System.Web.Helpers.dll
+E:\Clients project\Electronic Medical Data Entry\EMedicalSolution-naveed\EMedicalSolution\EMedicalSolution\bin\System.Web.Http.dll
+E:\Clients project\Electronic Medical Data Entry\EMedicalSolution-naveed\EMedicalSolution\EMedicalSolution\bin\System.Web.Http.WebHost.dll
+E:\Clients project\Electronic Medical Data Entry\EMedicalSolution-naveed\EMedicalSolution\EMedicalSolution\bin\System.Web.Mvc.dll
+E:\Clients project\Electronic Medical Data Entry\EMedicalSolution-naveed\EMedicalSolution\EMedicalSolution\bin\System.Web.Razor.dll
+E:\Clients project\Electronic Medical Data Entry\EMedicalSolution-naveed\EMedicalSolution\EMedicalSolution\bin\System.Web.WebPages.Deployment.dll
+E:\Clients project\Electronic Medical Data Entry\EMedicalSolution-naveed\EMedicalSolution\EMedicalSolution\bin\System.Web.WebPages.dll
+E:\Clients project\Electronic Medical Data Entry\EMedicalSolution-naveed\EMedicalSolution\EMedicalSolution\bin\System.Web.WebPages.Razor.dll
+E:\Clients project\Electronic Medical Data Entry\EMedicalSolution-naveed\EMedicalSolution\EMedicalSolution\bin\EntityFramework.xml
+E:\Clients project\Electronic Medical Data Entry\EMedicalSolution-naveed\EMedicalSolution\EMedicalSolution\bin\Newtonsoft.Json.xml
+E:\Clients project\Electronic Medical Data Entry\EMedicalSolution-naveed\EMedicalSolution\EMedicalSolution\bin\System.Net.Http.Formatting.xml
+E:\Clients project\Electronic Medical Data Entry\EMedicalSolution-naveed\EMedicalSolution\EMedicalSolution\bin\System.Web.Helpers.xml
+E:\Clients project\Electronic Medical Data Entry\EMedicalSolution-naveed\EMedicalSolution\EMedicalSolution\bin\System.Web.Http.xml
+E:\Clients project\Electronic Medical Data Entry\EMedicalSolution-naveed\EMedicalSolution\EMedicalSolution\bin\System.Web.Http.WebHost.xml
+E:\Clients project\Electronic Medical Data Entry\EMedicalSolution-naveed\EMedicalSolution\EMedicalSolution\bin\System.Web.Mvc.xml
+E:\Clients project\Electronic Medical Data Entry\EMedicalSolution-naveed\EMedicalSolution\EMedicalSolution\bin\System.Web.Razor.xml
+E:\Clients project\Electronic Medical Data Entry\EMedicalSolution-naveed\EMedicalSolution\EMedicalSolution\bin\System.Web.WebPages.xml
+E:\Clients project\Electronic Medical Data Entry\EMedicalSolution-naveed\EMedicalSolution\EMedicalSolution\bin\System.Web.WebPages.Deployment.xml
+E:\Clients project\Electronic Medical Data Entry\EMedicalSolution-naveed\EMedicalSolution\EMedicalSolution\bin\System.Web.WebPages.Razor.xml
+E:\Clients project\Electronic Medical Data Entry\EMedicalSolution-naveed\EMedicalSolution\EMedicalSolution\obj\Debug\EMedicalSolution.csprojResolveAssemblyReference.cache
+E:\Clients project\Electronic Medical Data Entry\EMedicalSolution-naveed\EMedicalSolution\EMedicalSolution\obj\Debug\EMedicalSolution.dll
+E:\Clients project\Electronic Medical Data Entry\EMedicalSolution-naveed\EMedicalSolution\EMedicalSolution\obj\Debug\EMedicalSolution.pdb

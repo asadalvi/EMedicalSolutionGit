@@ -1,0 +1,11 @@
+﻿@*@model EMedicalSolution.ViewModels.patientIntakeViewModel*@
+  
+<div class="w3-row w3-margin-top" id="intakeDiv"></div>
+    @*@if (Model != null && Model.objSymptom != null)
+        {
+            foreach (var symptom in Model.objSymptom)
+            {
+                <label class="w3-text-green">tilt @symptom.ID</label>
+                @symptom.Title <br />
+            }
+        }*@
