@@ -112,3 +112,32 @@ E:\Clients project\Electronic Medical Data Entry\EMedicalSolution-naveed\EMedica
 E:\Clients project\Electronic Medical Data Entry\EMedicalSolution-naveed\EMedicalSolution\EMedicalSolution\obj\Debug\EMedicalSolution.csprojResolveAssemblyReference.cache
 E:\Clients project\Electronic Medical Data Entry\EMedicalSolution-naveed\EMedicalSolution\EMedicalSolution\obj\Debug\EMedicalSolution.dll
 E:\Clients project\Electronic Medical Data Entry\EMedicalSolution-naveed\EMedicalSolution\EMedicalSolution\obj\Debug\EMedicalSolution.pdb
+G:\code projects\EMedicalSolutionGit-master\EMedicalSolutionGit-master\EMedicalSolution\EMedicalSolution\bin\EMedicalSolution.dll.config
+G:\code projects\EMedicalSolutionGit-master\EMedicalSolutionGit-master\EMedicalSolution\EMedicalSolution\bin\EMedicalSolution.dll
+G:\code projects\EMedicalSolutionGit-master\EMedicalSolutionGit-master\EMedicalSolution\EMedicalSolution\bin\EMedicalSolution.pdb
+G:\code projects\EMedicalSolutionGit-master\EMedicalSolutionGit-master\EMedicalSolution\EMedicalSolution\bin\EntityFramework.dll
+G:\code projects\EMedicalSolutionGit-master\EMedicalSolutionGit-master\EMedicalSolution\EMedicalSolution\bin\Microsoft.Web.Infrastructure.dll
+G:\code projects\EMedicalSolutionGit-master\EMedicalSolutionGit-master\EMedicalSolution\EMedicalSolution\bin\Newtonsoft.Json.dll
+G:\code projects\EMedicalSolutionGit-master\EMedicalSolutionGit-master\EMedicalSolution\EMedicalSolution\bin\System.Net.Http.Formatting.dll
+G:\code projects\EMedicalSolutionGit-master\EMedicalSolutionGit-master\EMedicalSolution\EMedicalSolution\bin\System.Web.Helpers.dll
+G:\code projects\EMedicalSolutionGit-master\EMedicalSolutionGit-master\EMedicalSolution\EMedicalSolution\bin\System.Web.Http.dll
+G:\code projects\EMedicalSolutionGit-master\EMedicalSolutionGit-master\EMedicalSolution\EMedicalSolution\bin\System.Web.Http.WebHost.dll
+G:\code projects\EMedicalSolutionGit-master\EMedicalSolutionGit-master\EMedicalSolution\EMedicalSolution\bin\System.Web.Mvc.dll
+G:\code projects\EMedicalSolutionGit-master\EMedicalSolutionGit-master\EMedicalSolution\EMedicalSolution\bin\System.Web.Razor.dll
+G:\code projects\EMedicalSolutionGit-master\EMedicalSolutionGit-master\EMedicalSolution\EMedicalSolution\bin\System.Web.WebPages.Deployment.dll
+G:\code projects\EMedicalSolutionGit-master\EMedicalSolutionGit-master\EMedicalSolution\EMedicalSolution\bin\System.Web.WebPages.dll
+G:\code projects\EMedicalSolutionGit-master\EMedicalSolutionGit-master\EMedicalSolution\EMedicalSolution\bin\System.Web.WebPages.Razor.dll
+G:\code projects\EMedicalSolutionGit-master\EMedicalSolutionGit-master\EMedicalSolution\EMedicalSolution\bin\EntityFramework.xml
+G:\code projects\EMedicalSolutionGit-master\EMedicalSolutionGit-master\EMedicalSolution\EMedicalSolution\bin\Newtonsoft.Json.xml
+G:\code projects\EMedicalSolutionGit-master\EMedicalSolutionGit-master\EMedicalSolution\EMedicalSolution\bin\System.Net.Http.Formatting.xml
+G:\code projects\EMedicalSolutionGit-master\EMedicalSolutionGit-master\EMedicalSolution\EMedicalSolution\bin\System.Web.Helpers.xml
+G:\code projects\EMedicalSolutionGit-master\EMedicalSolutionGit-master\EMedicalSolution\EMedicalSolution\bin\System.Web.Http.xml
+G:\code projects\EMedicalSolutionGit-master\EMedicalSolutionGit-master\EMedicalSolution\EMedicalSolution\bin\System.Web.Http.WebHost.xml
+G:\code projects\EMedicalSolutionGit-master\EMedicalSolutionGit-master\EMedicalSolution\EMedicalSolution\bin\System.Web.Mvc.xml
+G:\code projects\EMedicalSolutionGit-master\EMedicalSolutionGit-master\EMedicalSolution\EMedicalSolution\bin\System.Web.Razor.xml
+G:\code projects\EMedicalSolutionGit-master\EMedicalSolutionGit-master\EMedicalSolution\EMedicalSolution\bin\System.Web.WebPages.xml
+G:\code projects\EMedicalSolutionGit-master\EMedicalSolutionGit-master\EMedicalSolution\EMedicalSolution\bin\System.Web.WebPages.Deployment.xml
+G:\code projects\EMedicalSolutionGit-master\EMedicalSolutionGit-master\EMedicalSolution\EMedicalSolution\bin\System.Web.WebPages.Razor.xml
+G:\code projects\EMedicalSolutionGit-master\EMedicalSolutionGit-master\EMedicalSolution\EMedicalSolution\obj\Debug\EMedicalSolution.csprojResolveAssemblyReference.cache
+G:\code projects\EMedicalSolutionGit-master\EMedicalSolutionGit-master\EMedicalSolution\EMedicalSolution\obj\Debug\EMedicalSolution.dll
+G:\code projects\EMedicalSolutionGit-master\EMedicalSolutionGit-master\EMedicalSolution\EMedicalSolution\obj\Debug\EMedicalSolution.pdb
