@@ -8,8 +8,7 @@
     {
     @Html.HiddenFor(a => a.ID)
     }
-    
-    <div class="w3-row w3-margin-top">
+        <div class="w3-row w3-margin-top">
         <label class="w3-text-green">ID</label>
         @Html.TextBoxFor(a => a.ID, new { @class = "w3-input w3-border", Readonly="readonly" })
         @Html.ValidationMessageFor(a => a.ID)
