@@ -16,9 +16,9 @@
                         <th>Date of Birth</th>
                         <th>Tel</th>
                         <th>Email</th>
-                        
-                        <th>Edit</th>
                         <th>Delete</th>
+                        <th>Edit</th>
+                        <th>History</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -68,6 +68,11 @@
                     {
                         "data": "ID", "render": function (data) {
                             return '<a class="popup  w3-btn w3-red" href="/Patients/delete/' + data + '">Delete<a>';
+                        }
+                    },
+                    {
+                        "data": "ID", "render": function (data) {
+                            return '<a class="popup  w3-btn w3-red" href="/Patients/history/' + data + '">History<a>';
                         }
                     }
                 ]

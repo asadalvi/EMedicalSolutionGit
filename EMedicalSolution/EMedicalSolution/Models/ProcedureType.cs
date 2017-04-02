@@ -21,6 +21,7 @@ namespace EMedicalSolution.Models
     
         public int ID { get; set; }
         public string Title { get; set; }
+        public bool isSelected { get; set; }
         public System.DateTime Created { get; set; }
         public int CreatedBy { get; set; }
         public Nullable<System.DateTime> Modified { get; set; }

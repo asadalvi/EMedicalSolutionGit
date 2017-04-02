@@ -11,6 +11,7 @@ namespace EMedicalSolution.ViewModels
         public Patient objPatient { get; set; }
         //public IList<Patient> objListPatients { get; set; }
         public IList<ProcedureType> objProcedureType { get; set; }
+        public ProcedureType ChkprocedureType { get; set; }
         public IList<Symptom> objSymptom { get; set; }
         public IList<Disease> objDisease { get; set; }
         public IList<MedicalNecessity> objMedicalNecessity { get; set; }

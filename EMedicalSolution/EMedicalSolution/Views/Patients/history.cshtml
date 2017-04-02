@@ -1,0 +1,10 @@
+﻿@model EMedicalSolution.Models.Patient
+
+    <div class="w3-row w3-margin-top">
+        <label class="w3-text-green">Show history</label>
+    </div>
+    <div class="w3-row w3-margin-top">
+        <label class="w3-text-green">Patient Id</label>
+        @Html.TextBoxFor(a => a.FirstName, new { @class = "w3-input w3-border" })
+        @Html.TextBoxFor(a => a.LastName, new { @class = "w3-input w3-border" })
+    </div>

@@ -1,24 +1,14 @@
-﻿@model EMedicalSolution.Models.ProcedureType
+﻿@model EMedicalSolution.ViewModels.patientIntakeViewModel
+<h2>Step 2 Content</h2>
 
-
-<input type="hidden" id="pHistoryId" value="@ViewBag.pHistoryId" />
-@ViewBag.pHistoryId
-    <div class="w3-row w3-margin-top">
-        <div class="quarter">
-            <input class="w3-radio procedure_Type" type="checkbox" name="procedureType" value="1" checked />
-            Autonomic Nervous System (ANS) Test
-        </div>
-        <div class="quarter">
-            <input class="w3-radio procedure_Type" type="checkbox" name="procedureType" value="2" />
-            Vascular Study / Ankle Brachial Index (ABI) Test
-        </div>
-        <div class="quarter">
-            <input class="w3-radio procedure_Type" type="checkbox" name="procedureType" value="3" />
-            Home Sleep Study (HST) Test
-        </div>
-        <div class="quarter">
-            <input class="w3-radio procedure_Type" type="checkbox" name="procedureType" value="4" />
-            Allergy Test
-        </div>
-    </div>
-
+    @if (Model != null && Model.objProcedureType != null)
+    {
+        foreach (var procedure in Model.objProcedureType)
+        {
+          
+        <input class="w3-radio procedure_Type" type="checkbox" name="procedureType" value=@procedure.ID checked />
+                   @procedure.Title
+            <br /> 
+        }
+ 
+    }

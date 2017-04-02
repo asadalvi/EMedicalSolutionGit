@@ -132,14 +132,14 @@ namespace EMedicalSolution.Controllers
             //return Json(status,JsonRequestBehavior.AllowGet);
         }
         [HttpPost]
-        public JsonResult procedureTypes(string type, int pHistoryId)
+        public JsonResult procedureTypes(string type,int pHistoryId)
         {
             bool status = false;
             PatientProcedure pProcedure;
             if (ModelState.IsValid)
             {
+                // int[] myType = Array.ConvertAll(type, s => int.Parse(s));
                 string[] myType = type.Split(',');
-                //int[] myType = Array.ConvertAll(type, s => int.Parse(s));
                 using (PatientMgmtEntities db = new PatientMgmtEntities())
                 {
                     pProcedure = new PatientProcedure();
@@ -161,35 +161,43 @@ namespace EMedicalSolution.Controllers
             return new JsonResult { Data = new { status = status } };
 
         }
-        [HttpGet]
-        public ActionResult intake()
-        {
-            //SelectListItem listItem 
-            patientIntakeViewModel intakeView = new patientIntakeViewModel();
-            PatientMgmtEntities db = new PatientMgmtEntities();
-
-            intakeView.objSymptom = db.Symptoms.ToList();
-            intakeView.objDisease = db.Diseases.ToList();//.Include(a => a.dis).ToList();//Select(diseise => new Disease { Title = diseise.Title, ID = diseise.ID }).ToList();
-
-            //  return Json(intakeView, JsonRequestBehavior.AllowGet);
-            var result = JsonConvert.SerializeObject(intakeView, Formatting.Indented,
-                             new JsonSerializerSettings
-                             {
-                                 ReferenceLoopHandling = ReferenceLoopHandling.Ignore
-                             });
-            // return new JsonResult { Data = new { intakeView = intakeView } };
-            return Json(result, JsonRequestBehavior.AllowGet);
-        }
-
-        //[HttpPost]
-        //public JsonResult intake(string value)
+        //[HttpGet]
+        //public ActionResult intake()
         //{
-        //    bool status = false;
+        //    //SelectListItem listItem 
+        //    patientIntakeViewModel intakeView = new patientIntakeViewModel();
+        //    PatientMgmtEntities db = new PatientMgmtEntities();
 
-        //    status = true;
+        //    intakeView.objSymptom = db.Symptoms.ToList();
+        //    intakeView.objDisease = db.Diseases.ToList();//.Include(a => a.dis).ToList();//Select(diseise => new Disease { Title = diseise.Title, ID = diseise.ID }).ToList();
 
-        //    return Json(status, JsonRequestBehavior.AllowGet);
+        //    //  return Json(intakeView, JsonRequestBehavior.AllowGet);
+        //    var result = JsonConvert.SerializeObject(intakeView, Formatting.Indented,
+        //                     new JsonSerializerSettings
+        //                     {
+        //                         ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+        //                     });
+        //    // return new JsonResult { Data = new { intakeView = intakeView } };
+        //    return Json(result, JsonRequestBehavior.AllowGet);
         //}
+
+        [HttpPost]
+        public JsonResult intake(string symptom, string disease)
+        {
+            bool status = false;
+            if (ModelState.IsValid)
+            {
+                string[] symptoms = symptom.Split(',');
+                string[] diseases = disease.Split(',');
+                //int[] symptoms = Array.ConvertAll(symptom, s => int.Parse(s));
+                //int[] diseases = Array.ConvertAll(disease, s => int.Parse(s));
+                using (PatientMgmtEntities db = new PatientMgmtEntities())
+                {
+                    
+                }
+            }
+            return new JsonResult { Data = new { status = status } };
+        }
         //[HttpPost]
         //public JsonResult intake(string value)
         //{
@@ -233,6 +241,20 @@ namespace EMedicalSolution.Controllers
             }
             return new JsonResult { Data = new { status = status } };
         }
-
+        [HttpGet]
+        [ActionName("history")]
+        public ActionResult ShowPatientHistory(int id)
+        {
+            using (PatientMgmtEntities db = new PatientMgmtEntities())
+            {
+                var v = (from t1 in db.Patients
+                         from t2 in db.PatientHistories.Where(o => t1.ID == o.PatientID)
+                                                        .Take(1)
+                                                        .DefaultIfEmpty()
+                         select t1);
+                //var v = db.Patients.Where(a => a.ID == id).FirstOrDefault();
+                return View(v);
+            }
+        }
     }
 }
