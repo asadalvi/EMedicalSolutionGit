@@ -1,0 +1,96 @@
+﻿
+<div class="w3-container tablecontainer-history dashboardDiv" id="patients-tab">
+
+    <div class="w3-row w3-padding-16">
+
+        <div class="w3-row w3-padding-16">
+            @Html.ActionLink("+ Add New", "PatientInsuranceType", "Patients", new { id = 0 }, new { @class = "popup w3-btn w3-green" })
+        </div>
+        <div class="w3-responsive">
+            <table class="w3-table-all w3-hoverable" id="patientHistoryDataTable">
+                <thead>
+                    <tr>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Insurance Type</th>
+                        <th>Created</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                   
+                    <tr>
+                        <td>
+
+                        </td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </tbody>
+
+            </table>
+            @*Table Content Appends Here*@
+            @foreach (var item in (IEnumerable<EMedicalSolution.ViewModels.PatientHistoryVM>
+                ) ViewBag.pHistory)
+            {
+                <p>@item.FirstName</p>
+                }
+
+                @foreach (var history in ViewBag.pHistory)
+            {
+                    @(history)
+
+                }
+</div>
+    </div>
+</div>
+
+
+@*@section Scripts {*@
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<script src="~/Scripts/jquery.dataTables.min.js"></script>
+<script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+<script src="~/Scripts/date.format.js"></script>
+
+<script>
+    $(document).ready(function () {
+        var oTable = $("#patientHistoryDataTable").DataTable({
+
+            "ajax": {
+                "url": '/Patients/historyList/1',
+                "type": 'get',
+                "datatype": "json"
+            },
+            "columns": [
+                { "data": "FirstName", "autoWidth": true },
+                { "data": "LastName", "autoWidth": true },
+                 { "data": "Title", "autoWidth": true },
+                {
+                    "data": "Created", "autoWidth": true, "render": function (data) {
+                        var date = new Date(parseInt(data.substr(6)));
+                        var sdate = date.format("mmm d, yyyy");
+                        return sdate;
+                    }
+                },
+               
+                {
+                    "data": "ID", "render": function (data) {
+                        return '<a class="popup  w3-btn w3-orange" href="/Patients/delete/' + data + '">View<a>';
+                    }
+                }
+            ]
+        });
+
+        $('.tablecontainer-history').on('click', 'a.popup', function (e) {
+            e.preventDefault();
+            OpenPopup($(this).attr('href'), oTable, "History");
+        });
+    });
+</script>
+@*}*@
+
+
+

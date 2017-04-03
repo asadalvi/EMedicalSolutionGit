@@ -39,13 +39,6 @@ namespace EMedicalSolution.Controllers
             PatientMgmtEntities db = new PatientMgmtEntities();
             {
                 List<Patient> patients = db.Patients.OrderBy(a => a.FirstName).ToList();
-
-                //var result = JsonConvert.SerializeObject(patients, Formatting.Indented,
-                //            new JsonSerializerSettings
-                //            {
-                //                ReferenceLoopHandling = ReferenceLoopHandling.Ignore
-                //            });
-
                 return Json(new
                 {
                     data = patients.Select(p => new
@@ -62,6 +55,38 @@ namespace EMedicalSolution.Controllers
                     }
                 )
                 }, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        [HttpGet]
+        public ActionResult HistoryList(int id)
+        {
+            List<PatientHistoryVM> pHistoryVM = new List<PatientHistoryVM>(); 
+            PatientMgmtEntities db = new PatientMgmtEntities();
+            {
+                var pHistory = (from p in db.Patients
+                                join ph in db.PatientHistories on p.ID equals ph.PatientID
+                                join i in db.InsuranceTypes on ph.InsuranceTypeID equals i.ID
+                                where p.ID == id
+                                select new { ph.ID, p.FirstName, p.LastName , i.Title, ph.Created }).ToList();
+                ViewBag.pHistory = pHistory;
+
+                //pHistoryVM = phistory.ToList();
+                //db.PatientHistories
+                //                    .Where(h => h.PatientID.Equals(patientid)).OrderByDescending(a => a.Created).ToList();
+                //return Json(new
+                //{
+                //    data = pHistory.Select(p => new
+                //    {
+                //        p.ID,
+                //        p.FirstName,
+                //        p.LastName,
+                //        p.Title,
+                //        p.Created
+                //    }
+                //)
+                //}, JsonRequestBehavior.AllowGet);
+                return View();
             }
         }
 
