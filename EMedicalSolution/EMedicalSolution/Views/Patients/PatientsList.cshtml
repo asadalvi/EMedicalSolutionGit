@@ -16,9 +16,9 @@
                         <th>Date of Birth</th>
                         <th>Tel</th>
                         <th>Email</th>
-                        <th>Delete</th>
-                        <th>Edit</th>
                         <th>History</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -32,58 +32,57 @@
 
 
 @*@section Scripts {*@
-    <script src="~/Scripts/jquery.validate.min.js"></script>
-    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
-    <script src="~/Scripts/jquery.dataTables.min.js"></script>
-    <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
-    <script src="~/Scripts/date.format.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<script src="~/Scripts/jquery.dataTables.min.js"></script>
+<script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+<script src="~/Scripts/date.format.js"></script>
 
-    <script>
-        $(document).ready(function () {
-            var oTable = $("#patientsDataTable").DataTable({
-                "ajax": {
-                    "url": '/Patients/GetPatients',
-                    "type": 'get',
-                    "datatype": "json"
-                },
-                "columns": [
-                    { "data": "FirstName", "autoWidth": true },
-                    { "data": "LastName", "autoWidth": true },
-                     { "data": "Gender", "autoWidth": true },
-                    {
-                        "data": "DOB", "autoWidth": true, "render": function (data) {
-                            var date = new Date(parseInt(data.substr(6)));
-                            var sdate = date.format("mmm d, yyyy");
-                            return sdate;
-                        }
-                    },
-                     { "data": "Tel", "autoWidth": true },
-                      { "data": "Email", "autoWidth": true },
-                   
-                    {
-                        "data": "ID", "render": function (data) {
-                            return '<a class="popup w3-btn w3-orange" href="/Patients/Patient/' + data + '">Edit<a>';
-                        }
-                    },
-                    {
-                        "data": "ID", "render": function (data) {
-                            return '<a class="popup  w3-btn w3-red" href="/Patients/delete/' + data + '">Delete<a>';
-                        }
-                    },
-                    {
-                        "data": "ID", "render": function (data) {
-                            return '<a class="popup  w3-btn w3-red" href="/Patients/history/' + data + '">History<a>';
-                        }
+<script>
+    $(document).ready(function () {
+        var oTable = $("#patientsDataTable").DataTable({
+            "ajax": {
+                "url": '/Patients/GetPatients',
+                "type": 'get',
+                "datatype": "json"
+            },
+            "columns": [
+                { "data": "FirstName", "autoWidth": true },
+                { "data": "LastName", "autoWidth": true },
+                 { "data": "Gender", "autoWidth": true },
+                {
+                    "data": "DOB", "autoWidth": true, "render": function (data) {
+                        var date = new Date(parseInt(data.substr(6)));
+                        var sdate = date.format("mmm d, yyyy");
+                        return sdate;
                     }
-                ]
-            });
-
-            $('.tablecontainer-patient').on('click', 'a.popup', function (e) {
-                e.preventDefault();
-                OpenPopup($(this).attr('href'), oTable, "Patient");
-            });
+                },
+                 { "data": "Tel", "autoWidth": true },
+                  { "data": "Email", "autoWidth": true },
+                {
+                    "data": "ID", "render": function (data) {
+                        return '<a class="popup w3-btn w3-orange" href="/Patients/HistoryList/' + data + '">History<a>';
+                    }
+                },
+                {
+                    "data": "ID", "render": function (data) {
+                        return '<a class="popup w3-btn w3-orange" href="/Patients/Patient/' + data + '">Edit<a>';
+                    }
+                },
+                {
+                    "data": "ID", "render": function (data) {
+                        return '<a class="popup  w3-btn w3-red" href="/Patients/delete/' + data + '">Delete<a>';
+                    }
+                }
+            ]
         });
-    </script>
+
+        $('.tablecontainer-patient').on('click', 'a.popup', function (e) {
+            e.preventDefault();
+            OpenPopup($(this).attr('href'), oTable, "Patient");
+        });
+    });
+</script>
 @*}*@
 
 

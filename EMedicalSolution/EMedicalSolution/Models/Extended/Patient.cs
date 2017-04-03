@@ -9,7 +9,7 @@ namespace EMedicalSolution.Models
     [MetadataType(typeof(PatientMetaData))]
     public partial class Patient
     {
-
+        
     }
 
     public class PatientMetaData
