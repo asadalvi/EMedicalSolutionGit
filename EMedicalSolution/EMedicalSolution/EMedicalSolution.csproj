@@ -201,6 +201,7 @@
       <DependentUpon>EPatientMgmt.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\PatientHistoryVM.cs" />
     <Compile Include="ViewModels\patientIntakeViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
