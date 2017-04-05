@@ -57,7 +57,16 @@ namespace EMedicalSolution.Controllers
                 }, JsonRequestBehavior.AllowGet);
             }
         }
+        [HttpGet]
+        public ActionResult PatientInsuranceType(int id)
+        {
+            using (PatientMgmtEntities db = new PatientMgmtEntities())
+            {
+                IList<InsuranceType> iType = db.InsuranceTypes.ToList();
+                return View(iType);
+            }
 
+        }
         [HttpGet]
         public ActionResult HistoryList(int id)
         {          

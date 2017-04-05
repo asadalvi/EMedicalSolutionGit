@@ -8,7 +8,7 @@
         @Html.ActionLink("+ Add New", "PatientInsuranceType", "Patients", new { id = 0 }, new { @class = "popup w3-btn w3-green" })
     </div>
     <div class="w3-responsive">
-        @*<table class="w3-table-all w3-hoverable" id="patientHistoryDataTable">
+        <table class="w3-table-all w3-hoverable" id="patientHistoryDataTable">
             <thead>
                 <tr>
                     <th>First Name</th>
@@ -20,33 +20,26 @@
             </thead>
             <tbody>
 
+               @foreach (var item in Model)
+               {
                 <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                    <td>@item.FirstName</td>
+                    <td>@item.LastName</td>
+                    <td>@item.Title</td>
+                    <td>@item.Created</td>
+                    <td><a class="popup  w3-btn w3-orange" href="/Patients/ViewHistory/@item.ID">View</a></td>
                 </tr>
+               }
 
             </tbody>
 
-        </table>*@
+        </table>
 
         
     </div>
 </div>
 </div>
-@foreach (var item in Model)
-{
-   
-        <span>
-            @item.FirstName</span><br />
-            <span>@item.LastName</span><br />
-            <span>@item.Title</span><br />
-            <span>@item.Created</span><br />
-            <span>Add</span><br />
 
-}
 
 @*@section Scripts {*@
 <script src="~/Scripts/jquery.validate.min.js"></script>
@@ -59,29 +52,29 @@
     $(document).ready(function () {
         var oTable = $("#patientHistoryDataTable").DataTable({
 
-            "ajax": {
-                "url": '/Patients/historyList/1',
-                "type": 'get',
-                "datatype": "json"
-            },
-            "columns": [
-                { "data": "FirstName", "autoWidth": true },
-                { "data": "LastName", "autoWidth": true },
-                 { "data": "Title", "autoWidth": true },
-                {
-                    "data": "Created", "autoWidth": true, "render": function (data) {
-                        var date = new Date(parseInt(data.substr(6)));
-                        var sdate = date.format("mmm d, yyyy");
-                        return sdate;
-                    }
-                },
+            //"ajax": {
+            //    "url": '/Patients/historyList/1',
+            //    "type": 'get',
+            //    "datatype": "json"
+            //},
+            //"columns": [
+            //    { "data": "FirstName", "autoWidth": true },
+            //    { "data": "LastName", "autoWidth": true },
+            //     { "data": "Title", "autoWidth": true },
+            //    {
+            //        "data": "Created", "autoWidth": true, "render": function (data) {
+            //            var date = new Date(parseInt(data.substr(6)));
+            //            var sdate = date.format("mmm d, yyyy");
+            //            return sdate;
+            //        }
+            //    },
 
-                {
-                    "data": "ID", "render": function (data) {
-                        return '<a class="popup  w3-btn w3-orange" href="/Patients/delete/' + data + '">View<a>';
-                    }
-                }
-            ]
+            //    {
+            //        "data": "ID", "render": function (data) {
+            //            return '<a class="popup  w3-btn w3-orange" href="/Patients/delete/' + data + '">View<a>';
+            //        }
+            //    }
+            //]
         });
 
         $('.tablecontainer-history').on('click', 'a.popup', function (e) {

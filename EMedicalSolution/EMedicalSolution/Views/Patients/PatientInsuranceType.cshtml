@@ -1,0 +1,26 @@
+﻿@model IList<EMedicalSolution.Models.InsuranceType>
+
+
+@using (Html.BeginForm("SavePatientInsuranceType", "Patients", FormMethod.Post, new { id = "popupForm" }))
+{
+    @*if (Model != null && Model.ID > 0)
+    {
+        @Html.HiddenFor(a => a.ID)
+    }*@
+
+
+    <div class="w3-row w3-margin-top">
+        <label class="w3-text-green">Choose Insurance Type</label>
+    </div>
+    <div class="w3-row w3-margin-top">
+        @foreach(var item in Model)
+        {
+            @Html.RadioButtonFor(a => item.ID, item.ID, new { @class="w3-radio"}) @item.Title <br />
+        }
+
+    </div>
+    <div class="w3-row  w3-margin-top">
+        <input class="w3-btn-block w3-green" type="submit" value="Save" />
+    </div>
+
+}
