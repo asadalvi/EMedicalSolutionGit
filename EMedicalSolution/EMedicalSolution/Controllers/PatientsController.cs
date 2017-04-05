@@ -57,51 +57,27 @@ namespace EMedicalSolution.Controllers
                 }, JsonRequestBehavior.AllowGet);
             }
         }
-        [HttpGet]
-        public ActionResult PatientInsuranceType(int id)
-        {
-            using (PatientMgmtEntities db = new PatientMgmtEntities())
-            {
-                IList<InsuranceType> iType = db.InsuranceTypes.ToList();
-                return View(iType);
-            }
-
-        }
+      
         [HttpGet]
         public ActionResult HistoryList(int id)
-        {          
+        {
+            ViewBag.patientID = id;
             PatientMgmtEntities db = new PatientMgmtEntities();
             {
                 var pHistory = (from p in db.Patients
                                 join ph in db.PatientHistories on p.ID equals ph.PatientID
                                 join i in db.InsuranceTypes on ph.InsuranceTypeID equals i.ID
                                 where p.ID == id
-                               // select new { ph.ID, p.FirstName, p.LastName, i.Title }).ToList();
-                select new PatientHistoryVM
-                {
-                    ID = ph.ID,
-                    FirstName = p.FirstName,
-                    LastName = p.LastName,
-                    Title = i.Title,
-                    Created = i.Created
-                });
-               // ViewBag.pHistory = pHistory.ToList();
-
-                //pHistoryVM = phistory.ToList();
-                //db.PatientHistories
-                //                    .Where(h => h.PatientID.Equals(patientid)).OrderByDescending(a => a.Created).ToList();
-                //return Json(new
-                //{
-                //    data = pHistory.Select(p => new
-                //    {
-                //        p.ID,
-                //        p.FirstName,
-                //        p.LastName,
-                //        p.Title,
-                //        p.Created
-                //    }
-                //)
-                //}, JsonRequestBehavior.AllowGet);
+                                // select new { ph.ID, p.FirstName, p.LastName, i.Title }).ToList();
+                                select new PatientHistoryVM
+                                {
+                                    ID = ph.ID,
+                                    FirstName = p.FirstName,
+                                    LastName = p.LastName,
+                                    Title = i.Title,
+                                    Created = i.Created
+                                });
+                ViewBag.PatienName = db.Patients.Where(a => a.ID == id).Select(p => p.FirstName + " " + p.LastName).FirstOrDefault();
                 return View(pHistory);
             }
         }
@@ -118,16 +94,14 @@ namespace EMedicalSolution.Controllers
         }
 
         [HttpPost]
-        public JsonResult patient(Patient patient, string insurance)
+        public JsonResult patient(Patient patient)
         {
             bool status = false;
             int pHistoryId = 0;
-            PatientHistory ph;
             if (ModelState.IsValid)
             {
                 using (PatientMgmtEntities db = new PatientMgmtEntities())
                 {
-                    ph = new PatientHistory();
                     if (patient.ID > 0)
                     {
                         //edit 
@@ -153,17 +127,6 @@ namespace EMedicalSolution.Controllers
                         patient.CreatedBy = 1;
                         db.Patients.Add(patient);  //Saving new object
                         db.SaveChanges();
-
-                        ph.PatientID = patient.ID; //Getting inserted ID
-
-                        ph.InsuranceTypeID = Convert.ToInt32(insurance);
-                        ph.Created = DateTime.Now;
-                        ph.CreatedBy = 1;
-                        db.PatientHistories.Add(ph);
-                        db.SaveChanges();
-
-                        ViewBag.pHistoryId = ph.ID;
-                        pHistoryId = ph.ID; //getting last inserted History ID
                     }
                     status = true;
                 }
@@ -274,6 +237,36 @@ namespace EMedicalSolution.Controllers
             }
             return new JsonResult { Data = new { status = status } };
         }
+        [HttpGet]
+        public ActionResult PatientInsuranceType(int id)
+        {
+            ViewBag.patientID = id;
+            using (PatientMgmtEntities db = new PatientMgmtEntities())
+            {
+                IList<InsuranceType> iType = db.InsuranceTypes.ToList();
+                return View(iType);
+            }
 
+        }
+        [HttpPost]
+        public ActionResult SavePatientInsuranceType()
+        {
+            bool status = false;
+            int  pId = Convert.ToInt32(Request.Form["pId"]);
+            int typeid = Convert.ToInt32(Request.Form["typeId"]);
+            PatientHistory ph = new PatientHistory();
+            ph.PatientID = pId; //Getting inserted ID
+
+            ph.InsuranceTypeID = typeid;
+            ph.Created = DateTime.Now;
+            ph.CreatedBy = 1;
+            using (PatientMgmtEntities db = new PatientMgmtEntities())
+            {
+                db.PatientHistories.Add(ph);
+                db.SaveChanges();
+                status = true;
+            }
+            return new JsonResult { Data = new { status = status } };
+        }
     }
 }

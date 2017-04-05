@@ -5,8 +5,9 @@
 <div class="w3-row w3-padding-16">
 
     <div class="w3-row w3-padding-16">
-        @Html.ActionLink("+ Add New", "PatientInsuranceType", "Patients", new { id = 0 }, new { @class = "popup w3-btn w3-green" })
+        @Html.ActionLink("+ Add New", "PatientInsuranceType", "Patients", new { id = @ViewBag.patientID }, new { @class = "popup w3-btn w3-green" })
     </div>
+    <input type="hidden" value="@ViewBag.PatienName" id="ViewBag_PatienName" />
     <div class="w3-responsive">
         <table class="w3-table-all w3-hoverable" id="patientHistoryDataTable">
             <thead>
@@ -50,6 +51,11 @@
 
 <script>
     $(document).ready(function () {
+        var pName = $("#ViewBag_PatienName").val();
+        if (pName !== undefined && pName !== "") {
+            $("#PatienName").html("Pateint Name: "+ pName);
+            $("#PatienName").css("display", "block");
+         }
         var oTable = $("#patientHistoryDataTable").DataTable({
 
             //"ajax": {

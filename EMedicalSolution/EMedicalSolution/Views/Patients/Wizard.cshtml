@@ -44,7 +44,8 @@
             </form>*@
 
         <br />
-
+        <div>
+        <span id="PatienName" style="display:none"></span></div>
         <!-- SmartWizard html -->
         <div id="smartwizard">
             <ul>
@@ -245,7 +246,7 @@
                                dataType: 'json',
                                cache: false,
                                data: patient,
-                               url: '/Patients/patient?insurance=' + insurance,
+                               url: '/Patients/patient',
                                success: function (Data) {
                                    if (Data !== undefined) {
                                        pHistoryId = Data.pHistoryId;

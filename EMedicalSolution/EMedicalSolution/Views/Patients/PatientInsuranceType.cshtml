@@ -7,20 +7,18 @@
     {
         @Html.HiddenFor(a => a.ID)
     }*@
-
-
+    
     <div class="w3-row w3-margin-top">
         <label class="w3-text-green">Choose Insurance Type</label>
     </div>
     <div class="w3-row w3-margin-top">
-        @foreach(var item in Model)
+        @foreach (var item in Model)
         {
-            @Html.RadioButtonFor(a => item.ID, item.ID, new { @class="w3-radio"}) @item.Title <br />
+            @Html.RadioButtonFor(a => item.ID, item.ID, new { @class="w3-radio", @Name = "typeId" }) @item.Title <br />
         }
-
+        <input type="hidden" name="pId" value="@ViewBag.patientID">
     </div>
     <div class="w3-row  w3-margin-top">
         <input class="w3-btn-block w3-green" type="submit" value="Save" />
     </div>
-
 }
