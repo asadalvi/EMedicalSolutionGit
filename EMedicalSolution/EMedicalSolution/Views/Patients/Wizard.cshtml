@@ -99,7 +99,20 @@
                      @Html.Partial("PatientsList")
                 </div >
                 <div id="step-2" class="">
-                    @Html.Partial("procedureTypes")
+                    <h2>Step 2 Content</h2>
+
+                    @if (Model != null && Model.objProcedureType != null)
+                    {
+                        foreach (var procedure in Model.objProcedureType)
+                        {
+
+                            <input class="w3-radio procedure_Type" type="checkbox" name="procedureType" value=@procedure.ID />
+                            @procedure.Title
+                            <br />
+                        }
+
+                    }
+
                 </div>
                 <div id="step-3" class="pre-scrollable">
                   @Html.Partial("intake")
