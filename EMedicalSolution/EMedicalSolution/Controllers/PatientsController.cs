@@ -136,14 +136,14 @@ namespace EMedicalSolution.Controllers
             //return Json(status,JsonRequestBehavior.AllowGet);
         }
         [HttpPost]
-        public JsonResult procedureTypes(string type, int pHistoryId)
+        public ActionResult procedureTypes(string[] procedureType,int pHistoryId)
         {
-            bool status = false;
+             bool status = false;
             PatientProcedure pProcedure;
             if (ModelState.IsValid)
             {
-                string[] myType = type.Split(',');
-                //int[] myType = Array.ConvertAll(type, s => int.Parse(s));
+                //string[] myType = procedureType.Split(',');
+                 int[] myType = Array.ConvertAll(procedureType, s => int.Parse(s));
                 using (PatientMgmtEntities db = new PatientMgmtEntities())
                 {
                     pProcedure = new PatientProcedure();
@@ -162,8 +162,8 @@ namespace EMedicalSolution.Controllers
                     }
                 }
             }
-            return new JsonResult { Data = new { status = status } };
-
+            //return new JsonResult { Data = new { status = status } };
+            return PartialView();
         }
         [HttpGet]
         public ActionResult intake()
@@ -185,24 +185,17 @@ namespace EMedicalSolution.Controllers
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
-        //[HttpPost]
-        //public JsonResult intake(string value)
-        //{
-        //    bool status = false;
+        [HttpPost]
+        public JsonResult intake(string[] symptom, string[] disease)
+        {
+            bool status = false;
+            int[] symptoms = Array.ConvertAll(symptom, s => int.Parse(s));
+            int[] diseases = Array.ConvertAll(disease, s => int.Parse(s));
+            status = true;
 
-        //    status = true;
+            return Json(status, JsonRequestBehavior.AllowGet);
+        }
 
-        //    return Json(status, JsonRequestBehavior.AllowGet);
-        //}
-        //[HttpPost]
-        //public JsonResult intake(string value)
-        //{
-        //    bool status = false;
-
-        //    status = true;
-
-        //    return Json(status, JsonRequestBehavior.AllowGet);
-        //}
         [HttpGet]
         public ActionResult Delete(int id)
         {

@@ -1,15 +1,18 @@
 ﻿   @*@using (Ajax.BeginForm("intake", "Patients", new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "step-4" }))
     {*@
-    <h3>Symptoms</h3>
-    @if (Model != null && Model.objSymptom != null)
+ @model EMedicalSolution.ViewModels.patientIntakeViewModel
+<h3>Symptoms</h3>
+@using (Html.BeginForm("intake", "Patients", FormMethod.Post, new { id = "popupForm" }))
+{
+
+    if (Model != null && Model.objSymptom != null)
     {
         <div class="col-sm-12">
             @foreach (var symptom in Model.objSymptom)
             {
                 <div class="col-sm-4">
-                    <input class="w3-radio Symptom_symptom" type="checkbox" value="@symptom.ID" /> @symptom.Title
-                    @*@Html.CheckBoxFor(model => model.objSymptom[count].isSelected, new { htmlAttributes = new { @class = "form-control", value = procedure.ID } })
-                    @symptom.Title*@
+                    <input class="w3-radio" type="checkbox" name="symptom" value="@symptom.ID" /> @symptom.Title
+
                 </div>
                 if (symptom.ID % 3 == 2)
                 {
@@ -19,13 +22,13 @@
         </div>
     }
     <h3>Disease</h3>
-    @if (Model != null && Model.objDisease != null)
+    if (Model != null && Model.objDisease != null)
     {
         <div class="col-lg-12">
             @foreach (var disease in Model.objDisease)
             {
                 <div class="col-lg-4">
-                    <input class="w3-radio Disease_disease" type="checkbox" value="@disease.ID" /> @disease.Title
+                    <input class="w3-radio" type="checkbox" name="disease" value="@disease.ID" /> @disease.Title
                 </div>
                 if (disease.ID % 3 == 2)
                 {
@@ -33,5 +36,8 @@
                 }
             }
         </div>
-       }
-   @*}*@
+    }
+    <div class="w3-row  w3-margin-top">
+        <input class="w3-btn-block w3-green" type="submit" value="Save" />
+    </div>
+}

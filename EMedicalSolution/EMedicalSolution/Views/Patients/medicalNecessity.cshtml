@@ -1,0 +1,11 @@
+﻿<h2>Step 5 Content</h2>
+@if (Model != null && Model.objMedicalNecessity != null)
+{
+    foreach (var necessity in Model.objMedicalNecessity)
+    {
+        <input type="checkbox" value="@necessity.ID" />  @(necessity.ICD10Code + " - " + necessity.Description)
+        <br />
+    }
+}<div class="w3-row  w3-margin-top">
+    <input class="w3-btn-block w3-green" type="submit" value="Save" />
+</div>

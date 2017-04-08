@@ -347,6 +347,10 @@
     <Content Include="Views\Patients\history.cshtml" />
     <Content Include="Views\Patients\HistoryList.cshtml" />
     <Content Include="Views\Patients\PatientInsuranceType.cshtml" />
+    <Content Include="Views\Patients\uploadReport.cshtml" />
+    <Content Include="Views\Patients\medicalNecessity.cshtml" />
+    <Content Include="Views\Patients\resultInterpretation.cshtml" />
+    <Content Include="Views\Patients\orderForm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

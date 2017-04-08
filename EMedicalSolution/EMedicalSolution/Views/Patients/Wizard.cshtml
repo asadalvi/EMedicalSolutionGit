@@ -20,30 +20,7 @@
         <h2>Patients Wizard</h2>
     </div>
     <div class="w3-row w3-padding-16">
-
-
-
-
-        @*            <form class="form-inline">
-                <div class="form-group">
-                    <label>Choose Theme:</label>
-                    <select id="theme_selector" class="form-control">
-                        <option value="default">default</option>
-                        <option value="arrows">arrows</option>
-                        <option value="circles">circles</option>
-                        <option value="dots">dots</option>
-                    </select>
-                </div>
-
-                <label>External Buttons:</label>
-                <div class="btn-group navbar-btn" role="group">
-                    <button class="btn btn-default" id="prev-btn" type="button">Go Previous</button>
-                    <button class="btn btn-default" id="next-btn" type="button">Go Next</button>
-                    <button class="btn btn-danger" id="reset-btn" type="button">Reset Wizard</button>
-                </div>
-            </form>*@
-
-        <br />
+         <br />
         <div>
         <span id="PatienName" style="display:none"></span></div>
         <!-- SmartWizard html -->
@@ -95,83 +72,28 @@
             </ul>
 
             <div>
-                <div id="step-1" class="">
+                <div id="step-1" class="pre-scrollable">
                      @Html.Partial("PatientsList")
                 </div >
-                <div id="step-2" class="">
-                    <h2>Step 2 Content</h2>
-
-                    @if (Model != null && Model.objProcedureType != null)
-                    {
-                        foreach (var procedure in Model.objProcedureType)
-                        {
-
-                            <input class="w3-radio procedure_Type" type="checkbox" name="procedureType" value=@procedure.ID />
-                            @procedure.Title
-                            <br />
-                        }
-
-                    }
-
+                <div id="step-2" class="pre-scrollable">
+                    @Html.Partial("procedureTypes")
                 </div>
                 <div id="step-3" class="pre-scrollable">
                   @Html.Partial("intake")
                     </div>
-                            <div id="step-4" class="">
-                                <h2>Step 4 Content</h2>
-                                <div class="w3-row w3-margin-bottom" id="add-prescription">
-                                    <div class="w3-half">
-                                        <div class="editor-label">
-                                            <label>Test Report</label>
-                                        </div>
-                                        <div class="input_fields_wrap">
-                                            <div>
-                                                <input type="file" name="[0].filePath" id="filePath" />
-                                            </div>
-                                            <button class="add_field_button w3-btn w3-cyan">+ Add More</button>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="panel panel-default">
-                                    <div class="panel-heading">My Details</div>
-                                    <table class="table">
-                                        <tbody>
-                                            <tr>
-                                                <th>Name:</th>
-                                                <td>Tim Smith</td>
-                                            </tr>
-                                            <tr>
-                                                <th>Email:</th>
-                                                <td>example@example.com</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                            <div id="step-5" class="">
-                                <h2>Step 5 Content</h2>
-                                @if (Model != null && Model.objMedicalNecessity != null)
-                                {
-                                    foreach (var necessity in Model.objMedicalNecessity)
-                                    {
-
-                                        <input type="checkbox" value="@necessity.ID" />  @(necessity.ICD10Code + " - " + necessity.Description)
-                                        <br />
-                                    }
-                                }
-                            </div>
-                            <div id="step-6" class="">
-                                <h2>Step 6 Content</h2>
-                                Order Form / Supper Bill
-
-                            </div>
-                            <div id="step-7" class="">
-                                <h2>Step 7 Content</h2>
-                                Result Interpretation by Specialist
-
-                            </div>
-                        </div>
+                 <div id="step-4" class="pre-scrollable">
+                     @Html.Partial("uploadReport")
+                </div>
+                <div id="step-5" class="pre-scrollable">
+                 @Html.Partial("medicalNecessity")              
+                 </div>
+                <div id="step-6" class="pre-scrollable">
+                    @Html.Partial("orderForm") 
+                </div>
+                <div id="step-7" class="pre-scrollable">
+                    @Html.Partial("resultInterpretation") 
+                </div>
+                </div>
                 </div>
 
 
@@ -236,109 +158,6 @@
                         // Navigate next
                         $('#smartwizard').smartWizard("next");
                         return true;
-                    });
-                    $('#smartwizard .sw-btn-group .sw-btn-next').on('click', function () {
-
-                        if (numberOFSteps == 1) {
-                            var ID = 0;
-                            if ($("#pID").val() !== undefined && $("#pID").val() !== null && $("#pID").val() !== "") {
-                                ID = $("#pID").val();
-                            }
-                            var gender = "Male";
-                            var insurance = "1";
-                            var FirstName = $("#pFirstName").val();
-                            var LastName = $("#pLastName").val();
-                            var DOB = $("#pDOB").val();
-                            var IDNumber = $("#pTel").val();
-                            var Email = $("#pEmail").val();
-                            gender = $("input:radio[name=Gender]:checked").val();
-                            insurance = $("input:radio[name=insurance]:checked").val();
-                            patient = { ID: ID, FirstName: FirstName, LastName: LastName, DOB: DOB, IDNumber: IDNumber, Email: Email, Gender: gender, },
-                           $.ajax({
-                               type: 'post',
-                               dataType: 'json',
-                               cache: false,
-                               data: patient,
-                               url: '/Patients/patient',
-                               success: function (Data) {
-                                   if (Data !== undefined) {
-                                       pHistoryId = Data.pHistoryId;
-                                       console.log("Successfully data saved", pHistoryId);
-                                       alert("Successfully data saved");
-                                   } else { alert("error in data saving"); }
-                               },
-                               error: function (jqXHR, textStatus, errorThrown) {
-                                   alert('Error - ' + errorThrown);
-                               }
-                           });
-                        }
-                        if (numberOFSteps == 2) {
-                            var type = [];
-                            $('.procedure_Type:checked').each(function () {
-                                type.push($(this).val());
-                            }),
-                                $.ajax({
-                                    type: 'post',
-                                    dataType: 'json',
-                                    cache: false,
-                                    url: '/Patients/procedureTypes?type=' + type + "&pHistoryId=" + pHistoryId,
-                                    success: function (status) {
-                                        //if (status) {
-                                        //    alert("Successfully data saved");
-                                        //    $.ajax({
-                                        //        type: 'get',
-                                        //        dataType: 'json',
-                                        //        cache: false,
-                                        //        url: '/Patients/intake',
-                                        //        success: function (result) {
-                                        //            if (result !== undefined) {
-                                        //                alert("Successfully data saved");
-                                        //                for (var j = 0; j < result.length; j++) {
-                                        //                    for (var i = 0; i < result.objSymptom[j].length; i++) {
-                                        //                        var symptom = result.objSymptom[i];
-                                        //                        $("#intakeDiv").append('<div class="quarter">'
-                                        //                       + '<input class="w3-radio procedure_Type" type="checkbox" name="procedureType" value=" ' + symptom.ID + ' " checked />'
-                                        //                       + symptom.Title + '</div>');
-                                        //                    }
-                                        //                }
-                                        //            } else { alert("error in data saving"); }
-                                        //        },
-                                        //        error: function (jqXHR, textStatus, errorThrown) {
-                                        //            alert(textStatus, jqXHR, 'Error - ' + errorThrown);
-                                        //        }
-                                        //    });
-                                        //} else { alert("error in data saving"); }
-                                    },
-                                    error: function (jqXHR, textStatus, errorThrown) {
-                                        alert('Error - ' + errorThrown);
-                                    }
-                                });
-                        }
-                        if (numberOFSteps == 3) {
-                            var vale = "test";
-                            var symptom = [];
-                            $('.Symptom_symptom:checked').each(function () {
-                                symptom.push($(this).val());
-                            });
-                            var disease = [];
-                            $('.Disease_disease:checked').each(function () {
-                                disease.push($(this).val());
-                            });
-                            $.ajax({
-                                type: 'post',
-                                dataType: 'json',
-                                cache: false,
-                                url: '/Patients/intake?symptom=' + symptom + "&disease=" + disease,
-                                success: function (status) {
-                                    if (status) {
-                                        alert("Successfully data saved");
-                                    } else { alert("error in data saving"); }
-                                },
-                                error: function (jqXHR, textStatus, errorThrown) {
-                                    alert('Error - ' + errorThrown);
-                                }
-                            });
-                        }
                     });
 
                     $("#theme_selector").on("change", function () {
