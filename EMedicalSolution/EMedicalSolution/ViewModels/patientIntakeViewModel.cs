@@ -14,6 +14,7 @@ namespace EMedicalSolution.ViewModels
         public ProcedureType ChkprocedureType { get; set; }
         public IList<Symptom> objSymptom { get; set; }
         public IList<Disease> objDisease { get; set; }
+        public IList<InterferingCondition> objInterferingCondition { get; set; }
         public IList<MedicalNecessity> objMedicalNecessity { get; set; }
 
     }

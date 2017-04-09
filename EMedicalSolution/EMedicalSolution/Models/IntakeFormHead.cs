@@ -24,7 +24,7 @@ namespace EMedicalSolution.Models
         public int ID { get; set; }
         public int HistoryID { get; set; }
         public string HaveSupportDevice { get; set; }
-        public bool isPregnant { get; set; }
+        public int isPregnant { get; set; }
         public System.DateTime Date { get; set; }
         public System.DateTime Created { get; set; }
         public int CreatedBy { get; set; }

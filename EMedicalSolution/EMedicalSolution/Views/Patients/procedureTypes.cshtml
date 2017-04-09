@@ -1,6 +1,6 @@
 ﻿@model EMedicalSolution.ViewModels.patientIntakeViewModel
 <h2>Step 2 Content</h2>
-@using (Html.BeginForm("procedureTypes", "Patients", FormMethod.Post, new { id = "popupForm" }))
+@using (Html.BeginForm("procedureTypes", "Patients", FormMethod.Post, new { id = "procedureTypes" }))
 {
     if (Model != null && Model.objProcedureType != null)
     {
@@ -14,6 +14,6 @@
         <input type="hidden" name="pHistoryId" value="69" />
     }
     <div class="w3-row  w3-margin-top">
-            <input class="w3-btn-block w3-green" type="submit" value="Save" />
-        </div>
+        <button class="w3-btn-block w3-green submitForm" type="button">Save</button>
+    </div>
 }

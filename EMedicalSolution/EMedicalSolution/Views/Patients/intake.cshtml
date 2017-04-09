@@ -1,10 +1,39 @@
 ﻿   @*@using (Ajax.BeginForm("intake", "Patients", new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "step-4" }))
     {*@
  @model EMedicalSolution.ViewModels.patientIntakeViewModel
-<h3>Symptoms</h3>
-@using (Html.BeginForm("intake", "Patients", FormMethod.Post, new { id = "popupForm" }))
-{
 
+@using (Html.BeginForm("intake", "Patients", FormMethod.Post, new { id = "intake" }))
+{
+    <input type="hidden" name="pHistoryId" value="69" />
+    <div>
+        <label> Do you have a pacemaker, defibrillator, or any life support device? </label>
+        <input class="w3-radio" type="radio" name="supportDevice" value="Yes" checked /> Yes
+        <input class="w3-radio" type="radio" name="supportDevice" value="No" /> No
+    </div>
+    <div>
+        <label>Are you currently pregnant? </label>
+        <input class="w3-radio" type="radio" name="pregnant" value="1" checked /> Yes
+        <input class="w3-radio" type="radio" name="pregnant" value="0" /> No
+        <input class="w3-radio" type="radio" name="pregnant" value="2" /> N/A
+      </div>
+  <br />
+        if (Model != null && Model.objInterferingCondition != null)
+        {
+        <div class="col-sm-12">
+            <div>
+                <div class="col-sm-4"> <label> Is this condition interfering with any of the following?</label></div>
+
+                @foreach (var condition in Model.objInterferingCondition)
+                {
+                    <div class="col-sm-4">
+                        <input class="w3-radio" type="checkbox" name="condition" value="@condition.ID" /> @condition.Title
+                    </div>
+
+                }
+            </div>
+        </div>
+        }<br />
+        <h3>Symptoms</h3>
     if (Model != null && Model.objSymptom != null)
     {
         <div class="col-sm-12">
@@ -20,10 +49,10 @@
                 }
             }
         </div>
-    }
-    <h3>Disease</h3>
-    if (Model != null && Model.objDisease != null)
-    {
+        }
+        <h3>Disease</h3>
+        if (Model != null && Model.objDisease != null)
+        {
         <div class="col-lg-12">
             @foreach (var disease in Model.objDisease)
             {
@@ -36,8 +65,8 @@
                 }
             }
         </div>
-    }
-    <div class="w3-row  w3-margin-top">
-        <input class="w3-btn-block w3-green" type="submit" value="Save" />
-    </div>
-}
+        }
+        <div class="w3-row  w3-margin-top">
+            <button class="w3-btn-block w3-green submitForm" type="button">Save</button>
+        </div>
+        }

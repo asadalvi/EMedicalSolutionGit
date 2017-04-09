@@ -4,124 +4,13 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="PatientMgmtModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityContainer Name="PatientMgmtModelStoreContainer">
-          <EntitySet Name="Diseases" EntityType="PatientMgmtModel.Store.Diseases" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="DiseaseTypes" EntityType="PatientMgmtModel.Store.DiseaseTypes" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="InsuranceCardPictures" EntityType="PatientMgmtModel.Store.InsuranceCardPictures" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="InsuranceTypes" EntityType="PatientMgmtModel.Store.InsuranceTypes" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="IntakeFormHead" EntityType="PatientMgmtModel.Store.IntakeFormHead" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="InterferingConditions" EntityType="PatientMgmtModel.Store.InterferingConditions" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="MedicalNecessities" EntityType="PatientMgmtModel.Store.MedicalNecessities" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="Offices" EntityType="PatientMgmtModel.Store.Offices" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="PatientDiseases" EntityType="PatientMgmtModel.Store.PatientDiseases" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="PatientHistory" EntityType="PatientMgmtModel.Store.PatientHistory" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="PatientInterferingCondition" EntityType="PatientMgmtModel.Store.PatientInterferingCondition" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="PatientProcedures" EntityType="PatientMgmtModel.Store.PatientProcedures" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="Patients" EntityType="PatientMgmtModel.Store.Patients" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="PatientSymtoms" EntityType="PatientMgmtModel.Store.PatientSymtoms" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="ProcedureTypes" EntityType="PatientMgmtModel.Store.ProcedureTypes" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="Staff" EntityType="PatientMgmtModel.Store.Staff" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="Statuses" EntityType="PatientMgmtModel.Store.Statuses" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="Symptoms" EntityType="PatientMgmtModel.Store.Symptoms" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="sysdiagrams" EntityType="PatientMgmtModel.Store.sysdiagrams" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="UserRoles" EntityType="PatientMgmtModel.Store.UserRoles" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="Users" EntityType="PatientMgmtModel.Store.Users" store:Type="Tables" Schema="dbo" />
-          <AssociationSet Name="FK_Diseases_DiseaseTypes" Association="PatientMgmtModel.Store.FK_Diseases_DiseaseTypes">
-            <End Role="DiseaseTypes" EntitySet="DiseaseTypes" />
-            <End Role="Diseases" EntitySet="Diseases" />
-          </AssociationSet>
-          <AssociationSet Name="FK_InsuranceCardPictures_PatientHistory" Association="PatientMgmtModel.Store.FK_InsuranceCardPictures_PatientHistory">
-            <End Role="PatientHistory" EntitySet="PatientHistory" />
-            <End Role="InsuranceCardPictures" EntitySet="InsuranceCardPictures" />
-          </AssociationSet>
-          <AssociationSet Name="FK_InsuranceCardPictures_Patients" Association="PatientMgmtModel.Store.FK_InsuranceCardPictures_Patients">
-            <End Role="Patients" EntitySet="Patients" />
-            <End Role="InsuranceCardPictures" EntitySet="InsuranceCardPictures" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PatientDiseases_Diseases" Association="PatientMgmtModel.Store.FK_PatientDiseases_Diseases">
-            <End Role="Diseases" EntitySet="Diseases" />
-            <End Role="PatientDiseases" EntitySet="PatientDiseases" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PatientDiseases_IntakeFormHead" Association="PatientMgmtModel.Store.FK_PatientDiseases_IntakeFormHead">
-            <End Role="IntakeFormHead" EntitySet="IntakeFormHead" />
-            <End Role="PatientDiseases" EntitySet="PatientDiseases" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PatientDiseases_PatientHistory" Association="PatientMgmtModel.Store.FK_PatientDiseases_PatientHistory">
-            <End Role="PatientHistory" EntitySet="PatientHistory" />
-            <End Role="PatientDiseases" EntitySet="PatientDiseases" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PatientHistory_InsuranceTypes" Association="PatientMgmtModel.Store.FK_PatientHistory_InsuranceTypes">
-            <End Role="InsuranceTypes" EntitySet="InsuranceTypes" />
-            <End Role="PatientHistory" EntitySet="PatientHistory" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PatientHistory_MedicalNecessities" Association="PatientMgmtModel.Store.FK_PatientHistory_MedicalNecessities">
-            <End Role="MedicalNecessities" EntitySet="MedicalNecessities" />
-            <End Role="PatientHistory" EntitySet="PatientHistory" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PatientHistory_Offices" Association="PatientMgmtModel.Store.FK_PatientHistory_Offices">
-            <End Role="Offices" EntitySet="Offices" />
-            <End Role="PatientHistory" EntitySet="PatientHistory" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PatientHistory_Patients" Association="PatientMgmtModel.Store.FK_PatientHistory_Patients">
-            <End Role="Patients" EntitySet="Patients" />
-            <End Role="PatientHistory" EntitySet="PatientHistory" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PatientHistory_Statuses" Association="PatientMgmtModel.Store.FK_PatientHistory_Statuses">
-            <End Role="Statuses" EntitySet="Statuses" />
-            <End Role="PatientHistory" EntitySet="PatientHistory" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PatientInterferingCondition_IntakeFormHead" Association="PatientMgmtModel.Store.FK_PatientInterferingCondition_IntakeFormHead">
-            <End Role="IntakeFormHead" EntitySet="IntakeFormHead" />
-            <End Role="PatientInterferingCondition" EntitySet="PatientInterferingCondition" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PatientInterferingCondition_InterferingConditions" Association="PatientMgmtModel.Store.FK_PatientInterferingCondition_InterferingConditions">
-            <End Role="InterferingConditions" EntitySet="InterferingConditions" />
-            <End Role="PatientInterferingCondition" EntitySet="PatientInterferingCondition" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PatientInterferingCondition_PatientHistory" Association="PatientMgmtModel.Store.FK_PatientInterferingCondition_PatientHistory">
-            <End Role="PatientHistory" EntitySet="PatientHistory" />
-            <End Role="PatientInterferingCondition" EntitySet="PatientInterferingCondition" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PatientProcedures_PatientHistory" Association="PatientMgmtModel.Store.FK_PatientProcedures_PatientHistory">
-            <End Role="PatientHistory" EntitySet="PatientHistory" />
-            <End Role="PatientProcedures" EntitySet="PatientProcedures" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PatientProcedures_ProcedureTypes" Association="PatientMgmtModel.Store.FK_PatientProcedures_ProcedureTypes">
-            <End Role="ProcedureTypes" EntitySet="ProcedureTypes" />
-            <End Role="PatientProcedures" EntitySet="PatientProcedures" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PatientSymtoms_IntakeFormHead" Association="PatientMgmtModel.Store.FK_PatientSymtoms_IntakeFormHead">
-            <End Role="IntakeFormHead" EntitySet="IntakeFormHead" />
-            <End Role="PatientSymtoms" EntitySet="PatientSymtoms" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PatientSymtoms_PatientHistory" Association="PatientMgmtModel.Store.FK_PatientSymtoms_PatientHistory">
-            <End Role="PatientHistory" EntitySet="PatientHistory" />
-            <End Role="PatientSymtoms" EntitySet="PatientSymtoms" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PatientSymtoms_Symptoms" Association="PatientMgmtModel.Store.FK_PatientSymtoms_Symptoms">
-            <End Role="Symptoms" EntitySet="Symptoms" />
-            <End Role="PatientSymtoms" EntitySet="PatientSymtoms" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Staff_Offices" Association="PatientMgmtModel.Store.FK_Staff_Offices">
-            <End Role="Offices" EntitySet="Offices" />
-            <End Role="Staff" EntitySet="Staff" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Users_Staff" Association="PatientMgmtModel.Store.FK_Users_Staff">
-            <End Role="Staff" EntitySet="Staff" />
-            <End Role="Users" EntitySet="Users" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Users_Users" Association="PatientMgmtModel.Store.FK_Users_Users">
-            <End Role="UserRoles" EntitySet="UserRoles" />
-            <End Role="Users" EntitySet="Users" />
-          </AssociationSet>
-        </EntityContainer>
+      <Schema Namespace="PatientMgmtModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Diseases">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="Title" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="DiseaseTypeID" Type="int" Nullable="false" />
           <Property Name="Created" Type="datetime" Nullable="false" />
           <Property Name="CreatedBy" Type="int" Nullable="false" />
@@ -132,8 +21,8 @@
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="Title" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Created" Type="datetime" Nullable="false" />
           <Property Name="CreatedBy" Type="int" Nullable="false" />
           <Property Name="Modified" Type="datetime" />
@@ -143,9 +32,9 @@
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="Title" Type="varchar" Nullable="false" MaxLength="50" />
-          <Property Name="FilePath" Type="varchar" Nullable="false" MaxLength="150" />
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="FilePath" Type="varchar" MaxLength="150" Nullable="false" />
           <Property Name="HistoryID" Type="int" Nullable="false" />
           <Property Name="PatientID" Type="int" />
           <Property Name="Created" Type="datetime" Nullable="false" />
@@ -157,8 +46,8 @@
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="Title" Type="varchar" Nullable="false" MaxLength="20" />
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="varchar" MaxLength="20" Nullable="false" />
           <Property Name="Created" Type="datetime" Nullable="false" />
           <Property Name="CreatedBy" Type="int" Nullable="false" />
           <Property Name="Modified" Type="datetime" />
@@ -168,10 +57,10 @@
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="HistoryID" Type="int" Nullable="false" />
-          <Property Name="HaveSupportDevice" Type="varchar" Nullable="false" MaxLength="10" />
-          <Property Name="isPregnant" Type="bit" Nullable="false" />
+          <Property Name="HaveSupportDevice" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="isPregnant" Type="int" Nullable="false" />
           <Property Name="Date" Type="date" Nullable="false" />
           <Property Name="Created" Type="datetime" Nullable="false" />
           <Property Name="CreatedBy" Type="int" Nullable="false" />
@@ -182,8 +71,8 @@
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="Title" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Created" Type="datetime" Nullable="false" />
           <Property Name="CreatedBy" Type="int" Nullable="false" />
           <Property Name="Modified" Type="datetime" />
@@ -193,9 +82,9 @@
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="ICD10Code" Type="varchar" Nullable="false" MaxLength="20" />
-          <Property Name="Description" Type="varchar" Nullable="false" MaxLength="100" />
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ICD10Code" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="Created" Type="datetime" Nullable="false" />
           <Property Name="CreatedBy" Type="int" Nullable="false" />
           <Property Name="Modified" Type="datetime" />
@@ -205,10 +94,10 @@
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="Title" Type="varchar" Nullable="false" MaxLength="20" />
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="varchar" MaxLength="20" Nullable="false" />
           <Property Name="Description" Type="varchar" MaxLength="50" />
-          <Property Name="Location" Type="varchar" Nullable="false" MaxLength="100" />
+          <Property Name="Location" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="Tel" Type="varchar" MaxLength="15" />
           <Property Name="Email" Type="varchar" MaxLength="50" />
           <Property Name="Created" Type="datetime" Nullable="false" />
@@ -220,7 +109,7 @@
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="HistoryID" Type="int" Nullable="false" />
           <Property Name="IntakeFormID" Type="int" Nullable="false" />
           <Property Name="DiseaseID" Type="int" Nullable="false" />
@@ -233,7 +122,7 @@
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="PatientID" Type="int" />
           <Property Name="InsuranceTypeID" Type="int" />
           <Property Name="MedicalNecessitiesID" Type="int" />
@@ -253,7 +142,7 @@
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="HistoryID" Type="int" Nullable="false" />
           <Property Name="IntakeFormID" Type="int" Nullable="false" />
           <Property Name="PatientConditionID" Type="int" Nullable="false" />
@@ -266,7 +155,7 @@
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="HistoryID" Type="int" Nullable="false" />
           <Property Name="ProcedureTypeID" Type="int" Nullable="false" />
           <Property Name="FilePath" Type="varchar" MaxLength="150" />
@@ -276,15 +165,29 @@
           <Property Name="Modified" Type="datetime" />
           <Property Name="ModifiedBy" Type="int" />
         </EntityType>
+        <EntityType Name="PatientReports">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="FilePath" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="HistoryID" Type="int" Nullable="false" />
+          <Property Name="PatientID" Type="int" />
+          <Property Name="Created" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="Modified" Type="datetime" />
+          <Property Name="ModifiedBy" Type="int" />
+        </EntityType>
         <EntityType Name="Patients">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="FirstName" Type="varchar" Nullable="false" MaxLength="20" />
-          <Property Name="LastName" Type="varchar" Nullable="false" MaxLength="20" />
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="LastName" Type="varchar" MaxLength="20" Nullable="false" />
           <Property Name="DOB" Type="date" Nullable="false" />
-          <Property Name="Gender" Type="char" Nullable="false" MaxLength="6" />
+          <Property Name="Gender" Type="char" MaxLength="6" Nullable="false" />
           <Property Name="IDNumber" Type="varchar" MaxLength="20" />
           <Property Name="Tel" Type="varchar" MaxLength="15" />
           <Property Name="Email" Type="varchar" MaxLength="50" />
@@ -297,7 +200,7 @@
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="HistoryID" Type="int" Nullable="false" />
           <Property Name="IntakeFormID" Type="int" Nullable="false" />
           <Property Name="SymptomID" Type="int" Nullable="false" />
@@ -310,8 +213,8 @@
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="Title" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Created" Type="datetime" Nullable="false" />
           <Property Name="CreatedBy" Type="int" Nullable="false" />
           <Property Name="Modified" Type="datetime" />
@@ -321,11 +224,11 @@
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="FirstName" Type="varchar" Nullable="false" MaxLength="20" />
-          <Property Name="LastName" Type="varchar" Nullable="false" MaxLength="20" />
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="LastName" Type="varchar" MaxLength="20" Nullable="false" />
           <Property Name="DOB" Type="date" Nullable="false" />
-          <Property Name="Gender" Type="char" Nullable="false" MaxLength="6" />
+          <Property Name="Gender" Type="char" MaxLength="6" Nullable="false" />
           <Property Name="IDNumber" Type="varchar" MaxLength="20" />
           <Property Name="Tel" Type="varchar" MaxLength="15" />
           <Property Name="Email" Type="varchar" MaxLength="50" />
@@ -341,44 +244,34 @@
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="Title" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="Symptoms">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="Title" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Created" Type="datetime" Nullable="false" />
           <Property Name="CreatedBy" Type="int" Nullable="false" />
           <Property Name="Modified" Type="datetime" />
           <Property Name="ModifiedBy" Type="int" />
         </EntityType>
-        <EntityType Name="sysdiagrams">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="nvarchar" Nullable="false" MaxLength="128" />
-          <Property Name="principal_id" Type="int" Nullable="false" />
-          <Property Name="diagram_id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="version" Type="int" />
-          <Property Name="definition" Type="varbinary(max)" />
-        </EntityType>
         <EntityType Name="UserRoles">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="Title" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="Users">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="Username" Type="varchar" Nullable="false" MaxLength="20" />
-          <Property Name="Password" Type="varchar" Nullable="false" MaxLength="20" />
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Username" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="20" Nullable="false" />
           <Property Name="RoleID" Type="int" Nullable="false" />
           <Property Name="StaffID" Type="int" Nullable="false" />
           <Property Name="Created" Type="datetime" Nullable="false" />
@@ -387,8 +280,8 @@
           <Property Name="ModifiedBy" Type="int" />
         </EntityType>
         <Association Name="FK_Diseases_DiseaseTypes">
-          <End Role="DiseaseTypes" Type="PatientMgmtModel.Store.DiseaseTypes" Multiplicity="1" />
-          <End Role="Diseases" Type="PatientMgmtModel.Store.Diseases" Multiplicity="*" />
+          <End Role="DiseaseTypes" Type="Self.DiseaseTypes" Multiplicity="1" />
+          <End Role="Diseases" Type="Self.Diseases" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="DiseaseTypes">
               <PropertyRef Name="ID" />
@@ -399,8 +292,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_InsuranceCardPictures_PatientHistory">
-          <End Role="PatientHistory" Type="PatientMgmtModel.Store.PatientHistory" Multiplicity="1" />
-          <End Role="InsuranceCardPictures" Type="PatientMgmtModel.Store.InsuranceCardPictures" Multiplicity="*" />
+          <End Role="PatientHistory" Type="Self.PatientHistory" Multiplicity="1" />
+          <End Role="InsuranceCardPictures" Type="Self.InsuranceCardPictures" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="PatientHistory">
               <PropertyRef Name="ID" />
@@ -411,8 +304,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_InsuranceCardPictures_Patients">
-          <End Role="Patients" Type="PatientMgmtModel.Store.Patients" Multiplicity="0..1" />
-          <End Role="InsuranceCardPictures" Type="PatientMgmtModel.Store.InsuranceCardPictures" Multiplicity="*" />
+          <End Role="Patients" Type="Self.Patients" Multiplicity="0..1" />
+          <End Role="InsuranceCardPictures" Type="Self.InsuranceCardPictures" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Patients">
               <PropertyRef Name="ID" />
@@ -423,8 +316,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_PatientDiseases_Diseases">
-          <End Role="Diseases" Type="PatientMgmtModel.Store.Diseases" Multiplicity="1" />
-          <End Role="PatientDiseases" Type="PatientMgmtModel.Store.PatientDiseases" Multiplicity="*" />
+          <End Role="Diseases" Type="Self.Diseases" Multiplicity="1" />
+          <End Role="PatientDiseases" Type="Self.PatientDiseases" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Diseases">
               <PropertyRef Name="ID" />
@@ -435,8 +328,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_PatientDiseases_IntakeFormHead">
-          <End Role="IntakeFormHead" Type="PatientMgmtModel.Store.IntakeFormHead" Multiplicity="1" />
-          <End Role="PatientDiseases" Type="PatientMgmtModel.Store.PatientDiseases" Multiplicity="*" />
+          <End Role="IntakeFormHead" Type="Self.IntakeFormHead" Multiplicity="1" />
+          <End Role="PatientDiseases" Type="Self.PatientDiseases" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="IntakeFormHead">
               <PropertyRef Name="ID" />
@@ -447,8 +340,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_PatientDiseases_PatientHistory">
-          <End Role="PatientHistory" Type="PatientMgmtModel.Store.PatientHistory" Multiplicity="1" />
-          <End Role="PatientDiseases" Type="PatientMgmtModel.Store.PatientDiseases" Multiplicity="*" />
+          <End Role="PatientHistory" Type="Self.PatientHistory" Multiplicity="1" />
+          <End Role="PatientDiseases" Type="Self.PatientDiseases" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="PatientHistory">
               <PropertyRef Name="ID" />
@@ -459,8 +352,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_PatientHistory_InsuranceTypes">
-          <End Role="InsuranceTypes" Type="PatientMgmtModel.Store.InsuranceTypes" Multiplicity="0..1" />
-          <End Role="PatientHistory" Type="PatientMgmtModel.Store.PatientHistory" Multiplicity="*" />
+          <End Role="InsuranceTypes" Type="Self.InsuranceTypes" Multiplicity="0..1" />
+          <End Role="PatientHistory" Type="Self.PatientHistory" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="InsuranceTypes">
               <PropertyRef Name="ID" />
@@ -471,8 +364,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_PatientHistory_MedicalNecessities">
-          <End Role="MedicalNecessities" Type="PatientMgmtModel.Store.MedicalNecessities" Multiplicity="0..1" />
-          <End Role="PatientHistory" Type="PatientMgmtModel.Store.PatientHistory" Multiplicity="*" />
+          <End Role="MedicalNecessities" Type="Self.MedicalNecessities" Multiplicity="0..1" />
+          <End Role="PatientHistory" Type="Self.PatientHistory" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="MedicalNecessities">
               <PropertyRef Name="ID" />
@@ -483,8 +376,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_PatientHistory_Offices">
-          <End Role="Offices" Type="PatientMgmtModel.Store.Offices" Multiplicity="0..1" />
-          <End Role="PatientHistory" Type="PatientMgmtModel.Store.PatientHistory" Multiplicity="*" />
+          <End Role="Offices" Type="Self.Offices" Multiplicity="0..1" />
+          <End Role="PatientHistory" Type="Self.PatientHistory" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Offices">
               <PropertyRef Name="ID" />
@@ -495,8 +388,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_PatientHistory_Patients">
-          <End Role="Patients" Type="PatientMgmtModel.Store.Patients" Multiplicity="0..1" />
-          <End Role="PatientHistory" Type="PatientMgmtModel.Store.PatientHistory" Multiplicity="*" />
+          <End Role="Patients" Type="Self.Patients" Multiplicity="0..1" />
+          <End Role="PatientHistory" Type="Self.PatientHistory" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Patients">
               <PropertyRef Name="ID" />
@@ -507,8 +400,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_PatientHistory_Statuses">
-          <End Role="Statuses" Type="PatientMgmtModel.Store.Statuses" Multiplicity="0..1" />
-          <End Role="PatientHistory" Type="PatientMgmtModel.Store.PatientHistory" Multiplicity="*" />
+          <End Role="Statuses" Type="Self.Statuses" Multiplicity="0..1" />
+          <End Role="PatientHistory" Type="Self.PatientHistory" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Statuses">
               <PropertyRef Name="ID" />
@@ -519,8 +412,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_PatientInterferingCondition_IntakeFormHead">
-          <End Role="IntakeFormHead" Type="PatientMgmtModel.Store.IntakeFormHead" Multiplicity="1" />
-          <End Role="PatientInterferingCondition" Type="PatientMgmtModel.Store.PatientInterferingCondition" Multiplicity="*" />
+          <End Role="IntakeFormHead" Type="Self.IntakeFormHead" Multiplicity="1" />
+          <End Role="PatientInterferingCondition" Type="Self.PatientInterferingCondition" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="IntakeFormHead">
               <PropertyRef Name="ID" />
@@ -531,8 +424,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_PatientInterferingCondition_InterferingConditions">
-          <End Role="InterferingConditions" Type="PatientMgmtModel.Store.InterferingConditions" Multiplicity="1" />
-          <End Role="PatientInterferingCondition" Type="PatientMgmtModel.Store.PatientInterferingCondition" Multiplicity="*" />
+          <End Role="InterferingConditions" Type="Self.InterferingConditions" Multiplicity="1" />
+          <End Role="PatientInterferingCondition" Type="Self.PatientInterferingCondition" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="InterferingConditions">
               <PropertyRef Name="ID" />
@@ -543,8 +436,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_PatientInterferingCondition_PatientHistory">
-          <End Role="PatientHistory" Type="PatientMgmtModel.Store.PatientHistory" Multiplicity="1" />
-          <End Role="PatientInterferingCondition" Type="PatientMgmtModel.Store.PatientInterferingCondition" Multiplicity="*" />
+          <End Role="PatientHistory" Type="Self.PatientHistory" Multiplicity="1" />
+          <End Role="PatientInterferingCondition" Type="Self.PatientInterferingCondition" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="PatientHistory">
               <PropertyRef Name="ID" />
@@ -555,8 +448,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_PatientProcedures_PatientHistory">
-          <End Role="PatientHistory" Type="PatientMgmtModel.Store.PatientHistory" Multiplicity="1" />
-          <End Role="PatientProcedures" Type="PatientMgmtModel.Store.PatientProcedures" Multiplicity="*" />
+          <End Role="PatientHistory" Type="Self.PatientHistory" Multiplicity="1" />
+          <End Role="PatientProcedures" Type="Self.PatientProcedures" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="PatientHistory">
               <PropertyRef Name="ID" />
@@ -567,8 +460,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_PatientProcedures_ProcedureTypes">
-          <End Role="ProcedureTypes" Type="PatientMgmtModel.Store.ProcedureTypes" Multiplicity="1" />
-          <End Role="PatientProcedures" Type="PatientMgmtModel.Store.PatientProcedures" Multiplicity="*" />
+          <End Role="ProcedureTypes" Type="Self.ProcedureTypes" Multiplicity="1" />
+          <End Role="PatientProcedures" Type="Self.PatientProcedures" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="ProcedureTypes">
               <PropertyRef Name="ID" />
@@ -578,9 +471,33 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_PatientReports_PatientHistory">
+          <End Role="PatientHistory" Type="Self.PatientHistory" Multiplicity="1" />
+          <End Role="PatientReports" Type="Self.PatientReports" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PatientHistory">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PatientReports">
+              <PropertyRef Name="HistoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PatientReports_Patients">
+          <End Role="Patients" Type="Self.Patients" Multiplicity="0..1" />
+          <End Role="PatientReports" Type="Self.PatientReports" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Patients">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PatientReports">
+              <PropertyRef Name="PatientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_PatientSymtoms_IntakeFormHead">
-          <End Role="IntakeFormHead" Type="PatientMgmtModel.Store.IntakeFormHead" Multiplicity="1" />
-          <End Role="PatientSymtoms" Type="PatientMgmtModel.Store.PatientSymtoms" Multiplicity="*" />
+          <End Role="IntakeFormHead" Type="Self.IntakeFormHead" Multiplicity="1" />
+          <End Role="PatientSymtoms" Type="Self.PatientSymtoms" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="IntakeFormHead">
               <PropertyRef Name="ID" />
@@ -591,8 +508,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_PatientSymtoms_PatientHistory">
-          <End Role="PatientHistory" Type="PatientMgmtModel.Store.PatientHistory" Multiplicity="1" />
-          <End Role="PatientSymtoms" Type="PatientMgmtModel.Store.PatientSymtoms" Multiplicity="*" />
+          <End Role="PatientHistory" Type="Self.PatientHistory" Multiplicity="1" />
+          <End Role="PatientSymtoms" Type="Self.PatientSymtoms" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="PatientHistory">
               <PropertyRef Name="ID" />
@@ -603,8 +520,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_PatientSymtoms_Symptoms">
-          <End Role="Symptoms" Type="PatientMgmtModel.Store.Symptoms" Multiplicity="1" />
-          <End Role="PatientSymtoms" Type="PatientMgmtModel.Store.PatientSymtoms" Multiplicity="*" />
+          <End Role="Symptoms" Type="Self.Symptoms" Multiplicity="1" />
+          <End Role="PatientSymtoms" Type="Self.PatientSymtoms" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Symptoms">
               <PropertyRef Name="ID" />
@@ -615,8 +532,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Staff_Offices">
-          <End Role="Offices" Type="PatientMgmtModel.Store.Offices" Multiplicity="1" />
-          <End Role="Staff" Type="PatientMgmtModel.Store.Staff" Multiplicity="*" />
+          <End Role="Offices" Type="Self.Offices" Multiplicity="1" />
+          <End Role="Staff" Type="Self.Staff" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Offices">
               <PropertyRef Name="ID" />
@@ -627,8 +544,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Users_Staff">
-          <End Role="Staff" Type="PatientMgmtModel.Store.Staff" Multiplicity="1" />
-          <End Role="Users" Type="PatientMgmtModel.Store.Users" Multiplicity="*" />
+          <End Role="Staff" Type="Self.Staff" Multiplicity="1" />
+          <End Role="Users" Type="Self.Users" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Staff">
               <PropertyRef Name="ID" />
@@ -639,8 +556,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Users_Users">
-          <End Role="UserRoles" Type="PatientMgmtModel.Store.UserRoles" Multiplicity="1" />
-          <End Role="Users" Type="PatientMgmtModel.Store.Users" Multiplicity="*" />
+          <End Role="UserRoles" Type="Self.UserRoles" Multiplicity="1" />
+          <End Role="Users" Type="Self.Users" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="UserRoles">
               <PropertyRef Name="ID" />
@@ -650,240 +567,248 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
-    </edmx:StorageModels>
-    <!-- CSDL content -->
-    <edmx:ConceptualModels>
-      <Schema Namespace="PatientMgmtModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityContainer Name="PatientMgmtEntities" p1:LazyLoadingEnabled="true">
-          <EntitySet Name="Diseases" EntityType="PatientMgmtModel.Disease" />
-          <EntitySet Name="DiseaseTypes" EntityType="PatientMgmtModel.DiseaseType" />
-          <EntitySet Name="InsuranceCardPictures" EntityType="PatientMgmtModel.InsuranceCardPicture" />
-          <EntitySet Name="InsuranceTypes" EntityType="PatientMgmtModel.InsuranceType" />
-          <EntitySet Name="IntakeFormHeads" EntityType="PatientMgmtModel.IntakeFormHead" />
-          <EntitySet Name="InterferingConditions" EntityType="PatientMgmtModel.InterferingCondition" />
-          <EntitySet Name="MedicalNecessities" EntityType="PatientMgmtModel.MedicalNecessity" />
-          <EntitySet Name="Offices" EntityType="PatientMgmtModel.Office" />
-          <EntitySet Name="PatientDiseases" EntityType="PatientMgmtModel.PatientDiseas" />
-          <EntitySet Name="PatientHistories" EntityType="PatientMgmtModel.PatientHistory" />
-          <EntitySet Name="PatientInterferingConditions" EntityType="PatientMgmtModel.PatientInterferingCondition" />
-          <EntitySet Name="PatientProcedures" EntityType="PatientMgmtModel.PatientProcedure" />
-          <EntitySet Name="Patients" EntityType="PatientMgmtModel.Patient" />
-          <EntitySet Name="PatientSymtoms" EntityType="PatientMgmtModel.PatientSymtom" />
-          <EntitySet Name="ProcedureTypes" EntityType="PatientMgmtModel.ProcedureType" />
-          <EntitySet Name="Staffs" EntityType="PatientMgmtModel.Staff" />
-          <EntitySet Name="Statuses" EntityType="PatientMgmtModel.Status" />
-          <EntitySet Name="Symptoms" EntityType="PatientMgmtModel.Symptom" />
-          <EntitySet Name="sysdiagrams" EntityType="PatientMgmtModel.sysdiagram" />
-          <EntitySet Name="UserRoles" EntityType="PatientMgmtModel.UserRole" />
-          <EntitySet Name="Users" EntityType="PatientMgmtModel.User" />
-          <AssociationSet Name="FK_Diseases_DiseaseTypes" Association="PatientMgmtModel.FK_Diseases_DiseaseTypes">
+        <EntityContainer Name="PatientMgmtModelStoreContainer">
+          <EntitySet Name="Diseases" EntityType="Self.Diseases" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DiseaseTypes" EntityType="Self.DiseaseTypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="InsuranceCardPictures" EntityType="Self.InsuranceCardPictures" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="InsuranceTypes" EntityType="Self.InsuranceTypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="IntakeFormHead" EntityType="Self.IntakeFormHead" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="InterferingConditions" EntityType="Self.InterferingConditions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MedicalNecessities" EntityType="Self.MedicalNecessities" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Offices" EntityType="Self.Offices" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PatientDiseases" EntityType="Self.PatientDiseases" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PatientHistory" EntityType="Self.PatientHistory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PatientInterferingCondition" EntityType="Self.PatientInterferingCondition" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PatientProcedures" EntityType="Self.PatientProcedures" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PatientReports" EntityType="Self.PatientReports" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Patients" EntityType="Self.Patients" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PatientSymtoms" EntityType="Self.PatientSymtoms" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProcedureTypes" EntityType="Self.ProcedureTypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Staff" EntityType="Self.Staff" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Statuses" EntityType="Self.Statuses" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Symptoms" EntityType="Self.Symptoms" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserRoles" EntityType="Self.UserRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Diseases_DiseaseTypes" Association="Self.FK_Diseases_DiseaseTypes">
             <End Role="DiseaseTypes" EntitySet="DiseaseTypes" />
             <End Role="Diseases" EntitySet="Diseases" />
           </AssociationSet>
-          <AssociationSet Name="FK_PatientDiseases_Diseases" Association="PatientMgmtModel.FK_PatientDiseases_Diseases">
+          <AssociationSet Name="FK_InsuranceCardPictures_PatientHistory" Association="Self.FK_InsuranceCardPictures_PatientHistory">
+            <End Role="PatientHistory" EntitySet="PatientHistory" />
+            <End Role="InsuranceCardPictures" EntitySet="InsuranceCardPictures" />
+          </AssociationSet>
+          <AssociationSet Name="FK_InsuranceCardPictures_Patients" Association="Self.FK_InsuranceCardPictures_Patients">
+            <End Role="Patients" EntitySet="Patients" />
+            <End Role="InsuranceCardPictures" EntitySet="InsuranceCardPictures" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PatientDiseases_Diseases" Association="Self.FK_PatientDiseases_Diseases">
             <End Role="Diseases" EntitySet="Diseases" />
             <End Role="PatientDiseases" EntitySet="PatientDiseases" />
           </AssociationSet>
-          <AssociationSet Name="FK_InsuranceCardPictures_PatientHistory" Association="PatientMgmtModel.FK_InsuranceCardPictures_PatientHistory">
-            <End Role="PatientHistory" EntitySet="PatientHistories" />
-            <End Role="InsuranceCardPictures" EntitySet="InsuranceCardPictures" />
+          <AssociationSet Name="FK_PatientDiseases_IntakeFormHead" Association="Self.FK_PatientDiseases_IntakeFormHead">
+            <End Role="IntakeFormHead" EntitySet="IntakeFormHead" />
+            <End Role="PatientDiseases" EntitySet="PatientDiseases" />
           </AssociationSet>
-          <AssociationSet Name="FK_InsuranceCardPictures_Patients" Association="PatientMgmtModel.FK_InsuranceCardPictures_Patients">
-            <End Role="Patients" EntitySet="Patients" />
-            <End Role="InsuranceCardPictures" EntitySet="InsuranceCardPictures" />
+          <AssociationSet Name="FK_PatientDiseases_PatientHistory" Association="Self.FK_PatientDiseases_PatientHistory">
+            <End Role="PatientHistory" EntitySet="PatientHistory" />
+            <End Role="PatientDiseases" EntitySet="PatientDiseases" />
           </AssociationSet>
-          <AssociationSet Name="FK_PatientHistory_InsuranceTypes" Association="PatientMgmtModel.FK_PatientHistory_InsuranceTypes">
+          <AssociationSet Name="FK_PatientHistory_InsuranceTypes" Association="Self.FK_PatientHistory_InsuranceTypes">
             <End Role="InsuranceTypes" EntitySet="InsuranceTypes" />
-            <End Role="PatientHistory" EntitySet="PatientHistories" />
+            <End Role="PatientHistory" EntitySet="PatientHistory" />
           </AssociationSet>
-          <AssociationSet Name="FK_PatientDiseases_IntakeFormHead" Association="PatientMgmtModel.FK_PatientDiseases_IntakeFormHead">
-            <End Role="IntakeFormHead" EntitySet="IntakeFormHeads" />
-            <End Role="PatientDiseases" EntitySet="PatientDiseases" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PatientInterferingCondition_IntakeFormHead" Association="PatientMgmtModel.FK_PatientInterferingCondition_IntakeFormHead">
-            <End Role="IntakeFormHead" EntitySet="IntakeFormHeads" />
-            <End Role="PatientInterferingCondition" EntitySet="PatientInterferingConditions" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PatientSymtoms_IntakeFormHead" Association="PatientMgmtModel.FK_PatientSymtoms_IntakeFormHead">
-            <End Role="IntakeFormHead" EntitySet="IntakeFormHeads" />
-            <End Role="PatientSymtoms" EntitySet="PatientSymtoms" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PatientInterferingCondition_InterferingConditions" Association="PatientMgmtModel.FK_PatientInterferingCondition_InterferingConditions">
-            <End Role="InterferingConditions" EntitySet="InterferingConditions" />
-            <End Role="PatientInterferingCondition" EntitySet="PatientInterferingConditions" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PatientHistory_MedicalNecessities" Association="PatientMgmtModel.FK_PatientHistory_MedicalNecessities">
+          <AssociationSet Name="FK_PatientHistory_MedicalNecessities" Association="Self.FK_PatientHistory_MedicalNecessities">
             <End Role="MedicalNecessities" EntitySet="MedicalNecessities" />
-            <End Role="PatientHistory" EntitySet="PatientHistories" />
+            <End Role="PatientHistory" EntitySet="PatientHistory" />
           </AssociationSet>
-          <AssociationSet Name="FK_PatientHistory_Offices" Association="PatientMgmtModel.FK_PatientHistory_Offices">
+          <AssociationSet Name="FK_PatientHistory_Offices" Association="Self.FK_PatientHistory_Offices">
             <End Role="Offices" EntitySet="Offices" />
-            <End Role="PatientHistory" EntitySet="PatientHistories" />
+            <End Role="PatientHistory" EntitySet="PatientHistory" />
           </AssociationSet>
-          <AssociationSet Name="FK_Staff_Offices" Association="PatientMgmtModel.FK_Staff_Offices">
-            <End Role="Offices" EntitySet="Offices" />
-            <End Role="Staff" EntitySet="Staffs" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PatientDiseases_PatientHistory" Association="PatientMgmtModel.FK_PatientDiseases_PatientHistory">
-            <End Role="PatientHistory" EntitySet="PatientHistories" />
-            <End Role="PatientDiseases" EntitySet="PatientDiseases" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PatientHistory_Patients" Association="PatientMgmtModel.FK_PatientHistory_Patients">
+          <AssociationSet Name="FK_PatientHistory_Patients" Association="Self.FK_PatientHistory_Patients">
             <End Role="Patients" EntitySet="Patients" />
-            <End Role="PatientHistory" EntitySet="PatientHistories" />
+            <End Role="PatientHistory" EntitySet="PatientHistory" />
           </AssociationSet>
-          <AssociationSet Name="FK_PatientHistory_Statuses" Association="PatientMgmtModel.FK_PatientHistory_Statuses">
+          <AssociationSet Name="FK_PatientHistory_Statuses" Association="Self.FK_PatientHistory_Statuses">
             <End Role="Statuses" EntitySet="Statuses" />
-            <End Role="PatientHistory" EntitySet="PatientHistories" />
+            <End Role="PatientHistory" EntitySet="PatientHistory" />
           </AssociationSet>
-          <AssociationSet Name="FK_PatientInterferingCondition_PatientHistory" Association="PatientMgmtModel.FK_PatientInterferingCondition_PatientHistory">
-            <End Role="PatientHistory" EntitySet="PatientHistories" />
-            <End Role="PatientInterferingCondition" EntitySet="PatientInterferingConditions" />
+          <AssociationSet Name="FK_PatientInterferingCondition_IntakeFormHead" Association="Self.FK_PatientInterferingCondition_IntakeFormHead">
+            <End Role="IntakeFormHead" EntitySet="IntakeFormHead" />
+            <End Role="PatientInterferingCondition" EntitySet="PatientInterferingCondition" />
           </AssociationSet>
-          <AssociationSet Name="FK_PatientProcedures_PatientHistory" Association="PatientMgmtModel.FK_PatientProcedures_PatientHistory">
-            <End Role="PatientHistory" EntitySet="PatientHistories" />
+          <AssociationSet Name="FK_PatientInterferingCondition_InterferingConditions" Association="Self.FK_PatientInterferingCondition_InterferingConditions">
+            <End Role="InterferingConditions" EntitySet="InterferingConditions" />
+            <End Role="PatientInterferingCondition" EntitySet="PatientInterferingCondition" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PatientInterferingCondition_PatientHistory" Association="Self.FK_PatientInterferingCondition_PatientHistory">
+            <End Role="PatientHistory" EntitySet="PatientHistory" />
+            <End Role="PatientInterferingCondition" EntitySet="PatientInterferingCondition" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PatientProcedures_PatientHistory" Association="Self.FK_PatientProcedures_PatientHistory">
+            <End Role="PatientHistory" EntitySet="PatientHistory" />
             <End Role="PatientProcedures" EntitySet="PatientProcedures" />
           </AssociationSet>
-          <AssociationSet Name="FK_PatientSymtoms_PatientHistory" Association="PatientMgmtModel.FK_PatientSymtoms_PatientHistory">
-            <End Role="PatientHistory" EntitySet="PatientHistories" />
-            <End Role="PatientSymtoms" EntitySet="PatientSymtoms" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PatientProcedures_ProcedureTypes" Association="PatientMgmtModel.FK_PatientProcedures_ProcedureTypes">
+          <AssociationSet Name="FK_PatientProcedures_ProcedureTypes" Association="Self.FK_PatientProcedures_ProcedureTypes">
             <End Role="ProcedureTypes" EntitySet="ProcedureTypes" />
             <End Role="PatientProcedures" EntitySet="PatientProcedures" />
           </AssociationSet>
-          <AssociationSet Name="FK_PatientSymtoms_Symptoms" Association="PatientMgmtModel.FK_PatientSymtoms_Symptoms">
+          <AssociationSet Name="FK_PatientReports_PatientHistory" Association="Self.FK_PatientReports_PatientHistory">
+            <End Role="PatientHistory" EntitySet="PatientHistory" />
+            <End Role="PatientReports" EntitySet="PatientReports" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PatientReports_Patients" Association="Self.FK_PatientReports_Patients">
+            <End Role="Patients" EntitySet="Patients" />
+            <End Role="PatientReports" EntitySet="PatientReports" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PatientSymtoms_IntakeFormHead" Association="Self.FK_PatientSymtoms_IntakeFormHead">
+            <End Role="IntakeFormHead" EntitySet="IntakeFormHead" />
+            <End Role="PatientSymtoms" EntitySet="PatientSymtoms" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PatientSymtoms_PatientHistory" Association="Self.FK_PatientSymtoms_PatientHistory">
+            <End Role="PatientHistory" EntitySet="PatientHistory" />
+            <End Role="PatientSymtoms" EntitySet="PatientSymtoms" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PatientSymtoms_Symptoms" Association="Self.FK_PatientSymtoms_Symptoms">
             <End Role="Symptoms" EntitySet="Symptoms" />
             <End Role="PatientSymtoms" EntitySet="PatientSymtoms" />
           </AssociationSet>
-          <AssociationSet Name="FK_Users_Staff" Association="PatientMgmtModel.FK_Users_Staff">
-            <End Role="Staff" EntitySet="Staffs" />
+          <AssociationSet Name="FK_Staff_Offices" Association="Self.FK_Staff_Offices">
+            <End Role="Offices" EntitySet="Offices" />
+            <End Role="Staff" EntitySet="Staff" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Users_Staff" Association="Self.FK_Users_Staff">
+            <End Role="Staff" EntitySet="Staff" />
             <End Role="Users" EntitySet="Users" />
           </AssociationSet>
-          <AssociationSet Name="FK_Users_Users" Association="PatientMgmtModel.FK_Users_Users">
+          <AssociationSet Name="FK_Users_Users" Association="Self.FK_Users_Users">
             <End Role="UserRoles" EntitySet="UserRoles" />
             <End Role="Users" EntitySet="Users" />
           </AssociationSet>
         </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="PatientMgmtModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="Disease">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
-          <Property Name="Title" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="DiseaseTypeID" Type="Int32" Nullable="false" />
           <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="CreatedBy" Type="Int32" Nullable="false" />
           <Property Name="Modified" Type="DateTime" Precision="3" />
           <Property Name="ModifiedBy" Type="Int32" />
-          <NavigationProperty Name="DiseaseType" Relationship="PatientMgmtModel.FK_Diseases_DiseaseTypes" FromRole="Diseases" ToRole="DiseaseTypes" />
-          <NavigationProperty Name="PatientDiseases" Relationship="PatientMgmtModel.FK_PatientDiseases_Diseases" FromRole="Diseases" ToRole="PatientDiseases" />
+          <NavigationProperty Name="DiseaseType" Relationship="Self.FK_Diseases_DiseaseTypes" FromRole="Diseases" ToRole="DiseaseTypes" />
+          <NavigationProperty Name="PatientDiseases" Relationship="Self.FK_PatientDiseases_Diseases" FromRole="Diseases" ToRole="PatientDiseases" />
         </EntityType>
         <EntityType Name="DiseaseType">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
-          <Property Name="Title" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="CreatedBy" Type="Int32" Nullable="false" />
           <Property Name="Modified" Type="DateTime" Precision="3" />
           <Property Name="ModifiedBy" Type="Int32" />
-          <NavigationProperty Name="Diseases" Relationship="PatientMgmtModel.FK_Diseases_DiseaseTypes" FromRole="DiseaseTypes" ToRole="Diseases" />
+          <NavigationProperty Name="Diseases" Relationship="Self.FK_Diseases_DiseaseTypes" FromRole="DiseaseTypes" ToRole="Diseases" />
         </EntityType>
         <EntityType Name="InsuranceCardPicture">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
-          <Property Name="Title" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
-          <Property Name="FilePath" Type="String" Nullable="false" MaxLength="150" Unicode="false" FixedLength="false" />
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="FilePath" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="HistoryID" Type="Int32" Nullable="false" />
           <Property Name="PatientID" Type="Int32" />
           <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="CreatedBy" Type="Int32" Nullable="false" />
           <Property Name="Modified" Type="DateTime" Precision="3" />
           <Property Name="ModifiedBy" Type="Int32" />
-          <NavigationProperty Name="PatientHistory" Relationship="PatientMgmtModel.FK_InsuranceCardPictures_PatientHistory" FromRole="InsuranceCardPictures" ToRole="PatientHistory" />
-          <NavigationProperty Name="Patient" Relationship="PatientMgmtModel.FK_InsuranceCardPictures_Patients" FromRole="InsuranceCardPictures" ToRole="Patients" />
+          <NavigationProperty Name="PatientHistory" Relationship="Self.FK_InsuranceCardPictures_PatientHistory" FromRole="InsuranceCardPictures" ToRole="PatientHistory" />
+          <NavigationProperty Name="Patient" Relationship="Self.FK_InsuranceCardPictures_Patients" FromRole="InsuranceCardPictures" ToRole="Patients" />
         </EntityType>
         <EntityType Name="InsuranceType">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
-          <Property Name="Title" Type="String" Nullable="false" MaxLength="20" Unicode="false" FixedLength="false" />
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="CreatedBy" Type="Int32" Nullable="false" />
           <Property Name="Modified" Type="DateTime" Precision="3" />
           <Property Name="ModifiedBy" Type="Int32" />
-          <NavigationProperty Name="PatientHistories" Relationship="PatientMgmtModel.FK_PatientHistory_InsuranceTypes" FromRole="InsuranceTypes" ToRole="PatientHistory" />
+          <NavigationProperty Name="PatientHistories" Relationship="Self.FK_PatientHistory_InsuranceTypes" FromRole="InsuranceTypes" ToRole="PatientHistory" />
         </EntityType>
         <EntityType Name="IntakeFormHead">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="HistoryID" Type="Int32" Nullable="false" />
-          <Property Name="HaveSupportDevice" Type="String" Nullable="false" MaxLength="10" Unicode="false" FixedLength="false" />
-          <Property Name="isPregnant" Type="Boolean" Nullable="false" />
+          <Property Name="HaveSupportDevice" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="isPregnant" Type="Int32" Nullable="false" />
           <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="CreatedBy" Type="Int32" Nullable="false" />
           <Property Name="Modified" Type="DateTime" Precision="3" />
           <Property Name="ModifiedBy" Type="Int32" />
-          <NavigationProperty Name="PatientDiseases" Relationship="PatientMgmtModel.FK_PatientDiseases_IntakeFormHead" FromRole="IntakeFormHead" ToRole="PatientDiseases" />
-          <NavigationProperty Name="PatientInterferingConditions" Relationship="PatientMgmtModel.FK_PatientInterferingCondition_IntakeFormHead" FromRole="IntakeFormHead" ToRole="PatientInterferingCondition" />
-          <NavigationProperty Name="PatientSymtoms" Relationship="PatientMgmtModel.FK_PatientSymtoms_IntakeFormHead" FromRole="IntakeFormHead" ToRole="PatientSymtoms" />
+          <NavigationProperty Name="PatientDiseases" Relationship="Self.FK_PatientDiseases_IntakeFormHead" FromRole="IntakeFormHead" ToRole="PatientDiseases" />
+          <NavigationProperty Name="PatientInterferingConditions" Relationship="Self.FK_PatientInterferingCondition_IntakeFormHead" FromRole="IntakeFormHead" ToRole="PatientInterferingCondition" />
+          <NavigationProperty Name="PatientSymtoms" Relationship="Self.FK_PatientSymtoms_IntakeFormHead" FromRole="IntakeFormHead" ToRole="PatientSymtoms" />
         </EntityType>
         <EntityType Name="InterferingCondition">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
-          <Property Name="Title" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="CreatedBy" Type="Int32" Nullable="false" />
           <Property Name="Modified" Type="DateTime" Precision="3" />
           <Property Name="ModifiedBy" Type="Int32" />
-          <NavigationProperty Name="PatientInterferingConditions" Relationship="PatientMgmtModel.FK_PatientInterferingCondition_InterferingConditions" FromRole="InterferingConditions" ToRole="PatientInterferingCondition" />
+          <NavigationProperty Name="PatientInterferingConditions" Relationship="Self.FK_PatientInterferingCondition_InterferingConditions" FromRole="InterferingConditions" ToRole="PatientInterferingCondition" />
         </EntityType>
         <EntityType Name="MedicalNecessity">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
-          <Property Name="ICD10Code" Type="String" Nullable="false" MaxLength="20" Unicode="false" FixedLength="false" />
-          <Property Name="Description" Type="String" Nullable="false" MaxLength="100" Unicode="false" FixedLength="false" />
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ICD10Code" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="CreatedBy" Type="Int32" Nullable="false" />
           <Property Name="Modified" Type="DateTime" Precision="3" />
           <Property Name="ModifiedBy" Type="Int32" />
-          <NavigationProperty Name="PatientHistories" Relationship="PatientMgmtModel.FK_PatientHistory_MedicalNecessities" FromRole="MedicalNecessities" ToRole="PatientHistory" />
+          <NavigationProperty Name="PatientHistories" Relationship="Self.FK_PatientHistory_MedicalNecessities" FromRole="MedicalNecessities" ToRole="PatientHistory" />
         </EntityType>
         <EntityType Name="Office">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
-          <Property Name="Title" Type="String" Nullable="false" MaxLength="20" Unicode="false" FixedLength="false" />
-          <Property Name="Description" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
-          <Property Name="Location" Type="String" Nullable="false" MaxLength="100" Unicode="false" FixedLength="false" />
-          <Property Name="Tel" Type="String" MaxLength="15" Unicode="false" FixedLength="false" />
-          <Property Name="Email" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Location" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Tel" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="CreatedBy" Type="Int32" Nullable="false" />
           <Property Name="Modified" Type="DateTime" Precision="3" />
           <Property Name="ModifiedBy" Type="Int32" />
-          <NavigationProperty Name="PatientHistories" Relationship="PatientMgmtModel.FK_PatientHistory_Offices" FromRole="Offices" ToRole="PatientHistory" />
-          <NavigationProperty Name="Staffs" Relationship="PatientMgmtModel.FK_Staff_Offices" FromRole="Offices" ToRole="Staff" />
+          <NavigationProperty Name="PatientHistories" Relationship="Self.FK_PatientHistory_Offices" FromRole="Offices" ToRole="PatientHistory" />
+          <NavigationProperty Name="Staffs" Relationship="Self.FK_Staff_Offices" FromRole="Offices" ToRole="Staff" />
         </EntityType>
         <EntityType Name="PatientDiseas">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="HistoryID" Type="Int32" Nullable="false" />
           <Property Name="IntakeFormID" Type="Int32" Nullable="false" />
           <Property Name="DiseaseID" Type="Int32" Nullable="false" />
@@ -891,22 +816,22 @@
           <Property Name="CreatedBy" Type="Int32" Nullable="false" />
           <Property Name="Modified" Type="DateTime" Precision="3" />
           <Property Name="ModifiedBy" Type="Int32" />
-          <NavigationProperty Name="Disease" Relationship="PatientMgmtModel.FK_PatientDiseases_Diseases" FromRole="PatientDiseases" ToRole="Diseases" />
-          <NavigationProperty Name="IntakeFormHead" Relationship="PatientMgmtModel.FK_PatientDiseases_IntakeFormHead" FromRole="PatientDiseases" ToRole="IntakeFormHead" />
-          <NavigationProperty Name="PatientHistory" Relationship="PatientMgmtModel.FK_PatientDiseases_PatientHistory" FromRole="PatientDiseases" ToRole="PatientHistory" />
+          <NavigationProperty Name="Disease" Relationship="Self.FK_PatientDiseases_Diseases" FromRole="PatientDiseases" ToRole="Diseases" />
+          <NavigationProperty Name="IntakeFormHead" Relationship="Self.FK_PatientDiseases_IntakeFormHead" FromRole="PatientDiseases" ToRole="IntakeFormHead" />
+          <NavigationProperty Name="PatientHistory" Relationship="Self.FK_PatientDiseases_PatientHistory" FromRole="PatientDiseases" ToRole="PatientHistory" />
         </EntityType>
         <EntityType Name="PatientHistory">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="PatientID" Type="Int32" />
           <Property Name="InsuranceTypeID" Type="Int32" />
           <Property Name="MedicalNecessitiesID" Type="Int32" />
-          <Property Name="SecondaryNecessities" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+          <Property Name="SecondaryNecessities" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="OfficeID" Type="Int32" />
           <Property Name="StatusID" Type="Int32" />
-          <Property Name="PhysicianRemarks" Type="String" MaxLength="150" Unicode="false" FixedLength="false" />
+          <Property Name="PhysicianRemarks" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
           <Property Name="isApprove" Type="Boolean" />
           <Property Name="ApprovedBy" Type="Int32" />
           <Property Name="ApprovedDate" Type="DateTime" Precision="3" />
@@ -914,22 +839,23 @@
           <Property Name="CreatedBy" Type="Int32" Nullable="false" />
           <Property Name="Modified" Type="DateTime" Precision="3" />
           <Property Name="ModifiedBy" Type="Int32" />
-          <NavigationProperty Name="InsuranceCardPictures" Relationship="PatientMgmtModel.FK_InsuranceCardPictures_PatientHistory" FromRole="PatientHistory" ToRole="InsuranceCardPictures" />
-          <NavigationProperty Name="InsuranceType" Relationship="PatientMgmtModel.FK_PatientHistory_InsuranceTypes" FromRole="PatientHistory" ToRole="InsuranceTypes" />
-          <NavigationProperty Name="MedicalNecessity" Relationship="PatientMgmtModel.FK_PatientHistory_MedicalNecessities" FromRole="PatientHistory" ToRole="MedicalNecessities" />
-          <NavigationProperty Name="Office" Relationship="PatientMgmtModel.FK_PatientHistory_Offices" FromRole="PatientHistory" ToRole="Offices" />
-          <NavigationProperty Name="PatientDiseases" Relationship="PatientMgmtModel.FK_PatientDiseases_PatientHistory" FromRole="PatientHistory" ToRole="PatientDiseases" />
-          <NavigationProperty Name="Patient" Relationship="PatientMgmtModel.FK_PatientHistory_Patients" FromRole="PatientHistory" ToRole="Patients" />
-          <NavigationProperty Name="Status" Relationship="PatientMgmtModel.FK_PatientHistory_Statuses" FromRole="PatientHistory" ToRole="Statuses" />
-          <NavigationProperty Name="PatientInterferingConditions" Relationship="PatientMgmtModel.FK_PatientInterferingCondition_PatientHistory" FromRole="PatientHistory" ToRole="PatientInterferingCondition" />
-          <NavigationProperty Name="PatientProcedures" Relationship="PatientMgmtModel.FK_PatientProcedures_PatientHistory" FromRole="PatientHistory" ToRole="PatientProcedures" />
-          <NavigationProperty Name="PatientSymtoms" Relationship="PatientMgmtModel.FK_PatientSymtoms_PatientHistory" FromRole="PatientHistory" ToRole="PatientSymtoms" />
+          <NavigationProperty Name="InsuranceCardPictures" Relationship="Self.FK_InsuranceCardPictures_PatientHistory" FromRole="PatientHistory" ToRole="InsuranceCardPictures" />
+          <NavigationProperty Name="InsuranceType" Relationship="Self.FK_PatientHistory_InsuranceTypes" FromRole="PatientHistory" ToRole="InsuranceTypes" />
+          <NavigationProperty Name="MedicalNecessity" Relationship="Self.FK_PatientHistory_MedicalNecessities" FromRole="PatientHistory" ToRole="MedicalNecessities" />
+          <NavigationProperty Name="Office" Relationship="Self.FK_PatientHistory_Offices" FromRole="PatientHistory" ToRole="Offices" />
+          <NavigationProperty Name="PatientDiseases" Relationship="Self.FK_PatientDiseases_PatientHistory" FromRole="PatientHistory" ToRole="PatientDiseases" />
+          <NavigationProperty Name="Patient" Relationship="Self.FK_PatientHistory_Patients" FromRole="PatientHistory" ToRole="Patients" />
+          <NavigationProperty Name="Status" Relationship="Self.FK_PatientHistory_Statuses" FromRole="PatientHistory" ToRole="Statuses" />
+          <NavigationProperty Name="PatientInterferingConditions" Relationship="Self.FK_PatientInterferingCondition_PatientHistory" FromRole="PatientHistory" ToRole="PatientInterferingCondition" />
+          <NavigationProperty Name="PatientProcedures" Relationship="Self.FK_PatientProcedures_PatientHistory" FromRole="PatientHistory" ToRole="PatientProcedures" />
+          <NavigationProperty Name="PatientReports" Relationship="Self.FK_PatientReports_PatientHistory" FromRole="PatientHistory" ToRole="PatientReports" />
+          <NavigationProperty Name="PatientSymtoms" Relationship="Self.FK_PatientSymtoms_PatientHistory" FromRole="PatientHistory" ToRole="PatientSymtoms" />
         </EntityType>
         <EntityType Name="PatientInterferingCondition">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="HistoryID" Type="Int32" Nullable="false" />
           <Property Name="IntakeFormID" Type="Int32" Nullable="false" />
           <Property Name="PatientConditionID" Type="Int32" Nullable="false" />
@@ -937,50 +863,67 @@
           <Property Name="CreatedBy" Type="Int32" Nullable="false" />
           <Property Name="Modified" Type="DateTime" Precision="3" />
           <Property Name="ModifiedBy" Type="Int32" />
-          <NavigationProperty Name="IntakeFormHead" Relationship="PatientMgmtModel.FK_PatientInterferingCondition_IntakeFormHead" FromRole="PatientInterferingCondition" ToRole="IntakeFormHead" />
-          <NavigationProperty Name="InterferingCondition" Relationship="PatientMgmtModel.FK_PatientInterferingCondition_InterferingConditions" FromRole="PatientInterferingCondition" ToRole="InterferingConditions" />
-          <NavigationProperty Name="PatientHistory" Relationship="PatientMgmtModel.FK_PatientInterferingCondition_PatientHistory" FromRole="PatientInterferingCondition" ToRole="PatientHistory" />
+          <NavigationProperty Name="IntakeFormHead" Relationship="Self.FK_PatientInterferingCondition_IntakeFormHead" FromRole="PatientInterferingCondition" ToRole="IntakeFormHead" />
+          <NavigationProperty Name="InterferingCondition" Relationship="Self.FK_PatientInterferingCondition_InterferingConditions" FromRole="PatientInterferingCondition" ToRole="InterferingConditions" />
+          <NavigationProperty Name="PatientHistory" Relationship="Self.FK_PatientInterferingCondition_PatientHistory" FromRole="PatientInterferingCondition" ToRole="PatientHistory" />
         </EntityType>
         <EntityType Name="PatientProcedure">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="HistoryID" Type="Int32" Nullable="false" />
           <Property Name="ProcedureTypeID" Type="Int32" Nullable="false" />
-          <Property Name="FilePath" Type="String" MaxLength="150" Unicode="false" FixedLength="false" />
+          <Property Name="FilePath" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
           <Property Name="FileDate" Type="DateTime" Precision="3" />
           <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="CreatedBy" Type="Int32" Nullable="false" />
           <Property Name="Modified" Type="DateTime" Precision="3" />
           <Property Name="ModifiedBy" Type="Int32" />
-          <NavigationProperty Name="PatientHistory" Relationship="PatientMgmtModel.FK_PatientProcedures_PatientHistory" FromRole="PatientProcedures" ToRole="PatientHistory" />
-          <NavigationProperty Name="ProcedureType" Relationship="PatientMgmtModel.FK_PatientProcedures_ProcedureTypes" FromRole="PatientProcedures" ToRole="ProcedureTypes" />
+          <NavigationProperty Name="PatientHistory" Relationship="Self.FK_PatientProcedures_PatientHistory" FromRole="PatientProcedures" ToRole="PatientHistory" />
+          <NavigationProperty Name="ProcedureType" Relationship="Self.FK_PatientProcedures_ProcedureTypes" FromRole="PatientProcedures" ToRole="ProcedureTypes" />
+        </EntityType>
+        <EntityType Name="PatientReport">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="FilePath" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="HistoryID" Type="Int32" Nullable="false" />
+          <Property Name="PatientID" Type="Int32" />
+          <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="Modified" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedBy" Type="Int32" />
+          <NavigationProperty Name="PatientHistory" Relationship="Self.FK_PatientReports_PatientHistory" FromRole="PatientReports" ToRole="PatientHistory" />
+          <NavigationProperty Name="Patient" Relationship="Self.FK_PatientReports_Patients" FromRole="PatientReports" ToRole="Patients" />
         </EntityType>
         <EntityType Name="Patient">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
-          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="20" Unicode="false" FixedLength="false" />
-          <Property Name="LastName" Type="String" Nullable="false" MaxLength="20" Unicode="false" FixedLength="false" />
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="LastName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="DOB" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="Gender" Type="String" Nullable="false" MaxLength="6" Unicode="false" FixedLength="true" />
-          <Property Name="IDNumber" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
-          <Property Name="Tel" Type="String" MaxLength="15" Unicode="false" FixedLength="false" />
-          <Property Name="Email" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="Gender" Type="String" MaxLength="6" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="IDNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Tel" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="CreatedBy" Type="Int32" Nullable="false" />
           <Property Name="Modified" Type="DateTime" Precision="3" />
           <Property Name="ModifiedBy" Type="Int32" />
-          <NavigationProperty Name="InsuranceCardPictures" Relationship="PatientMgmtModel.FK_InsuranceCardPictures_Patients" FromRole="Patients" ToRole="InsuranceCardPictures" />
-          <NavigationProperty Name="PatientHistories" Relationship="PatientMgmtModel.FK_PatientHistory_Patients" FromRole="Patients" ToRole="PatientHistory" />
+          <NavigationProperty Name="InsuranceCardPictures" Relationship="Self.FK_InsuranceCardPictures_Patients" FromRole="Patients" ToRole="InsuranceCardPictures" />
+          <NavigationProperty Name="PatientHistories" Relationship="Self.FK_PatientHistory_Patients" FromRole="Patients" ToRole="PatientHistory" />
+          <NavigationProperty Name="PatientReports" Relationship="Self.FK_PatientReports_Patients" FromRole="Patients" ToRole="PatientReports" />
         </EntityType>
         <EntityType Name="PatientSymtom">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="HistoryID" Type="Int32" Nullable="false" />
           <Property Name="IntakeFormID" Type="Int32" Nullable="false" />
           <Property Name="SymptomID" Type="Int32" Nullable="false" />
@@ -988,101 +931,91 @@
           <Property Name="CreatedBy" Type="Int32" Nullable="false" />
           <Property Name="Modified" Type="DateTime" Precision="3" />
           <Property Name="ModifiedBy" Type="Int32" />
-          <NavigationProperty Name="IntakeFormHead" Relationship="PatientMgmtModel.FK_PatientSymtoms_IntakeFormHead" FromRole="PatientSymtoms" ToRole="IntakeFormHead" />
-          <NavigationProperty Name="PatientHistory" Relationship="PatientMgmtModel.FK_PatientSymtoms_PatientHistory" FromRole="PatientSymtoms" ToRole="PatientHistory" />
-          <NavigationProperty Name="Symptom" Relationship="PatientMgmtModel.FK_PatientSymtoms_Symptoms" FromRole="PatientSymtoms" ToRole="Symptoms" />
+          <NavigationProperty Name="IntakeFormHead" Relationship="Self.FK_PatientSymtoms_IntakeFormHead" FromRole="PatientSymtoms" ToRole="IntakeFormHead" />
+          <NavigationProperty Name="PatientHistory" Relationship="Self.FK_PatientSymtoms_PatientHistory" FromRole="PatientSymtoms" ToRole="PatientHistory" />
+          <NavigationProperty Name="Symptom" Relationship="Self.FK_PatientSymtoms_Symptoms" FromRole="PatientSymtoms" ToRole="Symptoms" />
         </EntityType>
         <EntityType Name="ProcedureType">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
-          <Property Name="Title" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="CreatedBy" Type="Int32" Nullable="false" />
           <Property Name="Modified" Type="DateTime" Precision="3" />
           <Property Name="ModifiedBy" Type="Int32" />
-          <NavigationProperty Name="PatientProcedures" Relationship="PatientMgmtModel.FK_PatientProcedures_ProcedureTypes" FromRole="ProcedureTypes" ToRole="PatientProcedures" />
+          <NavigationProperty Name="PatientProcedures" Relationship="Self.FK_PatientProcedures_ProcedureTypes" FromRole="ProcedureTypes" ToRole="PatientProcedures" />
         </EntityType>
         <EntityType Name="Staff">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
-          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="20" Unicode="false" FixedLength="false" />
-          <Property Name="LastName" Type="String" Nullable="false" MaxLength="20" Unicode="false" FixedLength="false" />
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="LastName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="DOB" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="Gender" Type="String" Nullable="false" MaxLength="6" Unicode="false" FixedLength="true" />
-          <Property Name="IDNumber" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
-          <Property Name="Tel" Type="String" MaxLength="15" Unicode="false" FixedLength="false" />
-          <Property Name="Email" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
-          <Property Name="SignatureFilePath" Type="String" MaxLength="200" Unicode="false" FixedLength="false" />
-          <Property Name="SignaturePassword" Type="String" MaxLength="20" Unicode="true" FixedLength="false" />
+          <Property Name="Gender" Type="String" MaxLength="6" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="IDNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Tel" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="SignatureFilePath" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="SignaturePassword" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="OfficeID" Type="Int32" Nullable="false" />
           <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="CreatedBy" Type="Int32" Nullable="false" />
           <Property Name="Modified" Type="DateTime" Precision="3" />
           <Property Name="ModifiedBy" Type="Int32" />
-          <NavigationProperty Name="Office" Relationship="PatientMgmtModel.FK_Staff_Offices" FromRole="Staff" ToRole="Offices" />
-          <NavigationProperty Name="Users" Relationship="PatientMgmtModel.FK_Users_Staff" FromRole="Staff" ToRole="Users" />
+          <NavigationProperty Name="Office" Relationship="Self.FK_Staff_Offices" FromRole="Staff" ToRole="Offices" />
+          <NavigationProperty Name="Users" Relationship="Self.FK_Users_Staff" FromRole="Staff" ToRole="Users" />
         </EntityType>
         <EntityType Name="Status">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
-          <Property Name="Title" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
-          <NavigationProperty Name="PatientHistories" Relationship="PatientMgmtModel.FK_PatientHistory_Statuses" FromRole="Statuses" ToRole="PatientHistory" />
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="PatientHistories" Relationship="Self.FK_PatientHistory_Statuses" FromRole="Statuses" ToRole="PatientHistory" />
         </EntityType>
         <EntityType Name="Symptom">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
-          <Property Name="Title" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="CreatedBy" Type="Int32" Nullable="false" />
           <Property Name="Modified" Type="DateTime" Precision="3" />
           <Property Name="ModifiedBy" Type="Int32" />
-          <NavigationProperty Name="PatientSymtoms" Relationship="PatientMgmtModel.FK_PatientSymtoms_Symptoms" FromRole="Symptoms" ToRole="PatientSymtoms" />
-        </EntityType>
-        <EntityType Name="sysdiagram">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="String" Nullable="false" MaxLength="128" Unicode="true" FixedLength="false" />
-          <Property Name="principal_id" Type="Int32" Nullable="false" />
-          <Property Name="diagram_id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
-          <Property Name="version" Type="Int32" />
-          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="PatientSymtoms" Relationship="Self.FK_PatientSymtoms_Symptoms" FromRole="Symptoms" ToRole="PatientSymtoms" />
         </EntityType>
         <EntityType Name="UserRole">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
-          <Property Name="Title" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
-          <NavigationProperty Name="Users" Relationship="PatientMgmtModel.FK_Users_Users" FromRole="UserRoles" ToRole="Users" />
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Users" Relationship="Self.FK_Users_Users" FromRole="UserRoles" ToRole="Users" />
         </EntityType>
         <EntityType Name="User">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
-          <Property Name="Username" Type="String" Nullable="false" MaxLength="20" Unicode="false" FixedLength="false" />
-          <Property Name="Password" Type="String" Nullable="false" MaxLength="20" Unicode="false" FixedLength="false" />
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Username" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="RoleID" Type="Int32" Nullable="false" />
           <Property Name="StaffID" Type="Int32" Nullable="false" />
           <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="CreatedBy" Type="Int32" Nullable="false" />
           <Property Name="Modified" Type="DateTime" Precision="3" />
           <Property Name="ModifiedBy" Type="Int32" />
-          <NavigationProperty Name="Staff" Relationship="PatientMgmtModel.FK_Users_Staff" FromRole="Users" ToRole="Staff" />
-          <NavigationProperty Name="UserRole" Relationship="PatientMgmtModel.FK_Users_Users" FromRole="Users" ToRole="UserRoles" />
+          <NavigationProperty Name="Staff" Relationship="Self.FK_Users_Staff" FromRole="Users" ToRole="Staff" />
+          <NavigationProperty Name="UserRole" Relationship="Self.FK_Users_Users" FromRole="Users" ToRole="UserRoles" />
         </EntityType>
         <Association Name="FK_Diseases_DiseaseTypes">
-          <End Role="DiseaseTypes" Type="PatientMgmtModel.DiseaseType" Multiplicity="1" />
-          <End Role="Diseases" Type="PatientMgmtModel.Disease" Multiplicity="*" />
+          <End Role="DiseaseTypes" Type="Self.DiseaseType" Multiplicity="1" />
+          <End Role="Diseases" Type="Self.Disease" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="DiseaseTypes">
               <PropertyRef Name="ID" />
@@ -1093,8 +1026,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_PatientDiseases_Diseases">
-          <End Role="Diseases" Type="PatientMgmtModel.Disease" Multiplicity="1" />
-          <End Role="PatientDiseases" Type="PatientMgmtModel.PatientDiseas" Multiplicity="*" />
+          <End Role="Diseases" Type="Self.Disease" Multiplicity="1" />
+          <End Role="PatientDiseases" Type="Self.PatientDiseas" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Diseases">
               <PropertyRef Name="ID" />
@@ -1105,8 +1038,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_InsuranceCardPictures_PatientHistory">
-          <End Role="PatientHistory" Type="PatientMgmtModel.PatientHistory" Multiplicity="1" />
-          <End Role="InsuranceCardPictures" Type="PatientMgmtModel.InsuranceCardPicture" Multiplicity="*" />
+          <End Role="PatientHistory" Type="Self.PatientHistory" Multiplicity="1" />
+          <End Role="InsuranceCardPictures" Type="Self.InsuranceCardPicture" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="PatientHistory">
               <PropertyRef Name="ID" />
@@ -1117,8 +1050,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_InsuranceCardPictures_Patients">
-          <End Role="Patients" Type="PatientMgmtModel.Patient" Multiplicity="0..1" />
-          <End Role="InsuranceCardPictures" Type="PatientMgmtModel.InsuranceCardPicture" Multiplicity="*" />
+          <End Role="Patients" Type="Self.Patient" Multiplicity="0..1" />
+          <End Role="InsuranceCardPictures" Type="Self.InsuranceCardPicture" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Patients">
               <PropertyRef Name="ID" />
@@ -1129,8 +1062,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_PatientHistory_InsuranceTypes">
-          <End Role="InsuranceTypes" Type="PatientMgmtModel.InsuranceType" Multiplicity="0..1" />
-          <End Role="PatientHistory" Type="PatientMgmtModel.PatientHistory" Multiplicity="*" />
+          <End Role="InsuranceTypes" Type="Self.InsuranceType" Multiplicity="0..1" />
+          <End Role="PatientHistory" Type="Self.PatientHistory" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="InsuranceTypes">
               <PropertyRef Name="ID" />
@@ -1141,8 +1074,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_PatientDiseases_IntakeFormHead">
-          <End Role="IntakeFormHead" Type="PatientMgmtModel.IntakeFormHead" Multiplicity="1" />
-          <End Role="PatientDiseases" Type="PatientMgmtModel.PatientDiseas" Multiplicity="*" />
+          <End Role="IntakeFormHead" Type="Self.IntakeFormHead" Multiplicity="1" />
+          <End Role="PatientDiseases" Type="Self.PatientDiseas" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="IntakeFormHead">
               <PropertyRef Name="ID" />
@@ -1153,8 +1086,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_PatientInterferingCondition_IntakeFormHead">
-          <End Role="IntakeFormHead" Type="PatientMgmtModel.IntakeFormHead" Multiplicity="1" />
-          <End Role="PatientInterferingCondition" Type="PatientMgmtModel.PatientInterferingCondition" Multiplicity="*" />
+          <End Role="IntakeFormHead" Type="Self.IntakeFormHead" Multiplicity="1" />
+          <End Role="PatientInterferingCondition" Type="Self.PatientInterferingCondition" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="IntakeFormHead">
               <PropertyRef Name="ID" />
@@ -1165,8 +1098,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_PatientSymtoms_IntakeFormHead">
-          <End Role="IntakeFormHead" Type="PatientMgmtModel.IntakeFormHead" Multiplicity="1" />
-          <End Role="PatientSymtoms" Type="PatientMgmtModel.PatientSymtom" Multiplicity="*" />
+          <End Role="IntakeFormHead" Type="Self.IntakeFormHead" Multiplicity="1" />
+          <End Role="PatientSymtoms" Type="Self.PatientSymtom" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="IntakeFormHead">
               <PropertyRef Name="ID" />
@@ -1177,8 +1110,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_PatientInterferingCondition_InterferingConditions">
-          <End Role="InterferingConditions" Type="PatientMgmtModel.InterferingCondition" Multiplicity="1" />
-          <End Role="PatientInterferingCondition" Type="PatientMgmtModel.PatientInterferingCondition" Multiplicity="*" />
+          <End Role="InterferingConditions" Type="Self.InterferingCondition" Multiplicity="1" />
+          <End Role="PatientInterferingCondition" Type="Self.PatientInterferingCondition" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="InterferingConditions">
               <PropertyRef Name="ID" />
@@ -1189,8 +1122,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_PatientHistory_MedicalNecessities">
-          <End Role="MedicalNecessities" Type="PatientMgmtModel.MedicalNecessity" Multiplicity="0..1" />
-          <End Role="PatientHistory" Type="PatientMgmtModel.PatientHistory" Multiplicity="*" />
+          <End Role="MedicalNecessities" Type="Self.MedicalNecessity" Multiplicity="0..1" />
+          <End Role="PatientHistory" Type="Self.PatientHistory" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="MedicalNecessities">
               <PropertyRef Name="ID" />
@@ -1201,8 +1134,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_PatientHistory_Offices">
-          <End Role="Offices" Type="PatientMgmtModel.Office" Multiplicity="0..1" />
-          <End Role="PatientHistory" Type="PatientMgmtModel.PatientHistory" Multiplicity="*" />
+          <End Role="Offices" Type="Self.Office" Multiplicity="0..1" />
+          <End Role="PatientHistory" Type="Self.PatientHistory" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Offices">
               <PropertyRef Name="ID" />
@@ -1213,8 +1146,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Staff_Offices">
-          <End Role="Offices" Type="PatientMgmtModel.Office" Multiplicity="1" />
-          <End Role="Staff" Type="PatientMgmtModel.Staff" Multiplicity="*" />
+          <End Role="Offices" Type="Self.Office" Multiplicity="1" />
+          <End Role="Staff" Type="Self.Staff" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Offices">
               <PropertyRef Name="ID" />
@@ -1225,8 +1158,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_PatientDiseases_PatientHistory">
-          <End Role="PatientHistory" Type="PatientMgmtModel.PatientHistory" Multiplicity="1" />
-          <End Role="PatientDiseases" Type="PatientMgmtModel.PatientDiseas" Multiplicity="*" />
+          <End Role="PatientHistory" Type="Self.PatientHistory" Multiplicity="1" />
+          <End Role="PatientDiseases" Type="Self.PatientDiseas" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="PatientHistory">
               <PropertyRef Name="ID" />
@@ -1237,8 +1170,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_PatientHistory_Patients">
-          <End Role="Patients" Type="PatientMgmtModel.Patient" Multiplicity="0..1" />
-          <End Role="PatientHistory" Type="PatientMgmtModel.PatientHistory" Multiplicity="*" />
+          <End Role="Patients" Type="Self.Patient" Multiplicity="0..1" />
+          <End Role="PatientHistory" Type="Self.PatientHistory" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Patients">
               <PropertyRef Name="ID" />
@@ -1249,8 +1182,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_PatientHistory_Statuses">
-          <End Role="Statuses" Type="PatientMgmtModel.Status" Multiplicity="0..1" />
-          <End Role="PatientHistory" Type="PatientMgmtModel.PatientHistory" Multiplicity="*" />
+          <End Role="Statuses" Type="Self.Status" Multiplicity="0..1" />
+          <End Role="PatientHistory" Type="Self.PatientHistory" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Statuses">
               <PropertyRef Name="ID" />
@@ -1261,8 +1194,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_PatientInterferingCondition_PatientHistory">
-          <End Role="PatientHistory" Type="PatientMgmtModel.PatientHistory" Multiplicity="1" />
-          <End Role="PatientInterferingCondition" Type="PatientMgmtModel.PatientInterferingCondition" Multiplicity="*" />
+          <End Role="PatientHistory" Type="Self.PatientHistory" Multiplicity="1" />
+          <End Role="PatientInterferingCondition" Type="Self.PatientInterferingCondition" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="PatientHistory">
               <PropertyRef Name="ID" />
@@ -1273,8 +1206,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_PatientProcedures_PatientHistory">
-          <End Role="PatientHistory" Type="PatientMgmtModel.PatientHistory" Multiplicity="1" />
-          <End Role="PatientProcedures" Type="PatientMgmtModel.PatientProcedure" Multiplicity="*" />
+          <End Role="PatientHistory" Type="Self.PatientHistory" Multiplicity="1" />
+          <End Role="PatientProcedures" Type="Self.PatientProcedure" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="PatientHistory">
               <PropertyRef Name="ID" />
@@ -1284,9 +1217,21 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_PatientReports_PatientHistory">
+          <End Role="PatientHistory" Type="Self.PatientHistory" Multiplicity="1" />
+          <End Role="PatientReports" Type="Self.PatientReport" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PatientHistory">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PatientReports">
+              <PropertyRef Name="HistoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_PatientSymtoms_PatientHistory">
-          <End Role="PatientHistory" Type="PatientMgmtModel.PatientHistory" Multiplicity="1" />
-          <End Role="PatientSymtoms" Type="PatientMgmtModel.PatientSymtom" Multiplicity="*" />
+          <End Role="PatientHistory" Type="Self.PatientHistory" Multiplicity="1" />
+          <End Role="PatientSymtoms" Type="Self.PatientSymtom" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="PatientHistory">
               <PropertyRef Name="ID" />
@@ -1297,8 +1242,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_PatientProcedures_ProcedureTypes">
-          <End Role="ProcedureTypes" Type="PatientMgmtModel.ProcedureType" Multiplicity="1" />
-          <End Role="PatientProcedures" Type="PatientMgmtModel.PatientProcedure" Multiplicity="*" />
+          <End Role="ProcedureTypes" Type="Self.ProcedureType" Multiplicity="1" />
+          <End Role="PatientProcedures" Type="Self.PatientProcedure" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="ProcedureTypes">
               <PropertyRef Name="ID" />
@@ -1308,9 +1253,21 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_PatientReports_Patients">
+          <End Role="Patients" Type="Self.Patient" Multiplicity="0..1" />
+          <End Role="PatientReports" Type="Self.PatientReport" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Patients">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PatientReports">
+              <PropertyRef Name="PatientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_PatientSymtoms_Symptoms">
-          <End Role="Symptoms" Type="PatientMgmtModel.Symptom" Multiplicity="1" />
-          <End Role="PatientSymtoms" Type="PatientMgmtModel.PatientSymtom" Multiplicity="*" />
+          <End Role="Symptoms" Type="Self.Symptom" Multiplicity="1" />
+          <End Role="PatientSymtoms" Type="Self.PatientSymtom" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Symptoms">
               <PropertyRef Name="ID" />
@@ -1321,8 +1278,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Users_Staff">
-          <End Role="Staff" Type="PatientMgmtModel.Staff" Multiplicity="1" />
-          <End Role="Users" Type="PatientMgmtModel.User" Multiplicity="*" />
+          <End Role="Staff" Type="Self.Staff" Multiplicity="1" />
+          <End Role="Users" Type="Self.User" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Staff">
               <PropertyRef Name="ID" />
@@ -1333,8 +1290,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Users_Users">
-          <End Role="UserRoles" Type="PatientMgmtModel.UserRole" Multiplicity="1" />
-          <End Role="Users" Type="PatientMgmtModel.User" Multiplicity="*" />
+          <End Role="UserRoles" Type="Self.UserRole" Multiplicity="1" />
+          <End Role="Users" Type="Self.User" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="UserRoles">
               <PropertyRef Name="ID" />
@@ -1344,6 +1301,125 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityContainer Name="PatientMgmtEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Diseases" EntityType="Self.Disease" />
+          <EntitySet Name="DiseaseTypes" EntityType="Self.DiseaseType" />
+          <EntitySet Name="InsuranceCardPictures" EntityType="Self.InsuranceCardPicture" />
+          <EntitySet Name="InsuranceTypes" EntityType="Self.InsuranceType" />
+          <EntitySet Name="IntakeFormHeads" EntityType="Self.IntakeFormHead" />
+          <EntitySet Name="InterferingConditions" EntityType="Self.InterferingCondition" />
+          <EntitySet Name="MedicalNecessities" EntityType="Self.MedicalNecessity" />
+          <EntitySet Name="Offices" EntityType="Self.Office" />
+          <EntitySet Name="PatientDiseases" EntityType="Self.PatientDiseas" />
+          <EntitySet Name="PatientHistories" EntityType="Self.PatientHistory" />
+          <EntitySet Name="PatientInterferingConditions" EntityType="Self.PatientInterferingCondition" />
+          <EntitySet Name="PatientProcedures" EntityType="Self.PatientProcedure" />
+          <EntitySet Name="PatientReports" EntityType="Self.PatientReport" />
+          <EntitySet Name="Patients" EntityType="Self.Patient" />
+          <EntitySet Name="PatientSymtoms" EntityType="Self.PatientSymtom" />
+          <EntitySet Name="ProcedureTypes" EntityType="Self.ProcedureType" />
+          <EntitySet Name="Staffs" EntityType="Self.Staff" />
+          <EntitySet Name="Statuses" EntityType="Self.Status" />
+          <EntitySet Name="Symptoms" EntityType="Self.Symptom" />
+          <EntitySet Name="UserRoles" EntityType="Self.UserRole" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <AssociationSet Name="FK_Diseases_DiseaseTypes" Association="Self.FK_Diseases_DiseaseTypes">
+            <End Role="DiseaseTypes" EntitySet="DiseaseTypes" />
+            <End Role="Diseases" EntitySet="Diseases" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PatientDiseases_Diseases" Association="Self.FK_PatientDiseases_Diseases">
+            <End Role="Diseases" EntitySet="Diseases" />
+            <End Role="PatientDiseases" EntitySet="PatientDiseases" />
+          </AssociationSet>
+          <AssociationSet Name="FK_InsuranceCardPictures_PatientHistory" Association="Self.FK_InsuranceCardPictures_PatientHistory">
+            <End Role="PatientHistory" EntitySet="PatientHistories" />
+            <End Role="InsuranceCardPictures" EntitySet="InsuranceCardPictures" />
+          </AssociationSet>
+          <AssociationSet Name="FK_InsuranceCardPictures_Patients" Association="Self.FK_InsuranceCardPictures_Patients">
+            <End Role="Patients" EntitySet="Patients" />
+            <End Role="InsuranceCardPictures" EntitySet="InsuranceCardPictures" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PatientHistory_InsuranceTypes" Association="Self.FK_PatientHistory_InsuranceTypes">
+            <End Role="InsuranceTypes" EntitySet="InsuranceTypes" />
+            <End Role="PatientHistory" EntitySet="PatientHistories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PatientDiseases_IntakeFormHead" Association="Self.FK_PatientDiseases_IntakeFormHead">
+            <End Role="IntakeFormHead" EntitySet="IntakeFormHeads" />
+            <End Role="PatientDiseases" EntitySet="PatientDiseases" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PatientInterferingCondition_IntakeFormHead" Association="Self.FK_PatientInterferingCondition_IntakeFormHead">
+            <End Role="IntakeFormHead" EntitySet="IntakeFormHeads" />
+            <End Role="PatientInterferingCondition" EntitySet="PatientInterferingConditions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PatientSymtoms_IntakeFormHead" Association="Self.FK_PatientSymtoms_IntakeFormHead">
+            <End Role="IntakeFormHead" EntitySet="IntakeFormHeads" />
+            <End Role="PatientSymtoms" EntitySet="PatientSymtoms" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PatientInterferingCondition_InterferingConditions" Association="Self.FK_PatientInterferingCondition_InterferingConditions">
+            <End Role="InterferingConditions" EntitySet="InterferingConditions" />
+            <End Role="PatientInterferingCondition" EntitySet="PatientInterferingConditions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PatientHistory_MedicalNecessities" Association="Self.FK_PatientHistory_MedicalNecessities">
+            <End Role="MedicalNecessities" EntitySet="MedicalNecessities" />
+            <End Role="PatientHistory" EntitySet="PatientHistories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PatientHistory_Offices" Association="Self.FK_PatientHistory_Offices">
+            <End Role="Offices" EntitySet="Offices" />
+            <End Role="PatientHistory" EntitySet="PatientHistories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Staff_Offices" Association="Self.FK_Staff_Offices">
+            <End Role="Offices" EntitySet="Offices" />
+            <End Role="Staff" EntitySet="Staffs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PatientDiseases_PatientHistory" Association="Self.FK_PatientDiseases_PatientHistory">
+            <End Role="PatientHistory" EntitySet="PatientHistories" />
+            <End Role="PatientDiseases" EntitySet="PatientDiseases" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PatientHistory_Patients" Association="Self.FK_PatientHistory_Patients">
+            <End Role="Patients" EntitySet="Patients" />
+            <End Role="PatientHistory" EntitySet="PatientHistories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PatientHistory_Statuses" Association="Self.FK_PatientHistory_Statuses">
+            <End Role="Statuses" EntitySet="Statuses" />
+            <End Role="PatientHistory" EntitySet="PatientHistories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PatientInterferingCondition_PatientHistory" Association="Self.FK_PatientInterferingCondition_PatientHistory">
+            <End Role="PatientHistory" EntitySet="PatientHistories" />
+            <End Role="PatientInterferingCondition" EntitySet="PatientInterferingConditions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PatientProcedures_PatientHistory" Association="Self.FK_PatientProcedures_PatientHistory">
+            <End Role="PatientHistory" EntitySet="PatientHistories" />
+            <End Role="PatientProcedures" EntitySet="PatientProcedures" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PatientReports_PatientHistory" Association="Self.FK_PatientReports_PatientHistory">
+            <End Role="PatientHistory" EntitySet="PatientHistories" />
+            <End Role="PatientReports" EntitySet="PatientReports" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PatientSymtoms_PatientHistory" Association="Self.FK_PatientSymtoms_PatientHistory">
+            <End Role="PatientHistory" EntitySet="PatientHistories" />
+            <End Role="PatientSymtoms" EntitySet="PatientSymtoms" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PatientProcedures_ProcedureTypes" Association="Self.FK_PatientProcedures_ProcedureTypes">
+            <End Role="ProcedureTypes" EntitySet="ProcedureTypes" />
+            <End Role="PatientProcedures" EntitySet="PatientProcedures" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PatientReports_Patients" Association="Self.FK_PatientReports_Patients">
+            <End Role="Patients" EntitySet="Patients" />
+            <End Role="PatientReports" EntitySet="PatientReports" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PatientSymtoms_Symptoms" Association="Self.FK_PatientSymtoms_Symptoms">
+            <End Role="Symptoms" EntitySet="Symptoms" />
+            <End Role="PatientSymtoms" EntitySet="PatientSymtoms" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Users_Staff" Association="Self.FK_Users_Staff">
+            <End Role="Staff" EntitySet="Staffs" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Users_Users" Association="Self.FK_Users_Users">
+            <End Role="UserRoles" EntitySet="UserRoles" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+        </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1522,6 +1598,21 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="PatientReports">
+            <EntityTypeMapping TypeName="PatientMgmtModel.PatientReport">
+              <MappingFragment StoreEntitySet="PatientReports">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="FilePath" ColumnName="FilePath" />
+                <ScalarProperty Name="HistoryID" ColumnName="HistoryID" />
+                <ScalarProperty Name="PatientID" ColumnName="PatientID" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Modified" ColumnName="Modified" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Patients">
             <EntityTypeMapping TypeName="PatientMgmtModel.Patient">
               <MappingFragment StoreEntitySet="Patients">
@@ -1607,17 +1698,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="PatientMgmtModel.sysdiagram">
-              <MappingFragment StoreEntitySet="sysdiagrams">
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
-                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-                <ScalarProperty Name="version" ColumnName="version" />
-                <ScalarProperty Name="definition" ColumnName="definition" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="UserRoles">
             <EntityTypeMapping TypeName="PatientMgmtModel.UserRole">
               <MappingFragment StoreEntitySet="UserRoles">
@@ -1655,8 +1735,9 @@
     <Options>
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
-        <DesignerProperty Name="EnablePluralization" Value="True" />
-        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
       </DesignerInfoPropertySet>
     </Options>

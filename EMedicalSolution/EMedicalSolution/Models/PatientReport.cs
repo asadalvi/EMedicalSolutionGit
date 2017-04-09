@@ -12,20 +12,19 @@ namespace EMedicalSolution.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class InterferingCondition
+    public partial class PatientReport
     {
-        public InterferingCondition()
-        {
-            this.PatientInterferingConditions = new HashSet<PatientInterferingCondition>();
-        }
-    
         public int ID { get; set; }
         public string Title { get; set; }
+        public string FilePath { get; set; }
+        public int HistoryID { get; set; }
+        public Nullable<int> PatientID { get; set; }
         public System.DateTime Created { get; set; }
         public int CreatedBy { get; set; }
         public Nullable<System.DateTime> Modified { get; set; }
         public Nullable<int> ModifiedBy { get; set; }
     
-        public virtual ICollection<PatientInterferingCondition> PatientInterferingConditions { get; set; }
+        public virtual PatientHistory PatientHistory { get; set; }
+        public virtual Patient Patient { get; set; }
     }
 }

@@ -20,6 +20,7 @@ namespace EMedicalSolution.Models
             this.PatientDiseases = new HashSet<PatientDiseas>();
             this.PatientInterferingConditions = new HashSet<PatientInterferingCondition>();
             this.PatientProcedures = new HashSet<PatientProcedure>();
+            this.PatientReports = new HashSet<PatientReport>();
             this.PatientSymtoms = new HashSet<PatientSymtom>();
         }
     
@@ -48,6 +49,7 @@ namespace EMedicalSolution.Models
         public virtual Status Status { get; set; }
         public virtual ICollection<PatientInterferingCondition> PatientInterferingConditions { get; set; }
         public virtual ICollection<PatientProcedure> PatientProcedures { get; set; }
+        public virtual ICollection<PatientReport> PatientReports { get; set; }
         public virtual ICollection<PatientSymtom> PatientSymtoms { get; set; }
     }
 }

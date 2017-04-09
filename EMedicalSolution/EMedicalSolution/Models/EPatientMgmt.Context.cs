@@ -19,12 +19,12 @@ namespace EMedicalSolution.Models
             : base("name=PatientMgmtEntities")
         {
         }
-
+    
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             throw new UnintentionalCodeFirstException();
         }
-
+    
         public DbSet<Disease> Diseases { get; set; }
         public DbSet<DiseaseType> DiseaseTypes { get; set; }
         public DbSet<InsuranceCardPicture> InsuranceCardPictures { get; set; }
@@ -37,13 +37,13 @@ namespace EMedicalSolution.Models
         public DbSet<PatientHistory> PatientHistories { get; set; }
         public DbSet<PatientInterferingCondition> PatientInterferingConditions { get; set; }
         public DbSet<PatientProcedure> PatientProcedures { get; set; }
+        public DbSet<PatientReport> PatientReports { get; set; }
         public DbSet<Patient> Patients { get; set; }
         public DbSet<PatientSymtom> PatientSymtoms { get; set; }
         public DbSet<ProcedureType> ProcedureTypes { get; set; }
         public DbSet<Staff> Staffs { get; set; }
         public DbSet<Status> Statuses { get; set; }
         public DbSet<Symptom> Symptoms { get; set; }
-        public DbSet<sysdiagram> sysdiagrams { get; set; }
         public DbSet<UserRole> UserRoles { get; set; }
         public DbSet<User> Users { get; set; }
     }

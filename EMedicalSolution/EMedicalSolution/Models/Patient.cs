@@ -18,6 +18,7 @@ namespace EMedicalSolution.Models
         {
             this.InsuranceCardPictures = new HashSet<InsuranceCardPicture>();
             this.PatientHistories = new HashSet<PatientHistory>();
+            this.PatientReports = new HashSet<PatientReport>();
         }
     
         public int ID { get; set; }
@@ -35,5 +36,6 @@ namespace EMedicalSolution.Models
     
         public virtual ICollection<InsuranceCardPicture> InsuranceCardPictures { get; set; }
         public virtual ICollection<PatientHistory> PatientHistories { get; set; }
+        public virtual ICollection<PatientReport> PatientReports { get; set; }
     }
 }

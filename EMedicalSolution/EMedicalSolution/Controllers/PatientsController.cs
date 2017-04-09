@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using EMedicalSolution.Models;
 using EMedicalSolution.ViewModels;
 using Newtonsoft.Json;
+using System.IO;
 
 namespace EMedicalSolution.Controllers
 {
@@ -26,7 +27,7 @@ namespace EMedicalSolution.Controllers
         {
             patientIntakeViewModel intakeView = new patientIntakeViewModel();
             PatientMgmtEntities db = new PatientMgmtEntities();
-
+            intakeView.objInterferingCondition = db.InterferingConditions.ToList();
             intakeView.objSymptom = db.Symptoms.ToList();
             intakeView.objDisease = db.Diseases.ToList();
             intakeView.objProcedureType = db.ProcedureTypes.ToList();
@@ -186,13 +187,79 @@ namespace EMedicalSolution.Controllers
         }
 
         [HttpPost]
-        public JsonResult intake(string[] symptom, string[] disease)
+        public JsonResult intake(string[] symptom, string[] disease, int[] condition, string supportDevice, int pregnant, int pHistoryId)
         {
             bool status = false;
-            int[] symptoms = Array.ConvertAll(symptom, s => int.Parse(s));
-            int[] diseases = Array.ConvertAll(disease, s => int.Parse(s));
-            status = true;
+            int[] diseases;
+            int[] symptoms;
+            PatientDiseas patientDiseas;
+            PatientSymtom patientSymtom;
+            PatientInterferingCondition patientInterferingCondition;
+            IntakeFormHead intakeFormHead;
+            if (ModelState.IsValid)
+            {
+                using (PatientMgmtEntities db = new PatientMgmtEntities())
+                {
+                    intakeFormHead = new IntakeFormHead();
+                    intakeFormHead.HistoryID = pHistoryId;
+                    intakeFormHead.isPregnant = pregnant;
+                    intakeFormHead.HaveSupportDevice = supportDevice;
+                    intakeFormHead.Date = DateTime.Today;
+                    intakeFormHead.Created = DateTime.Now;
+                    intakeFormHead.CreatedBy = 1;
+                    db.IntakeFormHeads.Add(intakeFormHead);
+                    db.SaveChanges();
+                    int intakeId = intakeFormHead.ID;
+                    //intakeFormHead.HaveSupportDevice = 
+                    if (symptom.Length > 0 && intakeId > 0)
+                    {
+                        patientSymtom = new PatientSymtom();
+                        symptoms = Array.ConvertAll(symptom, s => int.Parse(s));
+                        for (int i = 0; i < symptom.Length; i++)
+                        {
+                            patientSymtom.IntakeFormID = intakeId;
+                            patientSymtom.HistoryID = pHistoryId;
+                            patientSymtom.SymptomID = Convert.ToInt32(symptom[i]);
+                            patientSymtom.Created = DateTime.Now;
+                            patientSymtom.CreatedBy = 1;
+                            db.PatientSymtoms.Add(patientSymtom);
+                            db.SaveChanges();
+                        }
+                    }
+                    if (disease.Length > 0 && intakeId > 0)
+                    {
+                        patientDiseas = new PatientDiseas();
+                        diseases = Array.ConvertAll(disease, s => int.Parse(s));
+                        for (int i = 0; i < diseases.Length; i++)
+                        {
+                            patientDiseas.IntakeFormID = intakeId;
+                            patientDiseas.HistoryID = pHistoryId;
+                            patientDiseas.DiseaseID = Convert.ToInt32(diseases[i]);
+                            patientDiseas.Created = DateTime.Now;
+                            patientDiseas.CreatedBy = 1;
+                            db.PatientDiseases.Add(patientDiseas);
+                            db.SaveChanges();
+                        }
+                    }
+                    if (condition.Length > 0 && intakeId > 0)
+                    {
+                        for (int i = 0; i < condition.Length; i++)
+                        {
+                            patientInterferingCondition = new PatientInterferingCondition();
+                            patientInterferingCondition.IntakeFormID = intakeId;
+                            patientInterferingCondition.HistoryID = pHistoryId;
+                            patientInterferingCondition.PatientConditionID = Convert.ToInt32(condition[i]);
+                            patientInterferingCondition.Created = DateTime.Now;
+                            patientInterferingCondition.CreatedBy = 1;
+                            db.PatientInterferingConditions.Add(patientInterferingCondition);
+                            db.SaveChanges();
+                        }
+                    }
+                }
 
+            
+            status = true;
+        }
             return Json(status, JsonRequestBehavior.AllowGet);
         }
 
@@ -260,6 +327,50 @@ namespace EMedicalSolution.Controllers
                 status = true;
             }
             return new JsonResult { Data = new { status = status } };
+        }
+        [HttpPost]
+        public ActionResult UploadReports(HttpPostedFileBase[] filePath, string[] filetitle, int pHistoryId)
+        {
+            bool status = false;
+            if (filePath != null)
+            {
+                var allowedExtensions = new[] { ".Jpg", ".png", ".jpg", "jpeg", ".rar", ".zip", ".pdf", ".doc", ".docx", ".xls", ".xlsx" }; //Allowe Extensions
+                int i = -1;
+                foreach (var file in filePath)
+                {
+                    i++;
+                    if (file != null && file.ContentLength > 0)
+                    {
+                        //oTests[i].ReportPath = files[i].ToString(); //getting complete url  
+                        var fileName = Path.GetFileName(file.FileName); //getting only file name(ex-ganesh.jpg)  
+                        var ext = Path.GetExtension(file.FileName); //getting the extension(ex-.jpg)  
+
+                        if (allowedExtensions.Contains(ext)) //check what type of extension  
+                        {
+                            PatientReport PatientReports = new PatientReport();
+                            string name = Path.GetFileNameWithoutExtension(fileName); //getting file name without extension  
+                            using (PatientMgmtEntities db = new PatientMgmtEntities())
+                            {
+                                int id = db.PatientReports.Max(p => p.ID) + 1;
+                                string myfile = "Report_" + id + ext; //appending the name with id  
+                                                                      // store the file inside ~/project folder(Img)  
+                                var path = Path.Combine(Server.MapPath("~/Files/Reports"), myfile);
+                                file.SaveAs(path);
+                                PatientReports.FilePath = path;
+                                PatientReports.HistoryID = pHistoryId;
+                                PatientReports.Title = filetitle[i];
+                                PatientReports.Created = DateTime.Now;
+                                PatientReports.CreatedBy = 1;
+                                db.PatientReports.Add(PatientReports);
+                                db.SaveChanges();
+                            }
+                        }
+
+                    } //checking file is not empty 
+                } // for loop end
+                status = true;
+            }
+            return Json(status, JsonRequestBehavior.AllowGet);
         }
     }
 }

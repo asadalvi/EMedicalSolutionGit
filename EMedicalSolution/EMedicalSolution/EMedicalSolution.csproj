@@ -176,6 +176,9 @@
     <Compile Include="Models\PatientProcedure.cs">
       <DependentUpon>EPatientMgmt.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\PatientReport.cs">
+      <DependentUpon>EPatientMgmt.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\PatientSymtom.cs">
       <DependentUpon>EPatientMgmt.tt</DependentUpon>
     </Compile>
@@ -189,9 +192,6 @@
       <DependentUpon>EPatientMgmt.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Symptom.cs">
-      <DependentUpon>EPatientMgmt.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\sysdiagram.cs">
       <DependentUpon>EPatientMgmt.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\User.cs">
@@ -280,8 +280,25 @@
     <Content Include="fonts\fontawesome-webfont.woff" />
     <Content Include="fonts\fontawesome-webfont.woff2" />
     <Content Include="fonts\FontAwesome.otf" />
+    <EntityDeploy Include="Models\EPatientMgmt.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>EPatientMgmt.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\EPatientMgmt.edmx.diagram">
+      <DependentUpon>EPatientMgmt.edmx</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="Images\avatar.jpg" />
+    <Content Include="Models\EPatientMgmt.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>EPatientMgmt.edmx</DependentUpon>
+      <LastGenOutput>EPatientMgmt.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\EPatientMgmt.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>EPatientMgmt.edmx</DependentUpon>
+      <LastGenOutput>EPatientMgmt.cs</LastGenOutput>
+    </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\DataTable\buttons.flash.min.js" />
@@ -354,30 +371,10 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Files\Reports\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <EntityDeploy Include="Models\EPatientMgmt.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>EPatientMgmt.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Models\EPatientMgmt.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>EPatientMgmt.edmx</DependentUpon>
-      <LastGenOutput>EPatientMgmt.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\EPatientMgmt.edmx.diagram">
-      <DependentUpon>EPatientMgmt.edmx</DependentUpon>
-    </Content>
-    <Content Include="Models\EPatientMgmt.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>EPatientMgmt.edmx</DependentUpon>
-      <LastGenOutput>EPatientMgmt.cs</LastGenOutput>
-    </Content>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
