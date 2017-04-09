@@ -328,6 +328,33 @@ namespace EMedicalSolution.Controllers
             }
             return new JsonResult { Data = new { status = status } };
         }
+
+        [HttpGet]
+        public ActionResult GetReports(int pHistoryId)
+        {
+            PatientMgmtEntities db = new PatientMgmtEntities();
+            {
+                List<PatientReport> reports = db.PatientReports.Where(h => h.HistoryID == pHistoryId).OrderByDescending(a => a.Created).ToList();
+                return Json(new
+                {
+                    data = reports.Select(p => new
+                    {
+                        p.ID,
+                        p.Title,
+                        p.FilePath,
+                        p.Created
+                    }
+                )
+                }, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        public FileResult DownloadTestReport(string fileName)
+        {
+            var filePath = Path.Combine(Server.MapPath("/Files/Reports/"), fileName);
+            return File(filePath, MimeMapping.GetMimeMapping(filePath), fileName);
+        }
+
         [HttpPost]
         public ActionResult UploadReports(HttpPostedFileBase[] filePath, string[] filetitle, int pHistoryId)
         {
@@ -351,7 +378,7 @@ namespace EMedicalSolution.Controllers
                             string name = Path.GetFileNameWithoutExtension(fileName); //getting file name without extension  
                             using (PatientMgmtEntities db = new PatientMgmtEntities())
                             {
-                                int id = db.PatientReports.Max(p => p.ID) + 1;
+                                int id = db.PatientReports.Max(p => (int?)p.ID) ?? 0 + 1;
                                 string myfile = "Report_" + id + ext; //appending the name with id  
                                                                       // store the file inside ~/project folder(Img)  
                                 var path = Path.Combine(Server.MapPath("~/Files/Reports"), myfile);
@@ -369,6 +396,43 @@ namespace EMedicalSolution.Controllers
                     } //checking file is not empty 
                 } // for loop end
                 status = true;
+            }
+            return Json(status, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public ActionResult SaveMedicalNecessities(int[] necessities, int pHistoryId, string txtsecondary)
+        {
+            bool status = false;
+            PatientNecessity pNecessity;
+            PatientHistory pHistsory;
+            if (ModelState.IsValid)
+            {
+                //string[] myType = procedureType.Split(',');
+                //int[] pNecessities = Array.ConvertAll(necessities, s => int.Parse(s));
+                using (PatientMgmtEntities db = new PatientMgmtEntities())
+                {
+                    pNecessity = new PatientNecessity();
+                    pHistsory = new PatientHistory();
+                    if (pHistoryId > 0)
+                    {
+                        pNecessity.HistoryID = pHistoryId;
+
+                        for (int i = 0; i < necessities.Length; i++)
+                        {
+                            pNecessity.NecessityID = Convert.ToInt32(necessities[i]);
+                            pNecessity.Created = DateTime.Now;
+                            pNecessity.CreatedBy = 1;
+                            db.PatientNecessities.Add(pNecessity);
+                            db.SaveChanges();
+                        }
+                        pHistsory = db.PatientHistories.Find(pHistoryId);
+                        pHistsory.SecondaryNecessities = txtsecondary;
+                        pHistsory.MedicalNecessitiesID = necessities[0];
+                        db.SaveChanges();
+                        status = true;
+                    }
+                }
             }
             return Json(status, JsonRequestBehavior.AllowGet);
         }

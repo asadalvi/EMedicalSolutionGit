@@ -151,6 +151,19 @@
           <Property Name="Modified" Type="datetime" />
           <Property Name="ModifiedBy" Type="int" />
         </EntityType>
+        <EntityType Name="PatientNecessities">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NecessityID" Type="int" Nullable="false" />
+          <Property Name="HistoryID" Type="int" Nullable="false" />
+          <Property Name="PatientID" Type="int" />
+          <Property Name="Created" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="Modified" Type="datetime" />
+          <Property Name="ModifiedBy" Type="int" />
+        </EntityType>
         <EntityType Name="PatientProcedures">
           <Key>
             <PropertyRef Name="ID" />
@@ -447,6 +460,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_PatientNecessities_PatientHistory">
+          <End Role="PatientHistory" Type="Self.PatientHistory" Multiplicity="1" />
+          <End Role="PatientNecessities" Type="Self.PatientNecessities" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PatientHistory">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PatientNecessities">
+              <PropertyRef Name="HistoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PatientNecessities_Patients">
+          <End Role="Patients" Type="Self.Patients" Multiplicity="0..1" />
+          <End Role="PatientNecessities" Type="Self.PatientNecessities" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Patients">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PatientNecessities">
+              <PropertyRef Name="PatientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_PatientProcedures_PatientHistory">
           <End Role="PatientHistory" Type="Self.PatientHistory" Multiplicity="1" />
           <End Role="PatientProcedures" Type="Self.PatientProcedures" Multiplicity="*" />
@@ -579,6 +616,7 @@
           <EntitySet Name="PatientDiseases" EntityType="Self.PatientDiseases" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PatientHistory" EntityType="Self.PatientHistory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PatientInterferingCondition" EntityType="Self.PatientInterferingCondition" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PatientNecessities" EntityType="Self.PatientNecessities" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PatientProcedures" EntityType="Self.PatientProcedures" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PatientReports" EntityType="Self.PatientReports" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Patients" EntityType="Self.Patients" Schema="dbo" store:Type="Tables" />
@@ -644,6 +682,14 @@
           <AssociationSet Name="FK_PatientInterferingCondition_PatientHistory" Association="Self.FK_PatientInterferingCondition_PatientHistory">
             <End Role="PatientHistory" EntitySet="PatientHistory" />
             <End Role="PatientInterferingCondition" EntitySet="PatientInterferingCondition" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PatientNecessities_PatientHistory" Association="Self.FK_PatientNecessities_PatientHistory">
+            <End Role="PatientHistory" EntitySet="PatientHistory" />
+            <End Role="PatientNecessities" EntitySet="PatientNecessities" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PatientNecessities_Patients" Association="Self.FK_PatientNecessities_Patients">
+            <End Role="Patients" EntitySet="Patients" />
+            <End Role="PatientNecessities" EntitySet="PatientNecessities" />
           </AssociationSet>
           <AssociationSet Name="FK_PatientProcedures_PatientHistory" Association="Self.FK_PatientProcedures_PatientHistory">
             <End Role="PatientHistory" EntitySet="PatientHistory" />
@@ -847,6 +893,7 @@
           <NavigationProperty Name="Patient" Relationship="Self.FK_PatientHistory_Patients" FromRole="PatientHistory" ToRole="Patients" />
           <NavigationProperty Name="Status" Relationship="Self.FK_PatientHistory_Statuses" FromRole="PatientHistory" ToRole="Statuses" />
           <NavigationProperty Name="PatientInterferingConditions" Relationship="Self.FK_PatientInterferingCondition_PatientHistory" FromRole="PatientHistory" ToRole="PatientInterferingCondition" />
+          <NavigationProperty Name="PatientNecessities" Relationship="Self.FK_PatientNecessities_PatientHistory" FromRole="PatientHistory" ToRole="PatientNecessities" />
           <NavigationProperty Name="PatientProcedures" Relationship="Self.FK_PatientProcedures_PatientHistory" FromRole="PatientHistory" ToRole="PatientProcedures" />
           <NavigationProperty Name="PatientReports" Relationship="Self.FK_PatientReports_PatientHistory" FromRole="PatientHistory" ToRole="PatientReports" />
           <NavigationProperty Name="PatientSymtoms" Relationship="Self.FK_PatientSymtoms_PatientHistory" FromRole="PatientHistory" ToRole="PatientSymtoms" />
@@ -866,6 +913,21 @@
           <NavigationProperty Name="IntakeFormHead" Relationship="Self.FK_PatientInterferingCondition_IntakeFormHead" FromRole="PatientInterferingCondition" ToRole="IntakeFormHead" />
           <NavigationProperty Name="InterferingCondition" Relationship="Self.FK_PatientInterferingCondition_InterferingConditions" FromRole="PatientInterferingCondition" ToRole="InterferingConditions" />
           <NavigationProperty Name="PatientHistory" Relationship="Self.FK_PatientInterferingCondition_PatientHistory" FromRole="PatientInterferingCondition" ToRole="PatientHistory" />
+        </EntityType>
+        <EntityType Name="PatientNecessity">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NecessityID" Type="Int32" Nullable="false" />
+          <Property Name="HistoryID" Type="Int32" Nullable="false" />
+          <Property Name="PatientID" Type="Int32" />
+          <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="Modified" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedBy" Type="Int32" />
+          <NavigationProperty Name="PatientHistory" Relationship="Self.FK_PatientNecessities_PatientHistory" FromRole="PatientNecessities" ToRole="PatientHistory" />
+          <NavigationProperty Name="Patient" Relationship="Self.FK_PatientNecessities_Patients" FromRole="PatientNecessities" ToRole="Patients" />
         </EntityType>
         <EntityType Name="PatientProcedure">
           <Key>
@@ -917,6 +979,7 @@
           <Property Name="ModifiedBy" Type="Int32" />
           <NavigationProperty Name="InsuranceCardPictures" Relationship="Self.FK_InsuranceCardPictures_Patients" FromRole="Patients" ToRole="InsuranceCardPictures" />
           <NavigationProperty Name="PatientHistories" Relationship="Self.FK_PatientHistory_Patients" FromRole="Patients" ToRole="PatientHistory" />
+          <NavigationProperty Name="PatientNecessities" Relationship="Self.FK_PatientNecessities_Patients" FromRole="Patients" ToRole="PatientNecessities" />
           <NavigationProperty Name="PatientReports" Relationship="Self.FK_PatientReports_Patients" FromRole="Patients" ToRole="PatientReports" />
         </EntityType>
         <EntityType Name="PatientSymtom">
@@ -1205,6 +1268,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_PatientNecessities_PatientHistory">
+          <End Role="PatientHistory" Type="Self.PatientHistory" Multiplicity="1" />
+          <End Role="PatientNecessities" Type="Self.PatientNecessity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PatientHistory">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PatientNecessities">
+              <PropertyRef Name="HistoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_PatientProcedures_PatientHistory">
           <End Role="PatientHistory" Type="Self.PatientHistory" Multiplicity="1" />
           <End Role="PatientProcedures" Type="Self.PatientProcedure" Multiplicity="*" />
@@ -1238,6 +1313,18 @@
             </Principal>
             <Dependent Role="PatientSymtoms">
               <PropertyRef Name="HistoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PatientNecessities_Patients">
+          <End Role="Patients" Type="Self.Patient" Multiplicity="0..1" />
+          <End Role="PatientNecessities" Type="Self.PatientNecessity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Patients">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PatientNecessities">
+              <PropertyRef Name="PatientID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1313,6 +1400,7 @@
           <EntitySet Name="PatientDiseases" EntityType="Self.PatientDiseas" />
           <EntitySet Name="PatientHistories" EntityType="Self.PatientHistory" />
           <EntitySet Name="PatientInterferingConditions" EntityType="Self.PatientInterferingCondition" />
+          <EntitySet Name="PatientNecessities" EntityType="Self.PatientNecessity" />
           <EntitySet Name="PatientProcedures" EntityType="Self.PatientProcedure" />
           <EntitySet Name="PatientReports" EntityType="Self.PatientReport" />
           <EntitySet Name="Patients" EntityType="Self.Patient" />
@@ -1387,6 +1475,10 @@
             <End Role="PatientHistory" EntitySet="PatientHistories" />
             <End Role="PatientInterferingCondition" EntitySet="PatientInterferingConditions" />
           </AssociationSet>
+          <AssociationSet Name="FK_PatientNecessities_PatientHistory" Association="Self.FK_PatientNecessities_PatientHistory">
+            <End Role="PatientHistory" EntitySet="PatientHistories" />
+            <End Role="PatientNecessities" EntitySet="PatientNecessities" />
+          </AssociationSet>
           <AssociationSet Name="FK_PatientProcedures_PatientHistory" Association="Self.FK_PatientProcedures_PatientHistory">
             <End Role="PatientHistory" EntitySet="PatientHistories" />
             <End Role="PatientProcedures" EntitySet="PatientProcedures" />
@@ -1398,6 +1490,10 @@
           <AssociationSet Name="FK_PatientSymtoms_PatientHistory" Association="Self.FK_PatientSymtoms_PatientHistory">
             <End Role="PatientHistory" EntitySet="PatientHistories" />
             <End Role="PatientSymtoms" EntitySet="PatientSymtoms" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PatientNecessities_Patients" Association="Self.FK_PatientNecessities_Patients">
+            <End Role="Patients" EntitySet="Patients" />
+            <End Role="PatientNecessities" EntitySet="PatientNecessities" />
           </AssociationSet>
           <AssociationSet Name="FK_PatientProcedures_ProcedureTypes" Association="Self.FK_PatientProcedures_ProcedureTypes">
             <End Role="ProcedureTypes" EntitySet="ProcedureTypes" />
@@ -1576,6 +1672,20 @@
                 <ScalarProperty Name="HistoryID" ColumnName="HistoryID" />
                 <ScalarProperty Name="IntakeFormID" ColumnName="IntakeFormID" />
                 <ScalarProperty Name="PatientConditionID" ColumnName="PatientConditionID" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Modified" ColumnName="Modified" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PatientNecessities">
+            <EntityTypeMapping TypeName="PatientMgmtModel.PatientNecessity">
+              <MappingFragment StoreEntitySet="PatientNecessities">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="NecessityID" ColumnName="NecessityID" />
+                <ScalarProperty Name="HistoryID" ColumnName="HistoryID" />
+                <ScalarProperty Name="PatientID" ColumnName="PatientID" />
                 <ScalarProperty Name="Created" ColumnName="Created" />
                 <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
                 <ScalarProperty Name="Modified" ColumnName="Modified" />

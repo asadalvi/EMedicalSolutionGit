@@ -36,6 +36,7 @@ namespace EMedicalSolution.Models
         public DbSet<PatientDiseas> PatientDiseases { get; set; }
         public DbSet<PatientHistory> PatientHistories { get; set; }
         public DbSet<PatientInterferingCondition> PatientInterferingConditions { get; set; }
+        public DbSet<PatientNecessity> PatientNecessities { get; set; }
         public DbSet<PatientProcedure> PatientProcedures { get; set; }
         public DbSet<PatientReport> PatientReports { get; set; }
         public DbSet<Patient> Patients { get; set; }

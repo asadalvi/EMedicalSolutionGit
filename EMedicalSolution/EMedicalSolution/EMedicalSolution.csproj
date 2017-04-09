@@ -173,6 +173,9 @@
     <Compile Include="Models\PatientInterferingCondition.cs">
       <DependentUpon>EPatientMgmt.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\PatientNecessity.cs">
+      <DependentUpon>EPatientMgmt.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\PatientProcedure.cs">
       <DependentUpon>EPatientMgmt.tt</DependentUpon>
     </Compile>

@@ -180,7 +180,7 @@
                         e.preventDefault();
                         if (x < max_fields) { //max input box allowed
                             x++; //text box increment
-                            $(wrapper).prepend('<div><input type="file" class="js-upload-files" name="[' + x + '].filePath" id="[' + x + '].filePath" /><input type="text" class="js-files-title" name="[' + x + '].reportName" id="[' + x + '].reportName" /><a href="#" class="remove_field">Remove</a></div>'); //add input box
+                            $(wrapper).append('<div><input type="file" class="js-upload-files" name="filePath" id="[' + x + '].filePath" /><input type="text" class="js-files-title" name="filetitle" id="[' + x + '].filetitle" /><a href="#" class="remove_field">Remove</a></div>'); //add input box
                         }
                     });
 
@@ -215,11 +215,9 @@
                 
                 $('#addPatientReport').click(function () {
                     $formData = new FormData();
-                    var filetitle = [];
                     var pHistoryId = $("#pHistoryId_id").val();
                     $('.js-upload-files').each(function () {
-                        console.log("idssssssssss",this.id);
-                        //var $file = this.id;
+                        console.log("id",this.id);
                         var $file = document.getElementById(this.id);
                         console.log($file,"file path", $file.files.length);   
 
@@ -229,26 +227,33 @@
                        }
                         }
                     });
-                    $('.js-files-title').each(function () {
-                        var text = document.getElementById(this.id);
-                        var value = $(text).val();
-                        filetitle.push(value);
-                        console.log(filetitle, "filetitle");
-
+                    $(".js-files-title").each(function (x, y) {
+                        $formData.append($(y).attr("name"), $(y).val());
                     });
                         $.ajax({
-                            url: '/Patients/uploadReports?filetitle=' + filetitle + "&pHistoryId=" + pHistoryId,
+                            url: '/Patients/uploadReports?pHistoryId=' + pHistoryId,
                            type: 'POST',
                            data: $formData,
                            dataType: 'json',
-   
                            contentType: false,
                            enctype: 'multipart/form-data',
                            processData: false,
                            success: function ($data) {
-
+                               
                            }
                          });
+                });
+
+
+                // Check if primary necessity is selected then enable secondary diaganosis 
+                $("input[type='checkbox'].necessities").change(function () {
+                    var a = $("input[type='checkbox'].necessities");
+                    if (a.filter(":checked").length > 0) {
+                        $('#secondaryDiagnosis').prop('disabled', false);
+                    }
+                    else {
+                        $('#secondaryDiagnosis').prop('disabled', true);
+                    }
                 });
             </script>
         }

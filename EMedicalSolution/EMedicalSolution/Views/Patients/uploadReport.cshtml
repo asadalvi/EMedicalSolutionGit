@@ -1,38 +1,75 @@
 ﻿<h2>Step 4 Content</h2>
-@using (Html.BeginForm("uploadReport", "Patients", FormMethod.Post, new { id = "uploadReport" }))
+@using (Html.BeginForm("UploadReports", "Patients", FormMethod.Post, new { id = "UploadReports" }))
 {
 <div class="w3-row w3-margin-bottom" id="add-prescription">
-    <input type="hidden" id="pHistoryId_id" name="pHistoryId" value="69" />
+    <input type="hidden" id="pHistoryId_id" name="pHistoryId" value="8" />
     <div class="w3-half">
         <div class="editor-label">
             <label>Test Report</label>
         </div>
         <div class="input_fields_wrap">
             <div>
-                <input type="file" class="js-upload-files" name="[0].filePath" id="[0].filePath" />
-                <input type="text" class="js-files-title" name="[0].reportName" id="[0].reportName" />
+                <input type="file" class="js-upload-files" name="filePath" id="[0].filePath" />
+                <input type="text" class="js-files-title" name="filetitle" id="[0].filetitle" />
             </div>
-            <button class="add_field_button w3-btn w3-cyan">+ Add More</button>
         </div>
+        <button class="add_field_button w3-btn w3-cyan">+ Add More</button>
     </div>
 </div>
 
 <div class="panel panel-default">
-    <div class="panel-heading">My Details</div>
-    <table class="table">
+    <div class="panel-heading">Reports</div>
+    <table class="table" id="reportsDataTable">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Download</th>
+                <th>Created</th>
+            </tr>
+        </thead>
         <tbody>
-            <tr>
-                <th>Name:</th>
-                <td>Tim Smith</td>
-            </tr>
-            <tr>
-                <th>Email:</th>
-                <td>example@example.com</td>
-            </tr>
+
         </tbody>
     </table>
 </div>
 <div class="w3-row  w3-margin-top">
-    <button class="w3-btn-block w3-green" id ="addPatientReport" type="button">Save</button>
+    <button class="w3-btn-block w3-green" id="addPatientReport" type="button">Save</button>
 </div>
 }
+@*addPatientReport*@
+
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<script src="~/Scripts/jquery.dataTables.min.js"></script>
+<script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+<script src="~/Scripts/date.format.js"></script>
+
+<script>
+    $(document).ready(function () {
+        var pHistoryId = $("#pHistoryId_id").val();
+        var oReportTable = $("#reportsDataTable").DataTable({
+            "ajax": {
+                "url": '/Patients/GetReports/?pHistoryId=' + pHistoryId,
+                "type": 'get',
+                "datatype": "json"
+            },
+            "columns": [
+                { "data": "Title", "autoWidth": true },
+                {
+                    "data": "FilePath", "render": function (data) {
+                        var filename = data.split('\\').pop();
+                        return '<span class="fa fa-download">  <a  href="/Patients/DownloadTestReport/?fileName=' + filename + '">  Download<a></span>';
+                    }
+                },
+                {
+                    "data": "Created", "autoWidth": true, "render": function (data) {
+                        var date = new Date(parseInt(data.substr(6)));
+                        var sdate = date.format("mmm d, yyyy");
+                        return sdate;
+                    }
+                }
+                 ]
+        });
+
+    });
+</script>
