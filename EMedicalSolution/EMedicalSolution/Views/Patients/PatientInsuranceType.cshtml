@@ -1,7 +1,7 @@
 ﻿@model IList<EMedicalSolution.Models.InsuranceType>
 
 
-@using (Html.BeginForm("SavePatientInsuranceType", "Patients", FormMethod.Post, new { id = "popupForm" }))
+@using (Html.BeginForm("SavePatientInsuranceType", "Patients", FormMethod.Post, new { id = "popupForm"}))
 {
     @*if (Model != null && Model.ID > 0)
     {
@@ -16,9 +16,50 @@
         {
             @Html.RadioButtonFor(a => item.ID, item.ID, new { @class="w3-radio", @Name = "typeId" }) @item.Title <br />
         }
-        <input type="hidden" name="pId" value="@ViewBag.patientID">
+        <input type="hidden" name="pId" id="patientId" value="@ViewBag.patientID">
+            <div>
+                <input type="file" name="filePath" id="insuranceCardfile" multiple="multiple"/>
+                <input type="text" name="insuranceTitle" id="insuranceTitle" />
+            </div>
     </div>
     <div class="w3-row  w3-margin-top">
-        <input class="w3-btn-block w3-green" type="submit" value="Save" />
+        <button class="w3-btn-block w3-green" id="addPatientInsurance" type="button">Save</button>
     </div>
 }
+
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<script src="~/Scripts/jquery.dataTables.min.js"></script>
+<script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+<script src="~/Scripts/date.format.js"></script>
+
+<script>
+    $(document).ready(function () {
+        //save patient insurance type
+
+        $('#addPatientInsurance').click(function () {
+            $formData = new FormData();
+            var pId = $("#patientId").val();
+            var insuranceTitle = $("#insuranceTitle").val();
+            var typeid = $("input[name='typeId']:checked").val();
+            var $file = document.getElementById('insuranceCardfile');
+            if ($file.files.length > 0) {
+                for (var i = 0; i < $file.files.length; i++) {
+                    $formData.append('filePath', $file.files[i]);
+                }
+            }
+            $.ajax({
+                url: '/Patients/SavePatientInsuranceType?pId=' + pId + "&insuranceTitle=" + insuranceTitle + "&typeid=" + typeid,
+                type: 'POST',
+                data: $formData,
+                dataType: 'json',
+                contentType: false,
+                enctype: 'multipart/form-data',
+                processData: false,
+                success: function ($data) {
+
+                }
+            });
+        });
+    });
+        </script>

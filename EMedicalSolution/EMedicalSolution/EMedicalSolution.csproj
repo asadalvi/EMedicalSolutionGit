@@ -374,6 +374,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Files\Cards\" />
     <Folder Include="Files\Reports\" />
   </ItemGroup>
   <ItemGroup>

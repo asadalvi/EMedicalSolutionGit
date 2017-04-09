@@ -309,21 +309,50 @@ namespace EMedicalSolution.Controllers
 
         }
         [HttpPost]
-        public ActionResult SavePatientInsuranceType()
+        public ActionResult SavePatientInsuranceType(HttpPostedFileBase filePath, string insuranceTitle, int pId, int typeid)
         {
             bool status = false;
-            int  pId = Convert.ToInt32(Request.Form["pId"]);
-            int typeid = Convert.ToInt32(Request.Form["typeId"]);
             PatientHistory ph = new PatientHistory();
+            InsuranceCardPicture insureCard = new InsuranceCardPicture();
             ph.PatientID = pId; //Getting inserted ID
 
             ph.InsuranceTypeID = typeid;
             ph.Created = DateTime.Now;
             ph.CreatedBy = 1;
+
+            insureCard.PatientID = pId; 
+            insureCard.Title = insuranceTitle;
+            insureCard.Created = DateTime.Now;
+            insureCard.CreatedBy = 1;
             using (PatientMgmtEntities db = new PatientMgmtEntities())
             {
                 db.PatientHistories.Add(ph);
                 db.SaveChanges();
+                int hId = ph.ID;
+                if (filePath != null)
+                {
+                    var allowedExtensions = new[] { ".Jpg", ".png", ".jpg", "jpeg", ".rar", ".zip", ".pdf", ".doc", ".docx", ".xls", ".xlsx" }; //Allowe Extensions
+                        if (filePath != null && filePath.ContentLength > 0)
+                        {
+                            //oTests[i].ReportPath = files[i].ToString(); //getting complete url  
+                            var fileName = Path.GetFileName(filePath.FileName); //getting only file name(ex-ganesh.jpg)  
+                            var ext = Path.GetExtension(filePath.FileName); //getting the extension(ex-.jpg)  
+
+                            if (allowedExtensions.Contains(ext)) //check what type of extension  
+                            {
+                                     string name = Path.GetFileNameWithoutExtension(fileName); //getting file name without extension  
+                                    int id = db.PatientReports.Max(p => (int?)p.ID) ?? 0 + 1;
+                                    string myfile = "Card_" + id + ext; //appending the name with id  
+                                                                          // store the file inside ~/project folder(Img)  
+                                    var path = Path.Combine(Server.MapPath("~/Files/Cards"), myfile);
+                                    filePath.SaveAs(path);
+                                    insureCard.FilePath = path;
+                                    insureCard.HistoryID = hId;
+                                    db.InsuranceCardPictures.Add(insureCard);
+                                    db.SaveChanges();
+                                }
+                            }
+                }
                 status = true;
             }
             return new JsonResult { Data = new { status = status } };
