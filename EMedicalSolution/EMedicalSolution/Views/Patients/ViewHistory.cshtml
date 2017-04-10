@@ -1,0 +1,18 @@
+﻿
+<input type="hidden" id="patient_patientID" name="pHistoryId" value="@ViewBag.pHistoryId" />
+
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<script src="~/Scripts/jquery.dataTables.min.js"></script>
+<script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+<script src="~/Scripts/date.format.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $("#pHistoryId").val($("#patient_patientID").val());
+        $(".ui-dialog-titlebar-close").trigger("click");
+    });
+</script>
+
+
+

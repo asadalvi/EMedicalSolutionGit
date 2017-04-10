@@ -7,6 +7,7 @@ using EMedicalSolution.Models;
 using EMedicalSolution.ViewModels;
 using Newtonsoft.Json;
 using System.IO;
+using HiQPdf;
 
 namespace EMedicalSolution.Controllers
 {
@@ -464,6 +465,67 @@ namespace EMedicalSolution.Controllers
                 }
             }
             return Json(status, JsonRequestBehavior.AllowGet);
+        }
+        //view history of a patient
+
+        //[HttpPost]
+        public ActionResult ViewHistory(int id)
+        {
+            ViewBag.pHistoryId = id;
+            bool status = false;
+            if (ModelState.IsValid)
+            {
+                status = true;
+            }
+            //return Json(status, JsonRequestBehavior.AllowGet);
+            return View();
+        }
+
+        //report rendering
+        public string RenderViewAsString(string viewName, object model)
+        {
+            // create a string writer to receive the HTML code
+            StringWriter stringWriter = new StringWriter();
+
+            // get the view to render
+            ViewEngineResult viewResult = ViewEngines.Engines.FindView(ControllerContext, viewName, null);
+            // create a context to render a view based on a model
+            ViewContext viewContext = new ViewContext(
+                    ControllerContext,
+                    viewResult.View,
+                    new ViewDataDictionary(model),
+                    new TempDataDictionary(),
+                    stringWriter
+                    );
+
+            // render the view to a HTML code
+            viewResult.View.Render(viewContext, stringWriter);
+
+            // return the HTML code
+            return stringWriter.ToString();
+        }
+
+        [HttpPost]
+        public ActionResult ConvertPatientToPdf()
+        {
+            // get the About view HTML code
+            string htmlToConvert = RenderViewAsString("Index", null);
+
+            // the base URL to resolve relative images and css
+            String thisPageUrl = this.ControllerContext.HttpContext.Request.Url.AbsoluteUri;
+            String baseUrl = thisPageUrl.Substring(0, thisPageUrl.Length - "Patients/ConvertPatientToPdf".Length);
+
+            // instantiate the HiQPdf HTML to PDF converter
+            HtmlToPdf htmlToPdfConverter = new HtmlToPdf();
+
+            // render the HTML code as PDF in memory
+            byte[] pdfBuffer = htmlToPdfConverter.ConvertHtmlToMemory(htmlToConvert, baseUrl);
+
+            // send the PDF file to browser
+            FileResult fileResult = new FileContentResult(pdfBuffer, "application/pdf");
+            fileResult.FileDownloadName = "AboutMvcViewToPdf.pdf";
+
+            return fileResult;
         }
     }
 }

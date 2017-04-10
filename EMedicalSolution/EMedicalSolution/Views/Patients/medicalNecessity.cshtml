@@ -2,7 +2,7 @@
 @using (Html.BeginForm("SaveMedicalNecessities", "Patients", FormMethod.Post, new { id = "SaveMedicalNecessities" }))
 {
 
-    <input type="hidden" name="pHistoryId" value="8" />
+  
     <h4>Primary Diagnosis</h4>
     if (Model != null && Model.objMedicalNecessity != null)
     {

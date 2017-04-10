@@ -2,8 +2,7 @@
 @using (Html.BeginForm("UploadReports", "Patients", FormMethod.Post, new { id = "UploadReports" }))
 {
 <div class="w3-row w3-margin-bottom" id="add-prescription">
-    <input type="hidden" id="pHistoryId_id" name="pHistoryId" value="8" />
-    <div class="w3-half">
+     <div class="w3-half">
         <div class="editor-label">
             <label>Test Report</label>
         </div>
@@ -47,29 +46,30 @@
 <script>
     $(document).ready(function () {
         var pHistoryId = $("#pHistoryId_id").val();
-        var oReportTable = $("#reportsDataTable").DataTable({
-            "ajax": {
-                "url": '/Patients/GetReports/?pHistoryId=' + pHistoryId,
-                "type": 'get',
-                "datatype": "json"
-            },
-            "columns": [
-                { "data": "Title", "autoWidth": true },
-                {
-                    "data": "FilePath", "render": function (data) {
-                        var filename = data.split('\\').pop();
-                        return '<span class="fa fa-download">  <a  href="/Patients/DownloadTestReport/?fileName=' + filename + '">  Download<a></span>';
-                    }
+        if (pHistoryId !== undefined && pHistoryId !== null && pHistoryId !== "") {
+            var oReportTable = $("#reportsDataTable").DataTable({
+                "ajax": {
+                    "url": '/Patients/GetReports/?pHistoryId=' + pHistoryId,
+                    "type": 'get',
+                    "datatype": "json"
                 },
-                {
-                    "data": "Created", "autoWidth": true, "render": function (data) {
-                        var date = new Date(parseInt(data.substr(6)));
-                        var sdate = date.format("mmm d, yyyy");
-                        return sdate;
+                "columns": [
+                    { "data": "Title", "autoWidth": true },
+                    {
+                        "data": "FilePath", "render": function (data) {
+                            var filename = data.split('\\').pop();
+                            return '<span class="fa fa-download">  <a  href="/Patients/DownloadTestReport/?fileName=' + filename + '">  Download<a></span>';
+                        }
+                    },
+                    {
+                        "data": "Created", "autoWidth": true, "render": function (data) {
+                            var date = new Date(parseInt(data.substr(6)));
+                            var sdate = date.format("mmm d, yyyy");
+                            return sdate;
+                        }
                     }
-                }
-                 ]
-        });
-
+                ]
+            });
+        }
     });
 </script>

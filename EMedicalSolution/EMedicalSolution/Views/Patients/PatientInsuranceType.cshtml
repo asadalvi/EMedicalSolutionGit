@@ -16,7 +16,6 @@
         {
             @Html.RadioButtonFor(a => item.ID, item.ID, new { @class="w3-radio", @Name = "typeId" }) @item.Title <br />
         }
-        <input type="hidden" name="pId" id="patientId" value="@ViewBag.patientID">
             <div>
                 <input type="file" name="filePath" id="insuranceCardfile" multiple="multiple"/>
                 <input type="text" name="insuranceTitle" id="insuranceTitle" />
@@ -39,7 +38,7 @@
 
         $('#addPatientInsurance').click(function () {
             $formData = new FormData();
-            var pId = $("#patientId").val();
+            var pId = $("#patientID").val();
             var insuranceTitle = $("#insuranceTitle").val();
             var typeid = $("input[name='typeId']:checked").val();
             var $file = document.getElementById('insuranceCardfile');

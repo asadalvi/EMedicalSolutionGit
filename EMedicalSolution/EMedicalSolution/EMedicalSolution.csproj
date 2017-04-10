@@ -43,6 +43,10 @@
     <Reference Include="EntityFramework">
       <HintPath>..\packages\EntityFramework.5.0.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
+    <Reference Include="HiQPdf.Free, Version=10.6.0.0, Culture=neutral, PublicKeyToken=acd8b62594985b24, processorArchitecture=MSIL">
+      <HintPath>..\packages\hiqpdf.free.10.6\lib\net40\HiQPdf.Free.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -371,6 +375,7 @@
     <Content Include="Views\Patients\medicalNecessity.cshtml" />
     <Content Include="Views\Patients\resultInterpretation.cshtml" />
     <Content Include="Views\Patients\orderForm.cshtml" />
+    <Content Include="Views\Patients\ViewHistory.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -7,11 +7,10 @@
         foreach (var procedure in Model.objProcedureType)
         {
 
-        <input class="w3-radio procedure_Type" type="checkbox" name="procedureType" value=@procedure.ID checked />
+        <input class="w3-radio procedure_Type" type="checkbox" name="procedureType" value=@procedure.ID  />
                    @procedure.Title
             <br />
         }
-        <input type="hidden" name="pHistoryId" value="69" />
     }
     <div class="w3-row  w3-margin-top">
         <button class="w3-btn-block w3-green submitForm" type="button">Save</button>

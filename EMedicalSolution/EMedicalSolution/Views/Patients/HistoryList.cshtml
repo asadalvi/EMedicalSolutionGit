@@ -3,7 +3,8 @@
 <div class="w3-container tablecontainer-history dashboardDiv" id="patients-tab">
 
 <div class="w3-row w3-padding-16">
-
+    <input type="hidden" id="historyList_patientID" name="patientID" value="@ViewBag.patientID" />
+    
     <div class="w3-row w3-padding-16">
         @Html.ActionLink("+ Add New", "PatientInsuranceType", "Patients", new { id = @ViewBag.patientID }, new { @class = "popup w3-btn w3-green" })
     </div>
@@ -42,7 +43,7 @@
 </div>
 
 
-@*@section Scripts {*@
+
 <script src="~/Scripts/jquery.validate.min.js"></script>
 <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
 <script src="~/Scripts/jquery.dataTables.min.js"></script>
@@ -53,8 +54,11 @@
     $(document).ready(function () {
         var pName = $("#ViewBag_PatienName").val();
         if (pName !== undefined && pName !== "") {
+            $("#PatienName").html("");
             $("#PatienName").html("Pateint Name: "+ pName);
             $("#PatienName").css("display", "block");
+            $("#ViewBag_PatienName").val('');
+            pName = "";
          }
         var oTable = $("#patientHistoryDataTable").DataTable({
 
@@ -87,8 +91,9 @@
             e.preventDefault();
             OpenPopup($(this).attr('href'), oTable, "History");
         });
+        $("#patientID").val($("#historyList_patientID").val());
     });
 </script>
-@*}*@
+
 
 

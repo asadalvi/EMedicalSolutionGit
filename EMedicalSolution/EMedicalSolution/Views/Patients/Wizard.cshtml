@@ -25,6 +25,10 @@
         <span id="PatienName" style="display:none"></span></div>
         <!-- SmartWizard html -->
         <div id="smartwizard">
+            @*hidden patient id and history id*@
+            <input type="text" id="patientID" name="patientID" />
+            <input type="text" id="pHistoryId" name="pHistoryId"  />
+
             <ul>
                 <li>
                     <a href="#step-1">
@@ -191,15 +195,16 @@
                     })
                     //------------------- END of multiple reports ------------------
                 });
-
+                
                 //submission form -------start-----------
                 $(document).find('.submitForm').on('click', function (e) {
+                    var pHistoryId = $("#pHistoryId").val();
                     var parentForm = $(this).parent().parent().attr('id');
-                   // console.log("the parent id is", $('#' + parentForm).files[0]);
+                    console.log("the parent id is", pHistoryId);
                     $.ajax({
                         type: "POST",
                         enctype: "multipart/form-data",
-                        url: "/Patients/" + parentForm,
+                        url: "/Patients/" + parentForm + "/?pHistoryId=" + pHistoryId,
                         data: $('#' + parentForm).serialize(),
                         success: function (data) {
                             console.log(data);
@@ -215,7 +220,7 @@
                 
                 $('#addPatientReport').click(function () {
                     $formData = new FormData();
-                    var pHistoryId = $("#pHistoryId_id").val();
+                    var pHistoryId = $("#pHistoryId").val();
                     $('.js-upload-files').each(function () {
                         console.log("id",this.id);
                         var $file = document.getElementById(this.id);
@@ -256,6 +261,5 @@
                     }
                 });
 
-               
             </script>
         }
