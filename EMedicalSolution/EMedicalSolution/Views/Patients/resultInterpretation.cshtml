@@ -1,5 +1,14 @@
 ﻿<h2>Step 7 Content</h2>
 Result Interpretation by Specialist
-<div class="w3-row  w3-margin-top">
-    <input class="w3-btn-block w3-green" type="submit" value="Save" />
-</div>
+@using (Html.BeginForm("resultInterpretation", "Patients", FormMethod.Post, new { id = "resultInterpretation" }))
+{
+    <div class="pre-scrollable">       
+ 
+    <div><label>Specialist Remarks:</label></div>
+    <input type="text" name="specialistRemarks" />
+</div>   
+    @*<input type="submit" value="Convert To PDF" />*@
+    <div class="w3-row  w3-margin-top">
+        <button class="w3-btn-block w3-green submitForm" type="button">Save</button>
+    </div>
+    }

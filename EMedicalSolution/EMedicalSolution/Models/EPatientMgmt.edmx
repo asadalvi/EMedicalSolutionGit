@@ -129,14 +129,18 @@
           <Property Name="SecondaryNecessities" Type="varchar" MaxLength="100" />
           <Property Name="OfficeID" Type="int" />
           <Property Name="StatusID" Type="int" />
-          <Property Name="PhysicianRemarks" Type="varchar" MaxLength="150" />
-          <Property Name="isApprove" Type="bit" />
-          <Property Name="ApprovedBy" Type="int" />
-          <Property Name="ApprovedDate" Type="datetime" />
+          <Property Name="PhysicianRemarks" Type="varchar" MaxLength="500" />
+          <Property Name="isApprovedByPhysician" Type="bit" />
+          <Property Name="PhysicianID" Type="int" />
+          <Property Name="PhysicianApprovedDate" Type="datetime" />
           <Property Name="Created" Type="datetime" Nullable="false" />
           <Property Name="CreatedBy" Type="int" Nullable="false" />
           <Property Name="Modified" Type="datetime" />
           <Property Name="ModifiedBy" Type="int" />
+          <Property Name="SpecialistRemarks" Type="varchar" MaxLength="500" />
+          <Property Name="isApprovedBySpecialist" Type="bit" />
+          <Property Name="SpecialistID" Type="int" />
+          <Property Name="SpecialistApprovedDate" Type="datetime" />
         </EntityType>
         <EntityType Name="PatientInterferingCondition">
           <Key>
@@ -877,14 +881,18 @@
           <Property Name="SecondaryNecessities" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="OfficeID" Type="Int32" />
           <Property Name="StatusID" Type="Int32" />
-          <Property Name="PhysicianRemarks" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
-          <Property Name="isApprove" Type="Boolean" />
-          <Property Name="ApprovedBy" Type="Int32" />
-          <Property Name="ApprovedDate" Type="DateTime" Precision="3" />
+          <Property Name="PhysicianRemarks" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="isApprovedByPhysician" Type="Boolean" />
+          <Property Name="PhysicianID" Type="Int32" />
+          <Property Name="PhysicianApprovedDate" Type="DateTime" Precision="3" />
           <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="CreatedBy" Type="Int32" Nullable="false" />
           <Property Name="Modified" Type="DateTime" Precision="3" />
           <Property Name="ModifiedBy" Type="Int32" />
+          <Property Name="SpecialistRemarks" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="isApprovedBySpecialist" Type="Boolean" />
+          <Property Name="SpecialistID" Type="Int32" />
+          <Property Name="SpecialistApprovedDate" Type="DateTime" Precision="3" />
           <NavigationProperty Name="InsuranceCardPictures" Relationship="Self.FK_InsuranceCardPictures_PatientHistory" FromRole="PatientHistory" ToRole="InsuranceCardPictures" />
           <NavigationProperty Name="InsuranceType" Relationship="Self.FK_PatientHistory_InsuranceTypes" FromRole="PatientHistory" ToRole="InsuranceTypes" />
           <NavigationProperty Name="MedicalNecessity" Relationship="Self.FK_PatientHistory_MedicalNecessities" FromRole="PatientHistory" ToRole="MedicalNecessities" />
@@ -1655,13 +1663,17 @@
                 <ScalarProperty Name="OfficeID" ColumnName="OfficeID" />
                 <ScalarProperty Name="StatusID" ColumnName="StatusID" />
                 <ScalarProperty Name="PhysicianRemarks" ColumnName="PhysicianRemarks" />
-                <ScalarProperty Name="isApprove" ColumnName="isApprove" />
-                <ScalarProperty Name="ApprovedBy" ColumnName="ApprovedBy" />
-                <ScalarProperty Name="ApprovedDate" ColumnName="ApprovedDate" />
+                <ScalarProperty Name="isApprovedByPhysician" ColumnName="isApprovedByPhysician" />
+                <ScalarProperty Name="PhysicianID" ColumnName="PhysicianID" />
+                <ScalarProperty Name="PhysicianApprovedDate" ColumnName="PhysicianApprovedDate" />
                 <ScalarProperty Name="Created" ColumnName="Created" />
                 <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
                 <ScalarProperty Name="Modified" ColumnName="Modified" />
                 <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="SpecialistRemarks" ColumnName="SpecialistRemarks" />
+                <ScalarProperty Name="isApprovedBySpecialist" ColumnName="isApprovedBySpecialist" />
+                <ScalarProperty Name="SpecialistID" ColumnName="SpecialistID" />
+                <ScalarProperty Name="SpecialistApprovedDate" ColumnName="SpecialistApprovedDate" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -33,13 +33,17 @@ namespace EMedicalSolution.Models
         public Nullable<int> OfficeID { get; set; }
         public Nullable<int> StatusID { get; set; }
         public string PhysicianRemarks { get; set; }
-        public Nullable<bool> isApprove { get; set; }
-        public Nullable<int> ApprovedBy { get; set; }
-        public Nullable<System.DateTime> ApprovedDate { get; set; }
+        public Nullable<bool> isApprovedByPhysician { get; set; }
+        public Nullable<int> PhysicianID { get; set; }
+        public Nullable<System.DateTime> PhysicianApprovedDate { get; set; }
         public System.DateTime Created { get; set; }
         public int CreatedBy { get; set; }
         public Nullable<System.DateTime> Modified { get; set; }
         public Nullable<int> ModifiedBy { get; set; }
+        public string SpecialistRemarks { get; set; }
+        public Nullable<bool> isApprovedBySpecialist { get; set; }
+        public Nullable<int> SpecialistID { get; set; }
+        public Nullable<System.DateTime> SpecialistApprovedDate { get; set; }
     
         public virtual ICollection<InsuranceCardPicture> InsuranceCardPictures { get; set; }
         public virtual InsuranceType InsuranceType { get; set; }

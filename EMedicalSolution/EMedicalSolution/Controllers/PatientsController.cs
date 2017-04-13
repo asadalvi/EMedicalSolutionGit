@@ -509,7 +509,7 @@ namespace EMedicalSolution.Controllers
         public ActionResult ConvertPatientToPdf()
         {
             // get the About view HTML code
-            string htmlToConvert = RenderViewAsString("Index", null);
+            string htmlToConvert = RenderViewAsString("orderForm", null);
 
             // the base URL to resolve relative images and css
             String thisPageUrl = this.ControllerContext.HttpContext.Request.Url.AbsoluteUri;
@@ -523,9 +523,99 @@ namespace EMedicalSolution.Controllers
 
             // send the PDF file to browser
             FileResult fileResult = new FileContentResult(pdfBuffer, "application/pdf");
-            fileResult.FileDownloadName = "AboutMvcViewToPdf.pdf";
+            fileResult.FileDownloadName = "orderForm.pdf";
 
             return fileResult;
+        }
+        //physician password,physician signature
+        public ActionResult physicianSignature()
+        { 
+            bool status = false;
+            if (ModelState.IsValid)
+            {
+                status = true;
+            }
+            return View();
+        }
+        //Approved physician password,Approved physician signature
+        [HttpPost]
+        public ActionResult physicianSignature(string physiciasnSignature, int pHistoryId)
+        {
+            bool status = false;
+            if (ModelState.IsValid)
+            {
+                using (PatientMgmtEntities db = new PatientMgmtEntities())
+                {
+                    var v = db.Staffs.Where(a => a.SignaturePassword == physiciasnSignature).FirstOrDefault();
+                    if (v != null)
+                    {
+                        status = true;
+                    }
+                }
+            }
+            return Json(status, JsonRequestBehavior.AllowGet);
+        }
+        //save physician remarks
+        [HttpPost]
+        public ActionResult PhysicianApproval(string physicianRemarks,int pHistoryId)
+        {
+            bool status = false;
+            PatientHistory pHistory;
+            if (ModelState.IsValid)
+            {
+                //string[] myType = procedureType.Split(',');
+                using (PatientMgmtEntities db = new PatientMgmtEntities())
+                {
+                   // pHistory = new PatientHistory();
+                    if (pHistoryId > 0)
+                    {
+                        pHistory = (from d in db.PatientHistories where d.ID == pHistoryId select d).FirstOrDefault();
+
+                        if (pHistory != null)
+                        {
+                            pHistory.PhysicianRemarks = physicianRemarks;
+                            pHistory.SpecialistApprovedDate = DateTime.Now;
+                            pHistory.isApprovedByPhysician = true;
+                            pHistory.PhysicianID = 1;
+                            pHistory.StatusID = 6;
+                            db.SaveChanges();
+                        }
+                        status = true;
+                    }
+                }
+            }
+            return Json(status, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public ActionResult resultInterpretation(string specialistRemarks, int pHistoryId)
+        {
+            bool status = false;
+            PatientHistory pHistory;
+            if (ModelState.IsValid)
+            {
+                //string[] myType = procedureType.Split(',');
+                using (PatientMgmtEntities db = new PatientMgmtEntities())
+                {
+                    // pHistory = new PatientHistory();
+                    if (pHistoryId > 0)
+                    {
+                        pHistory = (from d in db.PatientHistories where d.ID == pHistoryId select d).FirstOrDefault();
+
+                        if (pHistory != null)
+                        {
+                            pHistory.SpecialistRemarks = specialistRemarks;
+                            pHistory.SpecialistApprovedDate = DateTime.Now;
+                            pHistory.isApprovedBySpecialist = true;
+                            pHistory.SpecialistID = 1;
+                            pHistory.StatusID = 2;
+                            db.SaveChanges();
+                        }
+                        status = true;
+                    }
+                }
+            }
+            return Json(status, JsonRequestBehavior.AllowGet);
         }
     }
 }

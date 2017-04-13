@@ -1,12 +1,79 @@
 ﻿<h2>Step 6 Content</h2>
-Order Form / Supper Bill
-@using (Html.BeginForm("ConvertPatientToPdf", "Patients", FormMethod.Post, new { id = "convertForm" }))
-{
-    <div id="convertAboutPageButtonDiv">
-        <input type="submit" value="Convert To PDF" />
-    </div>
-}
 
-@*<div class="w3-row  w3-margin-top">
-    <input class="w3-btn-block w3-green" type="submit" value="Save" />
-</div>*@
+Order Form / Supper Bill
+@using (Html.BeginForm("ConvertPatientToPdf", "Patients", FormMethod.Post, new { id = "PhysicianApproval" }))
+{
+    <div class="pre-scrollable">
+        <div style="text-align: center;font-size:larger;font-weight:bold"> Advanced Clinic Testing</div>
+        <div style="text-align: center;font-size:large;font-weight:200"> Home Sleep Study and Allergy Test Specialist</div>
+        <div style="text-align: center;font-size:large;font-weight:200"> 4551 Pleasant Hill Rd, Kissimmee, FL 34746</div>
+        <div style="text-align: center;font-size:large;font-weight:200"> Phone: (281) 693-5289 Fax: (281)693-3111 </div>
+
+        <table id="orderForm" style="width:100%;border:solid">
+            <tr>
+                <th>Date of service: date patient lives with HST</th>
+                <th>Insurance: P  BLS PPO</th>
+                <th>Billing Information</th>
+            </tr>
+            <tr>
+                <td>Last Name: Walker</td>
+                <td rowspan="2">Insurance: S </td>
+                <td>Copay/Coins</td>
+            </tr>
+            <tr>
+                <td>First Name: William</td>
+                <td style="display:none;"></td>
+                <td>94</td>
+            </tr>
+            <tr>
+                <td>Time in: </td>
+                <td>Doe</td>
+                <td>80</td>
+            </tr>
+            <tr>
+                <td>Jill</td>
+                <td>Smith</td>
+                <td>50</td>
+            </tr>
+            <tr>
+                <td>DOB: 03/08/1951</td>
+                <td>Jackson</td>
+                <td>94</td>
+            </tr>
+            <tr>
+                <td>John</td>
+                <td>Doe</td>
+                <td>80</td>
+            </tr>
+        </table>
+    </div>
+    <div>
+        <div><label>Physician Remarks:</label></div>
+    <input type="text" name="physicianRemarks" />
+        </div>
+         <a class="popup w3-btn w3-orange" href="/Patients/physicianSignature/">Approve</a> 
+         <p id="Approvedbyphysician" style="display:none">Approved by physician</p>
+    @*<input type="submit" value="Convert To PDF" />*@   
+         <div class="w3-row  w3-margin-top">
+            <button class="w3-btn-block w3-green submitForm" type="button" id="savephysicianData" style="display:none">Save</button>
+        </div>
+}
+<script>
+    $(document).ready(function () {
+      
+        $('.tablecontainer-patient').on('click', 'a.popup', function (e) {
+            e.preventDefault();
+            OpenPopup($(this).attr('href'), "", "physician_signature");
+        });
+    });
+</script>
+ 
+
+
+
+
+
+
+
+
+
