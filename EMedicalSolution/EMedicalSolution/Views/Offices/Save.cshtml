@@ -1,8 +1,8 @@
-﻿@model EMedicalSolution.Models.Symptom
+﻿@model EMedicalSolution.Models.Office
 
 <h2>Save</h2>
 
-@using (Html.BeginForm("save", "Symptoms", FormMethod.Post, new { id = "popupForm" }))
+@using (Html.BeginForm("save", "Offices", FormMethod.Post, new { id = "popupForm" }))
 {
     if (Model != null && Model.ID > 0)
     {
@@ -19,7 +19,31 @@
         @Html.TextBoxFor(a => a.Title, new { @class = "w3-input w3-border" })
         @Html.ValidationMessageFor(a => a.Title)
     </div>
-   
+
+    <div class="w3-row w3-margin-top">
+        <label class="w3-text-green">Description</label>
+        @Html.TextBoxFor(a => a.Description, new { @class = "w3-input w3-border" })
+        @Html.ValidationMessageFor(a => a.Description)
+    </div>
+
+    <div class="w3-row w3-margin-top">
+        <label class="w3-text-green">Location</label>
+        @Html.TextBoxFor(a => a.Location, new { @class = "w3-input w3-border" })
+        @Html.ValidationMessageFor(a => a.Location)
+    </div>
+
+    <div class="w3-row w3-margin-top">
+        <label class="w3-text-green">Tel</label>
+        @Html.TextBoxFor(a => a.Tel, new { @class = "w3-input w3-border" })
+        @Html.ValidationMessageFor(a => a.Tel)
+    </div>
+
+    <div class="w3-row w3-margin-top">
+        <label class="w3-text-green">Email</label>
+        @Html.TextBoxFor(a => a.Email, new { @class = "w3-input w3-border" })
+        @Html.ValidationMessageFor(a => a.Email)
+    </div>
+
     <div class="w3-row  w3-margin-top">
         <input class="w3-btn-block w3-green" type="submit" value="Save" />
     </div>

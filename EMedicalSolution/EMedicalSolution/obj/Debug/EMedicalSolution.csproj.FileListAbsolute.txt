@@ -141,3 +141,6 @@ G:\code projects\EMedicalSolutionGit-master\EMedicalSolutionGit-master\EMedicalS
 G:\code projects\EMedicalSolutionGit-master\EMedicalSolutionGit-master\EMedicalSolution\EMedicalSolution\obj\Debug\EMedicalSolution.csprojResolveAssemblyReference.cache
 G:\code projects\EMedicalSolutionGit-master\EMedicalSolutionGit-master\EMedicalSolution\EMedicalSolution\obj\Debug\EMedicalSolution.dll
 G:\code projects\EMedicalSolutionGit-master\EMedicalSolutionGit-master\EMedicalSolution\EMedicalSolution\obj\Debug\EMedicalSolution.pdb
+G:\code projects\EMedicalSolutionGit-master\EMedicalSolutionGit-master\EMedicalSolution\EMedicalSolution\bin\HiQPdf.Free.dll
+G:\code projects\EMedicalSolutionGit-master\EMedicalSolutionGit-master\EMedicalSolution\EMedicalSolution\bin\HiQPdf.Free.xml
+G:\code projects\EMedicalSolutionGit-master\EMedicalSolutionGit-master\EMedicalSolution\EMedicalSolution\bin\HiQPdf.dep

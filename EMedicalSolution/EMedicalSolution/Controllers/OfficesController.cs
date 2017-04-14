@@ -21,8 +21,22 @@ namespace EMedicalSolution.Controllers
         {
             PatientMgmtEntities db = new PatientMgmtEntities();
             {
-                var Offices = db.Offices.OrderBy(a => a.Title).ToList();
-                return Json(new { data = Offices }, JsonRequestBehavior.AllowGet);
+                var offices = db.Offices.OrderBy(a => a.Title).ToList();
+                return Json(new
+                {
+                    data = offices.Select(o => new
+                    {
+                        o.ID,
+                        o.Title,
+                        o.Description,
+                        o.Location,
+                        o.Tel,
+                        o.Email,
+                        o.Created
+                    }
+                    )
+                }, JsonRequestBehavior.AllowGet);
+                //return Json(new { data = Offices }, JsonRequestBehavior.AllowGet);
             }
         }
 
