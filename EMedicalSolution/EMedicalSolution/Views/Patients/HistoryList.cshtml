@@ -1,5 +1,5 @@
 ﻿
-@model IEnumerable <EMedicalSolution.ViewModels.PatientHistoryVM>
+
 <div class="w3-container tablecontainer-history dashboardDiv" id="patients-tab">
 
 <div class="w3-row w3-padding-16">
@@ -8,7 +8,7 @@
     <div class="w3-row w3-padding-16">
         @Html.ActionLink("+ Add New", "PatientInsuranceType", "Patients", new { id = @ViewBag.patientID }, new { @class = "popup w3-btn w3-green" })
     </div>
-    <input type="hidden" value="@ViewBag.PatienName" id="ViewBag_PatienName" />
+    <input type="hidden"   id="ViewBag_PatienName" />
     <div class="w3-responsive">
         <table class="w3-table-all w3-hoverable" id="patientHistoryDataTable">
             <thead>
@@ -20,18 +20,18 @@
                     <th>Action</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody id="patient_history_views">
 
-               @foreach (var item in Model)
-               {
-                <tr>
-                    <td>@item.FirstName</td>
-                    <td>@item.LastName</td>
-                    <td>@item.Title</td>
-                    <td>@item.Created</td>
-                    <td><a class="popup  w3-btn w3-orange" href="/Patients/ViewHistory/@item.ID">View</a></td>
-                </tr>
-               }
+               @*@foreach (var item in Model)
+    {
+     <tr>
+         <td>@item.FirstName</td>
+         <td>@item.LastName</td>
+         <td>@item.Title</td>
+         <td>@item.Created</td>
+         <td>@*<a class="popup  w3-btn w3-orange" href="/Patients/ViewHistory/@item.ID">View</a></td>
+     </tr>
+    }*@
 
             </tbody>
 
@@ -52,6 +52,7 @@
 
 <script>
     $(document).ready(function () {
+        var patientId = $("#historyList_patientID").val();
         var pName = $("#ViewBag_PatienName").val();
         if (pName !== undefined && pName !== "") {
             $("#PatienName").html("");
@@ -62,29 +63,29 @@
          }
         var oTable = $("#patientHistoryDataTable").DataTable({
 
-            //"ajax": {
-            //    "url": '/Patients/historyList/1',
-            //    "type": 'get',
-            //    "datatype": "json"
-            //},
-            //"columns": [
-            //    { "data": "FirstName", "autoWidth": true },
-            //    { "data": "LastName", "autoWidth": true },
-            //     { "data": "Title", "autoWidth": true },
-            //    {
-            //        "data": "Created", "autoWidth": true, "render": function (data) {
-            //            var date = new Date(parseInt(data.substr(6)));
-            //            var sdate = date.format("mmm d, yyyy");
-            //            return sdate;
-            //        }
-            //    },
+            "ajax": {
+                "url": '/Patients/getHistoryList/' + patientId,
+                "type": 'post',
+                "datatype": "json"
+            },
+            "columns": [
+                { "data": "FirstName", "autoWidth": true },
+                { "data": "LastName", "autoWidth": true },
+                 { "data": "Title", "autoWidth": true },
+                {
+                    "data": "Created", "autoWidth": true, "render": function (data) {
+                        var date = new Date(parseInt(data.substr(6)));
+                        var sdate = date.format("mmm d, yyyy");
+                        return sdate;
+                    }
+                },
 
-            //    {
-            //        "data": "ID", "render": function (data) {
-            //            return '<a class="popup  w3-btn w3-orange" href="/Patients/delete/' + data + '">View<a>';
-            //        }
-            //    }
-            //]
+                {
+                    "data": "ID", "render": function (data) {
+                        return '<a class="popup  w3-btn w3-orange" href="/Patients/ViewHistory/' + data + '">View<a>';
+                    }
+                }
+            ]
         });
 
         $('.tablecontainer-history').on('click', 'a.popup', function (e) {
@@ -92,6 +93,7 @@
             OpenPopup($(this).attr('href'), oTable, "History");
         });
         $("#patientID").val($("#historyList_patientID").val());
+
     });
 </script>
 

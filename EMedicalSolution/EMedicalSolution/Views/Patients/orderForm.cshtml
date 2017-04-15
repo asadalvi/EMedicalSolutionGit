@@ -59,12 +59,10 @@ Order Form / Supper Bill
         </div>
 }
 <script>
-    $(document).ready(function () {
-      
-        $('.tablecontainer-patient').on('click', 'a.popup', function (e) {
-            e.preventDefault();
-            OpenPopup($(this).attr('href'), "", "physician_signature");
-        });
+  
+    $('#PhysicianApproval').on('click', 'a.popup', function (e) {
+        e.preventDefault();
+        OpenPopup($(this).attr('href'), "", "physicianSignature");
     });
 </script>
  

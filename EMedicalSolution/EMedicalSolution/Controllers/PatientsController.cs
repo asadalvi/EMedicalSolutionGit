@@ -59,9 +59,9 @@ namespace EMedicalSolution.Controllers
                 }, JsonRequestBehavior.AllowGet);
             }
         }
-      
-        [HttpGet]
-        public ActionResult HistoryList(int id)
+
+        [HttpPost]
+        public ActionResult getHistoryList(int id)
         {
             ViewBag.patientID = id;
             PatientMgmtEntities db = new PatientMgmtEntities();
@@ -79,8 +79,22 @@ namespace EMedicalSolution.Controllers
                                     Title = i.Title,
                                     Created = i.Created
                                 });
-                ViewBag.PatienName = db.Patients.Where(a => a.ID == id).Select(p => p.FirstName + " " + p.LastName).FirstOrDefault();
-                return View(pHistory);
+
+
+                return Json(new
+                {
+                    data = pHistory.Select(p => new
+                    {
+                        p.ID,
+                        p.FirstName,
+                        p.LastName,
+                        p.Title,
+                        p.Created
+                    }
+                )
+                }, JsonRequestBehavior.AllowGet);
+            //    ViewBag.PatienName = db.Patients.Where(a => a.ID == id).Select(p => p.FirstName + " " + p.LastName).FirstOrDefault();
+              //  return View(pHistory);
             }
         }
 
@@ -320,7 +334,8 @@ namespace EMedicalSolution.Controllers
             ph.InsuranceTypeID = typeid;
             ph.Created = DateTime.Now;
             ph.CreatedBy = 1;
-
+            string firstName = "";
+            string lastName = "";
             insureCard.PatientID = pId; 
             insureCard.Title = insuranceTitle;
             insureCard.Created = DateTime.Now;
@@ -330,6 +345,11 @@ namespace EMedicalSolution.Controllers
                 db.PatientHistories.Add(ph);
                 db.SaveChanges();
                 int hId = ph.ID;
+                var v =   (from p in db.Patients
+                 join ph1 in db.PatientHistories on p.ID equals ph1.PatientID
+                 where ph1.PatientID == pId select new { firstName = p.FirstName, lastName = p.LastName }).FirstOrDefault();
+                firstName = v.firstName;
+                lastName = v.lastName;
                 if (filePath != null)
                 {
                     var allowedExtensions = new[] { ".Jpg", ".png", ".jpg", "jpeg", ".rar", ".zip", ".pdf", ".doc", ".docx", ".xls", ".xlsx" }; //Allowe Extensions
@@ -356,7 +376,8 @@ namespace EMedicalSolution.Controllers
                 }
                 status = true;
             }
-            return new JsonResult { Data = new { status = status } };
+            return Json(status, JsonRequestBehavior.AllowGet);
+            //return new JsonResult { Data = new { firstName = firstName, lastName= firstName,title= insuranceTitle,pId=pId,createdDate = DateTime.Now } };
         }
 
         [HttpGet]
@@ -617,5 +638,12 @@ namespace EMedicalSolution.Controllers
             }
             return Json(status, JsonRequestBehavior.AllowGet);
         }
-    }
+        //history views
+            [HttpGet]
+        public ActionResult HistoryList(int id)
+        {
+            ViewBag.patientID = id;
+            return View();
+            }
+        }
 }

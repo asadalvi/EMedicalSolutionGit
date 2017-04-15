@@ -261,24 +261,7 @@
                     }
                 });
 
-                //submission form -------physician-----------
-                $(document).find('#approvedPhysicianForm').on('click', function (e) {
-                    var pHistoryId = $("#pHistoryId").val();
-                    var parentForm = $(this).parent().parent().attr('id'); 
-                    $.ajax({
-                        type: "POST",
-                        enctype: "multipart/form-data",
-                        url: "/Patients/" + parentForm + "/?pHistoryId=" + pHistoryId,
-                        data: $('#' + parentForm).serialize(),
-                        success: function (data) { 
-                            if (data) {
-                                $("#savephysicianData").prop('disabled', false);
-                                $("#Approvedbyphysician").css('display', 'block');
-                            }
-                        }
-                    })
-                });
-                $('.tablecontainer-patient').on('click', 'a.popup', function (e) {
+                    $('.physician-signature').on('click', 'a.popup', function (e) {
                     e.preventDefault();
                     OpenPopup($(this).attr('href'), "", "physician_signature");
                 });

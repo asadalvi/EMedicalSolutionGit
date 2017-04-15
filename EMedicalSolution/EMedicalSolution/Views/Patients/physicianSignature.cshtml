@@ -1,13 +1,34 @@
-﻿<div class="w3-container tablecontainer-patient dashboardDiv" id="physician_signature">
+﻿<div class="w3-container physician-signature dashboardDiv" id="physician_signature">
 
     <h2>physician Signature</h2>
     <div>
         <div><label>Please enter password</label></div>
         <div>
-            <input type="password" name="physiciasnSignature" />
+            <input type="password" name="physiciasnSignature" id="physiciasn_Signature" />
         </div>
     </div>
     <div class="w3-row  w3-margin-top">
         <button class="w3-btn-block w3-green" id="approvedPhysicianForm" type="button">Save</button>
     </div>
     </div>
+<script src="~/Scripts/Wizard/jquery.smartWizard.min.js"></script>
+<script type="text/javascript">
+//submission form -------physician-----------
+                $(document).find('#approvedPhysicianForm').on('click', function (e) {
+                    var pHistoryId = $("#pHistoryId").val();
+                    var physiciasnSignature = $("#physiciasn_Signature").val();
+                    var parentForm = $(this).parent().parent().attr('id');
+                    $.ajax({
+                        type: "POST",
+                        enctype: "multipart/form-data",
+                        url: "/Patients/physicianSignature/?pHistoryId=" + pHistoryId + "&physiciasnSignature=" + physiciasnSignature,
+                        success: function (data) {
+                            if (data) {
+                                $("#savephysicianData").css('display', 'block');
+                                $("#Approvedbyphysician").css('display', 'block');
+                                $(".ui-dialog-titlebar-close").trigger("click");
+                            }
+                        }
+                    })
+                });
+                </script>
