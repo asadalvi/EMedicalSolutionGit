@@ -4,9 +4,9 @@
 
   
     <h4>Primary Diagnosis</h4>
-    if (Model != null && Model.objMedicalNecessity != null)
+    if (Model.objMedicalNecessity1 != null)
     {
-        foreach (var necessity in Model.objMedicalNecessity)
+        foreach (var necessity in Model.objMedicalNecessity1)
         {
             <input type="checkbox" name="necessities" class="necessities" value="@necessity.ID" />  @(necessity.ICD10Code + " - " + necessity.Description)
             <br />

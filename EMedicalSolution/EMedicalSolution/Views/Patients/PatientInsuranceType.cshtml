@@ -17,6 +17,7 @@
             @Html.RadioButtonFor(a => item.ID, item.ID, new { @class="w3-radio", @Name = "typeId" }) @item.Title <br />
         }
             <div>
+                <label class="w3-text-green">Upload Insurance Card</label>
                 <input type="file" name="filePath" id="insuranceCardfile" multiple="multiple"/>
                 <input type="text" name="insuranceTitle" id="insuranceTitle" />
             </div>
@@ -33,12 +34,10 @@
 <script src="~/Scripts/date.format.js"></script>
 
 <script>
-    $(document).ready(function () {
         //save patient insurance type
-
         $('#addPatientInsurance').click(function () {
             $formData = new FormData();
-            var pId = $("#patientID").val();
+            var pId = $("#historyList_patientID").val();
             var insuranceTitle = $("#insuranceTitle").val();
             var typeid = $("input[name='typeId']:checked").val();
             var $file = document.getElementById('insuranceCardfile');
@@ -56,37 +55,41 @@
                 enctype: 'multipart/form-data',
                 processData: false,
                 success: function ($data) {
+                    //$('#partialPatientInsuranceType').css('display', 'none');
+                    $('#partialPatientInsuranceType').html('');
+                    oTable.ajax.reload();
+                    
                    // $(document).find("#patient_history_views").append('<tr role="row" class="even"><td class="sorting_1">' + $data.firstName + '</td><td>' + $data.lastName + '</td><td>' + $data.title + '</td><td>' + $data.createdDate + '</td><td><a class="popup  w3-btn w3-orange" href="/Patients/ViewHistory/"' + $data.pId + '>View</a><a></a></td></tr>');
-                    $dialog.dialog('close');
-                    $('#patientHistoryDataTable').empty();
+                    //$dialog.dialog('close');
+                    //$('#patientHistoryDataTable').empty();
                   // $(".ui-dialog-titlebar-close").trigger("click");
                    // $("#patientHistoryDataTable").dialog('open');
-                    var oTable = $("#patientHistoryDataTable").DataTable({
+                    //var oTable = $("#patientHistoryDataTable").DataTable({
 
-                        "ajax": {
-                            "url": '/Patients/getHistoryList/' + pId,
-                            "type": 'post',
-                            "datatype": "json"
-                        },
-                        "columns": [
-                            { "data": "FirstName", "autoWidth": true },
-                            { "data": "LastName", "autoWidth": true },
-                             { "data": "Title", "autoWidth": true },
-                            {
-                                "data": "Created", "autoWidth": true, "render": function (data) {
-                                    var date = new Date(parseInt(data.substr(6)));
-                                    var sdate = date.format("mmm d, yyyy");
-                                    return sdate;
-                                }
-                            },
+                    //    "ajax": {
+                    //        "url": '/Patients/getHistoryList/' + pId,
+                    //        "type": 'post',
+                    //        "datatype": "json"
+                    //    },
+                    //    "columns": [
+                    //        { "data": "FirstName", "autoWidth": true },
+                    //        { "data": "LastName", "autoWidth": true },
+                    //         { "data": "Title", "autoWidth": true },
+                    //        {
+                    //            "data": "Created", "autoWidth": true, "render": function (data) {
+                    //                var date = new Date(parseInt(data.substr(6)));
+                    //                var sdate = date.format("mmm d, yyyy");
+                    //                return sdate;
+                    //            }
+                    //        },
 
-                            {
-                                "data": "ID", "render": function (data) {
-                                    return '<a class="popup  w3-btn w3-orange" href="/Patients/ViewHistory/' + data + '">View<a>';
-                                }
-                            }
-                        ]
-                    });
+                    //        {
+                    //            "data": "ID", "render": function (data) {
+                    //                return '<a class="popup  w3-btn w3-orange" href="/Patients/ViewHistory/' + data + '">View<a>';
+                    //            }
+                    //        }
+                    //    ]
+                    //});
 
                     //$('.tablecontainer-history').on('click', 'a.popup', function (e) {
                     //    e.preventDefault();
@@ -95,5 +98,4 @@
                 }
             });
         });
-    });
         </script>

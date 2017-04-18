@@ -24,18 +24,67 @@ namespace EMedicalSolution.Controllers
         {
             return View();
         }
-        public ActionResult Wizard()
+        public ActionResult Wizard(int? id = 0)
         {
             patientIntakeViewModel intakeView = new patientIntakeViewModel();
             PatientMgmtEntities db = new PatientMgmtEntities();
-            intakeView.objInterferingCondition = db.InterferingConditions.ToList();
-            intakeView.objSymptom = db.Symptoms.ToList();
-            intakeView.objDisease = db.Diseases.ToList();
-            intakeView.objProcedureType = db.ProcedureTypes.ToList();
-            intakeView.objMedicalNecessity = db.MedicalNecessities.ToList();
-            return View(intakeView);
+            if (id == 0)
+            {
+                
+                intakeView.objInterferingCondition = db.InterferingConditions.ToList();
+                intakeView.objSymptom = db.Symptoms.ToList();
+                intakeView.objDisease = db.Diseases.ToList();
+                intakeView.objProcedureType = db.ProcedureTypes.ToList();
+                intakeView.objMedicalNecessity = db.MedicalNecessities.ToList();
+            }
+            else
+            {
+                intakeView.objProcedureType = db.ProcedureTypes.ToList();
+                intakeView.objInterferingCondition = db.InterferingConditions.ToList();
+                intakeView.objSymptom = (from s in db.Symptoms
+                                         join ps in db.PatientSymtoms on s.ID equals ps.SymptomID into leftJ
+                                         from lj in leftJ.DefaultIfEmpty()
+                                         where lj.HistoryID == id
+                                         select s).ToList();
+
+                intakeView.objDisease = db.Diseases.ToList();
+                intakeView.objMedicalNecessity1 = (from mn in db.MedicalNecessities
+                                              join pn in db.PatientNecessities on mn.ID equals pn.NecessityID into leftJ
+                                              from lj in (from pn in leftJ
+                                                                     where pn.HistoryID == id
+                                                                     select pn).DefaultIfEmpty() 
+                                              select new PatientNecessitiesVM {
+                                                 ID = mn.ID,
+                                                  ICD10Code = mn.ICD10Code,
+                                                  Description = mn.Description,
+                                                  NecessityID = (lj.NecessityID != null) ? lj.NecessityID : 0//,
+                                                  //HistoryID = lj.HistoryID
+                                              }).ToList();
+            }
+                return View(intakeView);
         }
 
+        [HttpPost]
+        public ActionResult Wizard(int id) //id = Patient History ID
+        {
+            patientIntakeViewModel intakeView = new patientIntakeViewModel();
+            PatientMgmtEntities db = new PatientMgmtEntities();
+            intakeView.objProcedureType = db.ProcedureTypes.ToList();
+            intakeView.objInterferingCondition = db.InterferingConditions.ToList();
+            intakeView.objSymptom = (from s in db.Symptoms
+                                     join ps in db.PatientSymtoms on s.ID equals ps.SymptomID into leftJ
+                                     from lj in leftJ.DefaultIfEmpty()
+                                     where lj.HistoryID == id
+                                     select s).ToList();
+
+            intakeView.objDisease = db.Diseases.ToList();
+            ViewBag.PatientNecessities = (from mn in db.MedicalNecessities
+                                              join pn in db.PatientNecessities on mn.ID equals pn.NecessityID into leftJ
+                                              from lj in leftJ.DefaultIfEmpty()
+                                              where lj.HistoryID == id
+                                              select new { mn, lj.HistoryID }).ToList();
+            return View(intakeView);
+        }
         public ActionResult GetPatients()
         {
             PatientMgmtEntities db = new PatientMgmtEntities();

@@ -6,10 +6,15 @@
     <input type="hidden" id="historyList_patientID" name="patientID" value="@ViewBag.patientID" />
     
     <div class="w3-row w3-padding-16">
-        @Html.ActionLink("+ Add New", "PatientInsuranceType", "Patients", new { id = @ViewBag.patientID }, new { @class = "popup w3-btn w3-green" })
+        <button type="button" class="w3-btn w3-green" id="loadInsuranceTypeForm">+ Add New </button>    
+    @*@Html.ActionLink("+ Add New", "PatientInsuranceType", "Patients", new { id = @ViewBag.patientID }, new { @class = "popup w3-btn w3-green" })*@
     </div>
     <input type="hidden"   id="ViewBag_PatienName" />
     <div class="w3-responsive">
+
+        <div id="partialPatientInsuranceType">
+        </div>
+        
         <table class="w3-table-all w3-hoverable" id="patientHistoryDataTable">
             <thead>
                 <tr>
@@ -51,7 +56,7 @@
 <script src="~/Scripts/date.format.js"></script>
 
 <script>
-    $(document).ready(function () {
+  
         var patientId = $("#historyList_patientID").val();
         var pName = $("#ViewBag_PatienName").val();
         if (pName !== undefined && pName !== "") {
@@ -82,19 +87,25 @@
 
                 {
                     "data": "ID", "render": function (data) {
-                        return '<a class="popup  w3-btn w3-orange" href="/Patients/ViewHistory/' + data + '">View<a>';
+                        return '<a class="popup  w3-btn w3-orange" href="/Patients/Wizard/' + data + '">View<a>';
                     }
                 }
             ]
         });
 
-        $('.tablecontainer-history').on('click', 'a.popup', function (e) {
-            e.preventDefault();
-            OpenPopup($(this).attr('href'), oTable, "History");
-        });
-        $("#patientID").val($("#historyList_patientID").val());
+        //$('.tablecontainer-history').on('click', 'a.popup', function (e) {
+        //    e.preventDefault();
+        //    OpenPopup($(this).attr('href'), oTable, "History");
+        //});
 
-    });
+        //$("#patientID").val($("#historyList_patientID").val());
+
+        $('#loadInsuranceTypeForm').click(function () {
+            //var historyId = $('#HistoryID').val();
+            $('#partialPatientInsuranceType').load('@Url.Action("PatientInsuranceType", "Patients", new { id = ViewBag.patientID })');
+
+        });
+
 </script>
 
 
