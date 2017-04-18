@@ -57,7 +57,8 @@ namespace EMedicalSolution.Controllers
                                                  ID = mn.ID,
                                                   ICD10Code = mn.ICD10Code,
                                                   Description = mn.Description,
-                                                  NecessityID = (lj.NecessityID != null) ? lj.NecessityID : 0//,
+                                                  NecessityID = (lj.NecessityID != null) ? lj.NecessityID : 0,//,
+                                                  HistoryID = (lj.HistoryID != null) ? lj.HistoryID : 0
                                                   //HistoryID = lj.HistoryID
                                               }).ToList();
             }

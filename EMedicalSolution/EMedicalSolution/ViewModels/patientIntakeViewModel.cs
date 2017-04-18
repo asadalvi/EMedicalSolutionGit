@@ -36,4 +36,26 @@ namespace EMedicalSolution.ViewModels
         public int NecessityID { get; set; }
         public int HistoryID { get; set; }
     }
+    public class ProcedureTypeVM
+    {
+        public int ID { get; set; }
+        public string Title { get; set; }
+    }
+
+    public class InterferingConditionVM
+    {
+        public int ID { get; set; }
+        public string Title { get; set; }
+    }
+    public class SymptomVM
+    {
+        public int ID { get; set; }
+        public string Title { get; set; }
+    }
+    public class DiseaseVM
+    {
+        public int ID { get; set; }
+        public string Title { get; set; }
+        public int DiseaseTypeID { get; set; }
+    }
 }
