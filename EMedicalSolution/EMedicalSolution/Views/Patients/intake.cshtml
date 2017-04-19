@@ -17,13 +17,13 @@
         <input class="w3-radio" type="radio" name="pregnant" value="2" /> N/A
       </div>
   <br />
-        if (Model != null && Model.objInterferingCondition != null)
+        if (Model != null && Model.objInterferingConditionVM1 != null)
         {
         <div class="col-sm-12">
             <div>
                 <div class="col-sm-4"> <label> Is this condition interfering with any of the following?</label></div>
 
-                @foreach (var condition in Model.objInterferingCondition)
+                @foreach (var condition in Model.objInterferingConditionVM1)
                 {
                     <div class="col-sm-4">
                         <input class="w3-radio" type="checkbox" name="condition" value="@condition.ID" /> @condition.Title
@@ -34,10 +34,10 @@
         </div>
         }<br />
         <h3>Symptoms</h3>
-    if (Model != null && Model.objSymptom != null)
+    if (Model != null && Model.objSymptomVM1 != null)
     {
         <div class="col-sm-12">
-            @foreach (var symptom in Model.objSymptom)
+            @foreach (var symptom in Model.objSymptomVM1)
             {
                 <div class="col-sm-4">
                     <input class="w3-radio" type="checkbox" name="symptom" value="@symptom.ID" /> @symptom.Title
@@ -51,10 +51,10 @@
         </div>
         }
         <h3>Disease</h3>
-        if (Model != null && Model.objDisease != null)
+        if (Model != null && Model.objDiseaseTypeVM1 != null)
         {
         <div class="col-lg-12">
-            @foreach (var disease in Model.objDisease)
+            @foreach (var disease in Model.objDiseaseTypeVM1)
             {
                 <div class="col-lg-4">
                     <input class="w3-radio" type="checkbox" name="disease" value="@disease.ID" /> @disease.Title
