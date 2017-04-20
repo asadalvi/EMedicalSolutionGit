@@ -4,7 +4,6 @@
 
 @using (Html.BeginForm("intake", "Patients", FormMethod.Post, new { id = "intake" }))
 {
-  
     <div>
         <label> Do you have a pacemaker, defibrillator, or any life support device? </label>
         <input class="w3-radio" type="radio" name="supportDevice" value="Yes" checked /> Yes
@@ -26,9 +25,14 @@
                 @foreach (var condition in Model.objInterferingConditionVM1)
                 {
                     <div class="col-sm-4">
+                        @if (ViewBag.HistoryID != condition.HistoryID)
+                        {
                         <input class="w3-radio" type="checkbox" name="condition" value="@condition.ID" /> @condition.Title
-                    </div>
-
+                        }
+                        else {
+                        <input class="w3-radio" type="checkbox" name="condition" value="@condition.ID" checked /> @condition.Title
+                        }
+                       </div>
                 }
             </div>
         </div>
@@ -40,8 +44,13 @@
             @foreach (var symptom in Model.objSymptomVM1)
             {
                 <div class="col-sm-4">
+                    @if (ViewBag.HistoryID != symptom.HistoryID)
+                    {
                     <input class="w3-radio" type="checkbox" name="symptom" value="@symptom.ID" /> @symptom.Title
-
+                    }
+                    else {
+                    <input class="w3-radio" type="checkbox" name="symptom" value="@symptom.ID" checked /> @symptom.Title  
+                    }                    
                 </div>
                 if (symptom.ID % 3 == 2)
                 {
@@ -57,8 +66,14 @@
             @foreach (var disease in Model.objDiseaseTypeVM1)
             {
                 <div class="col-lg-4">
+                    @if (ViewBag.HistoryID != disease.HistoryID)
+                    {
                     <input class="w3-radio" type="checkbox" name="disease" value="@disease.ID" /> @disease.Title
-                </div>
+                   }
+                    else {
+                    <input class="w3-radio" type="checkbox" name="disease" value="@disease.ID" checked /> @disease.Title
+                   }
+                        </div>
                 if (disease.ID % 3 == 2)
                 {
                     <br />

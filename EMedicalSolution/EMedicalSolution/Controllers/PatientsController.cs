@@ -39,6 +39,7 @@ namespace EMedicalSolution.Controllers
             }
             else
             {
+                ViewBag.HistoryID = id;
                 intakeView.PatientProceduresVM1 = (from p in db.ProcedureTypes
                                                    join pn in db.PatientProcedures on p.ID equals pn.ProcedureTypeID into leftJ
                                                    from lj in (from pn in leftJ
@@ -251,6 +252,12 @@ namespace EMedicalSolution.Controllers
                  int[] myType = Array.ConvertAll(procedureType, s => int.Parse(s));
                 using (PatientMgmtEntities db = new PatientMgmtEntities())
                 {
+                    var delobj = db.PatientProcedures.Where(p => p.HistoryID == pHistoryId).FirstOrDefault();
+                    if (delobj != null)
+                    {
+                        db.PatientProcedures.Remove(delobj);
+                        db.SaveChanges();
+                    }
                     pProcedure = new PatientProcedure();
                     if (pHistoryId > 0)
                     {
@@ -304,6 +311,21 @@ namespace EMedicalSolution.Controllers
             {
                 using (PatientMgmtEntities db = new PatientMgmtEntities())
                 {
+                    var delobj = db.IntakeFormHeads.Where(p => p.HistoryID == pHistoryId).FirstOrDefault();
+                    if (delobj != null)
+                    {
+                        db.IntakeFormHeads.Remove(delobj);
+                    }
+                        var delobj1 = db.PatientSymtoms.Where(p => p.HistoryID == pHistoryId).FirstOrDefault();
+                    if (delobj1 != null)
+                    {
+                        db.PatientSymtoms.Remove(delobj1);
+                    }
+                    var delobj2 = db.PatientDiseases.Where(p => p.HistoryID == pHistoryId).FirstOrDefault();
+                    if (delobj2 != null)
+                    {
+                        db.PatientDiseases.Remove(delobj2);
+                    }
                     intakeFormHead = new IntakeFormHead();
                     intakeFormHead.HistoryID = pHistoryId;
                     intakeFormHead.isPregnant = pregnant;
@@ -552,6 +574,12 @@ namespace EMedicalSolution.Controllers
                 //int[] pNecessities = Array.ConvertAll(necessities, s => int.Parse(s));
                 using (PatientMgmtEntities db = new PatientMgmtEntities())
                 {
+                    //change the below delete condition=====>>>>>>p.id change?????
+                    var delobj = db.MedicalNecessities.Where(p => p.ID == pHistoryId).SingleOrDefault();
+                    if (delobj != null)
+                    {
+                        db.MedicalNecessities.Remove(delobj);
+                    }
                     pNecessity = new PatientNecessity();
                     pHistsory = new PatientHistory();
                     if (pHistoryId > 0)

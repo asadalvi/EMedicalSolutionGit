@@ -2,13 +2,20 @@
 <h2>Step 2 Content</h2>
 @using (Html.BeginForm("procedureTypes", "Patients", FormMethod.Post, new { id = "procedureTypes" }))
 {
-    if (Model != null && Model.objProcedureType != null)
+    if (Model != null && Model.PatientProceduresVM1 != null)
     {
-        foreach (var procedure in Model.objProcedureType)
+        foreach (var procedure in Model.PatientProceduresVM1)
         {
+            if (ViewBag.HistoryID != procedure.HistoryID)
+            {
+                <input class="w3-radio procedure_Type" type="checkbox" name="procedureType" value=@procedure.ID />
+                @procedure.Title 
+            }
+            else {
+                <input class="w3-radio procedure_Type" type="checkbox" name="procedureType" value=@procedure.ID checked />
+                @procedure.Title
+            }
 
-        <input class="w3-radio procedure_Type" type="checkbox" name="procedureType" value=@procedure.ID  />
-                   @procedure.Title
             <br />
         }
     }

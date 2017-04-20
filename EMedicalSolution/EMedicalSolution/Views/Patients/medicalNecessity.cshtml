@@ -8,8 +8,13 @@
     {
         foreach (var necessity in Model.objMedicalNecessity1)
         {
+            if (ViewBag.HistoryID != necessity.HistoryID)
+            {
             <input type="checkbox" name="necessities" class="necessities" value="@necessity.ID" />  @(necessity.ICD10Code + " - " + necessity.Description)
-            <br />
+            }
+            else {
+                <input type="checkbox" name="necessities" class="necessities" value="@necessity.ID" checked />  @(necessity.ICD10Code + " - " + necessity.Description)
+            }<br />
         }
     }
 
