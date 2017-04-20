@@ -22,7 +22,8 @@ namespace EMedicalSolution.ViewModels
         public IList<DiseaseTypeVM> objDiseaseTypeVM1 { get; set; }
         public IList<InterferingConditionVM> objInterferingConditionVM1 { get; set; }
         public IList<SymptomVM> objSymptomVM1 { get; set; }
-    }    
+        public PatientHistory PatientHistoryVM11 { get; set; }
+    }
 
     public class PatientProceduresVM
     {
@@ -69,4 +70,26 @@ namespace EMedicalSolution.ViewModels
         public int DiseaseTypeID { get; set; }
         public int HistoryID { get; set; }
     }
+//    public class PatientHistoryVM1
+//    {
+//    public int ID { get; set; }
+//    public Nullable<int> PatientID { get; set; }
+//    public Nullable<int> InsuranceTypeID { get; set; }
+//    public Nullable<int> MedicalNecessitiesID { get; set; }
+//    public string SecondaryNecessities { get; set; }
+//    public Nullable<int> OfficeID { get; set; }
+//    public Nullable<int> StatusID { get; set; }
+//    public string PhysicianRemarks { get; set; }
+//    public Nullable<bool> isApprovedByPhysician { get; set; }
+//    public Nullable<int> PhysicianID { get; set; }
+//    public Nullable<System.DateTime> PhysicianApprovedDate { get; set; }
+//    public System.DateTime Created { get; set; }
+//    public int CreatedBy { get; set; }
+//    public Nullable<System.DateTime> Modified { get; set; }
+//    public Nullable<int> ModifiedBy { get; set; }
+//    public string SpecialistRemarks { get; set; }
+//    public Nullable<bool> isApprovedBySpecialist { get; set; }
+//    public Nullable<int> SpecialistID { get; set; }
+//    public Nullable<System.DateTime> SpecialistApprovedDate { get; set; }
+//}
 }

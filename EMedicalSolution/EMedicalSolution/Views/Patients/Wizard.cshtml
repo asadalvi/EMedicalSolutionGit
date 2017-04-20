@@ -106,6 +106,16 @@
         @section Scripts {
             <script src="~/Scripts/Wizard/jquery.smartWizard.min.js"></script>
             <script type="text/javascript">
+                var ViewBagSupportDevice = $("#ViewBagSupportDevice").val();
+                var ViewBagCurrentlyPregnant = $("#ViewBagCurrentlyPregnant").val();
+                if (ViewBagSupportDevice !== undefined && ViewBagSupportDevice === "No") {
+                    $("#supportDeviceNo").prop("checked", true);
+                } else { $("#supportDeviceYes").prop("checked", true); }
+                if (ViewBagCurrentlyPregnant !== undefined && ViewBagCurrentlyPregnant === "0") {
+                    $("#pregnant0").prop("checked", true);
+                } else if (ViewBagCurrentlyPregnant !== undefined && ViewBagCurrentlyPregnant === "2") {
+                    $("#pregnant2").prop("checked", true);
+                } else { $("#pregnant1").prop("checked", true); }
                 $(document).ready(function () {
                     var numberOFSteps = 0;
                     var pHistoryId = 0;

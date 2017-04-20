@@ -1,23 +1,25 @@
 ﻿   @*@using (Ajax.BeginForm("intake", "Patients", new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "step-4" }))
     {*@
  @*@model EMedicalSolution.ViewModels.patientIntakeViewModel*@
-
+ 
 @using (Html.BeginForm("intake", "Patients", FormMethod.Post, new { id = "intake" }))
-{
-    <div>
+            {
+    <input type="hidden" value="@ViewBag.supportDevice" id="ViewBagSupportDevice" />
+    <input type="hidden" value="@ViewBag.currentlyPregnant" id="ViewBagCurrentlyPregnant" />
+           <div>
         <label> Do you have a pacemaker, defibrillator, or any life support device? </label>
-        <input class="w3-radio" type="radio" name="supportDevice" value="Yes" checked /> Yes
-        <input class="w3-radio" type="radio" name="supportDevice" value="No" /> No
+        <input class="w3-radio" type="radio" name="supportDevice" id="supportDeviceYes" value="Yes"  /> Yes
+        <input class="w3-radio" type="radio" name="supportDevice" id="supportDeviceNo" value="No"  /> No
     </div>
     <div>
         <label>Are you currently pregnant? </label>
-        <input class="w3-radio" type="radio" name="pregnant" value="1" checked /> Yes
-        <input class="w3-radio" type="radio" name="pregnant" value="0" /> No
-        <input class="w3-radio" type="radio" name="pregnant" value="2" /> N/A
+        <input class="w3-radio" type="radio" name="pregnant" id="pregnant1" value="1"  /> Yes
+        <input class="w3-radio" type="radio" name="pregnant" id="pregnant0" value="0"  /> No
+        <input class="w3-radio" type="radio" name="pregnant" id="pregnant2" value="2"  /> N/A
       </div>
   <br />
-        if (Model != null && Model.objInterferingConditionVM1 != null)
-        {
+            if (Model != null && Model.objInterferingConditionVM1 != null)
+            {
         <div class="col-sm-12">
             <div>
                 <div class="col-sm-4"> <label> Is this condition interfering with any of the following?</label></div>
@@ -26,12 +28,12 @@
                 {
                     <div class="col-sm-4">
                         @if (ViewBag.HistoryID != condition.HistoryID)
-                        {
+        {
                         <input class="w3-radio" type="checkbox" name="condition" value="@condition.ID" /> @condition.Title
-                        }
+    }
                         else {
                         <input class="w3-radio" type="checkbox" name="condition" value="@condition.ID" checked /> @condition.Title
-                        }
+}
                        </div>
                 }
             </div>
@@ -42,10 +44,10 @@
     {
         <div class="col-sm-12">
             @foreach (var symptom in Model.objSymptomVM1)
-            {
+{
                 <div class="col-sm-4">
                     @if (ViewBag.HistoryID != symptom.HistoryID)
-                    {
+{
                     <input class="w3-radio" type="checkbox" name="symptom" value="@symptom.ID" /> @symptom.Title
                     }
                     else {
@@ -64,10 +66,10 @@
         {
         <div class="col-lg-12">
             @foreach (var disease in Model.objDiseaseTypeVM1)
-            {
+{
                 <div class="col-lg-4">
                     @if (ViewBag.HistoryID != disease.HistoryID)
-                    {
+{
                     <input class="w3-radio" type="checkbox" name="disease" value="@disease.ID" /> @disease.Title
                    }
                     else {

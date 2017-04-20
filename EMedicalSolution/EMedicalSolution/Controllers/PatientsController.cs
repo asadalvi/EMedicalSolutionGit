@@ -39,7 +39,13 @@ namespace EMedicalSolution.Controllers
             }
             else
             {
+                var intakeHistory = db.IntakeFormHeads.Where(a => a.HistoryID == id).FirstOrDefault();
+                if (intakeHistory != null) {
+                    ViewBag.supportDevice = intakeHistory.HaveSupportDevice;
+                    ViewBag.currentlyPregnant = intakeHistory.isPregnant;
+                }
                 ViewBag.HistoryID = id;
+                intakeView.PatientHistoryVM11 = db.PatientHistories.Where(a => a.ID == id).FirstOrDefault();
                 intakeView.PatientProceduresVM1 = (from p in db.ProcedureTypes
                                                    join pn in db.PatientProcedures on p.ID equals pn.ProcedureTypeID into leftJ
                                                    from lj in (from pn in leftJ
