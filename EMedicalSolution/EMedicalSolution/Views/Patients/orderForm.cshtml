@@ -47,10 +47,15 @@ Order Form / Supper Bill
             </tr>
         </table>
     </div>
-    <div>
+    
         <div><label>Physician Remarks:</label></div>
-    <input type="text" name="physicianRemarks" />
-        </div>
+        if (Model.PatientHistoryVM11 != null && Model.PatientHistoryVM11.PhysicianRemarks != null && Model.PatientHistoryVM11.PhysicianRemarks != "")
+        {
+        <input type="text" name="physicianRemarks" value="@Model.PatientHistoryVM11.PhysicianRemarks" />  }
+        else {
+        <input type="text" name="physicianRemarks" />
+        }
+        
          <a class="popup w3-btn w3-orange" href="/Patients/physicianSignature/">Approve</a> 
          <p id="Approvedbyphysician" style="display:none">Approved by physician</p>
     @*<input type="submit" value="Convert To PDF" />*@   

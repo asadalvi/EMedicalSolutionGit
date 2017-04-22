@@ -30,7 +30,7 @@ namespace EMedicalSolution.Controllers
             PatientMgmtEntities db = new PatientMgmtEntities();
             if (id == 0)
             {
-                
+                ViewBag.HistoryID = id;
                 intakeView.objInterferingCondition = db.InterferingConditions.ToList();
                 intakeView.objSymptom = db.Symptoms.ToList();
                 intakeView.objDisease = db.Diseases.ToList();
@@ -343,7 +343,7 @@ namespace EMedicalSolution.Controllers
                     db.SaveChanges();
                     int intakeId = intakeFormHead.ID;
                     //intakeFormHead.HaveSupportDevice = 
-                    if (symptom.Length > 0 && intakeId > 0)
+                    if (symptom != null && symptom.Length > 0 && intakeId > 0)
                     {
                         patientSymtom = new PatientSymtom();
                         symptoms = Array.ConvertAll(symptom, s => int.Parse(s));
@@ -358,7 +358,7 @@ namespace EMedicalSolution.Controllers
                             db.SaveChanges();
                         }
                     }
-                    if (disease.Length > 0 && intakeId > 0)
+                    if (disease != null && disease.Length > 0 && intakeId > 0)
                     {
                         patientDiseas = new PatientDiseas();
                         diseases = Array.ConvertAll(disease, s => int.Parse(s));

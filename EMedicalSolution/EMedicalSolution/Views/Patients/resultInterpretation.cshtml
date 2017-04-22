@@ -5,7 +5,12 @@ Result Interpretation by Specialist
     <div class="pre-scrollable">       
  
     <div><label>Specialist Remarks:</label></div>
-    <input type="text" name="specialistRemarks" />
+        @if (Model.PatientHistoryVM11 != null && Model.PatientHistoryVM11.SpecialistRemarks != null && Model.PatientHistoryVM11.SpecialistRemarks != "")
+        {
+            <input type="text" name="specialistRemarks" value="@Model.PatientHistoryVM11.SpecialistRemarks" />  }
+        else {
+            <input type="text" name="specialistRemarks" />
+        }
 </div>   
     @*<input type="submit" value="Convert To PDF" />*@
     <div class="w3-row  w3-margin-top">
