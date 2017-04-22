@@ -139,7 +139,19 @@
                                                      .on('click', function () { alert('Finish Clicked'); });
                     var btnCancel = $('<button></button>').text('Cancel')
                                                      .addClass('btn btn-danger')
-                                                     .on('click', function () { $('#smartwizard').smartWizard("reset"); });
+                                                     .on('click', function () {
+                                                         $("#pHistoryId").val('');
+                                                           $('#smartwizard').smartWizard("reset");
+                                                         $.ajax({
+                                                             url: '/Patients/Wizard/0',
+                                                             dataType: 'json',
+                                                             processData: false,
+                                                             success: function ($data) {
+                                                                 alert("Success, fields are cleared");
+                                                             }
+                                                         });
+                                                         //$('#smartwizard').smartWizard("reset");
+                                                     });
 
 
                     // Smart Wizard
@@ -275,9 +287,19 @@
                     e.preventDefault();
                     OpenPopup($(this).attr('href'), "", "physician_signature");
                     });
-                    $(document).find('.btn-danger').click(function () {
-                        /Patients/Wizard
-                    });
+                    //$(document).find('.btn-danger').click(function () {
+                    //    ("#pHistoryId").val('');
+                    //    alert("CCCCCCCCCcccc");
+                    //    $.ajax({
+                    //        url: '/Patients/Wizard/0',
+                    //        type: 'POST',
+                    //        dataType: 'json',
+                    //        processData: false,
+                    //        success: function ($data) {
+                    //            alert("Success, fields are cleared");
+                    //        }
+                    //    });
+                    //});
                     
             </script>
         }
