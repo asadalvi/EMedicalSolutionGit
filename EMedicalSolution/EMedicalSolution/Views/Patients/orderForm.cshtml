@@ -97,6 +97,7 @@
 <button class="btn btn-primary" id="btn_order_report" type="button">Order Form</button> <button class="btn btn-primary" id="btn_bill_report" type="button">Supper Bill</button>
 @using (Html.BeginForm("ConvertPatientToPdf", "Patients", FormMethod.Post, new { id = "PhysicianApproval" }))
 {
+    <input type="hidden" value="@ViewBag.HistoryID" name="orderFormHistoryId" />
         //order form
         <div class="page-div" id="order_form_report" style="display:block">
 
@@ -109,16 +110,16 @@
 
                     <p>
                         <b>Patient's Name:</b>
-                        @if(ViewBag.PatienData != null && ViewBag.PatienData.FirstName != null){
-                        <span>@ViewBag.PatienData.FirstName @ViewBag.PatienData.LastName</span>
+                        @if(Model != null && Model.objPatient != null && Model.objPatient.FirstName != null){
+                        <span>@Model.objPatient.FirstName @Model.objPatient.LastName</span>
                         }
                     </p>
 
                     <p>
                         <b>Sex:</b>
-                        @if (ViewBag.PatienData != null && ViewBag.PatienData.Gender != null)
+                        @if (Model != null && Model.objPatient != null && Model.objPatient.Gender != null)
                         {
-                            <span>@ViewBag.PatienData.Gender</span>
+                            <span>@Model.objPatient.Gender</span>
                         }
 
                         @*<span>Female</span>*@
@@ -136,9 +137,9 @@
 
                     <p>
                         <b>Date:</b>
-                        @if (ViewBag.PatienData != null && ViewBag.PatienData.Created != null)
+                        @if (Model != null && Model.objPatient != null && Model.objPatient.Created != null)
                         {
-                            <span>@ViewBag.PatienData.Created</span>
+                            <span>@Model.objPatient.Created</span>
                         }
                     </p>
 
@@ -250,33 +251,33 @@
                         <td style="width: 30%" class="bg-grey"><b>Billing Information</b></td>
                     </tr>
                     <tr>
-                        <td><b>Last Name:</b> @if (ViewBag.PatienData != null && ViewBag.PatienData.LastName != null)
+                        <td><b>Last Name:</b> @if (Model != null && Model.objPatient != null && Model.objPatient.LastName != null)
                         {
-                            <span>@ViewBag.PatienData.LastName</span>
+                            <span>@Model.objPatient.LastName</span>
                         }</td>
                         <td><b>Insurance:</b> S</td>
                         <td>Copay/Coins</td>
                     </tr>
                     <tr>
-                        <td><b>First Name:</b> @if (ViewBag.PatienData != null && ViewBag.PatienData.FirstName != null)
+                        <td><b>First Name:</b> @if (Model != null && Model.objPatient != null && Model.objPatient.FirstName != null)
                         {
-                            <span>@ViewBag.PatienData.FirstName</span>
+                            <span>@Model.objPatient.FirstName</span>
                         }</td>
                         <td><b>Physician's Name:</b> S</td>
                         <td>Deductible</td>
                     </tr>
                     <tr>
-                        <td><b>Time in:</b> @if (ViewBag.PatienData != null && ViewBag.PatienData.Created != null)
+                        <td><b>Time in:</b> @if (Model != null && Model.objPatient != null && Model.objPatient.Created != null)
                         {
-                            <span>@ViewBag.PatienData.Created</span>
+                            <span>@Model.objPatient.Created</span>
                         }</td>
                         <td></td>
                         <td>CC, Cash, Check</td>
                     </tr>
                     <tr>
-                        <td><b>DOB:</b> @if (ViewBag.PatienData != null && ViewBag.PatienData.DOB != null)
+                        <td><b>DOB:</b> @if (Model != null && Model.objPatient != null && Model.objPatient.DOB != null)
                         {
-                            <span>@ViewBag.PatienData.DOB</span>
+                            <span>@Model.objPatient.DOB</span>
                         }</td>
                         <td><b>Age:</b> 29</td>
                         <td><b>Total Paid:</b> 2000</td>
@@ -565,7 +566,7 @@
     </div>
 
         <div><label>Physician Remarks:</label></div>
-        if (Model.PatientHistoryVM11 != null && Model.PatientHistoryVM11.PhysicianRemarks != null && Model.PatientHistoryVM11.PhysicianRemarks != "")
+        if (Model !=null && Model.PatientHistoryVM11 != null && Model.PatientHistoryVM11.PhysicianRemarks != null && Model.PatientHistoryVM11.PhysicianRemarks != "")
         {
         <input type="text" name="physicianRemarks" value="@Model.PatientHistoryVM11.PhysicianRemarks" />  }
         else {
@@ -574,7 +575,7 @@
         
          <a class="popup w3-btn w3-orange" href="/Patients/physicianSignature/">Approve</a> 
          <p id="Approvedbyphysician" style="display:none">Approved by physician</p>
-    @*<input type="submit" value="Convert To PDF" />*@   
+    <input type="submit" value="Convert To PDF Test Button" />   
          <div class="w3-row  w3-margin-top">
             <button class="w3-btn-block w3-green submitForm" type="button" id="savephysicianData" style="display:none">Save</button>
         </div>
