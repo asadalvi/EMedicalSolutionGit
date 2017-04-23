@@ -107,6 +107,10 @@ namespace EMedicalSolution.Controllers
                                                   NecessityID = (lj.NecessityID != null) ? lj.NecessityID : 0,//,
                                                   HistoryID = (lj.HistoryID != null) ? lj.HistoryID : 0
                                               }).ToList();
+                ViewBag.PatienData = (from p in db.Patients
+                                      join ph1 in db.PatientHistories on p.ID equals ph1.PatientID
+                                      where ph1.ID == id
+                                      select p).FirstOrDefault();
             }
                 return View(intakeView);
         }
