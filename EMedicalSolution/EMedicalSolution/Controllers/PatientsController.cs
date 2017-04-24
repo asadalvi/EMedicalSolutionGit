@@ -321,15 +321,26 @@ namespace EMedicalSolution.Controllers
                     db.PatientDiseases.RemoveRange(db.PatientDiseases.Where(s => s.HistoryID == pHistoryId));
                     db.PatientInterferingConditions.RemoveRange(db.PatientInterferingConditions.Where(s => s.HistoryID == pHistoryId));
                     db.SaveChanges();
-
                     intakeFormHead = new IntakeFormHead();
-                    intakeFormHead.HistoryID = pHistoryId;
-                    intakeFormHead.isPregnant = pregnant;
-                    intakeFormHead.HaveSupportDevice = supportDevice;
-                    intakeFormHead.Date = DateTime.Today;
-                    intakeFormHead.Created = DateTime.Now;
-                    intakeFormHead.CreatedBy = 1;
-                    db.IntakeFormHeads.Add(intakeFormHead);
+                    intakeFormHead = db.IntakeFormHeads.Where(r => r.HistoryID == pHistoryId).FirstOrDefault();
+                    if (intakeFormHead != null)
+                    {
+                        intakeFormHead.HaveSupportDevice = supportDevice;
+                        intakeFormHead.isPregnant = pregnant;
+                        intakeFormHead.Modified = DateTime.Now;
+                        intakeFormHead.ModifiedBy = 1;
+                    }
+                    else
+                    {
+                        intakeFormHead = new IntakeFormHead();
+                        intakeFormHead.HistoryID = pHistoryId;
+                        intakeFormHead.isPregnant = pregnant;
+                        intakeFormHead.HaveSupportDevice = supportDevice;
+                        intakeFormHead.Date = DateTime.Today;
+                        intakeFormHead.Created = DateTime.Now;
+                        intakeFormHead.CreatedBy = 1;
+                        db.IntakeFormHeads.Add(intakeFormHead);
+                    }
                     db.SaveChanges();
                     int intakeId = intakeFormHead.ID;
                     //intakeFormHead.HaveSupportDevice = 
@@ -363,7 +374,7 @@ namespace EMedicalSolution.Controllers
                             db.SaveChanges();
                         }
                     }
-                    if (condition.Length > 0 && intakeId > 0)
+                    if (condition != null && condition.Length > 0 && intakeId > 0)
                     {
                         for (int i = 0; i < condition.Length; i++)
                         {
@@ -663,16 +674,16 @@ namespace EMedicalSolution.Controllers
                                             HistoryID = (lj.HistoryID != null) ? lj.HistoryID : 0
                                         }).ToList();
 
-            intakeView.objDiseaseTypeVM1 = (from dt in db.DiseaseTypes
-                                            join d in db.Diseases on dt.ID equals d.DiseaseTypeID into leftJ
+            intakeView.objPatientDiseaseVM = (from dt in db.Diseases
+                                            join d in db.PatientDiseases on dt.ID equals d.DiseaseID into leftJ
                                             from lj in (from dt in leftJ
                                                             //where dt.HistoryID == id   what should be here
                                                         select dt).DefaultIfEmpty()
-                                            select new DiseaseTypeVM
+                                            select new PatientDiseaseVM
                                             {
                                                 ID = dt.ID,
                                                 Title = dt.Title,
-                                                DiseaseTypeID = (lj.DiseaseTypeID != null) ? lj.DiseaseTypeID : 0,//,
+                                                HistoryID = (lj.HistoryID != null) ? lj.HistoryID : 0,//,
                                                                                                                   // HistoryID = (lj.HistoryID != null) ? lj.HistoryID : 0
                                             }).ToList();
             intakeView.objMedicalNecessity1 = (from mn in db.MedicalNecessities
@@ -739,11 +750,12 @@ namespace EMedicalSolution.Controllers
         //physician password,physician signature
         public ActionResult physicianSignature()
         { 
-            bool status = false;
+            //bool status = false;
             if (ModelState.IsValid)
             {
-                status = true;
+                //status = true;
             }
+            //status = false;
             return View();
         }
         //Approved physician password,Approved physician signature
