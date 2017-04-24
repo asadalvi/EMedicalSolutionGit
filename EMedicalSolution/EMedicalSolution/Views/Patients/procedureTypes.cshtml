@@ -6,13 +6,13 @@
     {
         foreach (var procedure in Model.PatientProceduresVM1)
         {
-            if (ViewBag.HistoryID != procedure.HistoryID)
+            if (procedure.HistoryID > 0)
             {
-                <input class="w3-radio procedure_Type" type="checkbox" name="procedureType" value=@procedure.ID />
+                <input class="w3-radio procedure_Type" type="checkbox" name="procedureType" value=@procedure.ID checked />
                 @procedure.Title 
             }
             else {
-                <input class="w3-radio procedure_Type" type="checkbox" name="procedureType" value=@procedure.ID checked />
+                <input class="w3-radio procedure_Type" type="checkbox" name="procedureType" value=@procedure.ID  />
                 @procedure.Title
             }
 

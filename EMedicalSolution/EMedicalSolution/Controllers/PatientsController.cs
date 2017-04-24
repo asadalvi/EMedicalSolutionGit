@@ -28,17 +28,17 @@ namespace EMedicalSolution.Controllers
         {
             patientIntakeViewModel intakeView = new patientIntakeViewModel();
             PatientMgmtEntities db = new PatientMgmtEntities();
-            if (id == 0)
-            {
-                ViewBag.HistoryID = id;
-                intakeView.objInterferingCondition = db.InterferingConditions.ToList();
-                intakeView.objSymptom = db.Symptoms.ToList();
-                intakeView.objDisease = db.Diseases.ToList();
-                intakeView.objProcedureType = db.ProcedureTypes.ToList();
-                intakeView.objMedicalNecessity = db.MedicalNecessities.ToList();
-            }
-            else
-            {
+            //if (id == 0)
+            //{
+            //    ViewBag.HistoryID = id;
+            //    intakeView.objInterferingCondition = db.InterferingConditions.ToList();
+            //    intakeView.objSymptom = db.Symptoms.ToList();
+            //    intakeView.objDisease = db.Diseases.ToList();
+            //    intakeView.objProcedureType = db.ProcedureTypes.ToList();
+            //    intakeView.objMedicalNecessity = db.MedicalNecessities.ToList();
+            //}
+            //else
+            //{
                 var intakeHistory = db.IntakeFormHeads.Where(a => a.HistoryID == id).FirstOrDefault();
                 if (intakeHistory != null) {
                     ViewBag.supportDevice = intakeHistory.HaveSupportDevice;
@@ -83,17 +83,16 @@ namespace EMedicalSolution.Controllers
                                              HistoryID = (lj.HistoryID != null) ? lj.HistoryID : 0
                                          }).ToList();
 
-                intakeView.objDiseaseTypeVM1 = (from dt in db.DiseaseTypes
-                                         join d in db.Diseases on dt.ID equals d.DiseaseTypeID into leftJ
+                intakeView.objPatientDiseaseVM = (from dt in db.Diseases
+                                                join d in db.PatientDiseases on dt.ID equals d.DiseaseID into leftJ
                                          from lj in (from dt in leftJ
                                                      //where dt.HistoryID == id   what should be here
                                                      select dt).DefaultIfEmpty()
-                                         select new DiseaseTypeVM
+                                         select new PatientDiseaseVM
                                          {
                                              ID = dt.ID,
                                              Title = dt.Title,
-                                             DiseaseTypeID = (lj.DiseaseTypeID != null) ? lj.DiseaseTypeID : 0,//,
-                                            // HistoryID = (lj.HistoryID != null) ? lj.HistoryID : 0
+                                             HistoryID = (lj.HistoryID != null) ? lj.HistoryID : 0,//,
                                          }).ToList();
                 intakeView.objMedicalNecessity1 = (from mn in db.MedicalNecessities
                                               join pn in db.PatientNecessities on mn.ID equals pn.NecessityID into leftJ
@@ -111,7 +110,7 @@ namespace EMedicalSolution.Controllers
                                       join ph1 in db.PatientHistories on p.ID equals ph1.PatientID
                                       where ph1.ID == id
                                       select p).FirstOrDefault();
-            }
+            //}
                 return View(intakeView);
         }
 
@@ -262,12 +261,9 @@ namespace EMedicalSolution.Controllers
                  int[] myType = Array.ConvertAll(procedureType, s => int.Parse(s));
                 using (PatientMgmtEntities db = new PatientMgmtEntities())
                 {
-                    var delobj = db.PatientProcedures.Where(p => p.HistoryID == pHistoryId).FirstOrDefault();
-                    if (delobj != null)
-                    {
-                        db.PatientProcedures.Remove(delobj);
-                        db.SaveChanges();
-                    }
+                    db.PatientProcedures.RemoveRange(db.PatientProcedures.Where(p => p.HistoryID == pHistoryId));
+                    db.SaveChanges();
+
                     pProcedure = new PatientProcedure();
                     if (pHistoryId > 0)
                     {
@@ -321,21 +317,11 @@ namespace EMedicalSolution.Controllers
             {
                 using (PatientMgmtEntities db = new PatientMgmtEntities())
                 {
-                    var delobj = db.IntakeFormHeads.Where(p => p.HistoryID == pHistoryId).FirstOrDefault();
-                    if (delobj != null)
-                    {
-                        db.IntakeFormHeads.Remove(delobj);
-                    }
-                        var delobj1 = db.PatientSymtoms.Where(p => p.HistoryID == pHistoryId).FirstOrDefault();
-                    if (delobj1 != null)
-                    {
-                        db.PatientSymtoms.Remove(delobj1);
-                    }
-                    var delobj2 = db.PatientDiseases.Where(p => p.HistoryID == pHistoryId).FirstOrDefault();
-                    if (delobj2 != null)
-                    {
-                        db.PatientDiseases.Remove(delobj2);
-                    }
+                    db.PatientSymtoms.RemoveRange(db.PatientSymtoms.Where(s => s.HistoryID == pHistoryId));
+                    db.PatientDiseases.RemoveRange(db.PatientDiseases.Where(s => s.HistoryID == pHistoryId));
+                    db.PatientInterferingConditions.RemoveRange(db.PatientInterferingConditions.Where(s => s.HistoryID == pHistoryId));
+                    db.SaveChanges();
+
                     intakeFormHead = new IntakeFormHead();
                     intakeFormHead.HistoryID = pHistoryId;
                     intakeFormHead.isPregnant = pregnant;
@@ -584,12 +570,9 @@ namespace EMedicalSolution.Controllers
                 //int[] pNecessities = Array.ConvertAll(necessities, s => int.Parse(s));
                 using (PatientMgmtEntities db = new PatientMgmtEntities())
                 {
-                    //change the below delete condition=====>>>>>>p.id change?????
-                    var delobj = db.MedicalNecessities.Where(p => p.ID == pHistoryId).SingleOrDefault();
-                    if (delobj != null)
-                    {
-                        db.MedicalNecessities.Remove(delobj);
-                    }
+                    db.PatientNecessities.RemoveRange(db.PatientNecessities.Where(n => n.HistoryID == pHistoryId));
+                    db.SaveChanges();
+
                     pNecessity = new PatientNecessity();
                     pHistsory = new PatientHistory();
                     if (pHistoryId > 0)

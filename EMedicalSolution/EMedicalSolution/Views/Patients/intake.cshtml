@@ -27,12 +27,12 @@
                 @foreach (var condition in Model.objInterferingConditionVM1)
                 {
                     <div class="col-sm-4">
-                        @if (ViewBag.HistoryID != condition.HistoryID)
+                        @if (condition.HistoryID > 0)
         {
-                        <input class="w3-radio" type="checkbox" name="condition" value="@condition.ID" /> @condition.Title
+                        <input class="w3-radio" type="checkbox" name="condition" value="@condition.ID" checked/> @condition.Title
     }
                         else {
-                        <input class="w3-radio" type="checkbox" name="condition" value="@condition.ID" checked /> @condition.Title
+                        <input class="w3-radio" type="checkbox" name="condition" value="@condition.ID" /> @condition.Title
 }
                        </div>
                 }
@@ -46,12 +46,12 @@
             @foreach (var symptom in Model.objSymptomVM1)
 {
                 <div class="col-sm-4">
-                    @if (ViewBag.HistoryID != symptom.HistoryID)
+                    @if (symptom.HistoryID > 0)
 {
-                    <input class="w3-radio" type="checkbox" name="symptom" value="@symptom.ID" /> @symptom.Title
+                    <input class="w3-radio" type="checkbox" name="symptom" value="@symptom.ID" checked/> @symptom.Title
                     }
                     else {
-                    <input class="w3-radio" type="checkbox" name="symptom" value="@symptom.ID" checked /> @symptom.Title  
+                    <input class="w3-radio" type="checkbox" name="symptom" value="@symptom.ID" /> @symptom.Title  
                     }                    
                 </div>
                 if (symptom.ID % 3 == 2)
@@ -62,18 +62,18 @@
         </div>
         }
         <h3>Disease</h3>
-        if (Model != null && Model.objDiseaseTypeVM1 != null)
+        if (Model != null && Model.objPatientDiseaseVM != null)
         {
         <div class="col-lg-12">
-            @foreach (var disease in Model.objDiseaseTypeVM1)
+            @foreach (var disease in Model.objPatientDiseaseVM)
 {
                 <div class="col-lg-4">
-                    @if (ViewBag.HistoryID != disease.HistoryID)
+                    @if (disease.HistoryID > 0)
 {
-                    <input class="w3-radio" type="checkbox" name="disease" value="@disease.ID" /> @disease.Title
+                    <input class="w3-radio" type="checkbox" name="disease" value="@disease.ID" checked/> @disease.Title
                    }
                     else {
-                    <input class="w3-radio" type="checkbox" name="disease" value="@disease.ID" checked /> @disease.Title
+                    <input class="w3-radio" type="checkbox" name="disease" value="@disease.ID"  /> @disease.Title
                    }
                         </div>
                 if (disease.ID % 3 == 2)

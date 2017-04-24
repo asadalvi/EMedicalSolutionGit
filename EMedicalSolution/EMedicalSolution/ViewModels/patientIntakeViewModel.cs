@@ -19,7 +19,7 @@ namespace EMedicalSolution.ViewModels
         public IList<PatientNecessitiesVM> objMedicalNecessity1 { get; set; }
         public IList<PatientProceduresVM> PatientProceduresVM1 { get; set; }
         public IList<ProcedureTypeVM> objProcedureType1 { get; set; }
-        public IList<DiseaseTypeVM> objDiseaseTypeVM1 { get; set; }
+        public IList<PatientDiseaseVM> objPatientDiseaseVM { get; set; }
         public IList<InterferingConditionVM> objInterferingConditionVM1 { get; set; }
         public IList<SymptomVM> objSymptomVM1 { get; set; }
         public PatientHistory PatientHistoryVM11 { get; set; }
@@ -63,11 +63,11 @@ namespace EMedicalSolution.ViewModels
         //public int IntakeFormID { get; set; }
         public int SymptomID { get; set; }
     }
-    public class DiseaseTypeVM
+    public class PatientDiseaseVM
     {
         public int ID { get; set; }
         public string Title { get; set; }
-        public int DiseaseTypeID { get; set; }
+        public int DiseaseID { get; set; }
         public int HistoryID { get; set; }
     }
 //    public class PatientHistoryVM1
