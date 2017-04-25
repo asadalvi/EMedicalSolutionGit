@@ -45,8 +45,17 @@ namespace EMedicalSolution.Controllers
                     ViewBag.currentlyPregnant = intakeHistory.isPregnant;
                 }
                 ViewBag.HistoryID = id;
-                intakeView.PatientHistoryVM11 = db.PatientHistories.Where(a => a.ID == id).FirstOrDefault();
-                intakeView.PatientProceduresVM1 = (from p in db.ProcedureTypes
+                intakeView.StaffNameVM = (from p in db.PatientHistories
+                                                 join pn in db.Users on p.PhysicianID equals pn.ID into leftJ                                                 
+                                                 from lj in (from pn in leftJ select pn).DefaultIfEmpty()
+                                                 join s in db.Staffs on lj.StaffID equals s.ID
+                                                 where p.ID == id
+                                                 select new StaffName
+                                                 {
+                                                     PhycisianName = s.FirstName + " " + s.LastName,
+                                                 }).FirstOrDefault();
+            intakeView.PatientHistoryVM11  = db.PatientHistories.Where(a => a.ID == id).FirstOrDefault();
+            intakeView.PatientProceduresVM1 = (from p in db.ProcedureTypes
                                                    join pn in db.PatientProcedures on p.ID equals pn.ProcedureTypeID into leftJ
                                                    from lj in (from pn in leftJ
                                                                where pn.HistoryID == id
@@ -622,11 +631,8 @@ namespace EMedicalSolution.Controllers
             //return Json(status, JsonRequestBehavior.AllowGet);
             return View();
         }
-
-        //report rendering
-        public string RenderViewAsString(string viewName, int id)
+        public patientIntakeViewModel patientWizardData(int id)
         {
-            //place this code in one place
             patientIntakeViewModel intakeView = new patientIntakeViewModel();
             PatientMgmtEntities db = new PatientMgmtEntities();
             var intakeHistory = db.IntakeFormHeads.Where(a => a.HistoryID == id).FirstOrDefault();
@@ -675,17 +681,17 @@ namespace EMedicalSolution.Controllers
                                         }).ToList();
 
             intakeView.objPatientDiseaseVM = (from dt in db.Diseases
-                                            join d in db.PatientDiseases on dt.ID equals d.DiseaseID into leftJ
-                                            from lj in (from dt in leftJ
-                                                            //where dt.HistoryID == id   what should be here
-                                                        select dt).DefaultIfEmpty()
-                                            select new PatientDiseaseVM
-                                            {
-                                                ID = dt.ID,
-                                                Title = dt.Title,
-                                                HistoryID = (lj.HistoryID != null) ? lj.HistoryID : 0,//,
-                                                                                                                  // HistoryID = (lj.HistoryID != null) ? lj.HistoryID : 0
-                                            }).ToList();
+                                              join d in db.PatientDiseases on dt.ID equals d.DiseaseID into leftJ
+                                              from lj in (from dt in leftJ
+                                                              //where dt.HistoryID == id   what should be here
+                                                          select dt).DefaultIfEmpty()
+                                              select new PatientDiseaseVM
+                                              {
+                                                  ID = dt.ID,
+                                                  Title = dt.Title,
+                                                  HistoryID = (lj.HistoryID != null) ? lj.HistoryID : 0,//,
+                                                                                                        // HistoryID = (lj.HistoryID != null) ? lj.HistoryID : 0
+                                              }).ToList();
             intakeView.objMedicalNecessity1 = (from mn in db.MedicalNecessities
                                                join pn in db.PatientNecessities on mn.ID equals pn.NecessityID into leftJ
                                                from lj in (from pn in leftJ
@@ -703,6 +709,25 @@ namespace EMedicalSolution.Controllers
                                      join ph1 in db.PatientHistories on p.ID equals ph1.PatientID
                                      where ph1.ID == id
                                      select p).FirstOrDefault();
+            return intakeView;
+        }
+        //order for report
+        public ActionResult orderReport(int id)
+        {
+            patientIntakeViewModel intakeView = patientWizardData(id);
+            return View(intakeView);
+        }
+        //order bill for report
+        public ActionResult orderBill(int id)
+        {
+            patientIntakeViewModel intakeView = patientWizardData(id);
+            return View(intakeView);
+        }
+        //report rendering
+        public string RenderViewAsString(string viewName, int id)
+        {
+            //place this code in one place
+            patientIntakeViewModel intakeView = patientWizardData(id);
             // create a string writer to receive the HTML code
             StringWriter stringWriter = new StringWriter();
 
@@ -728,9 +753,17 @@ namespace EMedicalSolution.Controllers
         public ActionResult ConvertPatientToPdf()
         {
             int id = Convert.ToInt32(Request["orderFormHistoryId"].ToString());
+            string type = Request["orderFormType"].ToString();
             // get the About view HTML code
-            string htmlToConvert = RenderViewAsString("orderForm", id);
-
+            string htmlToConvert;
+            if (type == "orderReport")
+            {
+                htmlToConvert = RenderViewAsString("orderReport", id);
+            } else if (type == "orderBill")
+            { htmlToConvert = RenderViewAsString("orderBill", id); } else
+            {
+                return View();
+            }
             // the base URL to resolve relative images and css
             String thisPageUrl = this.ControllerContext.HttpContext.Request.Url.AbsoluteUri;
             String baseUrl = thisPageUrl.Substring(0, thisPageUrl.Length - "Patients/ConvertPatientToPdf".Length);

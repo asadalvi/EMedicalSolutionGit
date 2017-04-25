@@ -382,6 +382,9 @@
     <Content Include="Views\Patients\ViewHistory.cshtml" />
     <Content Include="Views\Patients\physicianSignature.cshtml" />
     <Content Include="Views\Patients\super_bill.cshtml" />
+    <Content Include="Views\Patients\patientView.cshtml" />
+    <Content Include="Views\Patients\orderReport.cshtml" />
+    <Content Include="Views\Patients\orderBill.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

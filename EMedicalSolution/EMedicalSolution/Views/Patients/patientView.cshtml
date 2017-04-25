@@ -1,0 +1,18 @@
+﻿<div class="w3-row w3-padding-16" >
+    <h2>Patient profile</h2>
+    @if (Model != null && Model.objPatient != null && Model.objPatient.FirstName != null)
+    {
+        <div class="w3-row w3-margin-top">
+        <label class="w3-text-green">Patient Name</label>
+         <span>@Model.objPatient.FirstName @Model.objPatient.LastName</span>
+    </div>
+    <div class="w3-row w3-margin-top">
+        <label class="w3-text-green">Patient Gender</label>
+        <span>@Model.objPatient.Gender</span>
+    </div>
+    <div class="w3-row w3-margin-top">
+        <label class="w3-text-green">Patient DOB</label>
+        <span>@Model.objPatient.DOB</span>
+    </div>
+    }
+</div>

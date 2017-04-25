@@ -1,0 +1,247 @@
+﻿@model EMedicalSolution.ViewModels.patientIntakeViewModel
+
+<head>
+
+    <title>Order Report</title>
+    <style>
+        body {
+            background: darkgray;
+        }
+
+        .page-div {
+            width: 8.27in;
+            float: none;
+            margin: auto;
+            font-family: "Trebuchet MS", "serif";
+            background: white;
+        }
+
+        .content-area {
+            padding: 0.5cm 1cm;
+        }
+
+        #patientDetails p b {
+            width: 25%;
+            float: left;
+        }
+
+        h3 {
+            text-align: center;
+        }
+
+        h4 {
+            text-align: center;
+            color: darkgray;
+        }
+
+
+        /*table {
+            width: 100%;
+            margin-top: 0.5cm;
+            margin-bottom: 0.5cm;
+            font-size: 18px;
+            border: 1px black solid;
+        }*/
+
+            table td {
+                border: 1px black solid;
+                text-align: center;
+                vertical-align: middle;
+            }
+
+        #notice {
+            text-align: center;
+            margin-top: 1cm;
+        }
+  
+        h3, h6 {
+            text-align: center;
+            line-height: 0;
+        }
+
+        .h4-superbill {
+            text-align: center;
+            color: darkgray;
+            line-height: 0.3;
+        }
+
+        p span {
+            text-decoration: underline;
+        }
+
+        table {
+            width: 100%;
+            margin-top: 0.5cm;
+            margin-bottom: 0.5cm;
+            font-size: 15px;
+            border: 1px black solid;
+        }
+
+            table td {
+                border: 1px black solid;
+                vertical-align: middle;
+            }
+
+        thead td {
+            text-align: center;
+            font-weight: bold;
+        }
+        .bg-grey {
+            background: gray;
+        }
+    </style>
+
+</head>
+@using (Html.BeginForm("ConvertPatientToPdf", "Patients", FormMethod.Post, new { id = "PhysicianApproval" }))
+{
+    <input type="hidden" value="@ViewBag.HistoryID" name="orderFormHistoryId" />
+    <input type="hidden" value="orderReport" name="orderFormType" />
+    
+        <div class="page-div" id="order_form_report" style="display:block">
+
+            <div class="content-area">
+
+                <h3 style="padding:10px;">DIAGNOSTIC EVALUATION</h3>
+                <h4 style="margin:25px;">OFFER FORM</h4>
+
+                <div id="patientDetails">
+
+                    <p>
+                        <b>Patient's Name:</b>
+                        @if (Model != null && Model.objPatient != null && Model.objPatient.FirstName != null)
+                        {
+                        <span>@Model.objPatient.FirstName @Model.objPatient.LastName</span>
+                        }
+                    </p>
+
+                    <p>
+                        <b>Sex:</b>
+                        @if (Model != null && Model.objPatient != null && Model.objPatient.Gender != null)
+                        {
+                            <span>@Model.objPatient.Gender</span>
+                        }
+
+                        @*<span>Female</span>*@
+                    </p>
+
+                    <p>
+                        <b>Ordering MD/PA/NP:</b>
+                        <span>Test Ordered here</span>
+                    </p>
+
+                    <p>
+                        <b>Physician's Signature:</b>
+                        <span>Physician's Signature here</span>
+                    </p>
+
+                    <p>
+                        <b>Date:</b>
+                        @if (Model != null && Model.objPatient != null && Model.objPatient.Created != null)
+                        {
+                            <span>@Model.objPatient.Created</span>
+                        }
+                    </p>
+
+                </div>
+
+                <p>
+                    <i>
+                        Insurance card clear copy, patient demographics, state issued identification, ordering provider signature,
+                        and indication(s) for exam must be included or attached with this order. Incomplete orders without this
+                        information will be returned for completion.
+                    </i>
+                </p>
+
+                <table cellspacing="0">
+                    <tbody>
+                        <tr>
+                            <td>ANS Evaluation</td>
+                            <td>&#x2714;</td>
+                            <td>Using Tilt Table</td>
+                            <td>95924 + 95923</td>
+                        </tr>
+                        <tr>
+                            <td>ANS Evaluation</td>
+                            <td>&#x2716;</td>
+                            <td>Without Tilt Table</td>
+                            <td>95924 + 95923</td>
+                        </tr>
+                        <tr>
+                            <td>Arterial Evaluation</td>
+                            <td></td>
+                            <td></td>
+                            <td>95924 + 95923</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <p><i>Physician requires company to handle Billing x Global Technical only</i></p>
+
+                <p><b>Physician is ordering the test for the following reason(s):</b></p>
+
+                <p><b>[ ] ANS evaluation:</b> Indications, reasons, symptoms and/or diagnosis codes for exam:</p>
+
+                <p>
+                    1)
+                    <span>Data here</span>
+                </p>
+                <p>
+                    2)
+                    <span>Data here</span>
+                </p>
+
+                <p>
+                    3)
+                    <span>Data here</span>
+                </p>
+
+                <p>
+                    4)
+                    <span>Data here</span>
+                </p>
+
+                <p><b>[ ] Arterial evaluation:</b> Indications, reasons, symptoms and/or diagnosis codes for exam:</p>
+
+                <p>
+                    1)
+                    <span>Data here</span>
+                </p>
+                <p>
+                    2)
+                    <span>Data here</span>
+                </p>
+
+                <p>
+                    3)
+                    <span>Data here</span>
+                </p>
+
+                <p>
+                    4)
+                    <span>Data here</span>
+                </p>
+
+                <p>
+                    Special Instructions
+                    <span>Data here</span>
+                </p>
+
+                <p id="notice"><i>Please send this completed order to our office</i></p>
+
+            </div>
+
+        </div>
+        <div class="w3-row w3-padding-16">
+            <input type="submit" value="print report" />
+            </div>
+            }
+
+
+
+
+
+
+
+
+
+

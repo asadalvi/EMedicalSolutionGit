@@ -24,8 +24,7 @@
                         url: "/Patients/physicianSignature/?pHistoryId=" + pHistoryId + "&physiciasnSignature=" + physiciasnSignature,
                         success: function (data) {
                             if (data) {
-                                $("#savephysicianData").css('display', 'block');
-                                $("#Approvedbyphysician").css('display', 'block');
+                                $("#savephysicianData").css('display', 'block');                               
                                 $(".ui-dialog-titlebar-close").trigger("click");
                             }
                         }

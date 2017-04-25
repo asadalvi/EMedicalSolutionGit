@@ -1,583 +1,34 @@
-﻿<head>
-
-    <title>Order Form</title>
-    <style>
-        body {
-            background: darkgray;
-        }
-
-        .page-div {
-            width: 8.27in;
-            float: none;
-            margin: auto;
-            font-family: "Trebuchet MS", "serif";
-            background: white;
-        }
-
-        .content-area {
-            padding: 0.5cm 1cm;
-        }
-
-        #patientDetails p b {
-            width: 25%;
-            float: left;
-        }
-
-        h3 {
-            text-align: center;
-        }
-
-        h4 {
-            text-align: center;
-            color: darkgray;
-        }
-
-
-        /*table {
-            width: 100%;
-            margin-top: 0.5cm;
-            margin-bottom: 0.5cm;
-            font-size: 18px;
-            border: 1px black solid;
-        }*/
-
-            table td {
-                border: 1px black solid;
-                text-align: center;
-                vertical-align: middle;
-            }
-
-        #notice {
-            text-align: center;
-            margin-top: 1cm;
-        }
-  
-        h3, h6 {
-            text-align: center;
-            line-height: 0;
-        }
-
-        .h4-superbill {
-            text-align: center;
-            color: darkgray;
-            line-height: 0.3;
-        }
-
-        p span {
-            text-decoration: underline;
-        }
-
-        table {
-            width: 100%;
-            margin-top: 0.5cm;
-            margin-bottom: 0.5cm;
-            font-size: 15px;
-            border: 1px black solid;
-        }
-
-            table td {
-                border: 1px black solid;
-                vertical-align: middle;
-            }
-
-        thead td {
-            text-align: center;
-            font-weight: bold;
-        }
-        .bg-grey {
-            background: gray;
-        }
-    </style>
-
-</head>
-
+﻿
+<title>Order Form</title>
 
 <h2>Step 6 Content</h2>
 
-<button class="btn btn-primary" id="btn_order_report" type="button">Order Form</button> <button class="btn btn-primary" id="btn_bill_report" type="button">Supper Bill</button>
+@*<button class="btn btn-primary" id="btn_order_report" type="button">Order Form</button> <button class="btn btn-primary" id="btn_bill_report" type="button">Supper Bill</button>*@
+@Html.ActionLink("Order Form", "orderReport", "Patients", new { id = @ViewBag.HistoryID }, new { target = "_blank" }) /
+@Html.ActionLink("Supper Bill", "orderBill", "Patients", new { id = @ViewBag.HistoryID }, new { target = "_blank" })
+
 @using (Html.BeginForm("ConvertPatientToPdf", "Patients", FormMethod.Post, new { id = "PhysicianApproval" }))
 {
     <input type="hidden" value="@ViewBag.HistoryID" name="orderFormHistoryId" />
-        //order form
-        <div class="page-div" id="order_form_report" style="display:block">
 
-            <div class="content-area">
-
-                <h3 style="padding:10px;">DIAGNOSTIC EVALUATION</h3>
-                <h4 style="margin:25px;">OFFER FORM</h4>
-
-                <div id="patientDetails">
-
-                    <p>
-                        <b>Patient's Name:</b>
-                        @if(Model != null && Model.objPatient != null && Model.objPatient.FirstName != null){
-                        <span>@Model.objPatient.FirstName @Model.objPatient.LastName</span>
-                        }
-                    </p>
-
-                    <p>
-                        <b>Sex:</b>
-                        @if (Model != null && Model.objPatient != null && Model.objPatient.Gender != null)
-                        {
-                            <span>@Model.objPatient.Gender</span>
-                        }
-
-                        @*<span>Female</span>*@
-                    </p>
-
-                    <p>
-                        <b>Ordering MD/PA/NP:</b>
-                        <span>Test Ordered here</span>
-                    </p>
-
-                    <p>
-                        <b>Physician's Signature:</b>
-                        <span>Physician's Signature here</span>
-                    </p>
-
-                    <p>
-                        <b>Date:</b>
-                        @if (Model != null && Model.objPatient != null && Model.objPatient.Created != null)
-                        {
-                            <span>@Model.objPatient.Created</span>
-                        }
-                    </p>
-
-                </div>
-
-                <p>
-                    <i>
-                        Insurance card clear copy, patient demographics, state issued identification, ordering provider signature,
-                        and indication(s) for exam must be included or attached with this order. Incomplete orders without this
-                        information will be returned for completion.
-                    </i>
-                </p>
-
-                <table cellspacing="0">
-                    <tbody>
-                        <tr>
-                            <td>ANS Evaluation</td>
-                            <td>&#x2714;</td>
-                            <td>Using Tilt Table</td>
-                            <td>95924 + 95923</td>
-                        </tr>
-                        <tr>
-                            <td>ANS Evaluation</td>
-                            <td>&#x2716;</td>
-                            <td>Without Tilt Table</td>
-                            <td>95924 + 95923</td>
-                        </tr>
-                        <tr>
-                            <td>Arterial Evaluation</td>
-                            <td></td>
-                            <td></td>
-                            <td>95924 + 95923</td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <p><i>Physician requires company to handle Billing x Global Technical only</i></p>
-
-                <p><b>Physician is ordering the test for the following reason(s):</b></p>
-
-                <p><b>[ ] ANS evaluation:</b> Indications, reasons, symptoms and/or diagnosis codes for exam:</p>
-
-                <p>
-                    1)
-                    <span>Data here</span>
-                </p>
-                <p>
-                    2)
-                    <span>Data here</span>
-                </p>
-
-                <p>
-                    3)
-                    <span>Data here</span>
-                </p>
-
-                <p>
-                    4)
-                    <span>Data here</span>
-                </p>
-
-                <p><b>[ ] Arterial evaluation:</b> Indications, reasons, symptoms and/or diagnosis codes for exam:</p>
-
-                <p>
-                    1)
-                    <span>Data here</span>
-                </p>
-                <p>
-                    2)
-                    <span>Data here</span>
-                </p>
-
-                <p>
-                    3)
-                    <span>Data here</span>
-                </p>
-
-                <p>
-                    4)
-                    <span>Data here</span>
-                </p>
-
-                <p>
-                    Special Instructions
-                    <span>Data here</span>
-                </p>
-
-                <p id="notice"><i>Please send this completed order to our office</i></p>
-
-            </div>
-
-        </div>
-
-    //super bill
-    <div class="page-div" id="super_bill_report" style="display:none;" >
-
-        <div class="content-area">
-
-            <h3 style="padding:10px;">Advanced Clinic Testing</h3>
-            <h4 class="h4-superbill" style="margin:20px;">Home Sleep Study and Allergy Test Specialist</h4>
-            <h6 style="padding:10px;">4551 Pleasant Hill Rd, Kissimmee, FL 34746</h6>
-            <h6 style="padding:10px;">Phone: (281) 693-5289 Fax: (281)693-3111</h6>
-
-            <table cellspacing="0">
-                <tbody>
-                    <tr>
-                        <td style="width: 40%"><b>Date of service:</b> date patient lives with HST</td>
-                        <td style="width: 30%"><b>Insurance: P</b> BLS PPO</td>
-                        <td style="width: 30%" class="bg-grey"><b>Billing Information</b></td>
-                    </tr>
-                    <tr>
-                        <td><b>Last Name:</b> @if (Model != null && Model.objPatient != null && Model.objPatient.LastName != null)
-                        {
-                            <span>@Model.objPatient.LastName</span>
-                        }</td>
-                        <td><b>Insurance:</b> S</td>
-                        <td>Copay/Coins</td>
-                    </tr>
-                    <tr>
-                        <td><b>First Name:</b> @if (Model != null && Model.objPatient != null && Model.objPatient.FirstName != null)
-                        {
-                            <span>@Model.objPatient.FirstName</span>
-                        }</td>
-                        <td><b>Physician's Name:</b> S</td>
-                        <td>Deductible</td>
-                    </tr>
-                    <tr>
-                        <td><b>Time in:</b> @if (Model != null && Model.objPatient != null && Model.objPatient.Created != null)
-                        {
-                            <span>@Model.objPatient.Created</span>
-                        }</td>
-                        <td></td>
-                        <td>CC, Cash, Check</td>
-                    </tr>
-                    <tr>
-                        <td><b>DOB:</b> @if (Model != null && Model.objPatient != null && Model.objPatient.DOB != null)
-                        {
-                            <span>@Model.objPatient.DOB</span>
-                        }</td>
-                        <td><b>Age:</b> 29</td>
-                        <td><b>Total Paid:</b> 2000</td>
-                    </tr>
-                </tbody>
-            </table>
-
-            <table cellspacing="0">
-
-                <thead>
-                    <tr>
-                        <td style="width: 4%">&#x2716;</td>
-                        <td style="width: 20%">Description</td>
-                        <td style="width: 9%">Code</td>
-                        <td style="width: 4%">MOD</td>
-                        <td style="width: 20%">Description</td>
-                        <td style="width: 9%">Code</td>
-                        <td style="width: 4%">MOD</td>
-                        <td style="width: 20%">Description</td>
-                        <td style="width: 9%">Code</td>
-                    </tr>
-                </thead>
-
-                <tbody>
-                    <tr class="bg-grey">
-                        <td></td>
-                        <td>DIAGNOSIS</td>
-                    </tr>
-                  
-                            @if (Model != null && Model.objSymptomVM1 != null)
-                            {
-                                int i = 0;
-                                foreach (var symptom in Model.objSymptomVM1)
-                                {
-                                    if (i == 0)
-                                    {
-                                        @:<tr>
-                                      }
-                                    if (ViewBag.HistoryID != symptom.HistoryID)
-                                    {
-                                        if (i == 0)
-                                        {
-
-                                            <td>&#x2716;</td>
-                                            <td> @symptom.Title</td>
-                                                <td>G1000000</td>
-                                            i = 1; continue;
-
-                                        }
-                                        if (i == 1)
-                                        {
-
-                                            <td>&#x2716;</td>
-                                            <td> @symptom.Title</td>
-                                                        <td>G1000000</td>
-                                            i = 2; continue;
-
-                                        }
-                                        if (i == 2)
-                                        {
-
-                                            <td>&#x2716;</td>
-                                            <td> @symptom.Title</td>
-                                                    <td>G1000000</td>
-                                            i = 0; continue;
-
-                                        }
-                                        if (i == 2)
-                                        {
-                                            @:</tr>
-                                      }
-
-        }
-    }
-}
-
-                            @*<td>&#x2716;</td>
-                                <td>Obstructive Sleep Apnea</td>
-                                <td>G47.33</td>
-                                <td>&#x2716;</td>
-                                    <td>Obstructive Sleep Apnea</td>
-                                    <td>G47.33</td>
-                                    <td>&#x2716;</td>
-                                    <td>Obstructive Sleep Apnea</td>
-                                    <td>G47.33</td>*@
-
-<tr>
-                        <td>&#x2716;</td>
-                        <td>Obstructive Sleep Apnea</td>
-                        <td>G47.33</td>
-                        <td>&#x2716;</td>
-                        <td>Obstructive Sleep Apnea</td>
-                        <td>G47.33</td>
-                        <td>&#x2716;</td>
-                        <td>Obstructive Sleep Apnea</td>
-                        <td>G47.33</td>
-                    </tr>
-                    <tr>
-                        <td>&#x2716;</td>
-                        <td>Obstructive Sleep Apnea</td>
-                        <td>G47.33</td>
-                        <td>&#x2716;</td>
-                        <td>Obstructive Sleep Apnea</td>
-                        <td>G47.33</td>
-                        <td>&#x2716;</td>
-                        <td>Obstructive Sleep Apnea</td>
-                        <td>G47.33</td>
-                    </tr>
-
-                    <tr class="bg-grey">
-                        <td></td>
-                        <td>SLEEP STUDIES</td>
-                    </tr>
-                    <tr>
-                        <td>&#x2716;</td>
-                        <td>Obstructive Sleep Apnea</td>
-                        <td>G47.33</td>
-                        <td>&#x2716;</td>
-                        <td>Obstructive Sleep Apnea</td>
-                        <td>G47.33</td>
-                        <td>&#x2716;</td>
-                        <td>Obstructive Sleep Apnea</td>
-                        <td>G47.33</td>
-                    </tr>
-                    <tr>
-                        <td>&#x2716;</td>
-                        <td>Obstructive Sleep Apnea</td>
-                        <td>G47.33</td>
-                        <td>&#x2716;</td>
-                        <td>Obstructive Sleep Apnea</td>
-                        <td>G47.33</td>
-                        <td>&#x2716;</td>
-                        <td>Obstructive Sleep Apnea</td>
-                        <td>G47.33</td>
-                    </tr>
-                    <tr>
-                        <td>&#x2716;</td>
-                        <td>Obstructive Sleep Apnea</td>
-                        <td>G47.33</td>
-                        <td>&#x2716;</td>
-                        <td>Obstructive Sleep Apnea</td>
-                        <td>G47.33</td>
-                        <td>&#x2716;</td>
-                        <td>Obstructive Sleep Apnea</td>
-                        <td>G47.33</td>
-                    </tr>
-
-                    <tr class="bg-grey">
-                        <td></td>
-                        <td>CPAP & SUPPLIES</td>
-                    </tr>
-                    <tr>
-                        <td>&#x2716;</td>
-                        <td>Obstructive Sleep Apnea</td>
-                        <td>G47.33</td>
-                        <td>&#x2716;</td>
-                        <td>Obstructive Sleep Apnea</td>
-                        <td>G47.33</td>
-                        <td>&#x2716;</td>
-                        <td>Obstructive Sleep Apnea</td>
-                        <td>G47.33</td>
-                    </tr>
-                    <tr>
-                        <td>&#x2716;</td>
-                        <td>Obstructive Sleep Apnea</td>
-                        <td>G47.33</td>
-                        <td>&#x2716;</td>
-                        <td>Obstructive Sleep Apnea</td>
-                        <td>G47.33</td>
-                        <td>&#x2716;</td>
-                        <td>Obstructive Sleep Apnea</td>
-                        <td>G47.33</td>
-                    </tr>
-                    <tr>
-                        <td>&#x2716;</td>
-                        <td>Obstructive Sleep Apnea</td>
-                        <td>G47.33</td>
-                        <td>&#x2716;</td>
-                        <td>Obstructive Sleep Apnea</td>
-                        <td>G47.33</td>
-                        <td>&#x2716;</td>
-                        <td>Obstructive Sleep Apnea</td>
-                        <td>G47.33</td>
-                    </tr>
-                    <tr>
-                        <td>&#x2716;</td>
-                        <td>Obstructive Sleep Apnea</td>
-                        <td>G47.33</td>
-                        <td>&#x2716;</td>
-                        <td>Obstructive Sleep Apnea</td>
-                        <td>G47.33</td>
-                        <td>&#x2716;</td>
-                        <td>Obstructive Sleep Apnea</td>
-                        <td>G47.33</td>
-                    </tr>
-                    <tr>
-                        <td>&#x2716;</td>
-                        <td>Obstructive Sleep Apnea</td>
-                        <td>G47.33</td>
-                        <td>&#x2716;</td>
-                        <td>Obstructive Sleep Apnea</td>
-                        <td>G47.33</td>
-                        <td>&#x2716;</td>
-                        <td>Obstructive Sleep Apnea</td>
-                        <td>G47.33</td>
-                    </tr>
-                    <tr>
-                        <td>&#x2716;</td>
-                        <td>Obstructive Sleep Apnea</td>
-                        <td>G47.33</td>
-                        <td>&#x2716;</td>
-                        <td>Obstructive Sleep Apnea</td>
-                        <td>G47.33</td>
-                        <td>&#x2716;</td>
-                        <td>Obstructive Sleep Apnea</td>
-                        <td>G47.33</td>
-                    </tr>
-                    <tr>
-                        <td>&#x2716;</td>
-                        <td>Obstructive Sleep Apnea</td>
-                        <td>G47.33</td>
-                        <td>&#x2716;</td>
-                        <td>Obstructive Sleep Apnea</td>
-                        <td>G47.33</td>
-                        <td>&#x2716;</td>
-                        <td>Obstructive Sleep Apnea</td>
-                        <td>G47.33</td>
-                    </tr>
-                    <tr>
-                        <td>&#x2716;</td>
-                        <td>Obstructive Sleep Apnea</td>
-                        <td>G47.33</td>
-                        <td>&#x2716;</td>
-                        <td>Obstructive Sleep Apnea</td>
-                        <td>G47.33</td>
-                        <td>&#x2716;</td>
-                        <td>Obstructive Sleep Apnea</td>
-                        <td>G47.33</td>
-                    </tr>
-                    <tr>
-                        <td>&#x2716;</td>
-                        <td>Obstructive Sleep Apnea</td>
-                        <td>G47.33</td>
-                        <td>&#x2716;</td>
-                        <td>Obstructive Sleep Apnea</td>
-                        <td>G47.33</td>
-                        <td>&#x2716;</td>
-                        <td>Obstructive Sleep Apnea</td>
-                        <td>G47.33</td>
-                    </tr>
-                </tbody>
-            </table>
-
-            <p>
-                Payment Type:
-                <span>&#x2716;</span>
-                Cash
-                <span>&#x2714;</span>
-                Cheque
-                <span>&#x2716;</span>
-                Credit Card
-            </p>
-
-            <p>
-                Total Amount:
-                <span>Data here</span>
-                Monthly Payment:
-                <span>Data here</span>
-            </p>
-
-            <p>
-                I HEREBY AUTHORIZE MY INSURANCE BENEFITS TO BE PAID DIRECTLY TO <span>Data here</span> AND I AM RESPONSIBLE
-                FOR ANY NON-COVERED SERVICES. I ALSO AUTHORIZE THE RELEASE OF ANY INFORMATION REQUIRED FOR THE PROCESSING OF
-                THE CLAIM.
-            </p>
-
-            <p id="notice">
-                <i>
-                    Advanced Clinic Testing LLC 4551 Pleasant Hill Rd, Kissimmee, FL 34746 Phone: (281) 693-5289
-                    Fax: (281)693-3111
-                </i>
-            </p>
-
-        </div>
-
-    </div>
-
-        <div><label>Physician Remarks:</label></div>
-        if (Model !=null && Model.PatientHistoryVM11 != null && Model.PatientHistoryVM11.PhysicianRemarks != null && Model.PatientHistoryVM11.PhysicianRemarks != "")
+    <div id="physicianRemarksTextBox">       
+        @if (Model != null && Model.PatientHistoryVM11 != null && Model.PatientHistoryVM11.isApprovedByPhysician != null && Model.PatientHistoryVM11.isApprovedByPhysician == true && Model.StaffNameVM != null && Model.StaffNameVM.PhycisianName != null)
         {
-        <input type="text" name="physicianRemarks" value="@Model.PatientHistoryVM11.PhysicianRemarks" />  }
-        else {
-        <input type="text" name="physicianRemarks" />
+        <h2>Approve by @Model.StaffNameVM.PhycisianName </h2>
         }
-        
-         <a class="popup w3-btn w3-orange" href="/Patients/physicianSignature/">Approve</a> 
-         <p id="Approvedbyphysician" style="display:none">Approved by physician</p>
-    <input type="submit" value="Convert To PDF Test Button" />   
+        else {
+            <label>Physician Remarks:</label>
+        <input type="text" name="physicianRemarks" id="physicianRemarksValue" />
+        <a class="popup w3-btn w3-orange" href="/Patients/physicianSignature/">Approve</a>
+        }
+    </div>
+    if (Model != null && Model.PatientHistoryVM11 != null && Model.PatientHistoryVM11.isApprovedByPhysician != null && Model.PatientHistoryVM11.isApprovedByPhysician == true && Model.StaffNameVM != null && Model.StaffNameVM.PhycisianName != null)
+    {  
+         <h2 id="Approvedbyphysician" style="display:none">Approve by @Model.StaffNameVM.PhycisianName </h2>
+    }
+  
          <div class="w3-row  w3-margin-top">
-            <button class="w3-btn-block w3-green submitForm" type="button" id="savephysicianData" style="display:none">Save</button>
+            <button class="w3-btn-block w3-green" type="button" id="savephysicianData" style="display:none">Save</button>
         </div>
 }
 <script>
@@ -586,14 +37,33 @@
         e.preventDefault();
         OpenPopup($(this).attr('href'), "", "physicianSignature");
     });
-    $("#btn_order_report").click(function () {
-        $("#order_form_report").css("display", "block");
-        $("#super_bill_report").css("display", "none");
-    });
+    //$("#btn_order_report").click(function () {
+    //    $("#order_form_report").css("display", "block");
+    //    $("#super_bill_report").css("display", "none");
+    //});
 
-    $("#btn_bill_report").click(function () {
-        $("#super_bill_report").css("display", "block");
-        $("#order_form_report").css("display", "none");
+    //$("#btn_bill_report").click(function () {
+    //    $("#super_bill_report").css("display", "block");
+    //    $("#order_form_report").css("display", "none");
+    //});
+    //submission form -------start-----------
+    $(document).find('#savephysicianData').on('click', function (e) {
+        var pHistoryId = $("#pHistoryId").val();
+        var physicianRemarks = $("#physicianRemarksVal").val();
+        console.log("the parent id is", pHistoryId);
+        $.ajax({
+            type: "POST",
+            url: "/Patients/PhysicianApproval/?pHistoryId=" + pHistoryId + "&physicianRemarks=" + physicianRemarks,
+           // data: $('#' + parentForm).serialize(),
+            success: function (data) {
+                console.log(data);
+                if (data) {
+                    alert("success");
+                    $("#Approvedbyphysician").css('display', 'block');
+                    $("#physicianRemarksTextBox").css('display', 'none');
+                }
+            }
+        })
     });
 </script>
  

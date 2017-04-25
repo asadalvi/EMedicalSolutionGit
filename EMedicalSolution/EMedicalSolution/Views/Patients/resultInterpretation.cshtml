@@ -2,18 +2,45 @@
 Result Interpretation by Specialist
 @using (Html.BeginForm("resultInterpretation", "Patients", FormMethod.Post, new { id = "resultInterpretation" }))
 {
-    <div class="pre-scrollable">       
- 
-    <div><label>Specialist Remarks:</label></div>
-        @if (Model.PatientHistoryVM11 != null && Model.PatientHistoryVM11.SpecialistRemarks != null && Model.PatientHistoryVM11.SpecialistRemarks != "")
-        {
-            <input type="text" name="specialistRemarks" value="@Model.PatientHistoryVM11.SpecialistRemarks" />  }
-        else {
-            <input type="text" name="specialistRemarks" />
-        }
-</div>   
+    <div class="pre-scrollable"> 
+           
+        <div id="specialistRemarksTextBox">
+            @if (Model != null && Model.PatientHistoryVM11 != null && Model.PatientHistoryVM11.isApprovedBySpecialist != null && Model.PatientHistoryVM11.isApprovedBySpecialist == true)
+            {
+                <h2>Approve by [Specialist Name] </h2>
+            }
+            else {
+                <label>Specialist Remarks:</label>
+                <input type="text" name="specialistRemarks" id="specialistRemarksValue" />
+                @*<a class="popup w3-btn w3-orange" href="/Patients/physicianSignature/">Approve</a>*@
+            }
+        </div>
+        <h2 id="ApprovedbySpecialist" style="display:none">Approve by [Specialist Name]</h2>
+  </div>   
     @*<input type="submit" value="Convert To PDF" />*@
     <div class="w3-row  w3-margin-top">
-        <button class="w3-btn-block w3-green submitForm" type="button">Save</button>
+        <button class="w3-btn-block w3-green" id="saveSpecialistData" type="button">Save</button>
     </div>
     }
+<script>
+
+    //submission form -------start-----------
+    $(document).find('#saveSpecialistData').on('click', function (e) {
+        var pHistoryId = $("#pHistoryId").val();
+        var specialistRemarks = $("#specialistRemarksValue").val();
+        console.log("the parent id is", pHistoryId);
+        $.ajax({
+            type: "POST",
+            url: "/Patients/resultInterpretation/?pHistoryId=" + pHistoryId + "&specialistRemarks=" + specialistRemarks,
+           // data: $('#' + parentForm).serialize(),
+            success: function (data) {
+                console.log(data);
+                if (data) {
+                    alert("success");
+                    $("#ApprovedbySpecialist").css('display', 'block');
+                    $("#specialistRemarksTextBox").css('display', 'none');
+                }
+            }
+        })
+    });
+</script>
