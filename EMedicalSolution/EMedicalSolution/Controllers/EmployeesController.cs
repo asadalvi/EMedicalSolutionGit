@@ -9,32 +9,36 @@ using EMedicalSolution.Models;
 
 namespace EMedicalSolution.Controllers
 {
-    public class UsersController : Controller
+    public class EmployeesController : Controller
     {
         PatientMgmtEntities db = new PatientMgmtEntities();
         //
-        // GET: /Users/
+        // GET: /Employees/
 
-        public ActionResult UsersList()
+        public ActionResult EmployeesList()
         {
-            var users = db.Users.Include(ur => ur.Staff).Include(u => u.UserRole).OrderBy(a => a.ID).ToList();
-            return View(users);
+            var Employees = db.Staffs.OrderBy(a => a.ID).ToList();
+            return View(Employees);
         }
 
         //For Ajax Call -- Not using right now
-        public ActionResult GetUsers()
+        public ActionResult GetEmployees()
         {
             PatientMgmtEntities db = new PatientMgmtEntities();
             {
-                var users = db.Users.Include(ur => ur.Staff).Include(u => u.UserRole).OrderBy(a => a.ID).ToList();
+                var Employees = db.Staffs.Include(o => o.Office).OrderBy(a => a.ID).ToList();
                 return Json(new
                 {
-                    data = users.Select(e => new
+                    data = Employees.Select(e => new
                     {
                         e.ID,
-                        e.Username,
-                        Name = e.Staff.FirstName + " " + e.Staff.LastName,
-                        Role = e.UserRole.Title,
+                        Name = e.FirstName + " " + e.LastName,
+                        e.Gender,
+                        e.DOB,
+                        e.Tel,
+                        e.Email,
+                        e.IDNumber,
+                        OfficeName = e.Office.Title,
                         e.Created
                     }
                     )
@@ -43,26 +47,23 @@ namespace EMedicalSolution.Controllers
         }
 
         [HttpGet]
-        public ActionResult SaveUser(int id)
+        public ActionResult SaveEmployee(int id)
         {
             PatientMgmtEntities db = new PatientMgmtEntities();
-            var v = db.Users.Include(ur => ur.Staff).Include(u => u.UserRole).Where(a => a.ID == id).FirstOrDefault();
+            var v = db.Staffs.Where(a => a.ID == id).FirstOrDefault();
             if (id > 0)
             {
-                ViewBag.RoleID = new SelectList(db.UserRoles, "ID", "Title", v.RoleID);
-                ViewBag.StaffID = new SelectList(db.Staffs, "ID", "FirstName", v.StaffID);
+                ViewBag.OfficeID = new SelectList(db.Offices, "ID", "Title", v.OfficeID);
             }
             else
             {
-                ViewBag.RoleID = new SelectList(db.UserRoles, "ID", "Title");
-                ViewBag.StaffID = new SelectList(db.Staffs, "ID", "FirstName");
+                ViewBag.OfficeID = new SelectList(db.Offices, "ID", "Title");
             }
             return View(v);
-
         }
 
         [HttpPost]
-        public ActionResult SaveUser(User user)
+        public ActionResult SaveEmployee(Staff oStaff)
         {
             bool status = false;
 
@@ -70,16 +71,20 @@ namespace EMedicalSolution.Controllers
             {
                 using (PatientMgmtEntities db = new PatientMgmtEntities())
                 {
-                    if (user.ID > 0)
+                    if (oStaff.ID > 0)
                     {
                         //edit 
-                        var v = db.Users.Where(a => a.ID == user.ID).FirstOrDefault();
+                        var v = db.Staffs.Where(a => a.ID == oStaff.ID).FirstOrDefault();
                         if (v != null)
                         {
-                            v.Username = user.Username;
-                            v.Password = user.Password;
-                            v.RoleID = user.RoleID;
-                            v.StaffID = user.StaffID;
+                            v.FirstName = oStaff.FirstName;
+                            v.LastName = oStaff.LastName;
+                            v.DOB = oStaff.DOB;
+                            v.Gender = oStaff.Gender;
+                            v.IDNumber = oStaff.IDNumber;
+                            v.Email = oStaff.Email;
+                            v.Tel = oStaff.Tel;
+                            v.OfficeID = oStaff.OfficeID;
                             v.Modified = DateTime.Now;
                             v.ModifiedBy = 1;
                         }
@@ -87,23 +92,23 @@ namespace EMedicalSolution.Controllers
                     else
                     {
                         //save
-                        user.Created = DateTime.Now;
-                        user.CreatedBy = 1;
-                        db.Users.Add(user);
+                        oStaff.Created = DateTime.Now;
+                        oStaff.CreatedBy = 1;
+                        db.Staffs.Add(oStaff);
                     }
                     db.SaveChanges();
                     status = true;
                 }
 
             }
-            //return RedirectToAction("UsersList");
+            //return RedirectToAction("EmployeesList");
             return new JsonResult { Data = new { status = status } };
         }
 
         [HttpGet]
-        public ActionResult DeleteUser(int id)
+        public ActionResult DeleteEmployee(int id)
         {
-            var v = db.Users.Where(a => a.ID == id).FirstOrDefault();
+            var v = db.Staffs.Where(a => a.ID == id).FirstOrDefault();
             if (v != null)
             {
                 return View(v);
@@ -115,15 +120,15 @@ namespace EMedicalSolution.Controllers
         }
 
         [HttpPost]
-        [ActionName("DeleteUser")]
-        public ActionResult DeleteUserDeleteUser(int id)
+        [ActionName("DeleteEmployee")]
+        public ActionResult ConfirmDeleteEmployee(int id)
         {
             bool status = false;
 
-            var v = db.Users.Where(a => a.ID == id).FirstOrDefault();
+            var v = db.Staffs.Where(a => a.ID == id).FirstOrDefault();
             if (v != null)
             {
-                db.Users.Remove(v);
+                db.Staffs.Remove(v);
                 db.SaveChanges();
                 status = true;
             }

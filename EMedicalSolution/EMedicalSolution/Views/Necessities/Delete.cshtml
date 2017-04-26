@@ -1,0 +1,36 @@
+﻿@model EMedicalSolution.Models.MedicalNecessity
+
+<h2>Delete Medical Necessities</h2>
+
+@using (Html.BeginForm("Delete", "Necessities", FormMethod.Post, new { id = "popupForm" }))
+{
+    @Html.HiddenFor(a => a.ID)
+    <div class="w3-row w3-margin-top">
+        <div class="w3-half">
+            <b>ID</b>
+        </div>
+        <div class="w3-half">
+            @Model.ID
+        </div>
+    </div>
+    <div class="w3-row w3-margin-top">
+        <div class="w3-half">
+            <b>ICD 10 Code</b>
+        </div>
+        <div class="w3-half">
+            @Model.ICD10Code
+        </div>
+    </div>
+    <div class="w3-row w3-margin-top">
+        <div class="w3-half">
+            <b>Description</b>
+        </div>
+        <div class="w3-half">
+            @Model.Description
+        </div>
+    </div>
+
+    <div class="w3-row w3-margin-top">
+        <input class="w3-btn-block w3-red" type="submit" value="Delete" />
+    </div>
+}

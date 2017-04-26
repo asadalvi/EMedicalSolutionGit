@@ -7,7 +7,7 @@ using EMedicalSolution.Models;
 
 namespace EMedicalSolution.Controllers
 {
-    public class SymptomsController : Controller
+    public class ProcedureTypesController : Controller
     {
         //
         // GET: /Home/
@@ -17,14 +17,14 @@ namespace EMedicalSolution.Controllers
             return View();
         }
 
-        public ActionResult GetSymptoms()
+        public ActionResult GetProcedureTypes()
         {
             PatientMgmtEntities db = new PatientMgmtEntities();
             {
-                var oSymptoms = db.Symptoms.OrderBy(a => a.Title).ToList();
+                var oProcedureTypes = db.ProcedureTypes.OrderBy(a => a.Title).ToList();
                 return Json(new
                 {
-                    data = oSymptoms.Select(s => new
+                    data = oProcedureTypes.Select(s => new
                     {
                         s.ID,
                         s.Title,
@@ -40,14 +40,14 @@ namespace EMedicalSolution.Controllers
         {
             using (PatientMgmtEntities db = new PatientMgmtEntities())
             {
-                var v = db.Symptoms.Where(a => a.ID == id).FirstOrDefault();
+                var v = db.ProcedureTypes.Where(a => a.ID == id).FirstOrDefault();
                 return View(v);
             }
 
         }
 
         [HttpPost]
-        public ActionResult Save(Symptom symptom)
+        public ActionResult Save(ProcedureType oProcedureType)
         {
             bool status = false;
 
@@ -55,13 +55,13 @@ namespace EMedicalSolution.Controllers
             {
                 using (PatientMgmtEntities db = new PatientMgmtEntities())
                 {
-                    if (symptom.ID > 0)
+                    if (oProcedureType.ID > 0)
                     {
                         //edit 
-                        var v = db.Symptoms.Where(a => a.ID == symptom.ID).FirstOrDefault();
+                        var v = db.ProcedureTypes.Where(a => a.ID == oProcedureType.ID).FirstOrDefault();
                         if (v != null)
                         {
-                            v.Title = symptom.Title;
+                            v.Title = oProcedureType.Title;
                             v.Created = DateTime.Now;
                             v.CreatedBy = 1;
                         }
@@ -70,9 +70,9 @@ namespace EMedicalSolution.Controllers
                     else
                     {
                         //save
-                        symptom.Created = DateTime.Now;
-                        symptom.CreatedBy = 1;
-                        db.Symptoms.Add(symptom);
+                        oProcedureType.Created = DateTime.Now;
+                        oProcedureType.CreatedBy = 1;
+                        db.ProcedureTypes.Add(oProcedureType);
                     }
                     db.SaveChanges();
                     status = true;
@@ -87,7 +87,7 @@ namespace EMedicalSolution.Controllers
         {
             using (PatientMgmtEntities db = new PatientMgmtEntities())
             {
-                var v = db.Symptoms.Where(a => a.ID == id).FirstOrDefault();
+                var v = db.ProcedureTypes.Where(a => a.ID == id).FirstOrDefault();
                 if (v != null)
                 {
                     return View(v);
@@ -106,10 +106,10 @@ namespace EMedicalSolution.Controllers
             bool status = false;
             using (PatientMgmtEntities db = new PatientMgmtEntities())
             {
-                var v = db.Symptoms.Where(a => a.ID == id).FirstOrDefault();
+                var v = db.ProcedureTypes.Where(a => a.ID == id).FirstOrDefault();
                 if (v != null)
                 {
-                    db.Symptoms.Remove(v);
+                    db.ProcedureTypes.Remove(v);
                     db.SaveChanges();
                     status = true;
                 }

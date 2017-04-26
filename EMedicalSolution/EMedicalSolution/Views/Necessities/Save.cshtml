@@ -1,0 +1,31 @@
+﻿@model EMedicalSolution.Models.MedicalNecessity
+
+<h2>Save</h2>
+
+@using (Html.BeginForm("save", "Necessities", FormMethod.Post, new { id = "popupForm" }))
+{
+    if (Model != null && Model.ID > 0)
+    {
+    @Html.HiddenFor(a => a.ID)
+    }
+        <div class="w3-row w3-margin-top">
+        <label class="w3-text-green">ID</label>
+        @Html.TextBoxFor(a => a.ID, new { @class = "w3-input w3-border", Readonly="readonly" })
+        @Html.ValidationMessageFor(a => a.ID)
+    </div>
+    <div class="w3-row w3-margin-top">
+        <label class="w3-text-green">ICD10Code</label>
+        @Html.TextBoxFor(a => a.ICD10Code, new { @class = "w3-input w3-border" })
+        @Html.ValidationMessageFor(a => a.ICD10Code)
+    </div>
+
+    <div class="w3-row w3-margin-top">
+        <label class="w3-text-green">Description</label>
+        @Html.TextAreaFor(a => a.Description, new { @class = "w3-input w3-border" })
+        @Html.ValidationMessageFor(a => a.Description)
+    </div>
+
+    <div class="w3-row  w3-margin-top">
+        <input class="w3-btn-block w3-green" type="submit" value="Save" />
+    </div>
+}

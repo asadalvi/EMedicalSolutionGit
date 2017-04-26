@@ -22,7 +22,16 @@ namespace EMedicalSolution.Controllers
             PatientMgmtEntities db = new PatientMgmtEntities();
             {
                 var InterferingConditions = db.InterferingConditions.OrderBy(a => a.Title).ToList();
-                return Json(new { data = InterferingConditions }, JsonRequestBehavior.AllowGet);
+                return Json(new
+                {
+                    data = InterferingConditions.Select(ic => new
+                    {
+                        ic.ID,
+                        ic.Title,
+                        ic.Created,
+
+                    })
+                }, JsonRequestBehavior.AllowGet);
             }
         }
 
@@ -53,7 +62,7 @@ namespace EMedicalSolution.Controllers
                         if (v != null)
                         {
                             v.Title = condition.Title;
-                             v.Created = DateTime.Now;
+                            v.Created = DateTime.Now;
                             v.CreatedBy = 1;
                         }
 

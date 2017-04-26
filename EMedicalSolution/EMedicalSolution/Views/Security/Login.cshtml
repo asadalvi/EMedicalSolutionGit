@@ -16,14 +16,15 @@
                 @if (ViewData["Error"] != null)
                 {
                     <div class="w3-panel w3-red">
-                    <label id="lblError" >@ViewData["Error"].ToString()</label></div>
+                        <label id="lblError">@ViewData["Error"].ToString()</label>
+                    </div>
                 }
 
                 <input class="w3-input w3-border w3-margin-bottom" type="text" placeholder="Enter UserName"
-                    name="userName" required="required">
+                       name="userName" required="required">
 
                 <input class="w3-input w3-border" type="password" placeholder="Enter Password" name="password"
-                    required="required">
+                       required="required">
 
                 <div class="w3-margin-top">
                     <label><b>Role:</b></label>
@@ -32,12 +33,12 @@
                 <div class="w3-row w3-margin-top">
 
                     <div class="w3-half">
-                        <input class="w3-radio" type="radio" name="role" value="1">
+                        <input class="w3-radio" type="radio" name="role" value="1" required>
                         <label class="w3-validate">Assistant</label>
                     </div>
 
                     <div class="w3-half">
-                        <input class="w3-radio" type="radio" name="role" value="2">
+                        <input class="w3-radio" type="radio" name="role" value="2" required>
                         <label class="w3-validate">Physician</label>
                     </div>
 
@@ -48,12 +49,12 @@
                 <div class="w3-row w3-margin-top w3-margin-bottom">
 
 
-                     <div class="w3-half">
-                        <input class="w3-radio" type="radio" name="role" value="3">
+                    <div class="w3-half">
+                        <input class="w3-radio" type="radio" name="role" value="3" required>
                         <label class="w3-validate">Specialist</label>
                     </div>
                     <div class="w3-half">
-                        <input class="w3-radio" type="radio" name="role" value="4">
+                        <input class="w3-radio" type="radio" name="role" value="4" required>
                         <label class="w3-validate">Admin</label>
                     </div>
                 </div>

@@ -1,0 +1,154 @@
+﻿@*@model IEnumerable<EMedicalSolution.Models.Staff>*@
+@{
+    ViewBag.Title = "Employees Management";
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
+}
+
+
+<div class="w3-container tablecontainer dashboardDiv" id="users-tab">
+    <div class="w3-center w3-dark-gray">
+        <h2>Employees Management</h2>
+    </div>
+    <div class="w3-row w3-padding-16">
+        <div class="w3-row w3-padding-16">
+            @Html.ActionLink("+ Add Employee", "SaveEmployee", "Employees", new { id = 0 }, new { @class = "popup w3-btn w3-green" })
+        </div>
+        <div class="w3-responsive">
+            <table class="w3-table-all w3-hoverable" id="employeesDataTable">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Gender</th>
+                        <th>DOB</th>
+                        <th>ID #</th>
+                        <th>Tel</th>
+                        <th>Email</th>
+                        <th>Office</th>
+                        <th>Created</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @*@foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ID)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.FirstName)
+                                @Html.DisplayFor(modelItem => item.LastName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Gender)
+                            </td>
+
+                            <td>
+                                @Html.DisplayFor(modelItem => item.DOB)
+                            </td>
+
+                            <td>
+                                @Html.DisplayFor(modelItem => item.IDNumber)
+                            </td>
+
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Tel)
+                            </td>
+
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Email)
+                            </td>
+
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Office.Title)
+                            </td>
+                            
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Created)
+                            </td>
+                            <td>
+                                @Html.ActionLink("Edit", "SaveEmployee", new { id = item.ID }, new { @class = "popup w3-btn w3-orange" }) 
+                            </td>
+                            <td>
+                                @Html.ActionLink("Delete", "deleteEmployee", new { id = item.ID }, new { @class = "popup w3-btn w3-red" }) 
+                            </td>
+                        </tr>
+                    }*@
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    <link href="~/Content/buttons.dataTables.min.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/Scripts/jquery.dataTables.min.js"></script>
+    <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+    <script src="~/Scripts/date.format.js"></script>
+
+    <script src="~/Scripts/DataTable/buttons.html5.min.js"></script>
+    <script src="~/Scripts/DataTable/buttons.print.min.js"></script>
+    <script src="~/Scripts/DataTable/dataTables.buttons.min.js"></script>
+    <script src="~/Scripts/DataTable/jszip.min.js"></script>
+    <script src="~/Scripts/DataTable/pdfmake.min.js"></script>
+    <script src="~/Scripts/DataTable/vfs_fonts.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            var oTable = $("#employeesDataTable").DataTable({
+                "ajax": {
+                    "url": '/Employees/GetEmployees',
+                    "type": 'get',
+                    "datatype": "json"
+                },
+                "columns": [
+                    { "data": "ID", "autoWidth": true },
+                    { "data": "Name", "autoWidth": true },
+                    { "data": "Gender", "autoWidth": true },
+                    {
+                        "data": "DOB", "autoWidth": true, "render": function (data) {
+                            var date = new Date(parseInt(data.substr(6)));
+                            var sdate = date.format("mmm d, yyyy");
+                            return sdate;
+                        }
+                    },
+                    { "data": "IDNumber", "autoWidth": true },
+                    { "data": "Tel", "autoWidth": true },
+                    { "data": "Email", "autoWidth": true },
+                    
+                    { "data": "OfficeName", "autoWidth": true },
+                    {
+                        "data": "Created", "autoWidth": true, "render": function (data) {
+                            var date = new Date(parseInt(data.substr(6)));
+                            var sdate = date.format("mmm d, yyyy");
+                            return sdate;
+                        }
+                    },
+                    {
+                        "data": "ID", "render": function (data) {
+                            return '<a class="popup w3-btn w3-orange" href="/Employees/saveEmployee/' + data + '">Edit<a>';
+                        }
+                    },
+                    {
+                        "data": "ID", "render": function (data) {
+                            return '<a class="popup  w3-btn w3-red" href="/Employees/deleteEmployee/' + data + '">Delete<a>';
+                        }
+                    }
+                ]
+            });
+
+            $('.tablecontainer').on('click', 'a.popup', function (e) {
+                e.preventDefault();
+                OpenPopup($(this).attr('href'), oTable, "Employee");
+            });
+        });
+    </script>
+}
+
+
+

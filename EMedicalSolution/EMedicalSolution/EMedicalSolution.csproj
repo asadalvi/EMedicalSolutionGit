@@ -119,8 +119,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\DiseasesController.cs" />
+    <Compile Include="Controllers\EmployeesController.cs" />
+    <Compile Include="Controllers\NecessitiesController.cs" />
     <Compile Include="Controllers\OfficesController.cs" />
     <Compile Include="Controllers\InterferringConditionsController.cs" />
+    <Compile Include="Controllers\ProcedureTypesController.cs" />
     <Compile Include="Controllers\SymtomsController.cs" />
     <Compile Include="Controllers\SecurityController.cs" />
     <Compile Include="Controllers\PatientsController.cs" />
@@ -275,6 +279,7 @@
     <Content Include="Content\wizard\smart_wizard_theme_arrows.css" />
     <Content Include="Content\wizard\smart_wizard_theme_circles.css" />
     <Content Include="Content\wizard\smart_wizard_theme_dots.css" />
+    <Content Include="favicon.ico" />
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -385,6 +390,18 @@
     <Content Include="Views\Patients\patientView.cshtml" />
     <Content Include="Views\Patients\orderReport.cshtml" />
     <Content Include="Views\Patients\orderBill.cshtml" />
+    <Content Include="Views\ProcedureTypes\Delete.cshtml" />
+    <Content Include="Views\ProcedureTypes\Index.cshtml" />
+    <Content Include="Views\ProcedureTypes\Save.cshtml" />
+    <Content Include="Views\Necessities\Delete.cshtml" />
+    <Content Include="Views\Necessities\Index.cshtml" />
+    <Content Include="Views\Necessities\Save.cshtml" />
+    <Content Include="Views\Employees\DeleteEmployee.cshtml" />
+    <Content Include="Views\Employees\EmployeesList.cshtml" />
+    <Content Include="Views\Employees\SaveEmployee.cshtml" />
+    <Content Include="Views\Diseases\Delete.cshtml" />
+    <Content Include="Views\Diseases\Index.cshtml" />
+    <Content Include="Views\Diseases\Save.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

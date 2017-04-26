@@ -1,24 +1,25 @@
 ﻿@{
-    ViewBag.Title = "Interfering Conditions";
+    ViewBag.Title = "Medical Necessities";
     Layout = "~/Views/Shared/_UserLayout.cshtml";
 }
 
 
-<div class="w3-container tablecontainer dashboardDiv" id="InterferingConditions-tab">
+<div class="w3-container tablecontainer dashboardDiv" id="necessity-tab">
     <div class="w3-center w3-dark-gray">
-        <h2>Interfering Conditions</h2>
+        <h2>Medical Necessities</h2>
     </div>
     <div class="w3-row w3-padding-16">
 
         <div class="w3-row w3-padding-16">
-            @Html.ActionLink("+ Add Condition", "Save", "InterferingConditions", new { id = 0 }, new { @class = "popup w3-btn w3-green" })
+            @Html.ActionLink("+ Add Necessity", "Save", "Necessities", new { id = 0 }, new { @class = "popup w3-btn w3-green" })
         </div>
         <div class="w3-responsive">
-            <table class="w3-table-all w3-hoverable" id="InterferingConditionsDataTable">
+            <table class="w3-table-all w3-hoverable" id="NecessitiesDataTable">
                 <thead>
                     <tr>
-                        <th>Condition ID</th>
-                        <th>Title</th>
+                        <th>Disease ID</th>
+                        <th>ICD10Code</th>                        
+                        <th>Description</th>
                         <th>Created</th>
                         <th>Edit</th>
                         <th>Delete</th>
@@ -43,15 +44,16 @@
 
     <script>
         $(document).ready(function () {
-            var oTable = $("#InterferingConditionsDataTable").DataTable({
+            var oTable = $("#NecessitiesDataTable").DataTable({
                 "ajax": {
-                    "url": '/InterferingConditions/GetInterferingConditions',
+                    "url": '/Necessities/GetNecessities',
                     "type": 'get',
                     "datatype": "json"
                 },
                 "columns": [
                     { "data": "ID", "autoWidth": true },
-                    { "data": "Title", "autoWidth": true },
+                    { "data": "ICD10Code", "autoWidth": true },
+                    { "data": "Description", "autoWidth": true },
                     {
                         "data": "Created", "autoWidth": true, "render": function (data) {
                             var date = new Date(parseInt(data.substr(6)));
@@ -59,15 +61,15 @@
                             return sdate;
                         }
                     },
-
+                   
                     {
                         "data": "ID", "render": function (data) {
-                            return '<a class="popup w3-btn w3-orange" href="/InterferingConditions/save/' + data + '">Edit<a>';
+                            return '<a class="popup w3-btn w3-orange" href="/Necessities/save/' + data + '">Edit<a>';
                         }
                     },
                     {
                         "data": "ID", "render": function (data) {
-                            return '<a class="popup  w3-btn w3-red" href="/InterferingConditions/delete/' + data + '">Delete<a>';
+                            return '<a class="popup  w3-btn w3-red" href="/Necessities/delete/' + data + '">Delete<a>';
                         }
                     }
                 ]
@@ -75,7 +77,7 @@
 
             $('.tablecontainer').on('click', 'a.popup', function (e) {
                 e.preventDefault();
-                OpenPopup($(this).attr('href'), oTable, "Interfering Conditions");
+                OpenPopup($(this).attr('href'), oTable, "Medical Necessities");
             });
         });
     </script>

@@ -1,0 +1,79 @@
+﻿@model EMedicalSolution.Models.Staff
+
+<h2>Save</h2>
+
+@using (Html.BeginForm("SaveEmployee", "Employees", FormMethod.Post, new { id = "popupForm" }))
+{
+    if (Model != null && Model.ID > 0)
+    {
+    @Html.HiddenFor(a => a.ID)
+    }
+    
+    <div class="w3-row w3-margin-top">
+        <label class="w3-text-green">First Name</label>
+        @Html.TextBoxFor(a => a.FirstName, new { @class = "w3-input w3-border" })
+        @Html.ValidationMessageFor(a => a.FirstName)
+    </div>
+    <div class="w3-row w3-margin-top">
+        <label class="w3-text-green">Last Name</label>
+        @Html.TextBoxFor(a => a.LastName, new { @class = "w3-input w3-border"})
+        @Html.ValidationMessageFor(a => a.LastName)
+    </div>
+
+    <div class="w3-row w3-margin-top">
+        <label class="w3-text-green">DOB</label>
+        @Html.TextBoxFor(a => a.DOB, new { @class = "w3-input w3-border" })
+        @Html.ValidationMessageFor(a => a.DOB)
+    </div>
+
+    <div class="w3-row w3-margin-top">
+        <label class="w3-text-green">Gender</label>
+        <select name="Gender" required="required">
+            <option>Select Gender</option>
+            @if (Model != null && Model.Gender.ToString().Trim() == "Male")
+            {
+                <option selected="selected">Male</option>
+                        <option>Female</option>
+            }
+            else if (Model != null && Model.Gender.ToString().Trim() == "Female")
+            {
+                <option>Male</option>
+                        <option selected="selected">Female</option>
+            }
+            else
+            {
+                <option>Male</option>
+                <option>Female</option>
+            }
+        </select>
+
+        @Html.ValidationMessageFor(a => a.Gender    )
+    </div>
+    <div class="w3-row w3-margin-top">
+        <label class="w3-text-green">ID Number</label>
+        @Html.TextBoxFor(a => a.IDNumber, new { @class = "w3-input w3-border" })
+        @Html.ValidationMessageFor(a => a.IDNumber)
+    </div>
+
+    <div class="w3-row w3-margin-top">
+        <label class="w3-text-green">Tel</label>
+        @Html.TextBoxFor(a => a.Tel, new { @class = "w3-input w3-border" })
+        @Html.ValidationMessageFor(a => a.Tel)
+    </div>
+
+    <div class="w3-row w3-margin-top">
+        <label class="w3-text-green">Email</label>
+        @Html.TextBoxFor(a => a.Email, new { @class = "w3-input w3-border" })
+        @Html.ValidationMessageFor(a => a.Email)
+    </div>
+
+    <div class="w3-row w3-margin-top">
+        <label class="w3-text-green">Office</label>
+        @Html.DropDownList("OfficeID", "Select Office")
+        @Html.ValidationMessageFor(a => a.OfficeID)
+    </div>
+  
+    <div class="w3-row  w3-margin-top">
+        <input class="w3-btn-block w3-green" type="submit" value="Save" />
+    </div>
+}

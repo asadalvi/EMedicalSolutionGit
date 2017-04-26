@@ -56,7 +56,7 @@
         </button>
         <span class="w3-left" style="font-size: 24px">
             <a href="~/Home/Dashboard"><i class="fa fa-heartbeat"></i></a> E-Medical Solution
-            </span>
+        </span>
         <span class="w3-right"><a href="~/Security/Logout"><i class="fa fa-sign-out"></i>Logout</a></span>
     </div>
 
@@ -65,54 +65,59 @@
         <br>
         <div class="w3-container w3-row">
             <div class="w3-col s4">
-@*                @if (Session["Image"] != null)
-                {z
-                    <img src="@Url.Content("~/images/" + Session["role"].ToString() + "/" + System.IO.Path.GetFileName(Session["Image"].ToString()))" alt="Image" style="width: 46px" />
-                }
-                else
-                {
-                    *@
+                @*                @if (Session["Image"] != null)
+                    {z
+                        <img src="@Url.Content("~/images/" + Session["role"].ToString() + "/" + System.IO.Path.GetFileName(Session["Image"].ToString()))" alt="Image" style="width: 46px" />
+                    }
+                    else
+                    {
+                *@
                 <img src="~/images/avatar.jpg" class="w3-circle w3-margin-right" style="width: 46px">
                 @*}*@
             </div>
             <div class="w3-col s8 w3-margin-top">
-                <span>Welcome <strong>@if (Session["Name"] != null)
-                                      { 
-                    @Session["Name"].ToString();
-                                      }
-                                      else
-                                      {
-                                          if (!Response.IsRequestBeingRedirected)
-                                          {
-                                              Response.Redirect("../../Security/Login");
-                                          }
-                                      }</strong></span><br>
-            </div>
+                <span>
+                    Welcome <strong>
+                        @if (Session["Name"] != null)
+                    {
+                        @Session["Name"].ToString();
+                    }
+                    else
+                    {
+                        if (!Response.IsRequestBeingRedirected)
+                        {
+                            Response.Redirect("../../Security/Login");
+                        }
+                    }
+                </strong>
+            </span><br>
         </div>
-        <hr>
-        <a href="#" class="w3-padding-16 w3-hide-large w3-dark-grey w3-hover-black" onclick="w3_close()" title="close menu"><i
-            class="fa fa-remove"></i>Close Menu</a>
-        @if (Session["role"] != null)
+    </div>
+    <hr>
+    <a href="#" class="w3-padding-16 w3-hide-large w3-dark-grey w3-hover-black" onclick="w3_close()" title="close menu">
+        <i class="fa fa-remove"></i>Close Menu
+    </a>
+    @if (Session["role"] != null)
+    {
+        if (Session["role"].ToString() == "4")
         {
-            if (Session["role"].ToString() == "4")
-            { 
             <a href="~/Patients/Wizard" class="w3-padding"><i class="fa fa-wheelchair"></i>Patients Wizard</a>
             <a href="~/Patients/Index" class="w3-padding"><i class="fa fa-wheelchair"></i>Patients</a>
+            <a href="~/Patient/Index" class="w3-padding"><i class="fa fa-user"></i>Profile</a>
             <a href="~/Symptoms/Index" class="w3-padding"><i class="fa fa-newspaper-o"></i>Symptoms</a>
             <a href="~/Diseases/Index" class="w3-padding"><i class="fa fa-newspaper-o"></i>Diseases</a>
-            <a href="~/Conditions/Index" class="w3-padding"><i class="fa fa-newspaper-o"></i>Interferring Conditions</a>
-            <a href="~/Patients/Index" class="w3-padding"><i class="fa fa-newspaper-o"></i>Medical Necessities</a>
-            <a href="~/Patients/Index" class="w3-padding"><i class="fa fa-newspaper-o"></i>Procedure Types</a>
+            <a href="~/InterferingConditions/Index" class="w3-padding"><i class="fa fa-newspaper-o"></i>Interferring Conditions</a>
+            <a href="~/Necessities/Index" class="w3-padding"><i class="fa fa-newspaper-o"></i>Medical Necessities</a>
+            <a href="~/ProcedureTypes/Index" class="w3-padding"><i class="fa fa-newspaper-o"></i>Procedure Types</a>
             <a href="~/Offices/Index" class="w3-padding"><i class="fa fa-building"></i>Offices</a>
-            <a href="~/Users/UsersList" class="w3-padding"><i class="fa fa-users"></i>Staff</a>
+            <a href="~/Employees/EmployeesList" class="w3-padding"><i class="fa fa-users"></i>Staff</a>
             <a href="~/Users/UsersList" class="w3-padding"><i class="fa fa-users"></i>Users Management</a>
             <a href='~/Doctor/ProfileInfo' class="w3-padding"><i class="fa fa-user"></i>Profile</a>
             <a href="~/Doctor/ScheduleList" class="w3-padding"><i class="fa fa-calendar"></i>Schedule</a>
-            <a href="#" class="w3-padding"><i class="fa fa-video-camera"></i>Video Conference</a>
             <a onclick="document.getElementById('video-modal').style.display='block'">Launch video</a>
-            }
-            else if (Session["role"].ToString() == "2")
-            {
+        }
+        else if (Session["role"].ToString() == "2")
+        {
             <a href="~/Patient/Index" class="w3-padding"><i class="fa fa-user"></i>Patients</a>
             <a href="~/Appointment/Index" class="w3-padding"><i class="fa fa-calendar"></i>Appointments</a>
             <a href="~/Doctor/Index" class="w3-padding"><i class="fa fa-user-md"></i>Doctors</a>
@@ -120,53 +125,51 @@
             <a href="~/Lab/Index" class="w3-padding"><i class="fa fa-flask"></i>Laboratories</a>
             <a href="~/Events/Index" class="w3-padding"><i class="fa fa-newspaper-o"></i>Events</a>
             <a href="~/Consent/Index" class="w3-padding"><i class="fa fa-upload"></i>Upload Consent Form</a>
-            }
-            else if (Session["role"].ToString() == "3")
-            { 
+        }
+        else if (Session["role"].ToString() == "3")
+        {
             <a href="~/Pharmacy/PrescriptionsToProcess" class="w3-padding"><i class="fa fa-medkit"></i>Prescriptions</a>
-            }
-            else if (Session["role"].ToString() == "4")
-            { 
+        }
+        else if (Session["role"].ToString() == "4")
+        {
             <a href="~/Lab/SuggestedTestsList" class="w3-padding"><i class="fa fa-flask"></i>Tests</a>
-            }
-            else if (Session["role"].ToString() == "patient")
-            { 
+        }
+        else if (Session["role"].ToString() == "patient")
+        {
             <a href="~/Appointment/Index" class="w3-padding"><i class="fa fa-calendar"></i>Appointments</a>
             <a href="~/Patient/HistoryList" class="w3-padding"><i class="fa fa-history"></i>History</a>
             <a href="#" class="w3-padding"><i class="fa fa-video-camera"></i>Video Conference</a>
-            }
         }
+    }
 
-    </nav>
-
-
-    <!-- Overlay effect when opening sidenav on small screens -->
-    <div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor: pointer"
-        title="close side menu" id="myOverlay">
-    </div>
-
-    <!-- !PAGE CONTENT! -->
-    <div class="w3-main" style="margin-left: 275px; margin-top: 50px;">
+</nav>
 
 
-        @RenderBody()
-        <!--Main Content-->
-        <!--Main Content-->
+<!-- Overlay effect when opening sidenav on small screens -->
+<div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor: pointer"
+     title="close side menu" id="myOverlay">
+</div>
 
-        <!-- Footer -->
-        <footer class="w3-container w3-light-grey w3-bottom">
-            <div class="w3-container w3-row">
-                <div class="w3-col s4 w3-hide-small">
-                    <h6>&copy; <a href="http://www.fiverr.com/asadawan88">Eazisol</a>. All Rights Reserved.</h6>
-                </div>
+<!-- !PAGE CONTENT! -->
+<div class="w3-main" style="margin-left: 275px; margin-top: 50px;">
+
+
+    @RenderBody()
+    <!--Main Content-->
+    <!--Main Content-->
+    <!-- Footer -->
+    <footer class="w3-container w3-light-grey w3-bottom">
+        <div class="w3-container w3-row">
+            <div class="w3-col s4 w3-hide-small">
+                <h6>&copy; <a href="http://www.fiverr.com/asadawan88">Eazisol</a>. All Rights Reserved.</h6>
             </div>
-        </footer>
-        <!-- Footer -->
-
-        <!-- End page content -->
-    </div>
-    @RenderSection("Scripts", false)
-    <script>
+        </div>
+    </footer>
+    <!-- Footer -->
+    <!-- End page content -->
+</div>
+@RenderSection("Scripts", false)
+<script>
         // Get the Sidenav
         var mySidenav = document.getElementById("mySidenav");
 
@@ -237,7 +240,7 @@
 
             $dialog.dialog('open');
         }
-    </script>
+</script>
 
 </body>
 </html>

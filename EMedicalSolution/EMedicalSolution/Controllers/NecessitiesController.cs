@@ -7,7 +7,7 @@ using EMedicalSolution.Models;
 
 namespace EMedicalSolution.Controllers
 {
-    public class SymptomsController : Controller
+    public class NecessitiesController : Controller
     {
         //
         // GET: /Home/
@@ -17,19 +17,20 @@ namespace EMedicalSolution.Controllers
             return View();
         }
 
-        public ActionResult GetSymptoms()
+        public ActionResult GetNecessities()
         {
             PatientMgmtEntities db = new PatientMgmtEntities();
             {
-                var oSymptoms = db.Symptoms.OrderBy(a => a.Title).ToList();
+                var Necessities = db.MedicalNecessities.OrderBy(a => a.ICD10Code).ToList();
                 return Json(new
                 {
-                    data = oSymptoms.Select(s => new
+                    data = Necessities.Select(ic => new
                     {
-                        s.ID,
-                        s.Title,
-                        s.Created,
-                        s.CreatedBy
+                        ic.ID,
+                        ic.ICD10Code,
+                        ic.Description,
+                        ic.Created,
+
                     })
                 }, JsonRequestBehavior.AllowGet);
             }
@@ -40,14 +41,14 @@ namespace EMedicalSolution.Controllers
         {
             using (PatientMgmtEntities db = new PatientMgmtEntities())
             {
-                var v = db.Symptoms.Where(a => a.ID == id).FirstOrDefault();
+                var v = db.MedicalNecessities.Where(a => a.ID == id).FirstOrDefault();
                 return View(v);
             }
 
         }
 
         [HttpPost]
-        public ActionResult Save(Symptom symptom)
+        public ActionResult Save(MedicalNecessity necessity)
         {
             bool status = false;
 
@@ -55,24 +56,24 @@ namespace EMedicalSolution.Controllers
             {
                 using (PatientMgmtEntities db = new PatientMgmtEntities())
                 {
-                    if (symptom.ID > 0)
+                    if (necessity.ID > 0)
                     {
                         //edit 
-                        var v = db.Symptoms.Where(a => a.ID == symptom.ID).FirstOrDefault();
+                        var v = db.MedicalNecessities.Where(a => a.ID == necessity.ID).FirstOrDefault();
                         if (v != null)
                         {
-                            v.Title = symptom.Title;
+                            v.ICD10Code = necessity.ICD10Code;
+                            v.Description = necessity.Description;
                             v.Created = DateTime.Now;
                             v.CreatedBy = 1;
                         }
-
                     }
                     else
                     {
                         //save
-                        symptom.Created = DateTime.Now;
-                        symptom.CreatedBy = 1;
-                        db.Symptoms.Add(symptom);
+                        necessity.Created = DateTime.Now;
+                        necessity.CreatedBy = 1;
+                        db.MedicalNecessities.Add(necessity);
                     }
                     db.SaveChanges();
                     status = true;
@@ -87,7 +88,7 @@ namespace EMedicalSolution.Controllers
         {
             using (PatientMgmtEntities db = new PatientMgmtEntities())
             {
-                var v = db.Symptoms.Where(a => a.ID == id).FirstOrDefault();
+                var v = db.MedicalNecessities.Where(a => a.ID == id).FirstOrDefault();
                 if (v != null)
                 {
                     return View(v);
@@ -101,15 +102,15 @@ namespace EMedicalSolution.Controllers
 
         [HttpPost]
         [ActionName("Delete")]
-        public ActionResult DeleteSymptom(int id)
+        public ActionResult DeleteCondition(int id)
         {
             bool status = false;
             using (PatientMgmtEntities db = new PatientMgmtEntities())
             {
-                var v = db.Symptoms.Where(a => a.ID == id).FirstOrDefault();
+                var v = db.MedicalNecessities.Where(a => a.ID == id).FirstOrDefault();
                 if (v != null)
                 {
-                    db.Symptoms.Remove(v);
+                    db.MedicalNecessities.Remove(v);
                     db.SaveChanges();
                     status = true;
                 }
