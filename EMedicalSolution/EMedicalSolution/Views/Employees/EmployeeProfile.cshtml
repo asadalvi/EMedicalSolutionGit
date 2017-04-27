@@ -1,0 +1,115 @@
+﻿@model EMedicalSolution.Models.Staff
+
+@{
+    ViewBag.Title = "Employee Profile";
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
+}
+<script type="text/javascript">
+    function show(input) { //to show thumbnail of selected image
+        if (input.files && input.files[0]) {
+            var filerdr = new FileReader();
+            filerdr.onload = function (e) {
+                $('#user_img').attr('src', e.target.result);
+            }
+            filerdr.readAsDataURL(input.files[0]);
+        }
+    }
+</script>
+
+@using (Html.BeginForm("SaveEmployeeProfile", "Employees", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.ValidationSummary(true)
+
+    @Html.HiddenFor(model => model.ID)
+    <div class="w3-container dashboardDiv" id="doctor-profile-tab">
+        <div class="w3-center w3-dark-gray">
+            <h2>Employee</h2>
+        </div>
+        <div class="w3-row">
+            <div class="w3-half">
+                
+                <label>
+                    First Name
+                </label>
+                @Html.TextBoxFor(model => model.FirstName, new { @class = "w3-input w3-border", required = "required" })
+                @Html.ValidationMessageFor(model => model.FirstName)
+                <label>
+                    Last Name
+                </label>
+                @Html.TextBoxFor(model => model.LastName, new { @class = "w3-input w3-border", required = "required" })
+                @Html.ValidationMessageFor(model => model.LastName)
+
+                <label>
+                    Signature Password:
+                </label>
+                @Html.TextBoxFor(model => model.SignaturePassword, new { @class = "w3-input w3-border", type = "password", required = "required" })
+                @Html.ValidationMessageFor(model => model.SignaturePassword)
+
+                    <div class="w3-center w3-margin-bottom">
+                        <div>
+                            @if (Model.SignatureFilePath != null)
+                            {
+                                <img class="db_img" src="@Url.Content("~/Files/Signatures/" + System.IO.Path.GetFileName(Model.SignatureFilePath))">
+                            }
+                            else
+                            {
+                                <img id="user_img" src="~/images/avatar.jpg">
+                            }
+                        </div>
+                    </div>
+   
+                @Html.TextBoxFor(model => model.SignatureFilePath, new { type = "file", onchange = "show(this)" })
+                @Html.ValidationMessageFor(model => model.SignatureFilePath)<br />
+                
+                
+            </div>
+
+            <div class="w3-half">
+                <label>Date of Birth</label>
+                @Html.TextBoxFor(model => model.DOB, new { @class = "w3-input w3-border", required = "required" })
+                @Html.ValidationMessageFor(model => model.DOB)
+
+                <label>Gender</label>
+                <select name="Gender" required="required">
+                    <option class="w3-input" required>Select Gender</option>
+                    @if (Model.Gender.ToString().Trim() == "Male")
+                    {
+                        <option selected="selected">Male</option>
+                        <option>Female</option>
+                    }
+                    else if (Model.Gender.ToString().Trim() == "Female")
+                    {
+                        <option>Male</option>
+                        <option selected="selected">Female</option>
+                    }
+                    else
+                    {
+                        <option>Male</option>
+                        <option>Female</option>
+                    }
+                </select>
+                <br />
+                <label>ID Number</label>
+                @Html.TextBoxFor(model => model.IDNumber, new { @class = "w3-input w3-border", required = "required" })
+                @Html.ValidationMessageFor(model => model.IDNumber)
+
+                <label>Tel</label>
+                @Html.TextBoxFor(model => model.Tel, new { @class = "w3-input w3-border", required = "required" })
+                @Html.ValidationMessageFor(model => model.Tel)
+
+                <label>Email</label>
+                @Html.TextBoxFor(model => model.Email, new { @class = "w3-input w3-border", required = "required" })
+                @Html.ValidationMessageFor(model => model.Email)
+
+                <div class="w3-margin-top">
+                    <input type="submit" value="Save" class="w3-btn w3-green" />
+                </div>
+                <div class="w3-margin-top w3-right">
+                   
+                        @Html.ActionLink("<< Back to Profile", "ProfileInfo")
+                </div>
+            </div>
+        </div>
+
+    </div>
+}
