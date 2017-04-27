@@ -1,7 +1,7 @@
 ﻿   @*@using (Ajax.BeginForm("intake", "Patients", new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "step-4" }))
     {*@
  @*@model EMedicalSolution.ViewModels.patientIntakeViewModel*@
- 
+ @{ string iType = "0";}
 @using (Html.BeginForm("intake", "Patients", FormMethod.Post, new { id = "intake" }))
             {
     <input type="hidden" value="@ViewBag.supportDevice" id="ViewBagSupportDevice" />
@@ -26,6 +26,8 @@
 
                 @foreach (var condition in Model.objInterferingConditionVM1)
                 {
+                    iType = "1";
+                    <input type="hidden" value="@iType" id="next_button_toggle_2" />
                     <div class="col-sm-4">
                         @if (condition.HistoryID > 0)
         {

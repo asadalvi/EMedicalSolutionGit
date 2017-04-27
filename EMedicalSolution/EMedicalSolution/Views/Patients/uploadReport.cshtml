@@ -18,7 +18,8 @@
 
 <div class="panel panel-default">
     <div class="panel-heading">Reports</div>
-    <table class="table" id="reportsDataTable">
+    '<input type="hidden" value="0" id="next_button_toggle_3" />'
+    <table class="table" id="reportsDataTable" style="width:100%">
         <thead>
             <tr>
                 <th>Title</th>
@@ -63,6 +64,11 @@
                     },
                     {
                         "data": "Created", "autoWidth": true, "render": function (data) {
+                            if (data !== undefined) {
+                                $("#next_button_toggle_3").val("1");
+                            } else {
+                                $("#next_button_toggle_3").val("0");
+                            }
                             var date = new Date(parseInt(data.substr(6)));
                             var sdate = date.format("mmm d, yyyy");
                             return sdate;
