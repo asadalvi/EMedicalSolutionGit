@@ -402,6 +402,7 @@
     <Content Include="Views\Diseases\Delete.cshtml" />
     <Content Include="Views\Diseases\Index.cshtml" />
     <Content Include="Views\Diseases\Save.cshtml" />
+    <Content Include="Views\Employees\EmployeeProfile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

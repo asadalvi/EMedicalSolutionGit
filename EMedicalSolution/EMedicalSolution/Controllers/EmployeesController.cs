@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using EMedicalSolution.Models;
+using System.IO;
 
 namespace EMedicalSolution.Controllers
 {
@@ -21,7 +22,7 @@ namespace EMedicalSolution.Controllers
             return View(Employees);
         }
 
-        //For Ajax Call -- Not using right now
+        //For Ajax Call 
         public ActionResult GetEmployees()
         {
             PatientMgmtEntities db = new PatientMgmtEntities();
@@ -134,6 +135,62 @@ namespace EMedicalSolution.Controllers
             }
 
             return new JsonResult { Data = new { status = status } };
+        }
+
+        public ActionResult EmployeeProfile()
+        {
+            var Employees = db.Staffs.Find(1);
+            return View(Employees);
+        }
+
+        public ActionResult SaveEmployeeProfile(Staff oStaff, HttpPostedFileBase SignatureFilePath)
+        {
+            Staff Employee = db.Staffs.Find(oStaff.ID);
+            
+            //Doctor tbl = new Doctor();
+            var allowedExtensions = new[] {
+            ".Jpg", ".png", ".jpg", "jpeg"
+        };
+            if (ModelState.IsValid)
+            {
+                Employee.FirstName = oStaff.FirstName;
+                Employee.LastName = oStaff.LastName;
+                Employee.Gender = oStaff.Gender;
+                Employee.DOB = oStaff.DOB;
+                Employee.Email = oStaff.Email;
+                Employee.Tel = oStaff.Tel;
+                Employee.IDNumber = oStaff.IDNumber;
+                Employee.SignaturePassword = oStaff.SignaturePassword;
+
+                if (SignatureFilePath != null)
+                {
+                    oStaff.SignatureFilePath = SignatureFilePath.ToString(); //getting complete url  
+                    var fileName = Path.GetFileName(SignatureFilePath.FileName); //getting only file name(ex-ganesh.jpg)  
+                    var ext = Path.GetExtension(SignatureFilePath.FileName); //getting the extension(ex-.jpg)  
+                    if (allowedExtensions.Contains(ext)) //check what type of extension  
+                    {
+                        string name = Path.GetFileNameWithoutExtension(fileName); //getting file name without extension         
+                        string myfile = "Signature_" + oStaff.ID + ext; //appending the name with id  
+                        string folderPath = Server.MapPath("~/Files/Signatures");
+                        if (!Directory.Exists(folderPath))
+                        {
+                            Directory.CreateDirectory(folderPath);
+                        }
+                        // store the file inside ~/project folder(Img)  
+                        var path = Path.Combine(folderPath, myfile);
+                        Employee.SignatureFilePath = path;
+                        SignatureFilePath.SaveAs(path);
+                    }
+                    else
+                    {
+                        ViewBag.message = "Please choose only Image file";
+                    }
+                }
+                db.Entry(Employee).CurrentValues.SetValues(Employee);
+                db.SaveChanges();
+                return RedirectToAction("EmployeeProfile");
+            }
+            return View("EmployeeProfile", oStaff);
         }
     }
 }
