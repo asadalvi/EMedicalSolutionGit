@@ -127,13 +127,16 @@
                           if (numberOFSteps == 0) {
                               setTimeout(function () {
                                   $(".sw-btn-next").removeClass("disabled");
+                                  $(".sw-btn-next").css("pointer-events", "auto");
                               }, 10);
                           } else
                               setTimeout(function () {
                                   var type = $("#next_button_toggle_" + stepNumber).val();
                                   console.log("the bool value is", type);
                                   if (type != undefined && type == "1") {
-                                      $(".sw-btn-next").removeClass("disabled")
+                                      $(".sw-btn-next").removeClass("disabled");
+                                      $(".sw-btn-next").css("pointer-events", "auto");
+                                      pointer - events
                                   } else {
                                       $(".sw-btn-next").addClass("disabled");
                                       $(".sw-btn-next").css("pointer-events", "none");
@@ -249,6 +252,7 @@
                                 alert("success");
                                 setTimeout(function () {
                                     $(".sw-btn-next").removeClass("disabled");
+                                    $(".sw-btn-next").css("pointer-events", "auto");
                                 }, 10);
                             }
                         }
@@ -285,6 +289,7 @@
                            success: function ($data) {
                                setTimeout(function () {
                                    $(".sw-btn-next").removeClass("disabled");
+                                   $(".sw-btn-next").css("pointer-events", "auto");
                                }, 10);
                            }
                          });
@@ -292,6 +297,7 @@
                 $(document).on('click', '.sw-btn-prev', function (e) {
                     setTimeout(function () {
                         $(".sw-btn-next").removeClass("disabled");
+                        $(".sw-btn-next").css("pointer-events", "auto");
                     }, 10);
                 });
                 // Check if primary necessity is selected then enable secondary diaganosis 
