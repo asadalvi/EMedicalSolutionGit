@@ -116,13 +116,29 @@
                 } else if (ViewBagCurrentlyPregnant !== undefined && ViewBagCurrentlyPregnant === "2") {
                     $("#pregnant2").prop("checked", true);
                 } else { $("#pregnant1").prop("checked", true); }
-                $(document).ready(function () {
-                    var numberOFSteps = 0;
+                $(document).ready(function () {                    
+                    var numberOFSteps = 0;                   
+
                     var pHistoryId = 0;
                     // Step show event
                     $("#smartwizard").on("showStep", function (e, anchorObject, stepNumber, stepDirection, stepPosition) {
-                        //alert("You are on step "+stepNumber+" now");
-                        numberOFSteps = stepNumber;
+                         // alert("You are on step "+stepNumber+" now");
+                          numberOFSteps = stepNumber;
+                          if (numberOFSteps == 0) {
+                              setTimeout(function () {
+                                  $(".sw-btn-next").removeClass("disabled");
+                              }, 10);
+                          } else
+                              setTimeout(function () {
+                                  var type = $("#next_button_toggle_" + stepNumber).val();
+                                  console.log("the bool value is", type);
+                                  if (type != undefined && type == "1") {
+                                      $(".sw-btn-next").removeClass("disabled")
+                                  } else {
+                                      $(".sw-btn-next").addClass("disabled");
+                                      $(".sw-btn-next").css("pointer-events", "none");
+                                  }
+                              }, 10);
                         if (stepPosition === 'first') {
                             $("#prev-btn").addClass('disabled');
                         } else if (stepPosition === 'final') {
@@ -151,8 +167,7 @@
                                                              }
                                                          });
                                                          //$('#smartwizard').smartWizard("reset");
-                                                     });
-
+                                                     });                 
 
                     // Smart Wizard
                     $('#smartwizard').smartWizard({
@@ -175,7 +190,7 @@
                     });
 
                     $("#prev-btn").on("click", function () {
-                        // Navigate previous
+                        // Navigate previous 
                         $('#smartwizard').smartWizard("prev");
                         return true;
                     });
@@ -232,7 +247,9 @@
                             console.log(data);
                             if (data) {
                                 alert("success");
-                            // $(".sw-btn-next").prop('disabled', true);
+                                setTimeout(function () {
+                                    $(".sw-btn-next").removeClass("disabled");
+                                }, 10);
                             }
                         }
                     })
@@ -266,12 +283,17 @@
                            enctype: 'multipart/form-data',
                            processData: false,
                            success: function ($data) {
-                               
+                               setTimeout(function () {
+                                   $(".sw-btn-next").removeClass("disabled");
+                               }, 10);
                            }
                          });
                 });
-
-
+                $(document).on('click', '.sw-btn-prev', function (e) {
+                    setTimeout(function () {
+                        $(".sw-btn-next").removeClass("disabled");
+                    }, 10);
+                });
                 // Check if primary necessity is selected then enable secondary diaganosis 
                 $("input[type='checkbox'].necessities").change(function () {
                     var a = $("input[type='checkbox'].necessities");
@@ -287,19 +309,8 @@
                     e.preventDefault();
                     OpenPopup($(this).attr('href'), "", "physician_signature");
                     });
-                    //$(document).find('.btn-danger').click(function () {
-                    //    ("#pHistoryId").val('');
-                    //    alert("CCCCCCCCCcccc");
-                    //    $.ajax({
-                    //        url: '/Patients/Wizard/0',
-                    //        type: 'POST',
-                    //        dataType: 'json',
-                    //        processData: false,
-                    //        success: function ($data) {
-                    //            alert("Success, fields are cleared");
-                    //        }
-                    //    });
-                    //});
-                    
+                   
+           
             </script>
+                     
         }

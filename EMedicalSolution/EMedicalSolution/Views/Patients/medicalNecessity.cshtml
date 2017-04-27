@@ -1,8 +1,7 @@
 ﻿<h2>Step 5 Content</h2>
+@{ string mType = "0";}
 @using (Html.BeginForm("SaveMedicalNecessities", "Patients", FormMethod.Post, new { id = "SaveMedicalNecessities" }))
 {
-
-  
     <h4>Primary Diagnosis</h4>
     if (Model.objMedicalNecessity1 != null)
     {
@@ -10,6 +9,8 @@
         {
             if (necessity.HistoryID > 0)
             {
+                mType = "1";
+                <input type="hidden" value="@mType" id="next_button_toggle_4" />
             <input type="checkbox" name="necessities" class="necessities" value="@necessity.ID" checked/>  @(necessity.ICD10Code + " - " + necessity.Description)
             }
             else {
