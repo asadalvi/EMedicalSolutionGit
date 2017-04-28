@@ -4,6 +4,7 @@
     <div>
         <div><label>Please enter password</label></div>
         <div>
+            <input type="hidden" id="physcianApproalDataText" />
             <input type="password" name="physiciasnSignature" id="physiciasn_Signature" />
         </div>
     </div>
@@ -13,7 +14,12 @@
     </div>
 <script src="~/Scripts/Wizard/jquery.smartWizard.min.js"></script>
 <script type="text/javascript">
-//submission form -------physician-----------
+    //submission form -------physician-----------
+    var physicianRemarks = "";
+    $(document).ready(function () {
+        $("#physcianApproalDataText").val($(document).find("#physicianRemarksValue").val());
+        physicianRemarks = $(document).find("#physicianRemarksValue").val();
+    });
                 $(document).find('#approvedPhysicianForm').on('click', function (e) {
                     var pHistoryId = $("#pHistoryId").val();
                     var physiciasnSignature = $("#physiciasn_Signature").val();
@@ -24,8 +30,22 @@
                         url: "/Patients/physicianSignature/?pHistoryId=" + pHistoryId + "&physiciasnSignature=" + physiciasnSignature,
                         success: function (data) {
                             if (data) {
-                                $("#savephysicianData").css('display', 'block');                               
+                               // $("#savephysicianData").css('display', 'block');                               
                                 $(".ui-dialog-titlebar-close").trigger("click");
+                                //var physicianRemarks = $("#physcianApproalDataText").val();
+                                $.ajax({
+                                    type: "POST",
+                                    url: "/Patients/PhysicianApproval/?pHistoryId=" + pHistoryId + "&physicianRemarks=" + physicianRemarks,
+                                    // data: $('#' + parentForm).serialize(),
+                                    success: function (Data) {
+                                        if (Data.status) {
+                                            alert("success");
+                                            $("#Approvedbyphysician").css('display', 'block');
+                                            $("#Approvedbyphysician").text("Approve by " + Data.namePhyscian)
+                                            $("#physicianRemarksTextBox").css('display', 'none');
+                                        }
+                                    }
+                                })
                             }
                         }
                     })

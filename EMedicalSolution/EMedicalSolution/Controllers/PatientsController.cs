@@ -814,6 +814,7 @@ namespace EMedicalSolution.Controllers
         public ActionResult PhysicianApproval(string physicianRemarks,int pHistoryId)
         {
             bool status = false;
+            string namePhyscian = "";
             PatientHistory pHistory;
             if (ModelState.IsValid)
             {
@@ -834,11 +835,21 @@ namespace EMedicalSolution.Controllers
                             pHistory.StatusID = 6;
                             db.SaveChanges();
                         }
+                        string na = "";
+                        string nb = "";
+                        var physicianName = (from p in db.PatientHistories
+                                                join pn in db.Users on p.PhysicianID equals pn.ID into leftJ
+                                                from lj in (from pn in leftJ select pn).DefaultIfEmpty()
+                                                join s in db.Staffs on lj.StaffID equals s.ID
+                                                where p.ID == pHistoryId
+                                                select new { na = s.FirstName, nb = s.LastName }).FirstOrDefault();
+                        namePhyscian = physicianName.na + " " + physicianName.nb;
                         status = true;
                     }
                 }
             }
-            return Json(status, JsonRequestBehavior.AllowGet);
+            return new JsonResult { Data = new { status = status, namePhyscian = namePhyscian } };
+            // return Json(status, JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]

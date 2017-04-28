@@ -19,17 +19,11 @@
         else {
             <label>Physician Remarks:</label>
         <input type="text" name="physicianRemarks" id="physicianRemarksValue" />
-        <a class="popup w3-btn w3-orange" href="/Patients/physicianSignature/">Approve</a>
+        <a class="popup w3-btn w3-orange" id="click_approveButton" href="/Patients/physicianSignature/">Approve</a>
         }
-    </div>
-    if (Model != null && Model.PatientHistoryVM11 != null && Model.PatientHistoryVM11.isApprovedByPhysician != null && Model.PatientHistoryVM11.isApprovedByPhysician == true && Model.StaffNameVM != null && Model.StaffNameVM.PhycisianName != null)
-    {  
-         <h2 id="Approvedbyphysician" style="display:none">Approve by @Model.StaffNameVM.PhycisianName </h2>
-    }
-  
-         <div class="w3-row  w3-margin-top">
-            <button class="w3-btn-block w3-green" type="button" id="savephysicianData" style="display:none">Save</button>
-        </div>
+    </div>   
+        <h2 id="Approvedbyphysician" style="display:none"></h2>
+ 
 }
 <script>
   
@@ -37,6 +31,7 @@
         e.preventDefault();
         OpenPopup($(this).attr('href'), "", "physicianSignature");
     });
+
     //$("#btn_order_report").click(function () {
     //    $("#order_form_report").css("display", "block");
     //    $("#super_bill_report").css("display", "none");
@@ -47,24 +42,24 @@
     //    $("#order_form_report").css("display", "none");
     //});
     //submission form -------start-----------
-    $(document).find('#savephysicianData').on('click', function (e) {
-        var pHistoryId = $("#pHistoryId").val();
-        var physicianRemarks = $("#physicianRemarksVal").val();
-        console.log("the parent id is", pHistoryId);
-        $.ajax({
-            type: "POST",
-            url: "/Patients/PhysicianApproval/?pHistoryId=" + pHistoryId + "&physicianRemarks=" + physicianRemarks,
-           // data: $('#' + parentForm).serialize(),
-            success: function (data) {
-                console.log(data);
-                if (data) {
-                    alert("success");
-                    $("#Approvedbyphysician").css('display', 'block');
-                    $("#physicianRemarksTextBox").css('display', 'none');
-                }
-            }
-        })
-    });
+    //$(document).find('#savephysicianData').on('click', function (e) {
+    //    var pHistoryId = $("#pHistoryId").val();
+    //    var physicianRemarks = $("#physicianRemarksVal").val();
+    //    console.log("the parent id is", pHistoryId);
+    //    $.ajax({
+    //        type: "POST",
+    //        url: "/Patients/PhysicianApproval/?pHistoryId=" + pHistoryId + "&physicianRemarks=" + physicianRemarks,
+    //       // data: $('#' + parentForm).serialize(),
+    //        success: function (data) {
+    //            console.log(data);
+    //            if (data) {
+    //                alert("success");
+    //                $("#Approvedbyphysician").css('display', 'block');
+    //                $("#physicianRemarksTextBox").css('display', 'none');
+    //            }
+    //        }
+    //    })
+    //});
 </script>
  
 
