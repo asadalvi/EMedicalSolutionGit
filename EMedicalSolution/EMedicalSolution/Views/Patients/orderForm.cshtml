@@ -2,7 +2,7 @@
 <title>Order Form</title>
 
 <h2>Step 6 Content</h2>
-
+@{ string pType = "0";}
 @*<button class="btn btn-primary" id="btn_order_report" type="button">Order Form</button> <button class="btn btn-primary" id="btn_bill_report" type="button">Supper Bill</button>*@
 @Html.ActionLink("Order Form", "orderReport", "Patients", new { id = @ViewBag.HistoryID }, new { target = "_blank" }) /
 @Html.ActionLink("Supper Bill", "orderBill", "Patients", new { id = @ViewBag.HistoryID }, new { target = "_blank" })
@@ -11,22 +11,25 @@
 {
     <input type="hidden" value="@ViewBag.HistoryID" name="orderFormHistoryId" />
 
-    <div id="physicianRemarksTextBox">       
+    <div id="physicianRemarksTextBox">
         @if (Model != null && Model.PatientHistoryVM11 != null && Model.PatientHistoryVM11.isApprovedByPhysician != null && Model.PatientHistoryVM11.isApprovedByPhysician == true && Model.StaffNameVM != null && Model.StaffNameVM.PhycisianName != null)
         {
-        <h2>Approve by @Model.StaffNameVM.PhycisianName </h2>
+            pType = "1";
+            <input type="hidden" value="@pType" id="next_button_toggle_5" />
+
+            <h2>Approve by @Model.StaffNameVM.PhycisianName </h2>
         }
         else {
             <label>Physician Remarks:</label>
-        <input type="text" name="physicianRemarks" id="physicianRemarksValue" />
-        <a class="popup w3-btn w3-orange" id="click_approveButton" href="/Patients/physicianSignature/">Approve</a>
+            <input type="text" name="physicianRemarks" id="physicianRemarksValue" />
+            <a class="popup w3-btn w3-orange" id="click_approveButton" href="/Patients/physicianSignature/">Approve</a>
         }
-    </div>   
-        <h2 id="Approvedbyphysician" style="display:none"></h2>
- 
+    </div>
+    <h2 id="Approvedbyphysician" style="display:none"></h2>
+
 }
 <script>
-  
+
     $('#PhysicianApproval').on('click', 'a.popup', function (e) {
         e.preventDefault();
         OpenPopup($(this).attr('href'), "", "physicianSignature");
@@ -61,7 +64,7 @@
     //    })
     //});
 </script>
- 
+
 
 
 
