@@ -1,9 +1,8 @@
-﻿<h3>Reports</h3>
+﻿<h3>Upload Reports</h3>
 @using (Html.BeginForm("UploadReports", "Patients", FormMethod.Post, new { id = "UploadReports" }))
 {
     <div class="w3-row w3-margin-bottom" id="add-prescription">
         <div class="w3-row">
-            <label>Test Report</label>
             <div class="input_fields_wrap">
                 <input type="file" class="js-upload-files" name="filePath" id="[0].filePath" />
                 <input type="text" class="js-files-title" name="filetitle" id="[0].filetitle" />
@@ -18,7 +17,7 @@
     </div>
 
     <div class="panel panel-default">
-        <div class="panel-heading">Reports</div>
+        <div class="panel-heading">Uploaded Reports</div>
         <input type="hidden" value="0" id="next_button_toggle_3" />
         <table class="table" id="reportsDataTable" style="width:100%">
             <thead>
