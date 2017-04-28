@@ -11,11 +11,11 @@
             {
                 pType = "1";
                 <input type="hidden" value="@pType" id="next_button_toggle_1" />
-                <input class="w3-radio procedure_Type" type="checkbox" name="procedureType" value=@procedure.ID checked />
+                <input class="w3-radio procedure_Type" type="checkbox" name="procedureType" value=@procedure.ID checked required/>
                 @procedure.Title
     }
             else {
-                <input class="w3-radio procedure_Type" type="checkbox" name="procedureType" value=@procedure.ID  />
+                <input class="w3-radio procedure_Type" type="checkbox" name="procedureType" value=@procedure.ID  required/>
                 @procedure.Title
 }
 
