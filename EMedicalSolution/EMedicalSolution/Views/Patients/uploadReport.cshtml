@@ -48,10 +48,11 @@
 <script src="~/Scripts/date.format.js"></script>
 
 <script>
-    $(document).ready(function () {
-        var pHistoryId = $("#pHistoryId").val();
+    //$(document).ready(function () {
+    var pHistoryId = $("#pHistoryId").val();
+    var oReportTable;
         if (pHistoryId !== undefined && pHistoryId !== null && pHistoryId !== "") {
-            var oReportTable = $("#reportsDataTable").DataTable({
+            oReportTable = $("#reportsDataTable").DataTable({
                 "ajax": {
                     "url": '/Patients/GetReports/?pHistoryId=' + pHistoryId,
                     "type": 'get',
@@ -80,5 +81,5 @@
                 ]
             });
         }
-    });
+    //});
 </script>
