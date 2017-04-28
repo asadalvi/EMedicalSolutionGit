@@ -1,42 +1,46 @@
-﻿<h2>Step 4 Content</h2>
+﻿<h3>Reports</h3>
 @using (Html.BeginForm("UploadReports", "Patients", FormMethod.Post, new { id = "UploadReports" }))
 {
-<div class="w3-row w3-margin-bottom" id="add-prescription">
-     <div class="w3-half">
-        <div class="editor-label">
+    <div class="w3-row w3-margin-bottom" id="add-prescription">
+        <div class="w3-row">
             <label>Test Report</label>
-        </div>
-        <div class="input_fields_wrap">
-            <div>
+            <div class="input_fields_wrap">
                 <input type="file" class="js-upload-files" name="filePath" id="[0].filePath" />
                 <input type="text" class="js-files-title" name="filetitle" id="[0].filetitle" />
+                <button class="add_field_button w3-btn w3-cyan">+ Add More</button>
+            </div>
+            <div class="w3-row w3-margin-top">
+                <div class="w3-third" style="float: none; margin: auto">
+                    <button class="w3-btn-block w3-green" id="addPatientReport" type="button">Save</button>
+                </div>
             </div>
         </div>
-        <button class="add_field_button w3-btn w3-cyan">+ Add More</button>
     </div>
-</div>
 
-<div class="panel panel-default">
-    <div class="panel-heading">Reports</div>
-    '<input type="hidden" value="0" id="next_button_toggle_3" />'
-    <table class="table" id="reportsDataTable" style="width:100%">
-        <thead>
-            <tr>
-                <th>Title</th>
-                <th>Download</th>
-                <th>Created</th>
-            </tr>
-        </thead>
-        <tbody>
-
-        </tbody>
-    </table>
-</div>
-<div class="w3-row  w3-margin-top">
-    <button class="w3-btn-block w3-green" id="addPatientReport" type="button">Save</button>
-</div>
+    <div class="panel panel-default">
+        <div class="panel-heading">Reports</div>
+        <input type="hidden" value="0" id="next_button_toggle_3" />
+        <table class="table" id="reportsDataTable" style="width:100%">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Download</th>
+                    <th>Created</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
 }
 @*addPatientReport*@
+
+<style>
+    .input_fields_wrap input {
+        display: inline;
+        margin: 0 8px !important;
+        padding: 6px !important;
+    }
+</style>
 
 <script src="~/Scripts/jquery.validate.min.js"></script>
 <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>

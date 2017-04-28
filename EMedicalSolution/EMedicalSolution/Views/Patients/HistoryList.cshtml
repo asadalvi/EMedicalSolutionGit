@@ -27,17 +27,6 @@
             </thead>
             <tbody id="patient_history_views">
 
-               @*@foreach (var item in Model)
-    {
-     <tr>
-         <td>@item.FirstName</td>
-         <td>@item.LastName</td>
-         <td>@item.Title</td>
-         <td>@item.Created</td>
-         <td>@*<a class="popup  w3-btn w3-orange" href="/Patients/ViewHistory/@item.ID">View</a></td>
-     </tr>
-    }*@
-
             </tbody>
 
         </table>
@@ -87,7 +76,7 @@
 
                 {
                     "data": "ID", "render": function (data) {
-                        return '<a class="popup  w3-btn w3-orange" href="/Patients/Wizard/' + data + '">View<a>';
+                        return '<a class="popup  w3-btn w3-blue" href="/Patients/Wizard/' + data + '">View<a>';
                     }
                 }
             ]

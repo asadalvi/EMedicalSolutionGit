@@ -39,6 +39,9 @@
         span.field-validation-error {
             color: red;
         }
+        html, body, form, fieldset, table, tr, td, img {
+            font-family: 'Candara', sans-serif !important;
+        }
     </style>
 
 </head>
@@ -203,8 +206,10 @@
                 $.validator.unobtrusive.parse('form');
 
             });
+            
+            $('.popupWindow').remove();
 
-            $dialog = $('<div class="popupWindow" style="overflow:auto"></div>')
+            $dialog = $('<div class="popupWindow" style="overflow:auto; height: auto !important; width: auto !important"></div>')
                       .html($pageContent)
                       .dialog({
                           autoOpen: false,
