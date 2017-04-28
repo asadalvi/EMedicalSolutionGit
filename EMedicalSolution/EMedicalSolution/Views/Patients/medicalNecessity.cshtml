@@ -1,35 +1,41 @@
-﻿<h2>Step 5 Content</h2>
+﻿
 @{ string mType = "0";}
 @using (Html.BeginForm("SaveMedicalNecessities", "Patients", FormMethod.Post, new { id = "SaveMedicalNecessities" }))
 {
-    <h4>Primary Diagnosis</h4>
+    <h3>Primary Diagnosis</h3>
+
     if (Model.objMedicalNecessity1 != null)
     {
-        foreach (var necessity in Model.objMedicalNecessity1)
-        {
-            if (necessity.HistoryID > 0)
+        <div class="w3-responsive checkbox-container">
+            @foreach (var necessity in Model.objMedicalNecessity1)
             {
-                mType = "1";
-                <input type="hidden" value="@mType" id="next_button_toggle_4" />
-            <input type="checkbox" name="necessities" class="necessities" value="@necessity.ID" checked/>  @(necessity.ICD10Code + " - " + necessity.Description)
+                if (necessity.HistoryID > 0)
+                {
+                    mType = "1";
+                    <input type="hidden" value="@mType" id="next_button_toggle_4" />
+                    <input type="checkbox" name="necessities" class="necessities" value="@necessity.ID" checked />  @(necessity.ICD10Code + " - " + necessity.Description)
+                }
+                else {
+                    <input type="checkbox" name="necessities" class="necessities" value="@necessity.ID" />  @(necessity.ICD10Code + " - " + necessity.Description)
+                }<br />
             }
-            else {
-                <input type="checkbox" name="necessities" class="necessities" value="@necessity.ID"  />  @(necessity.ICD10Code + " - " + necessity.Description)
-            }<br />
-        }
+        </div>
     }
 
-    <h4>Secondary Diagnosis</h4> 
+    <h4>Secondary Diagnosis</h4>
     if (Model.PatientHistoryVM11 != null && Model.PatientHistoryVM11.SecondaryNecessities != null && Model.PatientHistoryVM11.SecondaryNecessities != "")
     {
-       <input type = "text" name = "txtsecondary" disabled = "disabled" value="@Model.PatientHistoryVM11.SecondaryNecessities" id = "secondaryDiagnosis" />
+        <input type="text" name="txtsecondary" disabled="disabled" value="@Model.PatientHistoryVM11.SecondaryNecessities" id="secondaryDiagnosis" />
     }
     else {
         <input type="text" name="txtsecondary" disabled="disabled" id="secondaryDiagnosis" />
     }
 
-<div class="w3-row  w3-margin-top">
+    <div class="w3-row  w3-margin-top">
         <button class="w3-btn-block w3-green submitForm" type="button">Save</button>
     </div>
 }
 
+<style>
+    .checkbox-container { border:2px solid #ccc; width:600px; height: 130px; overflow-y: scroll; background:rgba(247, 247, 247, 0.92); }
+</style>

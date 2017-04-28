@@ -1,5 +1,5 @@
 ﻿@model EMedicalSolution.ViewModels.patientIntakeViewModel
-<h2>Step 2 Content</h2>
+<h3>Procedure Types</h3>
 @{ string pType = "0";}
 @using (Html.BeginForm("procedureTypes", "Patients", FormMethod.Post, new { id = "procedureTypes" }))
 {
@@ -11,19 +11,21 @@
             {
                 pType = "1";
                 <input type="hidden" value="@pType" id="next_button_toggle_1" />
-                <input class="w3-radio procedure_Type" type="checkbox" name="procedureType" value=@procedure.ID checked />
+                <input class="w3-check procedure_Type" type="checkbox" name="procedureType" value=@procedure.ID checked required/>
                 @procedure.Title
     }
             else {
-                <input class="w3-radio procedure_Type" type="checkbox" name="procedureType" value=@procedure.ID  />
+                <input class="w3-check procedure_Type" type="checkbox" name="procedureType" value=@procedure.ID  required/>
                 @procedure.Title
 }
 
             <br />
         }
     }
-    <div class="w3-row  w3-margin-top">
-        <button class="w3-btn-block w3-green submitForm" type="button">Save</button>
+    <div class="w3-row w3-margin-top">
+        <div class="w3-third" style="float: none; margin: auto">
+            <button class="w3-btn-block w3-green submitForm" type="button">Save</button>
+        </div>
     </div>
 }
  

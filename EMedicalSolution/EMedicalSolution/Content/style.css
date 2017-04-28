@@ -22,10 +22,6 @@ footer {
     margin-right: 10px;
 }
 
-input[type=checkbox] {
-    transform: scale(2);
-}
-
 .w3-top span {
     color: #ffffff;
     font-size: 24px !important;
@@ -124,10 +120,6 @@ th, td {
 
     #add-history .w3-third, #add-test .w3-half, #add-prescription .w3-half {
         padding: 5px;
-    }
-
-    #add-history .w3-btn, #add-test .w3-btn, #add-prescription .w3-btn {
-        margin-top: 22px;
     }
 
 .ui-dialog {
