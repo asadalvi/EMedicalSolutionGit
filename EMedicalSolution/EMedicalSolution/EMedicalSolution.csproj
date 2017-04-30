@@ -280,6 +280,34 @@
     <Content Include="Content\wizard\smart_wizard_theme_circles.css" />
     <Content Include="Content\wizard\smart_wizard_theme_dots.css" />
     <Content Include="favicon.ico" />
+    <Content Include="Files\Cards\Card_3.jpg" />
+    <Content Include="Files\Cards\Card_3.png" />
+    <Content Include="Files\Reports\Card_3.jpg" />
+    <Content Include="Files\Reports\Card_3.png" />
+    <Content Include="Files\Reports\Report_1.png" />
+    <Content Include="Files\Reports\Report_1022.jpg" />
+    <Content Include="Files\Reports\Report_12.jpg" />
+    <Content Include="Files\Reports\Report_13.jpg" />
+    <Content Include="Files\Reports\Report_14.jpg" />
+    <Content Include="Files\Reports\Report_15.jpg" />
+    <Content Include="Files\Reports\Report_16.jpg" />
+    <Content Include="Files\Reports\Report_17.jpg" />
+    <Content Include="Files\Reports\Report_18.jpg" />
+    <Content Include="Files\Reports\Report_19.jpg" />
+    <Content Include="Files\Reports\Report_2.png" />
+    <Content Include="Files\Reports\Report_20.jpg" />
+    <Content Include="Files\Reports\Report_21.jpg" />
+    <Content Include="Files\Reports\Report_22.jpg" />
+    <Content Include="Files\Reports\Report_23.jpg" />
+    <Content Include="Files\Reports\Report_24.jpg" />
+    <Content Include="Files\Reports\Report_25.jpg" />
+    <Content Include="Files\Reports\Report_26.jpg" />
+    <Content Include="Files\Reports\Report_27.jpg" />
+    <Content Include="Files\Reports\Report_4.jpg" />
+    <Content Include="Files\Reports\Report_5.jpg" />
+    <Content Include="Files\Reports\Report_6.jpg" />
+    <Content Include="Files\Reports\Report_7.jpg" />
+    <Content Include="Files\Reports\Report_8.jpg" />
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -303,6 +331,13 @@
     <Content Include="Models\EPatientMgmt.edmx.diagram">
       <DependentUpon>EPatientMgmt.edmx</DependentUpon>
     </Content>
+    <Content Include="Files\Cards\Card_1.doc" />
+    <Content Include="Files\Cards\Card_1.docx" />
+    <Content Include="Files\Cards\Card_3.docx" />
+    <Content Include="Files\Reports\Card_1.doc" />
+    <Content Include="Files\Reports\Card_1.docx" />
+    <Content Include="Files\Reports\Card_3.docx" />
+    <Content Include="Files\Reports\Report_3.docx" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="Images\avatar.jpg" />
     <Content Include="Models\EPatientMgmt.Context.tt">
@@ -403,11 +438,10 @@
     <Content Include="Views\Diseases\Index.cshtml" />
     <Content Include="Views\Diseases\Save.cshtml" />
     <Content Include="Views\Employees\EmployeeProfile.cshtml" />
+    <Content Include="Views\Patients\patientInfo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Files\Cards\" />
-    <Folder Include="Files\Reports\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
