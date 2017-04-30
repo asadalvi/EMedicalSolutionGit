@@ -1,10 +1,10 @@
 ﻿@model EMedicalSolution.ViewModels.patientIntakeViewModel
 
-
+@{ Layout = "~/Views/Shared/_UserLayout.cshtml";}
 <h2 style="margin-top:50px;">patient Information</h2>
  
 <div>
-    <label>
+    <label style="font-size:x-large;">
         procedure type
     </label>
 </div>
@@ -24,7 +24,7 @@
  else  { <p style="color:red;">no procedure data is avaiable</p>}
 
 <div>
-    <label>
+    <label style="font-size:x-large;">
         Interfering Condition
     </label>
 </div>
@@ -48,7 +48,7 @@ else { <p style="color:red;">no condition data is avaiable</p>}
  
 <div class="w3-row">
     <div>
-        <label>Symptoms</label>
+        <label style="font-size:x-large;">Symptoms</label>
     </div>
     @if (Model != null && Model.objSymptomVM1 != null && Model.objSymptomVM1.Count > 0)
     {
@@ -68,7 +68,7 @@ else { <p style="color:red;">no condition data is avaiable</p>}
 <br>
  
     <div>
-        <label>
+        <label style="font-size:x-large;">
             Disease
         </label>
     </div>
@@ -90,7 +90,7 @@ else { <p style="color:red;">no condition data is avaiable</p>}
     }
     else { <p style="color:red;">no diseases data is avaiable</p>}
 <div>
-    <label>
+    <label style="font-size:x-large;">
          Medical Necessity
     </label>
 </div>
@@ -116,7 +116,7 @@ else { <p style="color:red;">no medica necessities data is avaiable</p>}
 <input type="text" name="txtsecondary" disabled="disabled" value="@Model.PatientHistoryVM11.SecondaryNecessities" id="secondaryDiagnosis" />
     }
 <div>
-    <label>
+    <label style="font-size:x-large">
         Approved by Physician:
     </label>
 </div>
