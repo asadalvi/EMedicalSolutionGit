@@ -6,7 +6,7 @@
         <div>
             <input type="hidden" id="physcianApproalDataText" />
               <input type="password" name="physiciasnSignature" id="physiciasn_Signature" />
-            <p id="signaturePasswordError" style="font-size:large;color:red;display:none">Please enter the correct password</p>
+            <p id="signaturePasswordError" style="font-size:large;color:red;display:none">Please enter password</p>
         </div>
     </div>
     <div class="w3-row  w3-margin-top">
@@ -53,11 +53,12 @@
                                                 }, 10);
                                             }
                                         },
-                                        error: function () {
-                                            $(document).find("#signaturePasswordError").css("display", "block");
-                                        }
 
                                     })
+                                }
+                                else {
+                                    $(document).find("#signaturePasswordError").css("display", "block");
+                                    $(document).find("#signaturePasswordError").text("The password you have entered is incorrect.");
                                 }
                             }
                         })
