@@ -11,6 +11,7 @@ namespace EMedicalSolution.ViewModels
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Title { get; set; }
+        public string filename { get; set; }
         public DateTime Created { get; set; }
     }
 }

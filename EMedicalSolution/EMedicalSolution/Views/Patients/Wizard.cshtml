@@ -35,8 +35,12 @@
         <span id="PatienName" style="display:none"></span></div>
         <!-- SmartWizard html -->
         <div id="smartwizard">
+           @if (Model != null && Model.objPatient != null && Model.objPatient.FirstName != null)
+           { <b>Patient Name :</b>
+                <b>@Model.objPatient.FirstName @Model.objPatient.LastName</b> 
+           }
             @*hidden patient id and history id*@
-            <input type="text" id="patientID" name="patientID" />
+            <input type="hidden" id="patientID" name="patientID" />
             <input type="text" id="pHistoryId" name="pHistoryId" value="@ViewBag.HistoryID" />
 
             <ul>
@@ -116,6 +120,7 @@
         @section Scripts {
             <script src="~/Scripts/Wizard/jquery.smartWizard.min.js"></script>
             <script type="text/javascript">
+                var stepNumbersForm = 0;
                 var ViewBagSupportDevice = $("#ViewBagSupportDevice").val();
                 var ViewBagCurrentlyPregnant = $("#ViewBagCurrentlyPregnant").val();
                 if (ViewBagSupportDevice !== undefined && ViewBagSupportDevice === "No") {
@@ -132,7 +137,8 @@
                     var pHistoryId = 0;
                     // Step show event
                     $("#smartwizard").on("showStep", function (e, anchorObject, stepNumber, stepDirection, stepPosition) {
-                         // alert("You are on step "+stepNumber+" now");
+                        // alert("You are on step "+stepNumber+" now");
+                        stepNumbersForm = stepNumber;
                           numberOFSteps = stepNumber;
                           if (numberOFSteps == 0) {
                               setTimeout(function () {
@@ -248,25 +254,60 @@
                 
                 //submission form -------start-----------
                 $(document).find('.submitForm').on('click', function (e) {
+                    $(document).find(".saveError").css("display", "none");
                     var pHistoryId = $("#pHistoryId").val();
                     var parentForm = $(this).parent().parent().parent().attr('id');
-                    console.log("the parent id is", pHistoryId);
-                    $.ajax({
-                        type: "POST",
-                        enctype: "multipart/form-data",
-                        url: "/Patients/" + parentForm + "/?pHistoryId=" + pHistoryId,
-                        data: $('#' + parentForm).serialize(),
-                        success: function (data) {
-                            console.log(data);
-                            if (data) {
-                                alert("success");
-                                setTimeout(function () {
-                                    $(".sw-btn-next").removeClass("disabled");
-                                    $(".sw-btn-next").css("pointer-events", "auto");
-                                }, 10);
+                    console.log(stepNumbersForm, "the parent id is", pHistoryId);
+                    var selectAnyChecked = false;
+                    var selectintakeRefer = false;
+                    var selectintakeSymptom = false;
+                    if (stepNumbersForm !== undefined && stepNumbersForm == 2) {
+                        $('#intakeInterferingCondition input[type="checkbox"]').each(function () {
+                            if ($(this).is(":checked")) {
+                                selectintakeRefer = true;
+                                return false;
+                            } else { selectintakeRefer = false; }
+                        }); $('#intakeSymptom input[type="checkbox"]').each(function () {
+                            if ($(this).is(":checked")) {
+                                selectintakeSymptom = true;
+                                return false;
+                            } else { selectintakeSymptom = false; }
+                        }); $('#intakeDisease input[type="checkbox"]').each(function () {
+                            if ($(this).is(":checked")) {
+                                selectAnyChecked = true;
+                                if (selectintakeSymptom && selectintakeRefer) {
+                                    return false;
+                                } else { selectAnyChecked = false;}
+                            } else { selectAnyChecked = false; }
+                        });
+                    } else {
+                        $('#' + parentForm + ' input[type="checkbox"]').each(function () {
+                            if ($(this).is(":checked")) {
+                                selectAnyChecked = true;
+                                return false;
+                            } else { selectAnyChecked = false; }
+                        });
+                    }
+                    if (selectAnyChecked) {
+                        $(document).find(".saveError").css("display", "none");
+                        $.ajax({
+                            type: "POST",
+                            enctype: "multipart/form-data",
+                            url: "/Patients/" + parentForm + "/?pHistoryId=" + pHistoryId,
+                            data: $('#' + parentForm).serialize(),
+                            success: function (data) {
+                                console.log(data);
+                                if (data) {
+                                    alert("success");
+                                    $(document).find(".saveError").css("display", "none");
+                                    setTimeout(function () {
+                                        $(".sw-btn-next").removeClass("disabled");
+                                        $(".sw-btn-next").css("pointer-events", "auto");
+                                    }, 10);
+                                }
                             }
-                        }
-                    })
+                        })
+                    } else { $(document).find(".saveError").css("display", "block"); }
                 });
                 //submission form -------End-----------
 
@@ -274,6 +315,8 @@
                 $('#addPatientReport').click(function () {
                     $formData = new FormData();
                     var pHistoryId = $("#pHistoryId").val();
+                    var selectFileChecked = false;
+                    var selectTextChecked = false;
                     $('.js-upload-files').each(function () {
                         console.log("id",this.id);
                         var $file = document.getElementById(this.id);
@@ -282,34 +325,44 @@
                     if ($file.files.length > 0) {
                        for (var i = 0; i < $file.files.length; i++) {
                            $formData.append('filePath', $file.files[i]);
+                           selectFileChecked = true;
                        }
                         }
                     });
                     $(".js-files-title").each(function (x, y) {
                         $formData.append($(y).attr("name"), $(y).val());
+                        selectTextChecked = true
                     });
+                    if (selectFileChecked && selectTextChecked) {
+                        $(document).find(".saveError").css("display", "none");
                         $.ajax({
                             url: '/Patients/uploadReports?pHistoryId=' + pHistoryId,
-                           type: 'POST',
-                           data: $formData,
-                           dataType: 'json',
-                           contentType: false,
-                           enctype: 'multipart/form-data',
-                           processData: false,
-                           success: function ($data) {
-                               setTimeout(function () {
-                                   $(".sw-btn-next").removeClass("disabled");
-                                   $(".sw-btn-next").css("pointer-events", "auto");
-                               }, 10);
-                               oReportTable.ajax.reload();
-                           }
-                         });
+                            type: 'POST',
+                            data: $formData,
+                            dataType: 'json',
+                            contentType: false,
+                            enctype: 'multipart/form-data',
+                            processData: false,
+                            success: function ($data) {
+                                setTimeout(function () {
+                                    $(document).find(".saveError").css("display", "none");
+                                    $(".sw-btn-next").removeClass("disabled");
+                                    $(".sw-btn-next").css("pointer-events", "auto");
+                                }, 10);
+                                oReportTable.ajax.reload();
+                            }
+                        });
+                    } else { $(document).find(".saveError").css("display", "block"); }
                 });
                 $(document).on('click', '.sw-btn-prev', function (e) {
+                    $(document).find(".saveError").css("display", "none");
                     setTimeout(function () {
                         $(".sw-btn-next").removeClass("disabled");
                         $(".sw-btn-next").css("pointer-events", "auto");
                     }, 10);
+                });
+                $(document).on('click', '.sw-btn-next', function (e) {
+                    $(document).find(".saveError").css("display", "none");
                 });
                 // Check if primary necessity is selected then enable secondary diaganosis 
                 $("input[type='checkbox'].necessities").change(function () {

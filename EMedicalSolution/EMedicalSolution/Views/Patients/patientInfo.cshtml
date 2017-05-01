@@ -1,0 +1,129 @@
+﻿@model EMedicalSolution.ViewModels.patientIntakeViewModel
+
+@{ Layout = "~/Views/Shared/_UserLayout.cshtml";}
+<h2 style="margin-top:50px;">patient Information</h2>
+ 
+<div>
+    <label style="font-size:x-large;">
+        procedure type
+    </label>
+</div>
+ @if (Model != null && Model.PatientProceduresVM1 != null && Model.PatientProceduresVM1.Count > 0 )
+ {
+     foreach (var procedure in Model.PatientProceduresVM1)
+     {
+         if (procedure.HistoryID > 0)
+         {
+
+<input class="w3-check procedure_Type" type="checkbox" name="procedureType" value=@procedure.ID checked required />
+@procedure.Title
+         }
+
+     }
+ }
+ else  { <p style="color:red;">no procedure data is avaiable</p>}
+
+<div>
+    <label style="font-size:x-large;">
+        Interfering Condition
+    </label>
+</div>
+@if (Model != null && Model.objInterferingConditionVM1 != null && Model.objInterferingConditionVM1.Count > 0)
+{
+
+    foreach (var condition in Model.objInterferingConditionVM1)
+    {
+  
+                <div class="w3-third">
+                    @if (condition.HistoryID > 0)
+                    {
+                        <input class="w3-radio" type="checkbox" name="condition" value="@condition.ID" checked /> @condition.Title
+                    }
+                </div>
+    }
+
+}
+else { <p style="color:red;">no condition data is avaiable</p>}
+   
+ 
+<div class="w3-row">
+    <div>
+        <label style="font-size:x-large;">Symptoms</label>
+    </div>
+    @if (Model != null && Model.objSymptomVM1 != null && Model.objSymptomVM1.Count > 0)
+    {
+        foreach (var symptom in Model.objSymptomVM1)
+        {
+            <div class="w3-third" id="intakeSymptom">
+                @if (symptom.HistoryID > 0)
+                    {
+                    <input class="w3-radio" type="checkbox" name="symptom" value="@symptom.ID" checked /> @symptom.Title
+                }
+            </div>
+
+        }
+    }
+    else { <p style="color:red;">no symptom data is avaiable</p>}
+</div>
+<br>
+ 
+    <div>
+        <label style="font-size:x-large;">
+            Disease
+        </label>
+    </div>
+
+    @if (Model != null && Model.objPatientDiseaseVM != null && Model.objPatientDiseaseVM.Count > 0)
+    {
+        foreach (var disease in Model.objPatientDiseaseVM)
+        {
+            <div class="w3-third" id="intakeDisease">
+                @if (disease.HistoryID > 0)
+                    {
+                    <input class="w3-radio" type="checkbox" name="disease" value="@disease.ID" checked /> @disease.Title
+                }
+                else {
+                    <input class="w3-radio" type="checkbox" name="disease" value="@disease.ID" /> @disease.Title
+                }
+            </div>
+        }
+    }
+    else { <p style="color:red;">no diseases data is avaiable</p>}
+<div>
+    <label style="font-size:x-large;">
+         Medical Necessity
+    </label>
+</div>
+
+@if (Model.objMedicalNecessity1 != null && Model.objMedicalNecessity1.Count > 0)
+    {
+<div class="w3-responsive checkbox-container">
+    @foreach (var necessity in Model.objMedicalNecessity1)
+            {
+                if (necessity.HistoryID > 0)
+                {
+                                      <input type="checkbox" name="necessities" class="necessities" value="@necessity.ID" checked />  @(necessity.ICD10Code + " - " + necessity.Description)
+        }
+    }
+</div>
+}
+else { <p style="color:red;">no medica necessities data is avaiable</p>}
+
+
+    @if (Model.PatientHistoryVM11 != null && Model.PatientHistoryVM11.SecondaryNecessities != null && Model.PatientHistoryVM11.SecondaryNecessities != "")
+    {
+  <h4>Secondary Diagnosis</h4>
+<input type="text" name="txtsecondary" disabled="disabled" value="@Model.PatientHistoryVM11.SecondaryNecessities" id="secondaryDiagnosis" />
+    }
+<div>
+    <label style="font-size:x-large">
+        Approved by Physician:
+    </label>
+</div>
+
+@if (Model != null && Model.PatientHistoryVM11 != null && Model.PatientHistoryVM11.isApprovedByPhysician != null && Model.PatientHistoryVM11.isApprovedByPhysician == true && Model.StaffNameVM != null && Model.StaffNameVM.PhycisianName != null)
+{
+            <h2>Approve by @Model.StaffNameVM.PhycisianName </h2>
+}
+else { <p style="color:red;">not approved by any physician.</p>}
+ 
