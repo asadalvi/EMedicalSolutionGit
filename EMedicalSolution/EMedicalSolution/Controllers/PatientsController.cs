@@ -927,6 +927,7 @@ namespace EMedicalSolution.Controllers
                                   select new StaffName
                                   {
                                       PhycisianName = s.FirstName + " " + s.LastName,
+                                      SpecialistName = "test Name"
                                   }).FirstOrDefault();
         intakeView.PatientHistoryVM11 = db.PatientHistories.Where(a => a.ID == id).FirstOrDefault();
         intakeView.PatientProceduresVM1 = (from p in db.ProcedureTypes

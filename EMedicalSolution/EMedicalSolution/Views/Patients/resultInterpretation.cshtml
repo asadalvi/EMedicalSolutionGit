@@ -5,7 +5,7 @@ Result Interpretation by Specialist
     <div class="pre-scrollable"> 
            
         <div id="specialistRemarksTextBox">
-            @if (Model != null && Model.PatientHistoryVM11 != null && Model.PatientHistoryVM11.isApprovedBySpecialist != null && Model.PatientHistoryVM11.isApprovedBySpecialist == true)
+            @if (Model != null && Model.PatientHistoryVM11 != null && Model.PatientHistoryVM11.isApprovedBySpecialist != null && Model.PatientHistoryVM11.isApprovedBySpecialist == true && Model.StaffNameVM != null && Model.StaffNameVM.SpecialistName != null)
             {
                 <div class="w3-panel w3-hover-blue w3-light-blue w3-round-xxlarge">
                     <h3>Specialist Approval</h3>
@@ -16,37 +16,43 @@ Result Interpretation by Specialist
             else {
                 <label>Specialist Remarks:</label>
                 <input type="text" name="specialistRemarks" id="specialistRemarksValue" />
-                @*<a class="popup w3-btn w3-orange" href="/Patients/physicianSignature/">Approve</a>*@
+                <p id="specialistRemarksError" class="saveError" style="font-size:large;color:red;display:none">Please enter remarks.</p>
+                <div class="w3-row  w3-margin-top">
+                    <div class="w3-third" style="float: none; margin: auto">
+                        <button class="w3-btn-block w3-green" id="saveSpecialistData" type="button">Save</button>
+                    </div>
+                </div>
             }
         </div>
         <h2 id="ApprovedbySpecialist" style="display:none">Approve by [Specialist Name]</h2>
   </div>   
     @*<input type="submit" value="Convert To PDF" />*@
-    <div class="w3-row  w3-margin-top">
-        <div class="w3-third" style="float: none; margin: auto">
-            <button class="w3-btn-block w3-green" id="saveSpecialistData" type="button">Save</button>
-            </div>
-        </div>
+   
     }
 <script>
 
     //submission form -------start-----------
     $(document).find('#saveSpecialistData').on('click', function (e) {
+        $(document).find(".saveError").css("display", "none");
         var pHistoryId = $("#pHistoryId").val();
         var specialistRemarks = $("#specialistRemarksValue").val();
-        console.log("the parent id is", pHistoryId);
-        $.ajax({
-            type: "POST",
-            url: "/Patients/resultInterpretation/?pHistoryId=" + pHistoryId + "&specialistRemarks=" + specialistRemarks,
-           // data: $('#' + parentForm).serialize(),
-            success: function (data) {
-                console.log(data);
-                if (data) {
-                    alert("success");
-                    $("#ApprovedbySpecialist").css('display', 'block');
-                    $("#specialistRemarksTextBox").css('display', 'none');
+        if (specialistRemarks !== undefined && specialistRemarks !== null && specialistRemarks !== "") {
+            $.ajax({
+                type: "POST",
+                url: "/Patients/resultInterpretation/?pHistoryId=" + pHistoryId + "&specialistRemarks=" + specialistRemarks,
+                // data: $('#' + parentForm).serialize(),
+                success: function (data) {
+                    console.log(data);
+                    if (data) {
+                        alert("success");
+                        $(document).find(".saveError").css("display", "none");
+                        $(document).find("#saveSpecialistData").css("display", "none");
+                        
+                        $("#ApprovedbySpecialist").css('display', 'block');
+                        $("#specialistRemarksTextBox").css('display', 'none');
+                    }
                 }
-            }
-        })
+            })
+        } else { $(document).find(".saveError").css("display", "block"); }
     });
 </script>
