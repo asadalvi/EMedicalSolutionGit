@@ -123,7 +123,7 @@ else { <p style="color:red;">no medica necessities data is avaiable</p>}
 
 @if (Model != null && Model.PatientHistoryVM11 != null && Model.PatientHistoryVM11.isApprovedByPhysician != null && Model.PatientHistoryVM11.isApprovedByPhysician == true && Model.StaffNameVM != null && Model.StaffNameVM.PhycisianName != null)
 {
-            <h2>Approve by @Model.StaffNameVM.PhycisianName </h2>
+            <h2>Approve by Dr. @Model.StaffNameVM.PhycisianName </h2>
 }
 else { <p style="color:red;">not approved by any physician.</p>}
  

@@ -7,7 +7,11 @@ Result Interpretation by Specialist
         <div id="specialistRemarksTextBox">
             @if (Model != null && Model.PatientHistoryVM11 != null && Model.PatientHistoryVM11.isApprovedBySpecialist != null && Model.PatientHistoryVM11.isApprovedBySpecialist == true)
             {
-                <h2>Approve by [Specialist Name] </h2>
+                <div class="w3-panel w3-hover-blue w3-light-blue w3-round-xxlarge">
+                    <h3>Specialist Approval</h3>
+                    <p>Approve by Dr. @Model.StaffNameVM.SpecialistName </p>
+                    <p><strong>Remarks:</strong> @Model.StaffNameVM.SpecialistRemarks</p>
+                </div>
             }
             else {
                 <label>Specialist Remarks:</label>

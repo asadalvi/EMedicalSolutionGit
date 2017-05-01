@@ -6,6 +6,7 @@
 //    Manual changes to this file will be overwritten if the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
+using System.ComponentModel.DataAnnotations;
 
 namespace EMedicalSolution.Models
 {
@@ -25,6 +26,8 @@ namespace EMedicalSolution.Models
         public int ID { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Please provide date of birth")]
+        [DisplayFormat(DataFormatString = "{0:dd MMM yyyy}")]
         public System.DateTime DOB { get; set; }
         public string Gender { get; set; }
         public string IDNumber { get; set; }

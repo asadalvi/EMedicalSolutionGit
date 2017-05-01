@@ -12,7 +12,7 @@
             width: 8.27in;
             float: none;
             margin: auto;
-            font-family: "Trebuchet MS", "serif";
+            font-family: "Arial", "serif";
             background: white;
         }
 
@@ -42,13 +42,6 @@
             font-size: 18px;
             border: 1px black solid;
         }*/
-
-            table td {
-                border: 1px black solid;
-                text-align: center;
-                vertical-align: middle;
-            }
-
         #notice {
             text-align: center;
             margin-top: 1cm;
@@ -74,12 +67,12 @@
             margin-top: 0.5cm;
             margin-bottom: 0.5cm;
             font-size: 15px;
-            border: 1px black solid;
         }
 
             table td {
                 border: 1px black solid;
                 vertical-align: middle;
+                text-align: center;
             }
 
         thead td {
@@ -119,13 +112,13 @@
                         @if (Model != null && Model.objPatient != null && Model.objPatient.Gender != null)
                         {
                             <span>@Model.objPatient.Gender</span>
-                        }
-
-                        @*<span>Female</span>*@
+                        }<br />
+                        <b>DOB:</b> <span>@Model.objPatient.DOB.ToString("MM/dd/yyyy")</span>
                     </p>
 
                     <p>
-                        <b>Ordering MD/PA/NP:</b>
+                        <b>Ordering </b><br />
+                        <b>MD/PA/NP:</b>
                         <span>Test Ordered here</span>
                     </p>
 
@@ -138,7 +131,7 @@
                         <b>Date:</b>
                         @if (Model != null && Model.objPatient != null && Model.objPatient.Created != null)
                         {
-                            <span>@Model.objPatient.Created</span>
+                            <span>@Model.PatientHistoryVM11.Created.ToString("MM/dd/yyyy")</span>
                         }
                     </p>
 
@@ -152,30 +145,28 @@
                     </i>
                 </p>
 
-                <table cellspacing="0">
+                <table cellpadding="10">
                     <tbody>
                         <tr>
-                            <td>ANS Evaluation</td>
-                            <td>&#x2714;</td>
-                            <td>Using Tilt Table</td>
-                            <td>95924 + 95923</td>
+                            <td rowspan="2" style="text-align:left"> [ ] ANS Evaluation</td>
+                            <td>@*&#x2714;*@</td>
+                            <td><strong>Using Tilt Table</strong></td>
+                            <td><strong>95924 + 95923</strong></td>
                         </tr>
                         <tr>
-                            <td>ANS Evaluation</td>
+                            
                             <td>&#x2716;</td>
-                            <td>Without Tilt Table</td>
-                            <td>95924 + 95923</td>
+                            <td><strong>Without Tilt Table</strong></td>
+                            <td><strong>95921 + 95923 + 95943 or 95924 + 95923</strong></td>
                         </tr>
                         <tr>
-                            <td>Arterial Evaluation</td>
-                            <td></td>
-                            <td></td>
-                            <td>95924 + 95923</td>
+                            <td colspan="3" style="text-align:left"> [ ] Arterial Evaluation</td>
+                            <td><strong>93922</strong></td>
                         </tr>
                     </tbody>
                 </table>
 
-                <p><i>Physician requires company to handle Billing x Global Technical only</i></p>
+                <p><i>Physician requires company to handle Billing <strong>x</strong> Global Technical only</i></p>
 
                 <p><b>Physician is ordering the test for the following reason(s):</b></p>
 
@@ -183,47 +174,27 @@
 
                 <p>
                     1)
-                    <span>Data here</span>
+                    <span>95943</span>
                 </p>
                 <p>
                     2)
-                    <span>Data here</span>
+                    <span>95923</span>
                 </p>
 
-                <p>
-                    3)
-                    <span>Data here</span>
-                </p>
-
-                <p>
-                    4)
-                    <span>Data here</span>
-                </p>
+                
 
                 <p><b>[ ] Arterial evaluation:</b> Indications, reasons, symptoms and/or diagnosis codes for exam:</p>
 
                 <p>
                     1)
-                    <span>Data here</span>
+                    <span>93922</span>
                 </p>
-                <p>
-                    2)
-                    <span>Data here</span>
-                </p>
-
-                <p>
-                    3)
-                    <span>Data here</span>
-                </p>
-
-                <p>
-                    4)
-                    <span>Data here</span>
-                </p>
-
+               
                 <p>
                     Special Instructions
-                    <span>Data here</span>
+                    <span>_________________________________________________________________________</span>
+                    <span>_________________________________________________________________________</span>
+                    <span>_________________________________________________________________________</span>
                 </p>
 
                 <p id="notice"><i>Please send this completed order to our office</i></p>

@@ -46,13 +46,19 @@ namespace EMedicalSolution.Controllers
             }
             ViewBag.HistoryID = id;
             intakeView.StaffNameVM = (from p in db.PatientHistories
-                                      join pn in db.Users on p.PhysicianID equals pn.ID into leftJ
-                                      from lj in (from pn in leftJ select pn).DefaultIfEmpty()
-                                      join s in db.Staffs on lj.StaffID equals s.ID
+                                      join pn in db.Users on p.PhysicianID equals pn.ID 
+                                      join s in db.Staffs on pn.StaffID equals s.ID
+                                      join us in db.Users on p.SpecialistID equals us.ID into leftuSpec
+                                      from ljuSpec in (from us in leftuSpec select us).DefaultIfEmpty()
+                                      join ss in db.Staffs on ljuSpec.StaffID equals ss.ID into leftsSpec
+                                      from ljsSpec in (from ss in leftsSpec select ss).DefaultIfEmpty()
                                       where p.ID == id
                                       select new StaffName
                                       {
                                           PhycisianName = s.FirstName + " " + s.LastName,
+                                          PhysicianRemarks = p.PhysicianRemarks,
+                                          SpecialistName = ljsSpec.FirstName + " " + ljsSpec.LastName,
+                                          SpecialistRemarks = p.SpecialistRemarks
                                       }).FirstOrDefault();
             intakeView.PatientHistoryVM11 = db.PatientHistories.Where(a => a.ID == id).FirstOrDefault();
             intakeView.PatientProceduresVM1 = (from p in db.ProcedureTypes

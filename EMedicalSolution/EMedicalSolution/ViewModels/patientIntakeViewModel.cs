@@ -74,7 +74,9 @@ namespace EMedicalSolution.ViewModels
     public class StaffName
     {
         public string PhycisianName { get; set; }
+        public string PhysicianRemarks { get; set; }
         public string SpecialistName { get; set; }
+        public string SpecialistRemarks { get; set; }
     }
     //    public class PatientHistoryVM1
     //    {

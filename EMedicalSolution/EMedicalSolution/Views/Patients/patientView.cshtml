@@ -12,7 +12,31 @@
     </div>
     <div class="w3-row w3-margin-top">
         <b>Patient DOB :</b>
-        <span>@Model.objPatient.DOB</span>
+        <span>@Model.objPatient.DOB.ToString("dd/MM/yyyy")</span>
+    </div>
+    <div class="w3-row w3-margin-top">
+        @if (Model.StaffNameVM != null && Model.StaffNameVM.PhycisianName != null)
+        {
+            <b>Approved by :</b>
+            <span>Dr. @Model.StaffNameVM.PhycisianName (Physician)</span>
+        }
+        else
+        {
+            <b>Physician Approval :</b>
+            <span>Pending</span>
+        }
+    </div>
+    <div class="w3-row w3-margin-top">
+        @if (Model.StaffNameVM != null && Model.StaffNameVM.SpecialistName != null)
+        {
+            <b>Approved by :</b>
+            <span>Dr. @Model.StaffNameVM.SpecialistName (Specialist)</span>
+        }
+        else
+        {
+            <b>Specialist Approval :</b>
+            <span>Pending</span>
+        }
     </div>
     }
 </div>

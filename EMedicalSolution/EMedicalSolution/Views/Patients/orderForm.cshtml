@@ -17,7 +17,12 @@
             pType = "1";
             <input type="hidden" value="@pType" id="next_button_toggle_5" />
 
-            <h2>Approve by @Model.StaffNameVM.PhycisianName </h2>
+            <div class="w3-panel w3-hover-blue w3-light-blue w3-round-xxlarge">
+                <h3>Physician Approval</h3>
+                <p>Approve by Dr. @Model.StaffNameVM.PhycisianName </p>
+                <p><strong>Remarks:</strong> @Model.StaffNameVM.PhysicianRemarks</p>
+            </div>
+            <h2></h2>
         }
         else {
             <label>Physician Remarks:</label>

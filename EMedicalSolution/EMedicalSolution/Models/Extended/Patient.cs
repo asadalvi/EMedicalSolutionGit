@@ -19,6 +19,10 @@ namespace EMedicalSolution.Models
 
         [Required(AllowEmptyStrings = false, ErrorMessage = "Please provide last name")]
         public string LastName { get; set; }
+
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Please provide date of birth")]
+        [DisplayFormat(DataFormatString = "{0:dd MMM yyyy}")]
+        public DateTime DOB { get; set; }
     }
 
 }
