@@ -162,7 +162,7 @@
             }
         }
         else { <p style="color:red;">no diseases data is avaiable</p>}
-        </div>
+    </div>
     <div class="w3-container" id="diseaseDetails">
         <h4>Medical Necessities</h4>
         @if (Model.objMedicalNecessity1 != null && Model.objMedicalNecessity1.Count > 0)
@@ -178,15 +178,15 @@
             </div>
         }
         else { <p style="color:red;">no medica necessities data is avaiable</p>}
-        </div>
+    </div>
     <div class="w3-container" id="secondaryDiagnosisDetails">
-        
+
         @if (Model.PatientHistoryVM11 != null && Model.PatientHistoryVM11.SecondaryNecessities != null && Model.PatientHistoryVM11.SecondaryNecessities != "")
             {
             <h4>Secondary Diagnosis</h4>
-                @Model.PatientHistoryVM11.SecondaryNecessities
+            @Model.PatientHistoryVM11.SecondaryNecessities
         }
-        </div>
+    </div>
 
     <div class="w3-container" id="diseaseDetails">
         <h4>Approval by</h4>
