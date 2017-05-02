@@ -110,8 +110,9 @@
                 </div>
                 <div id="step-7" class="pre-scrollable">
                     @Html.Partial("resultInterpretation") 
+                </div>              
                 </div>
-                </div>
+
                 </div>
 
 
@@ -289,6 +290,7 @@
                         });
                     }
                     if (selectAnyChecked) {
+                        $(".ajax_loader_save").css("display", "block");
                         $(document).find(".saveError").css("display", "none");
                         $.ajax({
                             type: "POST",
@@ -298,7 +300,8 @@
                             success: function (data) {
                                 console.log(data);
                                 if (data) {
-                                    alert("success");
+                                    //alert("success");
+                                    $(".ajax_loader_save").css("display", "none");
                                     $(document).find(".saveError").css("display", "none");
                                     setTimeout(function () {
                                         $(".sw-btn-next").removeClass("disabled");
@@ -334,6 +337,7 @@
                         selectTextChecked = true
                     });
                     if (selectFileChecked && selectTextChecked) {
+                        $(".ajax_loader_save").css("display", "block");
                         $(document).find(".saveError").css("display", "none");
                         $.ajax({
                             url: '/Patients/uploadReports?pHistoryId=' + pHistoryId,
@@ -344,6 +348,7 @@
                             enctype: 'multipart/form-data',
                             processData: false,
                             success: function ($data) {
+                                $(".ajax_loader_save").css("display", "none");
                                 setTimeout(function () {
                                     $(document).find(".saveError").css("display", "none");
                                     $(".sw-btn-next").removeClass("disabled");

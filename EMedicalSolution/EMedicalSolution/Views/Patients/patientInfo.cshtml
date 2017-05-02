@@ -3,6 +3,11 @@
 @{ Layout = "~/Views/Shared/_Layout.cshtml";}
 <h2 style="margin-top:50px;">patient Information</h2>
  <p>
+     <div style="padding-bottom:20px;">
+         <button class="btn btn-success" style="background-color: gray;width: 200px; border-radius: 4px; color: white;">
+             <a style="text-decoration:none" href="/patients/Index">Back</a>
+         </button>
+     </div>
     <b>Patient's Name:</b>
     @if (Model != null && Model.objPatient != null && Model.objPatient.FirstName != null)
     {
@@ -162,6 +167,6 @@ else { <p style="color:red;">no medica necessities data is avaiable</p>}
 else { <p style="color:red;">not approved by any physician.</p>}
  
 
-<style>
+@*<style>
    h2,p,div {margin-left : 50px;}
-</style>
+</style>*@
