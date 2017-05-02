@@ -328,6 +328,7 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>EPatientMgmt.Designer.cs</LastGenOutput>
     </EntityDeploy>
+    <Content Include="Images\ajax_loader.png" />
     <Content Include="Models\EPatientMgmt.edmx.diagram">
       <DependentUpon>EPatientMgmt.edmx</DependentUpon>
     </Content>

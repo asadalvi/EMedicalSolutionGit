@@ -16,6 +16,7 @@ Result Interpretation by Specialist
             else {
                 <label>Specialist Remarks:</label>
                 <input type="text" name="specialistRemarks" id="specialistRemarksValue" />
+                <div class="ajax_loader_save" style="display:none;margin-top: -180px; margin-left: 300px;"><img src="~/Images/ajax_loader.png" /></div>
                 <p id="specialistRemarksError" class="saveError" style="font-size:large;color:red;display:none">Please enter remarks.</p>
                 <div class="w3-row  w3-margin-top">
                     <div class="w3-third" style="float: none; margin: auto">
@@ -37,6 +38,7 @@ Result Interpretation by Specialist
         var pHistoryId = $("#pHistoryId").val();
         var specialistRemarks = $("#specialistRemarksValue").val();
         if (specialistRemarks !== undefined && specialistRemarks !== null && specialistRemarks !== "") {
+            $(".ajax_loader_save").css("display", "block");
             $.ajax({
                 type: "POST",
                 url: "/Patients/resultInterpretation/?pHistoryId=" + pHistoryId + "&specialistRemarks=" + specialistRemarks,
@@ -44,7 +46,8 @@ Result Interpretation by Specialist
                 success: function (data) {
                     console.log(data);
                     if (data) {
-                        alert("success");
+                        // alert("success");
+                        $(".ajax_loader_save").css("display", "none");
                         $(document).find(".saveError").css("display", "none");
                         $(document).find("#saveSpecialistData").css("display", "none");
                         
