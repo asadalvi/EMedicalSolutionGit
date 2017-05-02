@@ -727,6 +727,7 @@ namespace EMedicalSolution.Controllers
                                      select p).FirstOrDefault();
             return intakeView;
         }
+        
         //order for report
         public ActionResult orderReport(int id)
         {
