@@ -1,172 +1,200 @@
 ﻿@model EMedicalSolution.ViewModels.patientIntakeViewModel
 
-@{ Layout = "~/Views/Shared/_Layout.cshtml";}
-<h2 style="margin-top:50px;">patient Information</h2>
- <p>
-     <div style="padding-bottom:20px;">
-         <button class="btn btn-success" style="background-color: gray;width: 200px; border-radius: 4px; color: white;">
-             <a style="text-decoration:none" href="/patients/Index">Back</a>
-         </button>
-     </div>
-    <b>Patient's Name:</b>
-    @if (Model != null && Model.objPatient != null && Model.objPatient.FirstName != null)
-    {
-        <span>@Model.objPatient.FirstName @Model.objPatient.LastName</span>
+@{
+    Layout = "~/Views/Shared/_OpenLayout.cshtml";
+}
+
+<style>
+    * {
+        font-family: 'Trebuchet MS' !important;
     }
-</p>
 
-<p>
-    <b>Sex:</b>
-    @if (Model != null && Model.objPatient != null && Model.objPatient.Gender != null)
-    {
-        <span>@Model.objPatient.Gender</span>
-    }<br />
-    <b>DOB:</b> <span>@Model.objPatient.DOB.ToString("MM/dd/yyyy")</span>
-</p>
-
-<p>
-    <b>Ordering: </b><br />
-    <b>MD/PA/NP:</b>
-    <span>Test Ordered here</span>
-</p>
-
-<p>
-    <b>Physician's Signature:</b>
-    <span>Physician's Signature here</span>
-</p>
-
-<p>
-    <b>Date:</b>
-    @if (Model != null && Model.objPatient != null && Model.objPatient.Created != null)
-    {
-        <span>@Model.PatientHistoryVM11.Created.ToString("MM/dd/yyyy")</span>
+    body {
+        background: darkgrey;
     }
-</p>
 
-<div>
-    <label style="font-size:x-large;">
-        procedure type
-    </label>
-</div>
- @if (Model != null && Model.PatientProceduresVM1 != null && Model.PatientProceduresVM1.Count > 0 )
- {
-     foreach (var procedure in Model.PatientProceduresVM1)
-     {
-         if (procedure.HistoryID > 0)
-         {
+    #mainContent {
+        width: 8.27in;
+        min-height: 11.69in;
+        background: white;
+        float: none;
+        margin: 0 auto;
+        padding: 32px 16px;
+    }
 
-<input class="w3-check procedure_Type" type="checkbox" name="procedureType" value=@procedure.ID checked required />
-@procedure.Title
-         }
+    table th, table td {
+        text-align: center !important;
+    }
 
-     }
- }
- else  { <p style="color:red;">no procedure data is avaiable</p>}
+    #doctorSign {
+        width: 160px;
+        height: 64px;
+        border: 1px grey solid;
+    }
+</style>
+<div id="mainContent">
+    <h2 class="w3-center">Patient Information</h2>
 
-<div>
-    <label style="font-size:x-large;">
-        Interfering Condition
-    </label>
-</div>
-@if (Model != null && Model.objInterferingConditionVM1 != null && Model.objInterferingConditionVM1.Count > 0)
-{
+    <div class="w3-container" id="patientDetails">
+        <table class="w3-table-all">
+            <thead>
+                <tr class="w3-black">
+                    <th>Patient's Name</th>
+                    <th>Patient's Gender</th>
+                    <th>Patient's DOB</th>
+                </tr>
+            </thead>
 
-    foreach (var condition in Model.objInterferingConditionVM1)
-    {
-  
+            <tbody>
+                <tr>
+                    @if (Model != null && Model.objPatient != null && Model.objPatient.FirstName != null)
+                    {
+                        <td>@Model.objPatient.FirstName @Model.objPatient.LastName</td>
+                    }
+                    @if (Model != null && Model.objPatient != null && Model.objPatient.Gender != null)
+                    {
+                        <td>@Model.objPatient.Gender</td>
+                    }
+                    <td>@Model.objPatient.DOB.ToString("MM/dd/yyyy")</td>
+                </tr>
+            </tbody>
+
+        </table>
+
+        <table class="w3-table-all">
+            <thead>
+                <tr class="w3-black">
+                    <th>MD / PA / NP</th>
+                    <th>Test Ordered</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr>
+                    <td>MD / PA / NP</td>
+                    <td>Test Ordered here</td>
+                    @if (Model != null && Model.objPatient != null && Model.objPatient.Created != null)
+                    {
+                        <td>@Model.PatientHistoryVM11.Created.ToString("MM/dd/yyyy")</td>
+                    }
+                </tr>
+            </tbody>
+
+        </table>
+
+        <b class="w3-right">Physician's Signature:</b><br />
+        <div class="w3-right" id="doctorSign">Physician's Signature here</div>
+    </div>
+
+    <div class="w3-container" id="procedureDetails">
+
+        <h4>Procedure Type</h4>
+
+        @if (Model != null && Model.PatientProceduresVM1 != null && Model.PatientProceduresVM1.Count > 0)
+        {
+            foreach (var procedure in Model.PatientProceduresVM1)
+            {
+                if (procedure.HistoryID > 0)
+                {
+                    <span>&rArr;</span> @procedure.Title
+                }
+
+            }
+        }
+        else { <p style="color:red;">no procedure data is avaiable</p>}
+
+    </div>
+
+    <div class="w3-container" id="conditionDetails">
+
+        <h3>Interfering Condition</h3>
+        @if (Model != null && Model.objInterferingConditionVM1 != null && Model.objInterferingConditionVM1.Count > 0)
+        {
+
+            foreach (var condition in Model.objInterferingConditionVM1)
+            {
                 <div class="w3-third">
                     @if (condition.HistoryID > 0)
                     {
-                        <input class="w3-radio" type="checkbox" name="condition" value="@condition.ID" checked /> @condition.Title
+                        <span>&rArr;</span> @condition.Title
                     }
                 </div>
-    }
-
-}
-else { <p style="color:red;">no condition data is avaiable</p>}
-   
-
-    <div>
-        <label style="font-size:x-large;">Symptoms</label>
-    </div>
-    @if (Model != null && Model.objSymptomVM1 != null && Model.objSymptomVM1.Count > 0)
-    {
-        foreach (var symptom in Model.objSymptomVM1)
-        {
-            <div class="w3-third" id="intakeSymptom">
-                @if (symptom.HistoryID > 0)
-                    {
-                    <input class="w3-radio" type="checkbox" name="symptom" value="@symptom.ID" checked /> @symptom.Title
-                }
-            </div>
+            }
 
         }
-    }
-    else { <p style="color:red;">no symptom data is avaiable</p>}
- 
-<br>
- 
-    <div>
-        <label style="font-size:x-large;">
-            Disease
-        </label>
+        else { <p style="color:red;">no condition data is avaiable</p>}
+
     </div>
 
-    @if (Model != null && Model.objPatientDiseaseVM != null && Model.objPatientDiseaseVM.Count > 0)
-    {
-        foreach (var disease in Model.objPatientDiseaseVM)
-        {
-            <div class="w3-third" id="intakeDisease">
-                @if (disease.HistoryID > 0)
-                    {
-                    <input class="w3-radio" type="checkbox" name="disease" value="@disease.ID" checked /> @disease.Title
-                }
-                else {
-                    <input class="w3-radio" type="checkbox" name="disease" value="@disease.ID" /> @disease.Title
-                }
-            </div>
-        }
-    }
-    else { <p style="color:red;">no diseases data is avaiable</p>}
-<div>
-    <label style="font-size:x-large;">
-         Medical Necessity
-    </label>
-</div>
+    <div class="w3-container" id="symptomDetails">
 
-@if (Model.objMedicalNecessity1 != null && Model.objMedicalNecessity1.Count > 0)
-    {
-<div class="w3-responsive checkbox-container">
-    @foreach (var necessity in Model.objMedicalNecessity1)
+        <h4>Symptoms</h4>
+        @if (Model != null && Model.objSymptomVM1 != null && Model.objSymptomVM1.Count > 0)
             {
-                if (necessity.HistoryID > 0)
+                foreach (var symptom in Model.objSymptomVM1)
                 {
-                                      <input type="checkbox" name="necessities" class="necessities" value="@necessity.ID" checked />  @(necessity.ICD10Code + " - " + necessity.Description)
+                <div class="w3-third" id="intakeSymptom">
+                    @if (symptom.HistoryID > 0)
+                    {
+                        <span>&rArr;</span>@symptom.Title
+                    }
+                </div>
+
+            }
         }
-    }
-</div>
-}
-else { <p style="color:red;">no medica necessities data is avaiable</p>}
+        else { <p style="color:red;">no symptom data is avaiable</p>}
 
+    </div>
 
-    @if (Model.PatientHistoryVM11 != null && Model.PatientHistoryVM11.SecondaryNecessities != null && Model.PatientHistoryVM11.SecondaryNecessities != "")
-    {
-  <h4>Secondary Diagnosis</h4>
-<input type="text" name="txtsecondary" disabled="disabled" value="@Model.PatientHistoryVM11.SecondaryNecessities" id="secondaryDiagnosis" />
-    }
-<div>
-    <label style="font-size:x-large">
-        Approved by Physician:
-    </label>
-</div>
+    <div class="w3-container" id="diseaseDetails">
+        <h3>Diseases</h3>
+        @if (Model != null && Model.objPatientDiseaseVM != null && Model.objPatientDiseaseVM.Count > 0)
+            {
+                foreach (var disease in Model.objPatientDiseaseVM)
+                {
+                <div class="w3-third" id="intakeDisease">
+                    @if (disease.HistoryID > 0)
+                    {
+                        <span>&rArr;</span>@disease.Title
+                    }
+                </div>
+            }
+        }
+        else { <p style="color:red;">no diseases data is avaiable</p>}
+    </div>
+    <div class="w3-container" id="diseaseDetails">
+        <h4>Medical Necessities</h4>
+        @if (Model.objMedicalNecessity1 != null && Model.objMedicalNecessity1.Count > 0)
+            {
+            <div class="w3-responsive checkbox-container">
+                @foreach (var necessity in Model.objMedicalNecessity1)
+                {
+                    if (necessity.HistoryID > 0)
+                    {
+                        @(necessity.ICD10Code + " - " + necessity.Description)
+                    }
+                }
+            </div>
+        }
+        else { <p style="color:red;">no medica necessities data is avaiable</p>}
+    </div>
+    <div class="w3-container" id="secondaryDiagnosisDetails">
 
-@if (Model != null && Model.PatientHistoryVM11 != null && Model.PatientHistoryVM11.isApprovedByPhysician != null && Model.PatientHistoryVM11.isApprovedByPhysician == true && Model.StaffNameVM != null && Model.StaffNameVM.PhycisianName != null)
-{
-            <h2>Approve by Dr. @Model.StaffNameVM.PhycisianName </h2>
-}
-else { <p style="color:red;">not approved by any physician.</p>}
- 
+        @if (Model.PatientHistoryVM11 != null && Model.PatientHistoryVM11.SecondaryNecessities != null && Model.PatientHistoryVM11.SecondaryNecessities != "")
+            {
+            <h4>Secondary Diagnosis</h4>
+            @Model.PatientHistoryVM11.SecondaryNecessities
+        }
+    </div>
 
-@*<style>
-   h2,p,div {margin-left : 50px;}
-</style>*@
+    <div class="w3-container" id="diseaseDetails">
+        <h4>Approval by</h4>
+
+        @if (Model != null && Model.PatientHistoryVM11 != null && Model.PatientHistoryVM11.isApprovedByPhysician != null && Model.PatientHistoryVM11.isApprovedByPhysician == true && Model.StaffNameVM != null && Model.StaffNameVM.PhycisianName != null)
+            {
+            <h3>Approve by Dr. @Model.StaffNameVM.PhycisianName </h3>
+        }
+        else { <p style="color:red;">not approved by any physician.</p>}
+
+    </div>
