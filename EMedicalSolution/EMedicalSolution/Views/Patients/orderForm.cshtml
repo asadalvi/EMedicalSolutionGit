@@ -5,7 +5,8 @@
 @{ string pType = "0";}
 @*<button class="btn btn-primary" id="btn_order_report" type="button">Order Form</button> <button class="btn btn-primary" id="btn_bill_report" type="button">Supper Bill</button>*@
 @Html.ActionLink("Order Form", "orderReport", "Patients", new { id = @ViewBag.HistoryID }, new { target = "_blank" }) /
-@Html.ActionLink("Supper Bill", "orderBill", "Patients", new { id = @ViewBag.HistoryID }, new { target = "_blank" })
+@Html.ActionLink("Supper Bill", "orderBill", "Patients", new { id = @ViewBag.HistoryID }, new { target = "_blank" }) / 
+@Html.ActionLink("Excel Report", "ExportToExcel", "Patients", new { id = @ViewBag.HistoryID }, new { target = "_blank" })
 
 @using (Html.BeginForm("ConvertPatientToPdf", "Patients", FormMethod.Post, new { id = "PhysicianApproval" }))
 {
