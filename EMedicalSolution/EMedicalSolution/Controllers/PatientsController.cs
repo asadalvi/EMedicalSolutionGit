@@ -60,6 +60,7 @@ namespace EMedicalSolution.Controllers
                                           SpecialistName = ljsSpec.FirstName + " " + ljsSpec.LastName,
                                           SpecialistRemarks = p.SpecialistRemarks
                                       }).FirstOrDefault();
+
             intakeView.PatientHistoryVM11 = db.PatientHistories.Where(a => a.ID == id).FirstOrDefault();
             intakeView.PatientProceduresVM1 = (from p in db.ProcedureTypes
                                                join pn in db.PatientProcedures on p.ID equals pn.ProcedureTypeID into leftJ
@@ -100,9 +101,9 @@ namespace EMedicalSolution.Controllers
 
             intakeView.objPatientDiseaseVM = (from dt in db.Diseases
                                               join d in db.PatientDiseases on dt.ID equals d.DiseaseID into leftJ
-                                              from lj in (from dt in leftJ
-                                                              //where dt.HistoryID == id   what should be here
-                                                          select dt).DefaultIfEmpty()
+                                              from lj in (from d in leftJ
+                                                              where d.HistoryID == id  // what should be here
+                                                          select d).DefaultIfEmpty()
                                               select new PatientDiseaseVM
                                               {
                                                   ID = dt.ID,
@@ -647,7 +648,89 @@ namespace EMedicalSolution.Controllers
             //return Json(status, JsonRequestBehavior.AllowGet);
             return View();
         }
-        public patientIntakeViewModel patientWizardData(int id)
+        //public patientIntakeViewModel patientWizardData(int id)
+        //{
+        //    patientIntakeViewModel intakeView = new patientIntakeViewModel();
+        //    PatientMgmtEntities db = new PatientMgmtEntities();
+        //    var intakeHistory = db.IntakeFormHeads.Where(a => a.HistoryID == id).FirstOrDefault();
+        //    if (intakeHistory != null)
+        //    {
+        //        ViewBag.supportDevice = intakeHistory.HaveSupportDevice;
+        //        ViewBag.currentlyPregnant = intakeHistory.isPregnant;
+        //    }
+        //    ViewBag.HistoryID = id;
+        //    intakeView.PatientHistoryVM11 = db.PatientHistories.Where(a => a.ID == id).FirstOrDefault();
+        //    intakeView.PatientProceduresVM1 = (from p in db.ProcedureTypes
+        //                                       join pn in db.PatientProcedures on p.ID equals pn.ProcedureTypeID into leftJ
+        //                                       from lj in (from pn in leftJ
+        //                                                   where pn.HistoryID == id
+        //                                                   select pn).DefaultIfEmpty()
+        //                                       select new PatientProceduresVM
+        //                                       {
+        //                                           ID = p.ID,
+        //                                           Title = p.Title,
+        //                                           ProcedureTypeID = (lj.ProcedureTypeID != null) ? lj.ProcedureTypeID : 0,//,
+        //                                           HistoryID = (lj.HistoryID != null) ? lj.HistoryID : 0
+        //                                       }).ToList();
+        //    intakeView.objInterferingConditionVM1 = (from p in db.InterferingConditions
+        //                                             join pn in db.PatientInterferingConditions on p.ID equals pn.PatientConditionID into leftJ
+        //                                             from lj in (from pn in leftJ
+        //                                                         where pn.HistoryID == id
+        //                                                         select pn).DefaultIfEmpty()
+        //                                             select new InterferingConditionVM
+        //                                             {
+        //                                                 ID = p.ID,
+        //                                                 Title = p.Title,
+        //                                                 PatientConditionID = (lj.PatientConditionID != null) ? lj.PatientConditionID : 0,//,
+        //                                                 HistoryID = (lj.HistoryID != null) ? lj.HistoryID : 0
+        //                                             }).ToList();
+        //    intakeView.objSymptomVM1 = (from mn in db.Symptoms
+        //                                join pn in db.PatientSymtoms on mn.ID equals pn.SymptomID into leftJ
+        //                                from lj in (from pn in leftJ
+        //                                            where pn.HistoryID == id
+        //                                            select pn).DefaultIfEmpty()
+        //                                select new SymptomVM
+        //                                {
+        //                                    ID = mn.ID,
+        //                                    Title = mn.Title,
+        //                                    SymptomID = (lj.SymptomID != null) ? lj.SymptomID : 0,//,
+        //                                    HistoryID = (lj.HistoryID != null) ? lj.HistoryID : 0
+        //                                }).ToList();
+
+        //    intakeView.objPatientDiseaseVM = (from dt in db.Diseases
+        //                                      join d in db.PatientDiseases on dt.ID equals d.DiseaseID into leftJ
+        //                                      from lj in (from dt in leftJ
+        //                                                      //where dt.HistoryID == id   what should be here
+        //                                                  select dt).DefaultIfEmpty()
+        //                                      select new PatientDiseaseVM
+        //                                      {
+        //                                          ID = dt.ID,
+        //                                          Title = dt.Title,
+        //                                          HistoryID = (lj.HistoryID != null) ? lj.HistoryID : 0,//,
+        //                                                                                                // HistoryID = (lj.HistoryID != null) ? lj.HistoryID : 0
+        //                                      }).ToList();
+        //    intakeView.objMedicalNecessity1 = (from mn in db.MedicalNecessities
+        //                                       join pn in db.PatientNecessities on mn.ID equals pn.NecessityID into leftJ
+        //                                       from lj in (from pn in leftJ
+        //                                                   where pn.HistoryID == id
+        //                                                   select pn).DefaultIfEmpty()
+        //                                       select new PatientNecessitiesVM
+        //                                       {
+        //                                           ID = mn.ID,
+        //                                           ICD10Code = mn.ICD10Code,
+        //                                           Description = mn.Description,
+        //                                           NecessityID = (lj.NecessityID != null) ? lj.NecessityID : 0,//,
+        //                                           HistoryID = (lj.HistoryID != null) ? lj.HistoryID : 0
+        //                                       }).ToList();
+        //    intakeView.objPatient = (from p in db.Patients
+        //                             join ph1 in db.PatientHistories on p.ID equals ph1.PatientID
+        //                             where ph1.ID == id
+        //                             select p).FirstOrDefault();
+        //    return intakeView;
+        //}
+
+
+        public patientIntakeViewModel patientHistoryDetail(int id)
         {
             patientIntakeViewModel intakeView = new patientIntakeViewModel();
             PatientMgmtEntities db = new PatientMgmtEntities();
@@ -660,91 +743,96 @@ namespace EMedicalSolution.Controllers
             ViewBag.HistoryID = id;
             intakeView.PatientHistoryVM11 = db.PatientHistories.Where(a => a.ID == id).FirstOrDefault();
             intakeView.PatientProceduresVM1 = (from p in db.ProcedureTypes
-                                               join pn in db.PatientProcedures on p.ID equals pn.ProcedureTypeID into leftJ
-                                               from lj in (from pn in leftJ
-                                                           where pn.HistoryID == id
-                                                           select pn).DefaultIfEmpty()
+                                               join pn in db.PatientProcedures on p.ID equals pn.ProcedureTypeID 
+                                               where pn.HistoryID == id
                                                select new PatientProceduresVM
                                                {
                                                    ID = p.ID,
                                                    Title = p.Title,
-                                                   ProcedureTypeID = (lj.ProcedureTypeID != null) ? lj.ProcedureTypeID : 0,//,
-                                                   HistoryID = (lj.HistoryID != null) ? lj.HistoryID : 0
+                                                   ProcedureTypeID = pn.ProcedureTypeID,
+                                                   HistoryID = pn.HistoryID
                                                }).ToList();
             intakeView.objInterferingConditionVM1 = (from p in db.InterferingConditions
-                                                     join pn in db.PatientInterferingConditions on p.ID equals pn.PatientConditionID into leftJ
-                                                     from lj in (from pn in leftJ
+                                                     join pn in db.PatientInterferingConditions on p.ID equals pn.PatientConditionID 
                                                                  where pn.HistoryID == id
-                                                                 select pn).DefaultIfEmpty()
                                                      select new InterferingConditionVM
                                                      {
                                                          ID = p.ID,
                                                          Title = p.Title,
-                                                         PatientConditionID = (lj.PatientConditionID != null) ? lj.PatientConditionID : 0,//,
-                                                         HistoryID = (lj.HistoryID != null) ? lj.HistoryID : 0
+                                                         PatientConditionID = pn.PatientConditionID,
+                                                         HistoryID = pn.HistoryID
                                                      }).ToList();
             intakeView.objSymptomVM1 = (from mn in db.Symptoms
-                                        join pn in db.PatientSymtoms on mn.ID equals pn.SymptomID into leftJ
-                                        from lj in (from pn in leftJ
+                                        join pn in db.PatientSymtoms on mn.ID equals pn.SymptomID 
                                                     where pn.HistoryID == id
-                                                    select pn).DefaultIfEmpty()
                                         select new SymptomVM
                                         {
                                             ID = mn.ID,
                                             Title = mn.Title,
-                                            SymptomID = (lj.SymptomID != null) ? lj.SymptomID : 0,//,
-                                            HistoryID = (lj.HistoryID != null) ? lj.HistoryID : 0
+                                            SymptomID = pn.SymptomID,
+                                            HistoryID = pn.HistoryID
                                         }).ToList();
 
             intakeView.objPatientDiseaseVM = (from dt in db.Diseases
-                                              join d in db.PatientDiseases on dt.ID equals d.DiseaseID into leftJ
-                                              from lj in (from dt in leftJ
-                                                              //where dt.HistoryID == id   what should be here
-                                                          select dt).DefaultIfEmpty()
+                                              join d in db.PatientDiseases on dt.ID equals d.DiseaseID
+                                              where d.HistoryID == id
                                               select new PatientDiseaseVM
                                               {
                                                   ID = dt.ID,
                                                   Title = dt.Title,
-                                                  HistoryID = (lj.HistoryID != null) ? lj.HistoryID : 0,//,
-                                                                                                        // HistoryID = (lj.HistoryID != null) ? lj.HistoryID : 0
+                                                  HistoryID = d.HistoryID
                                               }).ToList();
             intakeView.objMedicalNecessity1 = (from mn in db.MedicalNecessities
-                                               join pn in db.PatientNecessities on mn.ID equals pn.NecessityID into leftJ
-                                               from lj in (from pn in leftJ
+                                               join pn in db.PatientNecessities on mn.ID equals pn.NecessityID 
                                                            where pn.HistoryID == id
-                                                           select pn).DefaultIfEmpty()
                                                select new PatientNecessitiesVM
                                                {
                                                    ID = mn.ID,
                                                    ICD10Code = mn.ICD10Code,
                                                    Description = mn.Description,
-                                                   NecessityID = (lj.NecessityID != null) ? lj.NecessityID : 0,//,
-                                                   HistoryID = (lj.HistoryID != null) ? lj.HistoryID : 0
+                                                   NecessityID = pn.NecessityID,//,
+                                                   HistoryID = pn.HistoryID
                                                }).ToList();
             intakeView.objPatient = (from p in db.Patients
                                      join ph1 in db.PatientHistories on p.ID equals ph1.PatientID
                                      where ph1.ID == id
                                      select p).FirstOrDefault();
+
+            intakeView.StaffNameVM = (from p in db.PatientHistories
+                                      join pn in db.Users on p.PhysicianID equals pn.ID
+                                      join s in db.Staffs on pn.StaffID equals s.ID
+                                      join us in db.Users on p.SpecialistID equals us.ID into leftuSpec
+                                      from ljuSpec in (from us in leftuSpec select us).DefaultIfEmpty()
+                                      join ss in db.Staffs on ljuSpec.StaffID equals ss.ID into leftsSpec
+                                      from ljsSpec in (from ss in leftsSpec select ss).DefaultIfEmpty()
+                                      where p.ID == id
+                                      select new StaffName
+                                      {
+                                          PhycisianName = s.FirstName + " " + s.LastName,
+                                          PhysicianRemarks = p.PhysicianRemarks,
+                                          SpecialistName = ljsSpec.FirstName + " " + ljsSpec.LastName,
+                                          SpecialistRemarks = p.SpecialistRemarks
+                                      }).FirstOrDefault();
             return intakeView;
         }
-        
+
         //order for report
         public ActionResult orderReport(int id)
         {
-            patientIntakeViewModel intakeView = patientWizardData(id);
+            patientIntakeViewModel intakeView = patientHistoryDetail(id);
             return View(intakeView);
         }
         //order bill for report
         public ActionResult orderBill(int id)
         {
-            patientIntakeViewModel intakeView = patientWizardData(id);
+            patientIntakeViewModel intakeView = patientHistoryDetail(id);
             return View(intakeView);
         }
         //report rendering
         public string RenderViewAsString(string viewName, int id)
         {
             //place this code in one place
-            patientIntakeViewModel intakeView = patientWizardData(id);
+            patientIntakeViewModel intakeView = patientHistoryDetail(id);
             // create a string writer to receive the HTML code
             StringWriter stringWriter = new StringWriter();
 
@@ -910,82 +998,82 @@ namespace EMedicalSolution.Controllers
     //patient full information
     public ActionResult patientInfo(int id)
     {
-        patientIntakeViewModel intakeView = new patientIntakeViewModel();
-        PatientMgmtEntities db = new PatientMgmtEntities();
+        patientIntakeViewModel intakeView =  patientHistoryDetail(id);
+        
 
-        var intakeHistory = db.IntakeFormHeads.Where(a => a.HistoryID == id).FirstOrDefault();
-        if (intakeHistory != null)
-        {
-            ViewBag.supportDevice = intakeHistory.HaveSupportDevice;
-            ViewBag.currentlyPregnant = intakeHistory.isPregnant;
-        }
-        ViewBag.HistoryID = id;
-        intakeView.StaffNameVM = (from p in db.PatientHistories
-                                  join pn in db.Users on p.PhysicianID equals pn.ID into leftJ
-                                  from lj in (from pn in leftJ select pn).DefaultIfEmpty()
-                                  join s in db.Staffs on lj.StaffID equals s.ID
-                                  where p.ID == id
-                                  select new StaffName
-                                  {
-                                      PhycisianName = s.FirstName + " " + s.LastName,
-                                      SpecialistName = "test Name"
-                                  }).FirstOrDefault();
-        intakeView.PatientHistoryVM11 = db.PatientHistories.Where(a => a.ID == id).FirstOrDefault();
-        intakeView.PatientProceduresVM1 = (from p in db.ProcedureTypes
-                                           join pn in db.PatientProcedures on p.ID equals pn.ProcedureTypeID
-                                           where pn.HistoryID == id
-                                           select new PatientProceduresVM
-                                           {
-                                               ID = p.ID,
-                                               Title = p.Title,
-                                               ProcedureTypeID = (pn.ProcedureTypeID != null) ? pn.ProcedureTypeID : 0,//,
-                                               HistoryID = (pn.HistoryID != null) ? pn.HistoryID : 0
-                                           }).ToList();
-        intakeView.objInterferingConditionVM1 = (from p in db.InterferingConditions
-                                                 join pn in db.PatientInterferingConditions on p.ID equals pn.PatientConditionID
-                                                 where pn.HistoryID == id
-                                                 select new InterferingConditionVM
-                                                 {
-                                                     ID = p.ID,
-                                                     Title = p.Title,
-                                                     PatientConditionID = (pn.PatientConditionID != null) ? pn.PatientConditionID : 0,//,
-                                                     HistoryID = (pn.HistoryID != null) ? pn.HistoryID : 0
-                                                 }).ToList();
-        intakeView.objSymptomVM1 = (from mn in db.Symptoms
-                                    join pn in db.PatientSymtoms on mn.ID equals pn.SymptomID
-                                    where pn.HistoryID == id
-                                    select new SymptomVM
-                                    {
-                                        ID = mn.ID,
-                                        Title = mn.Title,
-                                        SymptomID = (pn.SymptomID != null) ? pn.SymptomID : 0,//,
-                                        HistoryID = (pn.HistoryID != null) ? pn.HistoryID : 0
-                                    }).ToList();
+        //var intakeHistory = db.IntakeFormHeads.Where(a => a.HistoryID == id).FirstOrDefault();
+        //if (intakeHistory != null)
+        //{
+        //    ViewBag.supportDevice = intakeHistory.HaveSupportDevice;
+        //    ViewBag.currentlyPregnant = intakeHistory.isPregnant;
+        //}
+        //ViewBag.HistoryID = id;
+        //intakeView.StaffNameVM = (from p in db.PatientHistories
+        //                          join pn in db.Users on p.PhysicianID equals pn.ID into leftJ
+        //                          from lj in (from pn in leftJ select pn).DefaultIfEmpty()
+        //                          join s in db.Staffs on lj.StaffID equals s.ID
+        //                          where p.ID == id
+        //                          select new StaffName
+        //                          {
+        //                              PhycisianName = s.FirstName + " " + s.LastName,
+        //                              SpecialistName = "test Name"
+        //                          }).FirstOrDefault();
+        //intakeView.PatientHistoryVM11 = db.PatientHistories.Where(a => a.ID == id).FirstOrDefault();
+        //intakeView.PatientProceduresVM1 = (from p in db.ProcedureTypes
+        //                                   join pn in db.PatientProcedures on p.ID equals pn.ProcedureTypeID
+        //                                   where pn.HistoryID == id
+        //                                   select new PatientProceduresVM
+        //                                   {
+        //                                       ID = p.ID,
+        //                                       Title = p.Title,
+        //                                       ProcedureTypeID = (pn.ProcedureTypeID != null) ? pn.ProcedureTypeID : 0,//,
+        //                                       HistoryID = (pn.HistoryID != null) ? pn.HistoryID : 0
+        //                                   }).ToList();
+        //intakeView.objInterferingConditionVM1 = (from p in db.InterferingConditions
+        //                                         join pn in db.PatientInterferingConditions on p.ID equals pn.PatientConditionID
+        //                                         where pn.HistoryID == id
+        //                                         select new InterferingConditionVM
+        //                                         {
+        //                                             ID = p.ID,
+        //                                             Title = p.Title,
+        //                                             PatientConditionID = (pn.PatientConditionID != null) ? pn.PatientConditionID : 0,//,
+        //                                             HistoryID = (pn.HistoryID != null) ? pn.HistoryID : 0
+        //                                         }).ToList();
+        //intakeView.objSymptomVM1 = (from mn in db.Symptoms
+        //                            join pn in db.PatientSymtoms on mn.ID equals pn.SymptomID
+        //                            where pn.HistoryID == id
+        //                            select new SymptomVM
+        //                            {
+        //                                ID = mn.ID,
+        //                                Title = mn.Title,
+        //                                SymptomID = (pn.SymptomID != null) ? pn.SymptomID : 0,//,
+        //                                HistoryID = (pn.HistoryID != null) ? pn.HistoryID : 0
+        //                            }).ToList();
 
-        intakeView.objPatientDiseaseVM = (from dt in db.Diseases
-                                          join d in db.PatientDiseases on dt.ID equals d.DiseaseID
-                                          where d.HistoryID == id
-                                          select new PatientDiseaseVM
-                                          {
-                                              ID = dt.ID,
-                                              Title = dt.Title,
-                                              HistoryID = (d.HistoryID != null) ? d.HistoryID : 0,//,
-                                          }).ToList();
-        intakeView.objMedicalNecessity1 = (from mn in db.MedicalNecessities
-                                           join pn in db.PatientNecessities on mn.ID equals pn.NecessityID
-                                           where pn.HistoryID == id
-                                           select new PatientNecessitiesVM
-                                           {
-                                               ID = mn.ID,
-                                               ICD10Code = mn.ICD10Code,
-                                               Description = mn.Description,
-                                               NecessityID = (pn.NecessityID != null) ? pn.NecessityID : 0,//,
-                                               HistoryID = (pn.HistoryID != null) ? pn.HistoryID : 0
-                                           }).ToList();
-        intakeView.objPatient = (from p in db.Patients
-                                 join ph1 in db.PatientHistories on p.ID equals ph1.PatientID
-                                 where ph1.ID == id
-                                 select p).FirstOrDefault();
+        //intakeView.objPatientDiseaseVM = (from dt in db.Diseases
+        //                                  join d in db.PatientDiseases on dt.ID equals d.DiseaseID
+        //                                  where d.HistoryID == id
+        //                                  select new PatientDiseaseVM
+        //                                  {
+        //                                      ID = dt.ID,
+        //                                      Title = dt.Title,
+        //                                      HistoryID = (d.HistoryID != null) ? d.HistoryID : 0,//,
+        //                                  }).ToList();
+        //intakeView.objMedicalNecessity1 = (from mn in db.MedicalNecessities
+        //                                   join pn in db.PatientNecessities on mn.ID equals pn.NecessityID
+        //                                   where pn.HistoryID == id
+        //                                   select new PatientNecessitiesVM
+        //                                   {
+        //                                       ID = mn.ID,
+        //                                       ICD10Code = mn.ICD10Code,
+        //                                       Description = mn.Description,
+        //                                       NecessityID = (pn.NecessityID != null) ? pn.NecessityID : 0,//,
+        //                                       HistoryID = (pn.HistoryID != null) ? pn.HistoryID : 0
+        //                                   }).ToList();
+        //intakeView.objPatient = (from p in db.Patients
+        //                         join ph1 in db.PatientHistories on p.ID equals ph1.PatientID
+        //                         where ph1.ID == id
+        //                         select p).FirstOrDefault();
         //}
         return View(intakeView);
     }

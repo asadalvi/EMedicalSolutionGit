@@ -7,7 +7,6 @@
     
     <div class="w3-row w3-padding-16">
         <button type="button" class="w3-btn w3-green" id="loadInsuranceTypeForm">+ Add New </button>    
-    @*@Html.ActionLink("+ Add New", "PatientInsuranceType", "Patients", new { id = @ViewBag.patientID }, new { @class = "popup w3-btn w3-green" })*@
     </div>
     <input type="hidden"   id="ViewBag_PatienName" />
     <div class="w3-responsive">
@@ -21,7 +20,7 @@
                     <th>First Name</th>
                     <th>Last Name</th>
                     <th>Insurance Type</th>
-                    <th>Download</th>
+                    <th>Insurance Card</th>
                     <th>Created</th>
                     <th>Action</th>
                     <th>Info</th>
@@ -70,7 +69,7 @@
                       "data": "filename", "render": function (data) {
                              if (data !== undefined) {
                               var filename = data.split('\\').pop();
-                              return '<span class="fa fa-download">  <a  href="/Patients/DownloadInsuranceCard/?fileName=' + filename + '">  Download<a></span>';
+                              return '<span class="fa fa-download"><a href="/Patients/DownloadInsuranceCard/?fileName=' + filename + '">  Download<a></span>';
                           }
                       }
                   },
@@ -84,28 +83,20 @@
 
                 {
                     "data": "ID", "render": function (data) {
-                        return '<a class="popup  w3-btn w3-blue" href="/Patients/Wizard/' + data + '">View<a>';
+                        return '<a class="popup  w3-btn w3-blue" href="/Patients/Wizard/' + data + '">Edit<a>';
                     }
                 },
                  {
                      "data": "ID", "render": function (data) {
-                         return '<a class="popup  w3-btn w3-blue" href="/Patients/patientInfo/' + data + '">Info<a>';
+                         return '<a class="popup  w3-btn w3-blue" href="/Patients/patientInfo/' + data + '">View<a>';
                      }
                  }
             ]
         });
 
-        //$('.tablecontainer-history').on('click', 'a.popup', function (e) {
-        //    e.preventDefault();
-        //    OpenPopup($(this).attr('href'), oTable, "History");
-        //});
-
-        //$("#patientID").val($("#historyList_patientID").val());
-
+        
         $('#loadInsuranceTypeForm').click(function () {
-            //var historyId = $('#HistoryID').val();
             $('#partialPatientInsuranceType').load('@Url.Action("PatientInsuranceType", "Patients", new { id = ViewBag.patientID })');
-
         });
 
 </script>
