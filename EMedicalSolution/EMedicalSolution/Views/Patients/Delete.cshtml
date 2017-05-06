@@ -4,68 +4,72 @@
 
 @using (Html.BeginForm("Delete", "Patients", FormMethod.Post, new { id = "popupForm" }))
 {
-    @Html.HiddenFor(a => a.ID)
-    <div class="w3-row w3-margin-top">
-        <div class="w3-half">
-            <b>First Name</b>
-        </div>
-        <div class="w3-half">
-            @Model.FirstName
-        </div>
+    <div class="w3-panel w3-red">
+        <span id="lblError"></span>
     </div>
-    <div class="w3-row w3-margin-top">
-        <div class="w3-half">
-            <b>Last Name</b>
-        </div>
-        <div class="w3-half">
-            @Model.LastName
-        </div>
-    </div>
-    <div class="w3-row w3-margin-top">
-        <div class="w3-half">
-            <b>DOB</b>
-        </div>
-        <div class="w3-half">
-            @Model.DOB
-        </div>
-    </div>
-    <div class="w3-row w3-margin-top">
-        <div class="w3-half">
-            <b>Gender</b>
-        </div>
-        <div class="w3-half">
-            @Model.Gender
-        </div>
-    </div>
-    
-    <div class="w3-row w3-margin-top">
-        <div class="w3-half">
-            <b>ID Number</b>
-        </div>
-        <div class="w3-half">
-            @Model.IDNumber
-        </div>
-    </div>
-    
+
+        @Html.HiddenFor(a => a.ID)
         <div class="w3-row w3-margin-top">
-        <div class="w3-half">
-            <b>Tel</b>
+            <div class="w3-half">
+                <b>First Name</b>
+            </div>
+            <div class="w3-half">
+                @Model.FirstName
+            </div>
         </div>
-        <div class="w3-half">
-            @Model.Tel
-        </div>
-    </div>
-    
         <div class="w3-row w3-margin-top">
-        <div class="w3-half">
-            <b>Email</b>
+            <div class="w3-half">
+                <b>Last Name</b>
+            </div>
+            <div class="w3-half">
+                @Model.LastName
+            </div>
         </div>
-        <div class="w3-half">
-            @Model.Email
+        <div class="w3-row w3-margin-top">
+            <div class="w3-half">
+                <b>DOB</b>
+            </div>
+            <div class="w3-half">
+                @Model.DOB.ToString("MM/dd/yyyy")
+            </div>
         </div>
-    </div>    
-    
-    <div class="w3-row w3-margin-top">
-        <input class="w3-btn-block w3-red" type="submit" value="Delete" />
-    </div>
+        <div class="w3-row w3-margin-top">
+            <div class="w3-half">
+                <b>Gender</b>
+            </div>
+            <div class="w3-half">
+                @Model.Gender
+            </div>
+        </div>
+
+        <div class="w3-row w3-margin-top">
+            <div class="w3-half">
+                <b>ID Number</b>
+            </div>
+            <div class="w3-half">
+                @Model.IDNumber
+            </div>
+        </div>
+
+        <div class="w3-row w3-margin-top">
+            <div class="w3-half">
+                <b>Tel</b>
+            </div>
+            <div class="w3-half">
+                @Model.Tel
+            </div>
+        </div>
+
+        <div class="w3-row w3-margin-top">
+            <div class="w3-half">
+                <b>Email</b>
+            </div>
+            <div class="w3-half">
+                @Model.Email
+            </div>
+        </div>
+
+        <div class="w3-row w3-margin-top">
+            <input class="w3-btn-block w3-red" type="submit" value="Delete" />
+        </div>
 }

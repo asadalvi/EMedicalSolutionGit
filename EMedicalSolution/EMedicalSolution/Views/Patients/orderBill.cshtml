@@ -1,6 +1,6 @@
 ﻿<head>
 
-    <title>Order bill</title>
+    <title>Super Bill</title>
     <style>
         body {
             background: darkgray;
@@ -10,7 +10,7 @@
             width: 8.27in;
             float: none;
             margin: auto;
-            font-family: "Trebuchet MS", "serif";
+            font-family: "Arial", "serif";
             background: white;
         }
 
@@ -41,17 +41,18 @@
             border: 1px black solid;
         }*/
 
-            table td {
-                border: 1px black solid;
-                text-align: center;
-                vertical-align: middle;
-            }
+        table td {
+            border: 1px black solid;
+            text-align: center;
+            vertical-align: middle;
+        }
 
         #notice {
+            font-size: 10px;
             text-align: center;
             margin-top: 1cm;
         }
-  
+
         h3, h6 {
             text-align: center;
             line-height: 0;
@@ -71,19 +72,20 @@
             width: 100%;
             margin-top: 0.5cm;
             margin-bottom: 0.5cm;
-            font-size: 15px;
+            font-size: 10px;
             border: 1px black solid;
         }
 
             table td {
-                border: 1px black solid;
                 vertical-align: middle;
+                padding: 3px;
             }
 
         thead td {
             text-align: center;
             font-weight: bold;
         }
+
         .bg-grey {
             background: gray;
         }
@@ -94,54 +96,69 @@
 @using (Html.BeginForm("ConvertPatientToPdf", "Patients", FormMethod.Post, new { id = "PhysicianApproval" }))
 {
     <input type="hidden" value="@ViewBag.HistoryID" name="orderFormHistoryId" />
-   <input type="hidden" value="orderBill" name="orderFormType" />
-    <div class="page-div" id="super_bill_report" >
+    <input type="hidden" value="orderBill" name="orderFormType" />
+    <div class="page-div" id="super_bill_report">
 
         <div class="content-area">
 
-            <h3 style="padding:10px;">Advanced Clinic Testing</h3>
+            <h3>Advanced Clinic Testing</h3>
             <h4 class="h4-superbill" style="margin:20px;">Home Sleep Study and Allergy Test Specialist</h4>
-            <h6 style="padding:10px;">4551 Pleasant Hill Rd, Kissimmee, FL 34746</h6>
-            <h6 style="padding:10px;">Phone: (281) 693-5289 Fax: (281)693-3111</h6>
+            <h6>4551 Pleasant Hill Rd, Kissimmee, FL 34746</h6>
+            <h6>Phone: (281) 693-5289 Fax: (281)693-3111</h6>
 
             <table cellspacing="0">
                 <tbody>
                     <tr>
-                        <td style="width: 40%"><b>Date of service:</b> date patient lives with HST</td>
+                        <td style="width: 40%"><b>Date of service:</b> @Model.PatientHistoryVM11.Created.ToString("MM/dd/yyyy") </td>
                         <td style="width: 30%"><b>Insurance: P</b> BLS PPO</td>
                         <td style="width: 30%" class="bg-grey"><b>Billing Information</b></td>
                     </tr>
                     <tr>
-                        <td><b>Last Name:</b> @if (Model != null && Model.objPatient != null && Model.objPatient.LastName != null)
-                        {
-                            <span>@Model.objPatient.LastName</span>
-                        }</td>
+                        <td>
+                            <b>Last Name:</b> @if (Model != null && Model.objPatient != null && Model.objPatient.LastName != null)
+                            {
+                                <span>@Model.objPatient.LastName</span>
+                            }
+                        </td>
                         <td><b>Insurance:</b> S</td>
                         <td>Copay/Coins</td>
                     </tr>
                     <tr>
-                        <td><b>First Name:</b> @if (Model != null && Model.objPatient != null && Model.objPatient.FirstName != null)
-                        {
-                            <span>@Model.objPatient.FirstName</span>
-                        }</td>
-                        <td><b>Physician's Name:</b> S</td>
+                        <td>
+                            <b>First Name:</b> @if (Model != null && Model.objPatient != null && Model.objPatient.FirstName != null)
+                            {
+                                <span>@Model.objPatient.FirstName</span>
+                            }
+                        </td>
+                        <td><b>Physician's Name:</b> Dr. @Model.StaffNameVM.PhycisianName</td>
                         <td>Deductible</td>
                     </tr>
                     <tr>
-                        <td><b>Time in:</b> @if (Model != null && Model.objPatient != null && Model.objPatient.Created != null)
-                        {
-                            <span>@Model.objPatient.Created</span>
-                        }</td>
+                        <td>
+                            <b>Time in:</b> @if (Model != null && Model.PatientHistoryVM11 != null && Model.PatientHistoryVM11.Created != null)
+                            {
+                                <span>@Model.PatientHistoryVM11.Created.ToString("hh:mm tt")</span>
+                            }
+                        </td>
                         <td></td>
-                        <td>CC, Cash, Check</td>
+                        <td>CC, Cash, Cheque #</td>
                     </tr>
                     <tr>
-                        <td><b>DOB:</b> @if (Model != null && Model.objPatient != null && Model.objPatient.DOB != null)
-                        {
-                            <span>@Model.objPatient.DOB</span>
-                        }</td>
-                        <td><b>Age:</b> 29</td>
-                        <td><b>Total Paid:</b> 2000</td>
+                        <td>
+                            <b>DOB:</b> @if (Model != null && Model.objPatient != null && Model.objPatient.DOB != null)
+                            {
+                                <span>@Model.objPatient.DOB.ToString("MM/dd/yyyy")</span>
+                            }
+                        </td>
+                        <td>
+                            <b>Age:</b>
+
+                            @{
+                                var age = DateTime.Now.Year - Model.objPatient.DOB.Year;
+                                <span>@age</span>
+                            }
+                        </td>
+                        <td>Total Paid:</td>
                     </tr>
                 </tbody>
             </table>
@@ -167,85 +184,88 @@
                         <td></td>
                         <td>DIAGNOSIS</td>
                     </tr>
-                  
-                            @if (Model != null && Model.objSymptomVM1 != null)
+
+                    @*@if (Model != null && Model.objSymptomVM1 != null)
+                        {
+                            int i = 0;
+                            foreach (var symptom in Model.objSymptomVM1)
                             {
-                                int i = 0;
-                                foreach (var symptom in Model.objSymptomVM1)
+                                if (i == 0)
+                                {
+                                    @:<tr>
+                                  }
+                                if (ViewBag.HistoryID != symptom.HistoryID)
                                 {
                                     if (i == 0)
                                     {
-                                        @:<tr>
-                                      }
-                                    if (ViewBag.HistoryID != symptom.HistoryID)
-                                    {
-                                        if (i == 0)
-                                        {
 
-                                            <td>&#x2716;</td>
-                                            <td> @symptom.Title</td>
-                                                <td>G1000000</td>
-                                            i = 1; continue;
-
-                                        }
-                                        if (i == 1)
-                                        {
-
-                                            <td>&#x2716;</td>
-                                            <td> @symptom.Title</td>
-                                                        <td>G1000000</td>
-                                            i = 2; continue;
-
-                                        }
-                                        if (i == 2)
-                                        {
-
-                                            <td>&#x2716;</td>
-                                            <td> @symptom.Title</td>
-                                                    <td>G1000000</td>
-                                            i = 0; continue;
-
-                                        }
-                                        if (i == 2)
-                                        {
-                                            @:</tr>
-                                      }
+                                        <td>&#x2716;</td>
+                                        <td> @symptom.Title</td>
+                                            <td>G1000000</td>
+                                        i = 1; continue;
 
                                     }
+                                    if (i == 1)
+                                    {
+
+                                        <td>&#x2716;</td>
+                                        <td> @symptom.Title</td>
+                                                    <td>G1000000</td>
+                                        i = 2; continue;
+
+                                    }
+                                    if (i == 2)
+                                    {
+
+                                        <td>&#x2716;</td>
+                                        <td> @symptom.Title</td>
+                                                <td>G1000000</td>
+                                        i = 0; continue;
+
+                                    }
+                                    if (i == 2)
+                                    {
+                                        @:</tr>
+                                  }
+
                                 }
                             }
-
-                            @*<td>&#x2716;</td>
-                                <td>Obstructive Sleep Apnea</td>
-                                <td>G47.33</td>
-                                <td>&#x2716;</td>
-                                    <td>Obstructive Sleep Apnea</td>
-                                    <td>G47.33</td>
-                                    <td>&#x2716;</td>
-                                    <td>Obstructive Sleep Apnea</td>
-                                    <td>G47.33</td>*@
-
-<tr>
-                        <td>&#x2716;</td>
-                        <td>Obstructive Sleep Apnea</td>
-                        <td>G47.33</td>
-                        <td>&#x2716;</td>
-                        <td>Obstructive Sleep Apnea</td>
-                        <td>G47.33</td>
-                        <td>&#x2716;</td>
-                        <td>Obstructive Sleep Apnea</td>
-                        <td>G47.33</td>
-                    </tr>
+                        }*@
                     <tr>
                         <td>&#x2716;</td>
                         <td>Obstructive Sleep Apnea</td>
                         <td>G47.33</td>
                         <td>&#x2716;</td>
-                        <td>Obstructive Sleep Apnea</td>
-                        <td>G47.33</td>
+                        <td>HYPERSOMNIA W/SLEEP APNEA</td>
+                        <td>G47.30</td>
                         <td>&#x2716;</td>
-                        <td>Obstructive Sleep Apnea</td>
-                        <td>G47.33</td>
+                        <td>SNORING</td>
+                        <td>R06.83</td>
+                    </tr>
+                    <tr>
+                        <td>&#x2716;</td>
+                        <td>Sleep Related Nonobstructive Alveolar Hypoventilation</td>
+                        <td>G47.34</td>
+                        <td>&#x2716;</td>
+                        <td>RECURRENT HYPERSOMNIA </td>
+                        <td>G47.13</td>
+                        <td>&#x2716;</td>
+                        <td>Central Apnea </td>
+                        <td>G47.31</td>
+                    </tr>
+                    <tr>
+                        <td>&#x2716;</td>
+                        <td>Obesity Hypoventilation Syndrome (Morbid Obesity)</td>
+                        <td>E66.2</td>
+
+                        <td>&#x2716;</td>
+                        <td>HYPERSOMNIA</td>
+                        <td>G47.10</td>
+
+                        <td>&#x2716;</td>
+                        <td>Sleep Paralysis</td>
+                        <td>G47.53</td>
+
                     </tr>
 
                     <tr class="bg-grey">
@@ -254,36 +274,40 @@
                     </tr>
                     <tr>
                         <td>&#x2716;</td>
-                        <td>Obstructive Sleep Apnea</td>
-                        <td>G47.33</td>
+                        <td>Polysomnagraphy (PSG) – 1st night</td>
+                        <td>95810</td>
                         <td>&#x2716;</td>
-                        <td>Obstructive Sleep Apnea</td>
-                        <td>G47.33</td>
-                        <td>&#x2716;</td>
-                        <td>Obstructive Sleep Apnea</td>
-                        <td>G47.33</td>
+                        <td>Split Night Cpap Titration</td>
+                        <td>95811</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+
                     </tr>
                     <tr>
                         <td>&#x2716;</td>
-                        <td>Obstructive Sleep Apnea</td>
-                        <td>G47.33</td>
+                        <td>Cpap Titration – 2nd night</td>
+                        <td>95811</td>
                         <td>&#x2716;</td>
-                        <td>Obstructive Sleep Apnea</td>
-                        <td>G47.33</td>
-                        <td>&#x2716;</td>
-                        <td>Obstructive Sleep Apnea</td>
-                        <td>G47.33</td>
+                        <td>CPAP/BIPAP Titration</td>
+                        <td>95811</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+
                     </tr>
                     <tr>
                         <td>&#x2716;</td>
-                        <td>Obstructive Sleep Apnea</td>
-                        <td>G47.33</td>
+                        <td>PAP NAP (DESENZITATION</td>
+                        <td>95807</td>
+
                         <td>&#x2716;</td>
-                        <td>Obstructive Sleep Apnea</td>
-                        <td>G47.33</td>
-                        <td>&#x2716;</td>
-                        <td>Obstructive Sleep Apnea</td>
-                        <td>G47.33</td>
+                        <td>HST X 3 NIGHTS</td>
+                        <td>95800</td>
+
+                        <td></td>
+                        <td></td>
+                        <td></td>
                     </tr>
 
                     <tr class="bg-grey">
@@ -292,107 +316,132 @@
                     </tr>
                     <tr>
                         <td>&#x2716;</td>
-                        <td>Obstructive Sleep Apnea</td>
-                        <td>G47.33</td>
+                        <td>CPAP full face mask</td>
+                        <td>A7030</td>
                         <td>&#x2716;</td>
-                        <td>Obstructive Sleep Apnea</td>
-                        <td>G47.33</td>
-                        <td>&#x2716;</td>
-                        <td>Obstructive Sleep Apnea</td>
-                        <td>G47.33</td>
+                        <td>CPAP full face mask</td>
+                        <td>E0601</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+
                     </tr>
                     <tr>
                         <td>&#x2716;</td>
-                        <td>Obstructive Sleep Apnea</td>
-                        <td>G47.33</td>
+                        <td> Replacement facemask interface</td>
+                        <td>A7031</td>
                         <td>&#x2716;</td>
-                        <td>Obstructive Sleep Apnea</td>
-                        <td>G47.33</td>
-                        <td>&#x2716;</td>
-                        <td>Obstructive Sleep Apnea</td>
-                        <td>G47.33</td>
+                        <td> BIPAP w/o backup</td>
+                        <td>E0470</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+
                     </tr>
                     <tr>
                         <td>&#x2716;</td>
-                        <td>Obstructive Sleep Apnea</td>
-                        <td>G47.33</td>
-                        <td>&#x2716;</td>
-                        <td>Obstructive Sleep Apnea</td>
-                        <td>G47.33</td>
-                        <td>&#x2716;</td>
-                        <td>Obstructive Sleep Apnea</td>
-                        <td>G47.33</td>
+                        <td>Replacement nasal cushion</td>
+                        <td>A7032</td>
+                        <td></td>
+                        <td>BIPAP w/ backup</td>
+                        <td>E0471</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+
                     </tr>
                     <tr>
                         <td>&#x2716;</td>
-                        <td>Obstructive Sleep Apnea</td>
-                        <td>G47.33</td>
+                        <td>Replacement nasal pillows/td>
+                        <td>A7033</td>
                         <td>&#x2716;</td>
-                        <td>Obstructive Sleep Apnea</td>
-                        <td>G47.33</td>
-                        <td>&#x2716;</td>
-                        <td>Obstructive Sleep Apnea</td>
-                        <td>G47.33</td>
+                        <td>Humidifier heated </td>
+                        <td>E0562</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+
                     </tr>
                     <tr>
                         <td>&#x2716;</td>
-                        <td>Obstructive Sleep Apnea</td>
-                        <td>G47.33</td>
+                        <td>Nasal application device </td>
+                        <td>A7034</td>
                         <td>&#x2716;</td>
-                        <td>Obstructive Sleep Apnea</td>
-                        <td>G47.33</td>
-                        <td>&#x2716;</td>
-                        <td>Obstructive Sleep Apnea</td>
-                        <td>G47.33</td>
+                        <td>HEATED TUBING</td>
+                        <td>A4604</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+
                     </tr>
                     <tr>
                         <td>&#x2716;</td>
-                        <td>Obstructive Sleep Apnea</td>
-                        <td>G47.33</td>
+                        <td>POS airway press headgear</td>
+                        <td>A7035</td>
                         <td>&#x2716;</td>
-                        <td>Obstructive Sleep Apnea</td>
-                        <td>G47.33</td>
-                        <td>&#x2716;</td>
-                        <td>Obstructive Sleep Apnea</td>
-                        <td>G47.33</td>
+                        <td>Battery X 3 Nights</td>
+                        <td>A4630</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+
                     </tr>
                     <tr>
                         <td>&#x2716;</td>
-                        <td>Obstructive Sleep Apnea</td>
-                        <td>G47.33</td>
-                        <td>&#x2716;</td>
-                        <td>Obstructive Sleep Apnea</td>
-                        <td>G47.33</td>
-                        <td>&#x2716;</td>
-                        <td>Obstructive Sleep Apnea</td>
-                        <td>G47.33</td>
+                        <td>POS airway pressure tubing</td>
+                        <td>A7037</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+
                     </tr>
                     <tr>
                         <td>&#x2716;</td>
-                        <td>Obstructive Sleep Apnea</td>
-                        <td>G47.33</td>
-                        <td>&#x2716;</td>
-                        <td>Obstructive Sleep Apnea</td>
-                        <td>G47.33</td>
-                        <td>&#x2716;</td>
-                        <td>Obstructive Sleep Apnea</td>
-                        <td>G47.33</td>
+                        <td>POS airway pressure filter</td>
+                        <td>A7038</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+
+                        <td></td>
+                        <td></td>
+                        <td></td>
+
                     </tr>
                     <tr>
                         <td>&#x2716;</td>
-                        <td>Obstructive Sleep Apnea</td>
-                        <td>G47.33</td>
+                        <td>PAP oral interface </td>
+                        <td>A7044</td>
+
+                        <td></td>
+                        <td></td>
+                        <td></td>
+
+                        <td></td>
+                        <td></td>
+                        <td></td>
+
+
+                    </tr>
+                    <tr>
                         <td>&#x2716;</td>
-                        <td>Obstructive Sleep Apnea</td>
-                        <td>G47.33</td>
-                        <td>&#x2716;</td>
-                        <td>Obstructive Sleep Apnea</td>
-                        <td>G47.33</td>
+                        <td>Replacement exhalation port </td>
+                        <td>A7045</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+
+                        <td></td>
+                        <td></td>
+                        <td></td>
                     </tr>
                 </tbody>
             </table>
 
-            <p>
+            <p style="font-size:11px">
                 Payment Type:
                 <span>&#x2716;</span>
                 Cash
@@ -402,15 +451,15 @@
                 Credit Card
             </p>
 
-            <p>
+            <p style="font-size:11px">
                 Total Amount:
-                <span>Data here</span>
+                <span>$_________</span>
                 Monthly Payment:
-                <span>Data here</span>
+                <span>$________</span>
             </p>
 
-            <p>
-                I HEREBY AUTHORIZE MY INSURANCE BENEFITS TO BE PAID DIRECTLY TO <span>Data here</span> AND I AM RESPONSIBLE
+            <p style="font-size:12px; text-align:justify">
+                I HEREBY AUTHORIZE MY INSURANCE BENEFITS TO BE PAID DIRECTLY TO <span>____________ ______________</span> AND I AM RESPONSIBLE
                 FOR ANY NON-COVERED SERVICES. I ALSO AUTHORIZE THE RELEASE OF ANY INFORMATION REQUIRED FOR THE PROCESSING OF
                 THE CLAIM.
             </p>
@@ -425,7 +474,7 @@
         </div>
 
     </div>
-    <div class="w3-row w3-padding-16">
-        <input type="submit" value="print report" />
-        </div>
-        }
+    @*<div class="w3-row w3-padding-16">
+            <input type="submit" value="print report" />
+        </div>*@
+                                }

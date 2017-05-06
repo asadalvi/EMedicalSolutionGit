@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Schema Namespace="PatientMgmtModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+<Schema Namespace="PatientMgmtModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
   <EntityType Name="Diseases">
     <Key>
       <PropertyRef Name="ID" />
@@ -124,18 +124,18 @@
     <Property Name="SecondaryNecessities" Type="varchar" MaxLength="100" />
     <Property Name="OfficeID" Type="int" />
     <Property Name="StatusID" Type="int" />
-    <Property Name="PhysicianRemarks" Type="varchar" MaxLength="500" />
+    <Property Name="PhysicianRemarks" Type="varchar" MaxLength="150" />
     <Property Name="isApprovedByPhysician" Type="bit" />
     <Property Name="PhysicianID" Type="int" />
     <Property Name="PhysicianApprovedDate" Type="datetime" />
-    <Property Name="Created" Type="datetime" Nullable="false" />
-    <Property Name="CreatedBy" Type="int" Nullable="false" />
-    <Property Name="Modified" Type="datetime" />
-    <Property Name="ModifiedBy" Type="int" />
     <Property Name="SpecialistRemarks" Type="varchar" MaxLength="500" />
     <Property Name="isApprovedBySpecialist" Type="bit" />
     <Property Name="SpecialistID" Type="int" />
     <Property Name="SpecialistApprovedDate" Type="datetime" />
+    <Property Name="Created" Type="datetime" Nullable="false" />
+    <Property Name="CreatedBy" Type="int" Nullable="false" />
+    <Property Name="Modified" Type="datetime" />
+    <Property Name="ModifiedBy" Type="int" />
   </EntityType>
   <EntityType Name="PatientInterferingCondition">
     <Key>
@@ -203,6 +203,7 @@
     <Property Name="IDNumber" Type="varchar" MaxLength="20" />
     <Property Name="Tel" Type="varchar" MaxLength="15" />
     <Property Name="Email" Type="varchar" MaxLength="50" />
+    <Property Name="OfficeID" Type="int" />
     <Property Name="Created" Type="datetime" Nullable="false" />
     <Property Name="CreatedBy" Type="int" Nullable="false" />
     <Property Name="Modified" Type="datetime" />

@@ -63,7 +63,7 @@ namespace EMedicalSolution.Controllers
                         {
                             v.Title = symptom.Title;
                             v.Created = DateTime.Now;
-                            v.CreatedBy = 1;
+                            v.CreatedBy = Convert.ToInt32(Session["userID"].ToString());
                         }
 
                     }
@@ -71,7 +71,7 @@ namespace EMedicalSolution.Controllers
                     {
                         //save
                         symptom.Created = DateTime.Now;
-                        symptom.CreatedBy = 1;
+                        symptom.CreatedBy = Convert.ToInt32(Session["userID"].ToString());
                         db.Symptoms.Add(symptom);
                     }
                     db.SaveChanges();

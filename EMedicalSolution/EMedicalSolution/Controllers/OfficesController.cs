@@ -72,7 +72,7 @@ namespace EMedicalSolution.Controllers
                             v.Tel = office.Tel;
                             v.Email = office.Email;
                             v.Created = DateTime.Now;
-                            v.CreatedBy = 1;
+                            v.CreatedBy = Convert.ToInt32(Session["userID"].ToString());
                         }
 
                     }
@@ -80,7 +80,7 @@ namespace EMedicalSolution.Controllers
                     {
                         //save
                         office.Created = DateTime.Now;
-                        office.CreatedBy = 1;
+                        office.CreatedBy = Convert.ToInt32(Session["userID"].ToString());
                         db.Offices.Add(office);
                     }
                     db.SaveChanges();

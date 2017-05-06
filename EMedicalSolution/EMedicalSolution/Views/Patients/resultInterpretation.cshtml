@@ -2,8 +2,8 @@
 Result Interpretation by Specialist
 @using (Html.BeginForm("resultInterpretation", "Patients", FormMethod.Post, new { id = "resultInterpretation" }))
 {
-    <div class="pre-scrollable"> 
-           
+    <div class="pre-scrollable">
+
         <div id="specialistRemarksTextBox">
             @if (Model != null && Model.PatientHistoryVM11 != null && Model.PatientHistoryVM11.isApprovedBySpecialist != null && Model.PatientHistoryVM11.isApprovedBySpecialist == true && Model.StaffNameVM != null && Model.StaffNameVM.SpecialistName != null)
             {
@@ -14,22 +14,44 @@ Result Interpretation by Specialist
                 </div>
             }
             else {
-                <label>Specialist Remarks:</label>
-                <input type="text" name="specialistRemarks" id="specialistRemarksValue" />
-                <div class="ajax_loader_save" style="display:none;margin-top: -180px; margin-left: 300px;"><img src="~/Images/ajax_loader.png" /></div>
-                <p id="specialistRemarksError" class="saveError" style="font-size:large;color:red;display:none">Please enter remarks.</p>
-                <div class="w3-row  w3-margin-top">
-                    <div class="w3-third" style="float: none; margin: auto">
-                        <button class="w3-btn-block w3-green" id="saveSpecialistData" type="button">Save</button>
+                if (Session["role"] != null && Session["role"].ToString() == "3") //3 for specialist
+                {
+                    <label>Specialist Remarks:</label><br />
+                    <textarea rows="4" cols="56" type="text" name="specialistRemarks" id="specialistRemarksValue"> </textarea>
+                    <div class="ajax_loader_save" style="display:none;margin-top: -180px; margin-left: 300px;"><img src="~/Images/ajax_loader.png" /></div>
+                    <p id="specialistRemarksError" class="saveError" style="font-size:large;color:red;display:none">Please enter remarks.</p>
+
+                    <div class="w3-row">
+                        <div class="w3-twothird w3-right">
+                            <button class="w3-btn w3-orange" id="saveSpecialistData" type="button">Approve</button>
+                        </div>
                     </div>
-                </div>
+                } // If role end
+                else
+                {
+                    <p class="w3-text-red w3-margin-top">Approval required by Specialist</p>
+                }
+
+                @*<div class="w3-row  w3-margin-top">
+                        <div class="w3-third" style="float: none; margin: auto">
+                            <button class="w3-btn-block w3-green" id="saveSpecialistData" type="button">Save</button>
+                        </div>
+                    </div>*@
             }
         </div>
-        <h2 id="ApprovedbySpecialist" style="display:none">Approve by [Specialist Name]</h2>
-  </div>   
+
+
+        @if (Session["role"] != null && Session["Name"] != null && Session["role"].ToString() == "3")  //Specialist id 3
+        {
+            <div class="w3-panel w3-hover-blue w3-green w3-round-xxlarge" id="ApprovedbySpecialist" style="display:none">
+                <h3>Success</h3>
+                <p>Approve by Dr. @Session["Name"].ToString() </p>
+            </div>
+        }
+    </div>
     @*<input type="submit" value="Convert To PDF" />*@
-   
-    }
+
+}
 <script>
 
     //submission form -------start-----------
@@ -50,7 +72,7 @@ Result Interpretation by Specialist
                         $(".ajax_loader_save").css("display", "none");
                         $(document).find(".saveError").css("display", "none");
                         $(document).find("#saveSpecialistData").css("display", "none");
-                        
+
                         $("#ApprovedbySpecialist").css('display', 'block');
                         $("#specialistRemarksTextBox").css('display', 'none');
                     }

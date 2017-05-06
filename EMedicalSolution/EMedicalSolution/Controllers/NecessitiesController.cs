@@ -65,14 +65,14 @@ namespace EMedicalSolution.Controllers
                             v.ICD10Code = necessity.ICD10Code;
                             v.Description = necessity.Description;
                             v.Created = DateTime.Now;
-                            v.CreatedBy = 1;
+                            v.CreatedBy = Convert.ToInt32(Session["userID"].ToString());
                         }
                     }
                     else
                     {
                         //save
                         necessity.Created = DateTime.Now;
-                        necessity.CreatedBy = 1;
+                        necessity.CreatedBy = Convert.ToInt32(Session["userID"].ToString());
                         db.MedicalNecessities.Add(necessity);
                     }
                     db.SaveChanges();

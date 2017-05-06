@@ -6,7 +6,7 @@
 
 <style>
     * {
-        font-family: 'Trebuchet MS' !important;
+        font-family: 'Arial' !important;
     }
 
     body {
@@ -72,8 +72,27 @@
 
             <tbody>
                 <tr>
-                    <td>MD / PA / NP</td>
-                    <td>Test Ordered here</td>
+                    @if (Model != null && Model.PatientHistoryVM11 != null && Model.PatientHistoryVM11.isApprovedByPhysician != null && Model.PatientHistoryVM11.isApprovedByPhysician == true && Model.StaffNameVM != null && Model.StaffNameVM.PhycisianName != null)
+                    {
+                        <td>Dr. @Model.StaffNameVM.PhycisianName </td>
+                    }
+                    else
+                    {
+                        <td>Approval Required</td>
+                    }
+                    @if (Model != null && Model.PatientProceduresVM1 != null && Model.PatientProceduresVM1.Count > 0)
+                    {
+                        <td>
+                            @foreach (var procedure in Model.PatientProceduresVM1)
+                            {
+                                <span>@procedure.Title</span>
+                            }
+                        </td>
+                    }
+                    else
+                    {
+                        <td>Not Ordered yet</td>
+                    }
                     @if (Model != null && Model.objPatient != null && Model.objPatient.Created != null)
                     {
                         <td>@Model.PatientHistoryVM11.Created.ToString("MM/dd/yyyy")</td>
@@ -84,7 +103,23 @@
         </table>
 
         <b class="w3-right">Physician's Signature:</b><br />
-        <div class="w3-right" id="doctorSign">Physician's Signature here</div>
+        @if (Model != null && Model.StaffNameVM != null && Model.StaffNameVM.SignatureFilePath != null)
+        {
+            <div class="w3-right" id="doctorSign">
+                <img class="db_img" width="160" height="64" src="@Url.Content("~/Files/Signatures/" + System.IO.Path.GetFileName(Model.StaffNameVM.SignatureFilePath))">
+            </div>
+        }
+        else if(Model != null && Model.StaffNameVM != null && Model.StaffNameVM.PhycisianName != null)
+        {
+            <span>@Model.StaffNameVM.PhycisianName</span>
+        }
+        else
+        {
+            <div class="w3-right" id="doctorSign">
+                <p>Not Signed yet</p>
+            </div>
+        }
+
     </div>
 
     <div class="w3-container" id="procedureDetails">
@@ -97,7 +132,7 @@
             {
                 if (procedure.HistoryID > 0)
                 {
-                    <span>&rArr;</span> @procedure.Title
+                    <span>&rArr;  </span> @procedure.Title
                 }
 
             }
@@ -108,7 +143,7 @@
 
     <div class="w3-container" id="conditionDetails">
 
-        <h3>Interfering Condition</h3>
+        <h4>Interfering Condition</h4>
         @if (Model != null && Model.objInterferingConditionVM1 != null && Model.objInterferingConditionVM1.Count > 0)
         {
 
@@ -117,7 +152,7 @@
                 <div class="w3-third">
                     @if (condition.HistoryID > 0)
                     {
-                        <span>&rArr;</span> @condition.Title
+                        <span>&rArr;  </span> @condition.Title
                     }
                 </div>
             }
@@ -137,7 +172,7 @@
                 <div class="w3-third" id="intakeSymptom">
                     @if (symptom.HistoryID > 0)
                     {
-                        <span>&rArr;</span>@symptom.Title
+                        <span>&rArr;  </span>@symptom.Title
                     }
                 </div>
 
@@ -148,7 +183,7 @@
     </div>
 
     <div class="w3-container" id="diseaseDetails">
-        <h3>Diseases</h3>
+        <h4>Diseases</h4>
         @if (Model != null && Model.objPatientDiseaseVM != null && Model.objPatientDiseaseVM.Count > 0)
             {
                 foreach (var disease in Model.objPatientDiseaseVM)
@@ -172,29 +207,30 @@
                 {
                     if (necessity.HistoryID > 0)
                     {
-                        @(necessity.ICD10Code + " - " + necessity.Description)
+                        <span>&rArr;  </span>@(necessity.ICD10Code + " - " + necessity.Description)
                     }
                 }
             </div>
         }
-        else { <p style="color:red;">no medica necessities data is avaiable</p>}
+        else { <p style="color:red;">no medical necessities selected yet</p>}
     </div>
     <div class="w3-container" id="secondaryDiagnosisDetails">
 
         @if (Model.PatientHistoryVM11 != null && Model.PatientHistoryVM11.SecondaryNecessities != null && Model.PatientHistoryVM11.SecondaryNecessities != "")
             {
             <h4>Secondary Diagnosis</h4>
-            @Model.PatientHistoryVM11.SecondaryNecessities
+            <span>&rArr;  </span>@Model.PatientHistoryVM11.SecondaryNecessities
         }
     </div>
 
     <div class="w3-container" id="diseaseDetails">
-        <h4>Approval by</h4>
+        <h4>Interpreted By Specialist</h4>
 
-        @if (Model != null && Model.PatientHistoryVM11 != null && Model.PatientHistoryVM11.isApprovedByPhysician != null && Model.PatientHistoryVM11.isApprovedByPhysician == true && Model.StaffNameVM != null && Model.StaffNameVM.PhycisianName != null)
+        @if (Model != null && Model.PatientHistoryVM11 != null && Model.PatientHistoryVM11.isApprovedBySpecialist != null && Model.PatientHistoryVM11.isApprovedBySpecialist == true && Model.StaffNameVM != null && Model.StaffNameVM.SpecialistName != null)
             {
-            <h3>Approve by Dr. @Model.StaffNameVM.PhycisianName </h3>
+            <span>&rArr;  Dr. </span>@Model.StaffNameVM.SpecialistName
         }
-        else { <p style="color:red;">not approved by any physician.</p>}
+        else { <p style="color:red">Not yet reviewed</p>}
 
+    </div>
     </div>

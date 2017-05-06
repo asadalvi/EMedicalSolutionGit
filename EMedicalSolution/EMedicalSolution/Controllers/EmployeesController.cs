@@ -87,14 +87,14 @@ namespace EMedicalSolution.Controllers
                             v.Tel = oStaff.Tel;
                             v.OfficeID = oStaff.OfficeID;
                             v.Modified = DateTime.Now;
-                            v.ModifiedBy = 1;
+                            v.ModifiedBy = Convert.ToInt32(Session["userID"].ToString());
                         }
                     }
                     else
                     {
                         //save
                         oStaff.Created = DateTime.Now;
-                        oStaff.CreatedBy = 1;
+                        oStaff.CreatedBy = Convert.ToInt32(Session["userID"].ToString());
                         db.Staffs.Add(oStaff);
                     }
                     db.SaveChanges();

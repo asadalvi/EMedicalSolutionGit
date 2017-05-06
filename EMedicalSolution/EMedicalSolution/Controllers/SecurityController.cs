@@ -11,10 +11,15 @@ namespace EMedicalSolution.Controllers
     {
         //
         // GET: /Security/
-
+        IList<UserRole> roles;
         public ActionResult Login()
         {
-            return View();
+           
+            using (PatientMgmtEntities db = new PatientMgmtEntities())
+            {
+                roles = db.UserRoles.ToList();
+            }
+            return View(roles);
         }
 
         [HttpPost]
@@ -27,7 +32,7 @@ namespace EMedicalSolution.Controllers
                 username = col["userName"].ToString().Trim();
                 password = col["password"].ToString().Trim();
                 role = Convert.ToInt32(col["role"].ToString().Trim());
-                var u = db.Users.Where(a => a.Username.Equals(username) && a.Password.Equals(password)).FirstOrDefault();
+                var u = db.Users.Where(a => a.Username.Equals(username) && a.Password.Equals(password) && a.RoleID == role).FirstOrDefault();
 
                 if (u != null)
                 {
@@ -36,12 +41,15 @@ namespace EMedicalSolution.Controllers
                     Session["userName"] = u.Username.ToString();
                     Session["Name"] = s.FirstName.ToString() + " " + s.LastName.ToString();
                     Session["role"] = role.ToString();
+                    Session["officeID"] = s.OfficeID.ToString();
+                    Session["staffID"] = s.ID.ToString();
 
                     return RedirectToAction("Dashboard", "Home");
                 }
 
                 ViewData["Error"] = "Incorrect User / Password";
-                return View("Login",u);
+                roles = db.UserRoles.ToList();
+                return View("Login", roles);
             }
         }
 

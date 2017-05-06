@@ -137,14 +137,14 @@
           <ScalarProperty Name="isApprovedByPhysician" ColumnName="isApprovedByPhysician" />
           <ScalarProperty Name="PhysicianID" ColumnName="PhysicianID" />
           <ScalarProperty Name="PhysicianApprovedDate" ColumnName="PhysicianApprovedDate" />
-          <ScalarProperty Name="Created" ColumnName="Created" />
-          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-          <ScalarProperty Name="Modified" ColumnName="Modified" />
-          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
           <ScalarProperty Name="SpecialistRemarks" ColumnName="SpecialistRemarks" />
           <ScalarProperty Name="isApprovedBySpecialist" ColumnName="isApprovedBySpecialist" />
           <ScalarProperty Name="SpecialistID" ColumnName="SpecialistID" />
           <ScalarProperty Name="SpecialistApprovedDate" ColumnName="SpecialistApprovedDate" />
+          <ScalarProperty Name="Created" ColumnName="Created" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="Modified" ColumnName="Modified" />
+          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -217,6 +217,7 @@
           <ScalarProperty Name="IDNumber" ColumnName="IDNumber" />
           <ScalarProperty Name="Tel" ColumnName="Tel" />
           <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="OfficeID" ColumnName="OfficeID" />
           <ScalarProperty Name="Created" ColumnName="Created" />
           <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
           <ScalarProperty Name="Modified" ColumnName="Modified" />

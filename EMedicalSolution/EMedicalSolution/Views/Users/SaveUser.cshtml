@@ -9,6 +9,10 @@
     @Html.HiddenFor(a => a.ID)
     }
     
+    <div class="w3-panel w3-red">
+        <span id="lblError"></span>
+    </div>
+
     <div class="w3-row w3-margin-top">
         <label class="w3-text-green">Username</label>
         @Html.TextBoxFor(a => a.Username, new { @class = "w3-input w3-border" })

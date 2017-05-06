@@ -27,7 +27,7 @@
         </div>
         <div class="w3-row">
             <div class="w3-half">
-                
+
                 <label>
                     First Name
                 </label>
@@ -39,17 +39,22 @@
                 @Html.TextBoxFor(model => model.LastName, new { @class = "w3-input w3-border", required = "required" })
                 @Html.ValidationMessageFor(model => model.LastName)
 
-                <label>
-                    Signature Password:
-                </label>
-                @Html.TextBoxFor(model => model.SignaturePassword, new { @class = "w3-input w3-border", type = "password", required = "required" })
-                @Html.ValidationMessageFor(model => model.SignaturePassword)
+ 
+                @if (Session["role"] != null && Session["role"].ToString() == "1") //Physician 2
+                {//Show signature option only if Physician is logged in
+                    <label>
+                        Signature Password:
+                    </label>
+                    @Html.TextBoxFor(model => model.SignaturePassword, new { @class = "w3-input w3-border", type = "password", required = "required" })
+                    @Html.ValidationMessageFor(model => model.SignaturePassword)
 
+                    <span>Upload Signatures (picture): </span>
                     <div class="w3-center w3-margin-bottom">
+
                         <div>
                             @if (Model.SignatureFilePath != null)
                             {
-                                <img class="db_img" src="@Url.Content("~/Files/Signatures/" + System.IO.Path.GetFileName(Model.SignatureFilePath))">
+                                <img class="db_img" width="300" height="120" src="@Url.Content("~/Files/Signatures/" + System.IO.Path.GetFileName(Model.SignatureFilePath))">
                             }
                             else
                             {
@@ -57,11 +62,11 @@
                             }
                         </div>
                     </div>
-   
-                @Html.TextBoxFor(model => model.SignatureFilePath, new { type = "file", onchange = "show(this)" })
-                @Html.ValidationMessageFor(model => model.SignatureFilePath)<br />
-                
-                
+
+                    @Html.TextBoxFor(model => model.SignatureFilePath, new { type = "file", onchange = "show(this)" })
+                    @Html.ValidationMessageFor(model => model.SignatureFilePath)<br />
+
+                }
             </div>
 
             <div class="w3-half">
@@ -104,10 +109,10 @@
                 <div class="w3-margin-top">
                     <input type="submit" value="Save" class="w3-btn w3-green" />
                 </div>
-                <div class="w3-margin-top w3-right">
-                   
-                        @Html.ActionLink("<< Back to Profile", "ProfileInfo")
-                </div>
+                @*<div class="w3-margin-top w3-right">
+
+                            @Html.ActionLink("<< Back to Profile", "ProfileInfo")
+                    </div>*@
             </div>
         </div>
 

@@ -63,7 +63,7 @@ namespace EMedicalSolution.Controllers
                         {
                             v.Title = oDisease.Title;
                             v.Created = DateTime.Now;
-                            v.CreatedBy = 1;
+                            v.CreatedBy = Convert.ToInt32(Session["userID"].ToString());
                         }
 
                     }
@@ -71,7 +71,7 @@ namespace EMedicalSolution.Controllers
                     {
                         //save
                         oDisease.Created = DateTime.Now;
-                        oDisease.CreatedBy = 1;
+                        oDisease.CreatedBy = Convert.ToInt32(Session["userID"].ToString());
                         db.Diseases.Add(oDisease);
                     }
                     db.SaveChanges();

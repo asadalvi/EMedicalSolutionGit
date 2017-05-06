@@ -5,8 +5,8 @@
 @{ string pType = "0";}
 @*<button class="btn btn-primary" id="btn_order_report" type="button">Order Form</button> <button class="btn btn-primary" id="btn_bill_report" type="button">Supper Bill</button>*@
 @Html.ActionLink("Order Form", "orderReport", "Patients", new { id = @ViewBag.HistoryID }, new { target = "_blank" }) /
-@Html.ActionLink("Supper Bill", "orderBill", "Patients", new { id = @ViewBag.HistoryID }, new { target = "_blank" }) / 
-@Html.ActionLink("Excel Report", "ExportToExcel", "Patients", new { id = @ViewBag.HistoryID }, new { target = "_blank" })
+@Html.ActionLink("Supper Bill", "orderBill", "Patients", new { id = @ViewBag.HistoryID }, new { target = "_blank" })
+@*@Html.ActionLink("Excel Report", "ExportToExcel", "Patients", new { id = @ViewBag.HistoryID }, new { target = "_blank" })*@
 
 @using (Html.BeginForm("ConvertPatientToPdf", "Patients", FormMethod.Post, new { id = "PhysicianApproval" }))
 {
@@ -21,18 +21,34 @@
             <div class="w3-panel w3-hover-blue w3-light-blue w3-round-xxlarge">
                 <h3>Physician Approval</h3>
                 <p>Approve by Dr. @Model.StaffNameVM.PhycisianName </p>
-                <p><strong>Remarks:</strong> @Model.StaffNameVM.PhysicianRemarks</p>
+                <p><strong>Reason:</strong> @Model.StaffNameVM.PhysicianRemarks</p>
             </div>
-            <h2></h2>
         }
         else {
-            <label>Physician Remarks:</label>
-            <input type="text" name="physicianRemarks" id="physicianRemarksValue" />
-            <p class="saveError" style="font-size:large;color:red;display:none">Please enter about the patient</p>
-            <a class="popup w3-btn w3-orange" id="click_approveButton">Approve</a>
+            if (Session["role"] != null && Session["role"].ToString() == "2") //2 for specialist
+            {
+                <label>Physician Remarks:</label><br />
+                <textarea rows="4" cols="56" name="physicianRemarks" id="physicianRemarksValue"> </textarea><br />
+                <p class="saveError" style="font-size:large;color:red;display:none">Please enter about the patient</p>
+                <div class="w3-row">
+                    <div class="w3-twothird w3-right">
+                        <a class="popup w3-btn w3-orange" id="click_approveButton">Approve</a>
+                    </div>
+                </div>
+            }
+            else
+            {
+                <p class="w3-text-red w3-margin-top">Approval required by Physician</p>
+            }
         }
     </div>
-    <h2 id="Approvedbyphysician" style="display:none"></h2>
+    if (Session["role"] != null && Session["Name"] != null && Session["role"].ToString() == "2")  //Physician id 2
+    {
+        <div class="w3-panel w3-hover-blue w3-green w3-round-xxlarge" id="Approvedbyphysician" style="display:none">
+            <h3>Success</h3>
+            <p>Approve by Dr. @Session["Name"].ToString() </p>
+        </div>
+    }
 
 }
 <script>
@@ -42,39 +58,18 @@
         OpenPopup($(this).attr('href'), "", "physicianSignature");
     });
 
-    //$("#btn_order_report").click(function () {
-    //    $("#order_form_report").css("display", "block");
-    //    $("#super_bill_report").css("display", "none");
-    //});
 
-    //$("#btn_bill_report").click(function () {
-    //    $("#super_bill_report").css("display", "block");
-    //    $("#order_form_report").css("display", "none");
-    //});
     //submission form -------start-----------
     $('#click_approveButton').on('click', function (e) {
         var val = $(document).find("#physicianRemarksValue").val();
         if (val !== undefined && val !== null && val !== "") {
             $(document).find(".saveError").css("display", "none");
             $('#click_approveButton').attr("href", "/Patients/physicianSignature");
-            //$('#click_approveButton')[0].click();
-            //$.ajax({
-            //    type: "get",                
-            //    url: "/Patients/physicianSignature",
-            //})
+
         } else {
             $(document).find(".saveError").css("display", "block");
             $('#click_approveButton').removeAttr("href");
         }
     });
 </script>
-
-
-
-
-
-
-
-
-
 

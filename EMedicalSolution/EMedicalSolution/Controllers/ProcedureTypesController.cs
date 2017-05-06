@@ -63,7 +63,7 @@ namespace EMedicalSolution.Controllers
                         {
                             v.Title = oProcedureType.Title;
                             v.Created = DateTime.Now;
-                            v.CreatedBy = 1;
+                            v.CreatedBy = Convert.ToInt32(Session["userID"].ToString());
                         }
 
                     }
@@ -71,7 +71,7 @@ namespace EMedicalSolution.Controllers
                     {
                         //save
                         oProcedureType.Created = DateTime.Now;
-                        oProcedureType.CreatedBy = 1;
+                        oProcedureType.CreatedBy = Convert.ToInt32(Session["userID"].ToString());
                         db.ProcedureTypes.Add(oProcedureType);
                     }
                     db.SaveChanges();

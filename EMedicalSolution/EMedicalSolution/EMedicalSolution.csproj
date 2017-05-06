@@ -119,6 +119,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_Start\SessionTimeoutAttribute.cs" />
     <Compile Include="Controllers\DiseasesController.cs" />
     <Compile Include="Controllers\EmployeesController.cs" />
     <Compile Include="Controllers\NecessitiesController.cs" />
@@ -324,14 +325,7 @@
     <Content Include="fonts\fontawesome-webfont.woff" />
     <Content Include="fonts\fontawesome-webfont.woff2" />
     <Content Include="fonts\FontAwesome.otf" />
-    <EntityDeploy Include="Models\EPatientMgmt.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>EPatientMgmt.Designer.cs</LastGenOutput>
-    </EntityDeploy>
     <Content Include="Images\ajax_loader.png" />
-    <Content Include="Models\EPatientMgmt.edmx.diagram">
-      <DependentUpon>EPatientMgmt.edmx</DependentUpon>
-    </Content>
     <Content Include="Files\Cards\Card_1.doc" />
     <Content Include="Files\Cards\Card_1.docx" />
     <Content Include="Files\Cards\Card_3.docx" />
@@ -339,6 +333,14 @@
     <Content Include="Files\Reports\Card_1.docx" />
     <Content Include="Files\Reports\Card_3.docx" />
     <Content Include="Files\Reports\Report_3.docx" />
+    <EntityDeploy Include="Models\EPatientMgmt.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>EPatientMgmt.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\EPatientMgmt.edmx.diagram">
+      <DependentUpon>EPatientMgmt.edmx</DependentUpon>
+    </Content>
+    <None Include="Properties\PublishProfiles\eMedicalSolution.pubxml" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="Images\avatar.jpg" />
     <Content Include="Models\EPatientMgmt.Context.tt">
@@ -443,6 +445,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Files\Signatures\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

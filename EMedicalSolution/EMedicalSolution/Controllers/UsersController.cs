@@ -65,39 +65,68 @@ namespace EMedicalSolution.Controllers
         public ActionResult SaveUser(User user)
         {
             bool status = false;
+            string errorMsg = "";
 
             if (ModelState.IsValid)
             {
                 using (PatientMgmtEntities db = new PatientMgmtEntities())
                 {
+                    var emp = db.Users.Where(s => s.StaffID == user.StaffID).FirstOrDefault();
                     if (user.ID > 0)
                     {
-                        //edit 
-                        var v = db.Users.Where(a => a.ID == user.ID).FirstOrDefault();
-                        if (v != null)
+                        if (emp.ID == user.ID)
                         {
-                            v.Username = user.Username;
-                            v.Password = user.Password;
-                            v.RoleID = user.RoleID;
-                            v.StaffID = user.StaffID;
-                            v.Modified = DateTime.Now;
-                            v.ModifiedBy = 1;
+                            //edit
+                            var v = db.Users.Where(a => a.ID == user.ID).FirstOrDefault();
+                            if (v != null)
+                            {
+                                v.Username = user.Username;
+                                v.Password = user.Password;
+                                v.RoleID = user.RoleID;
+                                v.StaffID = user.StaffID;
+                                v.Modified = DateTime.Now;
+                                v.ModifiedBy = Convert.ToInt32(Session["userID"].ToString());
+                                db.SaveChanges();
+                                status = true;
+                            }
+                        }
+                        else
+                        {
+                            errorMsg = "Selected employee already has a user";
+                            status = false;
                         }
                     }
                     else
                     {
-                        //save
-                        user.Created = DateTime.Now;
-                        user.CreatedBy = 1;
-                        db.Users.Add(user);
-                    }
-                    db.SaveChanges();
-                    status = true;
-                }
+                        var u = db.Users.Where(a => a.Username == user.Username).FirstOrDefault();
+                        if (u != null)
+                        {
+                            errorMsg = "User already exist";
+                            status = false;
+                        }
+                        else
+                        {
+                            if (emp != null)
+                            {
+                                errorMsg = "Selected employee already has a user";
+                                status = false;
+                            }
+                            else
+                            {
+                                user.Created = DateTime.Now;
+                                user.CreatedBy = Convert.ToInt32(Session["userID"].ToString());
+                                db.Users.Add(user);
+                                db.SaveChanges();
+                                status = true;
+                            }
+                        }
 
+
+                    }
+
+                }
             }
-            //return RedirectToAction("UsersList");
-            return new JsonResult { Data = new { status = status } };
+            return new JsonResult { Data = new { status = status, errorMsg = errorMsg } };
         }
 
         [HttpGet]

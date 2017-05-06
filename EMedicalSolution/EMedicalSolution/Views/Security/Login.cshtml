@@ -1,4 +1,4 @@
-﻿
+﻿@model IEnumerable<EMedicalSolution.Models.UserRole>
 @{
     ViewBag.Title = "Login";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -31,22 +31,23 @@
                 </div>
 
                 <div class="w3-row w3-margin-top">
-
-                    <div class="w3-half">
-                        <input class="w3-radio" type="radio" name="role" value="1" required>
-                        <label class="w3-validate">Assistant</label>
+                    @foreach (var role in Model)
+                    {
+                     <div class="w3-half">
+                        <input class="w3-radio" type="radio" name="role" value="@role.ID" required>
+                        <label class="w3-validate">@role.Title</label>
                     </div>
-
-                    <div class="w3-half">
+                    }
+                    @*<div class="w3-half">
                         <input class="w3-radio" type="radio" name="role" value="2" required>
                         <label class="w3-validate">Physician</label>
-                    </div>
+                    </div>*@
 
 
 
                 </div>
 
-                <div class="w3-row w3-margin-top w3-margin-bottom">
+                @*<div class="w3-row w3-margin-top w3-margin-bottom">
 
 
                     <div class="w3-half">
@@ -55,9 +56,9 @@
                     </div>
                     <div class="w3-half">
                         <input class="w3-radio" type="radio" name="role" value="4" required>
-                        <label class="w3-validate">Admin</label>
+                        <label class="w3-validate">Technician</label>
                     </div>
-                </div>
+                </div>*@
 
                 <button class="w3-btn-block w3-blue w3-section w3-padding" type="submit">Login</button>
             </div>

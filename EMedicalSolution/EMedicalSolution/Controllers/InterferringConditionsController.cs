@@ -63,7 +63,7 @@ namespace EMedicalSolution.Controllers
                         {
                             v.Title = condition.Title;
                             v.Created = DateTime.Now;
-                            v.CreatedBy = 1;
+                            v.CreatedBy = Convert.ToInt32(Session["userID"].ToString());
                         }
 
                     }
@@ -71,7 +71,7 @@ namespace EMedicalSolution.Controllers
                     {
                         //save
                         condition.Created = DateTime.Now;
-                        condition.CreatedBy = 1;
+                        condition.CreatedBy = Convert.ToInt32(Session["userID"].ToString());
                         db.InterferingConditions.Add(condition);
                     }
                     db.SaveChanges();
