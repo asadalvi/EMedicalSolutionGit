@@ -7,6 +7,7 @@ using System.Web;
 using System.Web.Mvc;
 using EMedicalSolution.Models;
 using System.IO;
+using EMedicalSolution.App_Start;
 
 namespace EMedicalSolution.Controllers
 {

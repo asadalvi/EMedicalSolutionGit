@@ -21,7 +21,7 @@
     
     <div class="w3-row w3-margin-top">
         <label class="w3-text-green">Date of Birth</label>
-        @Html.TextBoxFor(a => a.DOB, new { @class = "w3-input w3-border" })
+        @Html.TextBoxFor(a => a.DOB, new { @class = "w3-input w3-border datepicker", type="date" })
         @Html.ValidationMessageFor(a => a.DOB)
     </div>
     

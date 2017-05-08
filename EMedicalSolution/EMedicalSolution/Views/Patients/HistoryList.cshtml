@@ -17,13 +17,13 @@
         <table class="w3-table-all w3-hoverable" id="patientHistoryDataTable">
             <thead>
                 <tr>
-                    <th>First Name</th>
-                    <th>Last Name</th>
-                    <th>Insurance Type</th>
-                    <th>Insurance Card</th>
+                    <th>Patient</th>
+                    <th>Insurance</th>
+                    <th>Card</th>
+                    <th>Status</th>
                     <th>Created</th>
                     <th>Action</th>
-                    <th>Info</th>
+                    <th>View</th>
                 </tr>
 
             </thead>
@@ -62,8 +62,7 @@
                 "datatype": "json"
             },
             "columns": [
-                { "data": "FirstName", "autoWidth": true },
-                { "data": "LastName", "autoWidth": true },
+                { "data": "PatientName", "autoWidth": true },
                  { "data": "Title", "autoWidth": true },
                   {
                       "data": "filename", "render": function (data) {
@@ -73,6 +72,7 @@
                           }
                       }
                   },
+                  { "data": "Status", "autoWidth": true },
                 {
                     "data": "Created", "autoWidth": true, "render": function (data) {
                         var date = new Date(parseInt(data.substr(6)));
@@ -100,6 +100,3 @@
         });
 
 </script>
-
-
-

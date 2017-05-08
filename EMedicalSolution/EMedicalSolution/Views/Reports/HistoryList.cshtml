@@ -1,0 +1,129 @@
+﻿
+
+<div class="w3-container tablecontainer-history dashboardDiv" id="patients-tab">
+
+    <div class="w3-row w3-padding-16">
+        <input type="hidden" id="historyList_patientID" name="patientID" value="@ViewBag.patientID" />
+        <input type="checkbox" class="w3-check" id="chkAllHistories" />Show all Patient with Histories
+        <input type="hidden" id="ViewBag_PatienName" />
+        <div class="w3-responsive">
+            
+            <table class="w3-table-all w3-hoverable" id="patientHistoryDataTable">
+                <thead>
+                    <tr>
+                        <th>Patient</th>
+                        <th>DOB</th>
+                        <th>Insurance</th>
+                        <th>Card</th>
+                        <th>Clinic</th>
+                        <th>Physician</th>
+                        <th>Interpretation</th>
+                        <th>Status</th>
+                      
+                    </tr>
+                    <tr>
+                        <th>Patient</th>
+                        <th>DOB</th>
+                        <th>Insurance</th>
+                        <th>Card</th>
+                        <th>Clinic</th>
+                        <th>Physician</th>
+                        <th>Interpretation</th>
+                        <th>Status</th>
+                    </tr>
+
+                </thead>
+                
+                <tbody id="patient_history_views"></tbody>
+            </table>
+
+
+        </div>
+    </div>
+</div>
+
+<script>
+
+        var patientId = $("#historyList_patientID").val();
+        var pName = $("#ViewBag_PatienName").val();
+        if (pName !== undefined && pName !== "") {
+            $("#PatienName").html("");
+            $("#PatienName").html("Pateint Name: "+ pName);
+            $("#PatienName").css("display", "block");
+            $("#ViewBag_PatienName").val('');
+            pName = "";
+        }
+
+        $('#patientHistoryDataTable thead tr:eq(0) th').each(function () {
+            var title = $('#patientHistoryDataTable thead tr:eq(1) th').eq($(this).index()).text();
+            $(this).html('<input type="text" style="width: 50px;" placeholder="Search ' + title + '" />');
+        });
+
+        var oTableHistory = $("#patientHistoryDataTable").DataTable({
+            orderCellsTop: false, 
+            dom: 'Blfrtip',
+
+            buttons: [{
+                extend: 'excel',
+                exportOptions: {
+                    columns: [0, 1, 2, 4, 5, 6, 7, 8]
+                }
+            },
+            {
+                extend: 'print', 
+                exportOptions: {
+                    columns: [0, 1, 2, 4, 5 ,6 ,7 ,8]
+                }
+            }
+            ],
+            "ajax": {
+                "url": '/Patients/getHistoryList/' + patientId,
+                "type": 'post',
+                "datatype": "json"
+            },
+            "columns": [
+                { "data": "PatientName", "autoWidth": true },
+                {
+                    "data": "DOB", "autoWidth": true, "render": function (data) {
+                        var date = new Date(parseInt(data.substr(6)));
+                        var sdate = date.format("mmm d, yyyy");
+                        return sdate;
+                    }
+                },
+                 { "data": "Title", "autoWidth": true },
+                  {
+                      "data": "filename", "render": function (data) {
+                             if (data !== undefined) {
+                              var filename = data.split('\\').pop();
+                              return '<span class="fa fa-download"><a href="/Patients/DownloadInsuranceCard/?fileName=' + filename + '">  Download<a></span>';
+                          }
+                      }
+                  },
+                  { "data": "ClinicName", "autoWidth": true },
+                  { "data": "PhysicianName", "autoWidth": true },
+                  { "data": "SpecialistName", "autoWidth": true },
+                  { "data": "Status", "autoWidth": true }
+            ]
+        });
+       
+        // Apply the search
+        oTableHistory.columns().every(function (index) {
+            $('#patientHistoryDataTable thead tr:eq(0) th:eq(' + index + ') input').on('keyup change', function () {
+                oTableHistory.column($(this).parent().index() + ':visible')
+                    .search(this.value)
+                    .draw();
+            });
+        });
+
+        $("#chkAllHistories").change(function () {
+            if (this.checked) {
+                oTableHistory.ajax.url('/Patients/getHistoryList/0');
+                oTableHistory.ajax.reload();
+            } else {
+                oTableHistory.ajax.url('/Patients/getHistoryList/' + patientId);
+                oTableHistory.ajax.reload();
+            }
+        })
+
+
+</script>

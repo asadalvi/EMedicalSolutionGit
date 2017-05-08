@@ -7,6 +7,7 @@ using EMedicalSolution.Models;
 
 namespace EMedicalSolution.Controllers
 {
+
     public class HomeController : Controller
     {
         //

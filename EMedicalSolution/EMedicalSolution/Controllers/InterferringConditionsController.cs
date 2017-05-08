@@ -4,9 +4,10 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using EMedicalSolution.Models;
-
+using EMedicalSolution.App_Start;
 namespace EMedicalSolution.Controllers
 {
+    [SessionTimeout]
     public class InterferingConditionsController : Controller
     {
         //

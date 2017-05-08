@@ -71,11 +71,10 @@
 
             <div class="w3-half">
                 <label>Date of Birth</label>
-                @Html.TextBoxFor(model => model.DOB, new { @class = "w3-input w3-border", required = "required" })
+                @Html.TextBoxFor(model => model.DOB, new { @class = "w3-input w3-border", type = "date", required = "required" })
                 @Html.ValidationMessageFor(model => model.DOB)
 
-                <label>Gender</label>
-                <select name="Gender" required="required">
+                <label>Gender</label>                <select name="Gender" class="w3-input" required="required">
                     <option class="w3-input" required>Select Gender</option>
                     @if (Model.Gender.ToString().Trim() == "Male")
                     {

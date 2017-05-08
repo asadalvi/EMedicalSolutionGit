@@ -1,5 +1,5 @@
 ﻿@{
-    ViewBag.Title = "Patients Management";
+    ViewBag.Title = "Patients List";
     Layout = "~/Views/Shared/_UserLayout.cshtml";
 }
 <div class="w3-center w3-dark-gray">
@@ -38,15 +38,37 @@
 
 
 @section Scripts {
+<link href="~/Content/buttons.dataTables.min.css" rel="stylesheet" />
 <script src="~/Scripts/jquery.validate.min.js"></script>
 <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
 <script src="~/Scripts/jquery.dataTables.min.js"></script>
 <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
 <script src="~/Scripts/date.format.js"></script>
+<script src="~/Scripts/DataTable/buttons.html5.min.js"></script>
+<script src="~/Scripts/DataTable/buttons.print.min.js"></script>
+<script src="~/Scripts/DataTable/dataTables.buttons.min.js"></script>
+<script src="~/Scripts/DataTable/jszip.min.js"></script>
+<script src="~/Scripts/DataTable/pdfmake.min.js"></script>
+<script src="~/Scripts/DataTable/vfs_fonts.js"></script>
 
 <script>
     $(document).ready(function () {
         var oTable = $("#patientsDataTable").DataTable({
+            dom: 'Blfrtip',
+
+            buttons: [{
+                extend: 'excel',
+                exportOptions: {
+                    columns: [0, 1, 2, 3, 4, 5]
+                }
+            },
+            {
+                extend: 'print',
+                exportOptions: {
+                    columns: [0, 1, 2, 3, 4, 5]
+                }
+            }
+            ],
             "ajax": {
                 "url": '/Patients/GetPatients',
                 "type": 'get',

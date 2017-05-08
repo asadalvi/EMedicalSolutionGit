@@ -85,7 +85,7 @@
                         <td>
                             @foreach (var procedure in Model.PatientProceduresVM1)
                             {
-                                <span>@procedure.Title</span>
+                                <span>@procedure.Title <br /></span>
                             }
                         </td>
                     }
@@ -132,7 +132,7 @@
             {
                 if (procedure.HistoryID > 0)
                 {
-                    <span>&rArr;  </span> @procedure.Title
+                    <span>&rArr;  </span> @procedure.Title <br />
                 }
 
             }
