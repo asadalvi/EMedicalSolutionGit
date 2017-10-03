@@ -187,7 +187,7 @@ namespace EMedicalSolution.Controllers
                                 join ph in db.PatientHistories on p.ID equals ph.PatientID
                                 join i in db.InsuranceTypes on ph.InsuranceTypeID equals i.ID
                                 join pc in db.InsuranceCardPictures on ph.ID equals pc.HistoryID
-                                join off in db.Offices on ph.OfficeID equals off.ID
+                                join off in db.Offices on p.OfficeID equals off.ID
                                 join status in db.Statuses on ph.StatusID equals status.ID into leftStatus
                                 from lfStatus in (from st in leftStatus select st).DefaultIfEmpty()
                                 join up in db.Users on ph.PhysicianID equals up.ID into leftuPhy
@@ -198,7 +198,7 @@ namespace EMedicalSolution.Controllers
                                 from ljuSpec in (from us in leftuSpec select us).DefaultIfEmpty()
                                 join ss in db.Staffs on ljuSpec.StaffID equals ss.ID into leftsSpec
                                 from ljsSpec in (from ss in leftsSpec select ss).DefaultIfEmpty()
-                                where (id>0)? p.ID == id : 1 == 1
+                                where (id>0)? ph.PatientID == id : 1 == 1
                                 select new PatientHistoryVM
                                 {
                                     ID = ph.ID,

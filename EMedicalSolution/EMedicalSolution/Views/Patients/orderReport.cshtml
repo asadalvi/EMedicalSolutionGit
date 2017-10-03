@@ -140,13 +140,12 @@
                                     {
                                             <img class="db_img" width="160" height="64" src="@Url.Content("~/Files/Signatures/" + System.IO.Path.GetFileName(Model.StaffNameVM.SignatureFilePath))">
                                     }
-                                    else
+                                    else if (Model != null && Model.StaffNameVM != null && Model.StaffNameVM.PhycisianName != null)
                                     {
-                                        
                                             <span>Dr. @Model.StaffNameVM.PhycisianName</span>
                                     }
-                                    
-                                
+
+
                             </td>
                             <td>
                                 <b>Date:</b>

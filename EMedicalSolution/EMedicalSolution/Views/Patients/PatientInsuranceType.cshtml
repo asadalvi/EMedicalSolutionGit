@@ -75,42 +75,6 @@
                 $('#partialPatientInsuranceType').html('');
                 oTable.ajax.reload();
 
-                // $(document).find("#patient_history_views").append('<tr role="row" class="even"><td class="sorting_1">' + $data.firstName + '</td><td>' + $data.lastName + '</td><td>' + $data.title + '</td><td>' + $data.createdDate + '</td><td><a class="popup  w3-btn w3-orange" href="/Patients/ViewHistory/"' + $data.pId + '>View</a><a></a></td></tr>');
-                //$dialog.dialog('close');
-                //$('#patientHistoryDataTable').empty();
-                // $(".ui-dialog-titlebar-close").trigger("click");
-                // $("#patientHistoryDataTable").dialog('open');
-                //var oTable = $("#patientHistoryDataTable").DataTable({
-
-                //    "ajax": {
-                //        "url": '/Patients/getHistoryList/' + pId,
-                //        "type": 'post',
-                //        "datatype": "json"
-                //    },
-                //    "columns": [
-                //        { "data": "FirstName", "autoWidth": true },
-                //        { "data": "LastName", "autoWidth": true },
-                //         { "data": "Title", "autoWidth": true },
-                //        {
-                //            "data": "Created", "autoWidth": true, "render": function (data) {
-                //                var date = new Date(parseInt(data.substr(6)));
-                //                var sdate = date.format("mmm d, yyyy");
-                //                return sdate;
-                //            }
-                //        },
-
-                //        {
-                //            "data": "ID", "render": function (data) {
-                //                return '<a class="popup  w3-btn w3-orange" href="/Patients/ViewHistory/' + data + '">View<a>';
-                //            }
-                //        }
-                //    ]
-                //});
-
-                //$('.tablecontainer-history').on('click', 'a.popup', function (e) {
-                //    e.preventDefault();
-                //    OpenPopup($(this).attr('href'), oTable, "History");
-                //});
             }
         });
     });

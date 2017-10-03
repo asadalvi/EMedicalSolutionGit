@@ -125,17 +125,25 @@
                     </tr>
                     <tr>
                         <td>
-                            <b>First Name:</b> @if (Model != null && Model.objPatient != null && Model.objPatient.FirstName != null)
+                            <b>First Name:</b>
+                            @if (Model != null && Model.objPatient != null && Model.objPatient.FirstName != null)
                             {
                                 <span>@Model.objPatient.FirstName</span>
                             }
                         </td>
-                        <td><b>Physician's Name:</b> Dr. @Model.StaffNameVM.PhycisianName</td>
+                        <td>
+                            <b>Physician's Name:</b>
+                            @if (Model != null && Model.StaffNameVM != null && Model.StaffNameVM.PhycisianName != null)
+                            {
+                                <span>Dr. @Model.StaffNameVM.PhycisianName</span>
+                            }
+                        </td>
                         <td>Deductible</td>
                     </tr>
                     <tr>
                         <td>
-                            <b>Time in:</b> @if (Model != null && Model.PatientHistoryVM11 != null && Model.PatientHistoryVM11.Created != null)
+                            <b>Time in:</b>
+                            @if (Model != null && Model.PatientHistoryVM11 != null && Model.PatientHistoryVM11.Created != null)
                             {
                                 <span>@Model.PatientHistoryVM11.Created.ToString("hh:mm tt")</span>
                             }

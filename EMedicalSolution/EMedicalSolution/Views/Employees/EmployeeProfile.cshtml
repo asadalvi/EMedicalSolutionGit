@@ -40,7 +40,7 @@
                 @Html.ValidationMessageFor(model => model.LastName)
 
  
-                @if (Session["role"] != null && Session["role"].ToString() == "1") //Physician 2
+                @if (Session["role"] != null && Session["role"].ToString() == "2") //Physician 2
                 {//Show signature option only if Physician is logged in
                     <label>
                         Signature Password:
