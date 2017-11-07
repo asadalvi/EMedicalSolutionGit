@@ -11,6 +11,7 @@ using EMedicalSolution.App_Start;
 
 namespace EMedicalSolution.Controllers
 {
+    [SessionTimeout]
     public class EmployeesController : Controller
     {
         PatientMgmtEntities db = new PatientMgmtEntities();
@@ -140,7 +141,8 @@ namespace EMedicalSolution.Controllers
 
         public ActionResult EmployeeProfile()
         {
-            var Employees = db.Staffs.Find(1);
+            int staffID = Convert.ToInt32(Session["staffID"]);
+            var Employees = db.Staffs.Find(staffID);
             return View(Employees);
         }
 

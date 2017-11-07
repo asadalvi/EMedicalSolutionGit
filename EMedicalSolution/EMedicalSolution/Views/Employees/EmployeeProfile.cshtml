@@ -71,7 +71,7 @@
 
             <div class="w3-half">
                 <label>Date of Birth</label>
-                @Html.TextBoxFor(model => model.DOB, new { @class = "w3-input w3-border", type = "date", required = "required" })
+                @Html.TextBoxFor(model => model.DOB, new { @class = "w3-input w3-border", type = "text", required = "required" })
                 @Html.ValidationMessageFor(model => model.DOB)
 
                 <label>Gender</label>                <select name="Gender" class="w3-input" required="required">

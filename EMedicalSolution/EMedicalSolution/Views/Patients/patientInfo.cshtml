@@ -106,7 +106,7 @@
         @if (Model != null && Model.StaffNameVM != null && Model.StaffNameVM.SignatureFilePath != null)
         {
             <div class="w3-right" id="doctorSign">
-                <img class="db_img" width="160" height="64" src="@Url.Content("~/Files/Signatures/" + System.IO.Path.GetFileName(Model.StaffNameVM.SignatureFilePath))">
+                <img class="db_img" width="158" height="60" src="@Url.Content("~/Files/Signatures/" + System.IO.Path.GetFileName(Model.StaffNameVM.SignatureFilePath))">
             </div>
         }
         else if(Model != null && Model.StaffNameVM != null && Model.StaffNameVM.PhycisianName != null)
