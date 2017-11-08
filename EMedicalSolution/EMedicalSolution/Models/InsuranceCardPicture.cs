@@ -23,6 +23,7 @@ namespace EMedicalSolution.Models
         public int CreatedBy { get; set; }
         public Nullable<System.DateTime> Modified { get; set; }
         public Nullable<int> ModifiedBy { get; set; }
+        public string MemberID { get; set; }
     
         public virtual PatientHistory PatientHistory { get; set; }
         public virtual Patient Patient { get; set; }
