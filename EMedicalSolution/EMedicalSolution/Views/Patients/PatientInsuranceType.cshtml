@@ -34,13 +34,19 @@
             </div>
 
         </div>
+        <div class="w3-row w3-margin-top">
+            <div class="w3-center">
+                Member Id: <input type="text" name="insuranceMemberId" id="insuranceMemberId" />
+            </div>
+            </div>
 
-        <div class="w3-row w3-margin-top w3-center w3-margin-bottom">
-            <div class="w3-third" style="float: none; margin: auto">
-                <button class="w3-btn-block w3-green" id="addPatientInsurance" type="button">Save</button>
+            <div class="w3-row w3-margin-top w3-center w3-margin-bottom">
+                
+                <div class="w3-half" style="float: none; margin: auto">
+                    <button class="w3-btn-block w3-green" id="addPatientInsurance" type="button">Save</button>
+                </div>
             </div>
         </div>
-    </div>
 }
 
 <script src="~/Scripts/jquery.validate.min.js"></script>
@@ -55,6 +61,7 @@
         $formData = new FormData();
         var pId = $("#historyList_patientID").val();
         var insuranceTitle = $("#insuranceTitle").val();
+        var insuranceMemberId = $("#insuranceMemberId").val();        
         var typeid = $("input[name='typeId']:checked").val();
         var $file = document.getElementById('insuranceCardfile');
         if ($file.files.length > 0) {
@@ -63,7 +70,7 @@
             }
         }
         $.ajax({
-            url: '/Patients/SavePatientInsuranceType?pId=' + pId + "&insuranceTitle=" + insuranceTitle + "&typeid=" + typeid,
+            url: '/Patients/SavePatientInsuranceType?pId=' + pId + "&insuranceTitle=" + insuranceTitle + "&insuranceMemberId=" + insuranceMemberId + "&typeid=" + typeid,
             type: 'POST',
             data: $formData,
             dataType: 'json',

@@ -228,6 +228,13 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Content Include="favicon.ico" />
+    <Content Include="Files\Reports\Report_1.png" />
+    <Content Include="Files\Reports\Report_3.png" />
+    <Content Include="Files\Reports\Report_4.jpg" />
+    <Content Include="Files\Reports\Report_5.jpg" />
+    <Content Include="Files\Reports\Report_6.jpg" />
+    <Content Include="Files\Signatures\Signature_1.png" />
+    <Content Include="Files\Signatures\Signature_3.png" />
     <Content Include="Global.asax" />
     <EntityDeploy Include="Models\EPatientMgmt.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
@@ -236,6 +243,7 @@
     <Content Include="Models\EPatientMgmt.edmx.diagram">
       <DependentUpon>EPatientMgmt.edmx</DependentUpon>
     </Content>
+    <Content Include="Files\Reports\Report_2.pdf" />
     <None Include="Properties\PublishProfiles\eMedicalSolution.pubxml" />
     <Content Include="Models\EPatientMgmt.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -308,6 +316,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Files\Cards\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

@@ -205,6 +205,7 @@ namespace EMedicalSolution.Controllers
                                     PatientName = p.FirstName + " " + p.LastName,
                                     DOB = p.DOB,
                                     Title = i.Title,
+                                    MemberID = pc.MemberID,
                                     Status = lfStatus.Title,
                                     filename = pc.FilePath,
                                     ClinicName = off.Title,
@@ -222,6 +223,7 @@ namespace EMedicalSolution.Controllers
                         p.PatientName,
                         p.DOB,
                         p.Title,
+                        p.MemberID,
                         p.ClinicName, 
                         p.Status,
                         p.PhysicianName,
@@ -498,7 +500,7 @@ namespace EMedicalSolution.Controllers
 
         }
         [HttpPost]
-        public ActionResult SavePatientInsuranceType(HttpPostedFileBase filePath, string insuranceTitle, int pId, int typeid)
+        public ActionResult SavePatientInsuranceType(HttpPostedFileBase filePath, string insuranceTitle,string insuranceMemberId, int pId, int typeid)
         {
             bool status = false;
             PatientHistory ph = new PatientHistory();
@@ -513,6 +515,7 @@ namespace EMedicalSolution.Controllers
             string lastName = "";
             insureCard.PatientID = pId;
             insureCard.Title = insuranceTitle;
+            insureCard.MemberID = insuranceMemberId;
             insureCard.Created = DateTime.Now;
             insureCard.CreatedBy = Convert.ToInt32(Session["userID"].ToString());
             using (PatientMgmtEntities db = new PatientMgmtEntities())
