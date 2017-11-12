@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="PatientMgmtModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="PatientMgmtModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Diseases">
           <Key>
             <PropertyRef Name="ID" />
@@ -234,6 +234,20 @@
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Title" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Created" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="Modified" Type="datetime" />
+          <Property Name="ModifiedBy" Type="int" />
+        </EntityType>
+        <EntityType Name="ProgressNotes">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="FilePath" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="HistoryID" Type="int" Nullable="false" />
+          <Property Name="PatientID" Type="int" />
           <Property Name="Created" Type="datetime" Nullable="false" />
           <Property Name="CreatedBy" Type="int" Nullable="false" />
           <Property Name="Modified" Type="datetime" />
@@ -574,6 +588,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_ProgressNotes_PatientHistory">
+          <End Role="PatientHistory" Type="Self.PatientHistory" Multiplicity="1" />
+          <End Role="ProgressNotes" Type="Self.ProgressNotes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PatientHistory">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ProgressNotes">
+              <PropertyRef Name="HistoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProgressNotes_Patients">
+          <End Role="Patients" Type="Self.Patients" Multiplicity="0..1" />
+          <End Role="ProgressNotes" Type="Self.ProgressNotes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Patients">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ProgressNotes">
+              <PropertyRef Name="PatientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Staff_Offices">
           <End Role="Offices" Type="Self.Offices" Multiplicity="1" />
           <End Role="Staff" Type="Self.Staff" Multiplicity="*" />
@@ -628,6 +666,7 @@
           <EntitySet Name="Patients" EntityType="Self.Patients" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PatientSymtoms" EntityType="Self.PatientSymtoms" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProcedureTypes" EntityType="Self.ProcedureTypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProgressNotes" EntityType="Self.ProgressNotes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Staff" EntityType="Self.Staff" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Statuses" EntityType="Self.Statuses" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Symptoms" EntityType="Self.Symptoms" Schema="dbo" store:Type="Tables" />
@@ -725,6 +764,14 @@
             <End Role="Symptoms" EntitySet="Symptoms" />
             <End Role="PatientSymtoms" EntitySet="PatientSymtoms" />
           </AssociationSet>
+          <AssociationSet Name="FK_ProgressNotes_PatientHistory" Association="Self.FK_ProgressNotes_PatientHistory">
+            <End Role="PatientHistory" EntitySet="PatientHistory" />
+            <End Role="ProgressNotes" EntitySet="ProgressNotes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProgressNotes_Patients" Association="Self.FK_ProgressNotes_Patients">
+            <End Role="Patients" EntitySet="Patients" />
+            <End Role="ProgressNotes" EntitySet="ProgressNotes" />
+          </AssociationSet>
           <AssociationSet Name="FK_Staff_Offices" Association="Self.FK_Staff_Offices">
             <End Role="Offices" EntitySet="Offices" />
             <End Role="Staff" EntitySet="Staff" />
@@ -738,7 +785,8 @@
             <End Role="Users" EntitySet="Users" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="PatientMgmtModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -775,6 +823,7 @@
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="FilePath" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="MemberID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="HistoryID" Type="Int32" Nullable="false" />
           <Property Name="PatientID" Type="Int32" />
           <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
@@ -783,7 +832,6 @@
           <Property Name="ModifiedBy" Type="Int32" />
           <NavigationProperty Name="PatientHistory" Relationship="Self.FK_InsuranceCardPictures_PatientHistory" FromRole="InsuranceCardPictures" ToRole="PatientHistory" />
           <NavigationProperty Name="Patient" Relationship="Self.FK_InsuranceCardPictures_Patients" FromRole="InsuranceCardPictures" ToRole="Patients" />
-          <Property Name="MemberID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="InsuranceType">
           <Key>
@@ -907,6 +955,7 @@
           <NavigationProperty Name="PatientProcedures" Relationship="Self.FK_PatientProcedures_PatientHistory" FromRole="PatientHistory" ToRole="PatientProcedures" />
           <NavigationProperty Name="PatientReports" Relationship="Self.FK_PatientReports_PatientHistory" FromRole="PatientHistory" ToRole="PatientReports" />
           <NavigationProperty Name="PatientSymtoms" Relationship="Self.FK_PatientSymtoms_PatientHistory" FromRole="PatientHistory" ToRole="PatientSymtoms" />
+          <NavigationProperty Name="ProgressNotes" Relationship="Self.FK_ProgressNotes_PatientHistory" FromRole="PatientHistory" ToRole="ProgressNotes" />
         </EntityType>
         <EntityType Name="PatientInterferingCondition">
           <Key>
@@ -992,6 +1041,7 @@
           <NavigationProperty Name="PatientHistories" Relationship="Self.FK_PatientHistory_Patients" FromRole="Patients" ToRole="PatientHistory" />
           <NavigationProperty Name="PatientNecessities" Relationship="Self.FK_PatientNecessities_Patients" FromRole="Patients" ToRole="PatientNecessities" />
           <NavigationProperty Name="PatientReports" Relationship="Self.FK_PatientReports_Patients" FromRole="Patients" ToRole="PatientReports" />
+          <NavigationProperty Name="ProgressNotes" Relationship="Self.FK_ProgressNotes_Patients" FromRole="Patients" ToRole="ProgressNotes" />
         </EntityType>
         <EntityType Name="PatientSymtom">
           <Key>
@@ -1020,6 +1070,22 @@
           <Property Name="Modified" Type="DateTime" Precision="3" />
           <Property Name="ModifiedBy" Type="Int32" />
           <NavigationProperty Name="PatientProcedures" Relationship="Self.FK_PatientProcedures_ProcedureTypes" FromRole="ProcedureTypes" ToRole="PatientProcedures" />
+        </EntityType>
+        <EntityType Name="ProgressNote">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="FilePath" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="HistoryID" Type="Int32" Nullable="false" />
+          <Property Name="PatientID" Type="Int32" />
+          <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="Modified" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedBy" Type="Int32" />
+          <NavigationProperty Name="PatientHistory" Relationship="Self.FK_ProgressNotes_PatientHistory" FromRole="ProgressNotes" ToRole="PatientHistory" />
+          <NavigationProperty Name="Patient" Relationship="Self.FK_ProgressNotes_Patients" FromRole="ProgressNotes" ToRole="Patients" />
         </EntityType>
         <EntityType Name="Staff">
           <Key>
@@ -1327,6 +1393,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_ProgressNotes_PatientHistory">
+          <End Role="PatientHistory" Type="Self.PatientHistory" Multiplicity="1" />
+          <End Role="ProgressNotes" Type="Self.ProgressNote" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PatientHistory">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ProgressNotes">
+              <PropertyRef Name="HistoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_PatientNecessities_Patients">
           <End Role="Patients" Type="Self.Patient" Multiplicity="0..1" />
           <End Role="PatientNecessities" Type="Self.PatientNecessity" Multiplicity="*" />
@@ -1359,6 +1437,18 @@
               <PropertyRef Name="ID" />
             </Principal>
             <Dependent Role="PatientReports">
+              <PropertyRef Name="PatientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProgressNotes_Patients">
+          <End Role="Patients" Type="Self.Patient" Multiplicity="0..1" />
+          <End Role="ProgressNotes" Type="Self.ProgressNote" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Patients">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ProgressNotes">
               <PropertyRef Name="PatientID" />
             </Dependent>
           </ReferentialConstraint>
@@ -1417,6 +1507,7 @@
           <EntitySet Name="Patients" EntityType="Self.Patient" />
           <EntitySet Name="PatientSymtoms" EntityType="Self.PatientSymtom" />
           <EntitySet Name="ProcedureTypes" EntityType="Self.ProcedureType" />
+          <EntitySet Name="ProgressNotes" EntityType="Self.ProgressNote" />
           <EntitySet Name="Staffs" EntityType="Self.Staff" />
           <EntitySet Name="Statuses" EntityType="Self.Status" />
           <EntitySet Name="Symptoms" EntityType="Self.Symptom" />
@@ -1502,6 +1593,10 @@
             <End Role="PatientHistory" EntitySet="PatientHistories" />
             <End Role="PatientSymtoms" EntitySet="PatientSymtoms" />
           </AssociationSet>
+          <AssociationSet Name="FK_ProgressNotes_PatientHistory" Association="Self.FK_ProgressNotes_PatientHistory">
+            <End Role="PatientHistory" EntitySet="PatientHistories" />
+            <End Role="ProgressNotes" EntitySet="ProgressNotes" />
+          </AssociationSet>
           <AssociationSet Name="FK_PatientNecessities_Patients" Association="Self.FK_PatientNecessities_Patients">
             <End Role="Patients" EntitySet="Patients" />
             <End Role="PatientNecessities" EntitySet="PatientNecessities" />
@@ -1513,6 +1608,10 @@
           <AssociationSet Name="FK_PatientReports_Patients" Association="Self.FK_PatientReports_Patients">
             <End Role="Patients" EntitySet="Patients" />
             <End Role="PatientReports" EntitySet="PatientReports" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProgressNotes_Patients" Association="Self.FK_ProgressNotes_Patients">
+            <End Role="Patients" EntitySet="Patients" />
+            <End Role="ProgressNotes" EntitySet="ProgressNotes" />
           </AssociationSet>
           <AssociationSet Name="FK_PatientSymtoms_Symptoms" Association="Self.FK_PatientSymtoms_Symptoms">
             <End Role="Symptoms" EntitySet="Symptoms" />
@@ -1561,10 +1660,10 @@
           <EntitySetMapping Name="InsuranceCardPictures">
             <EntityTypeMapping TypeName="PatientMgmtModel.InsuranceCardPicture">
               <MappingFragment StoreEntitySet="InsuranceCardPictures">
-                <ScalarProperty Name="MemberID" ColumnName="MemberID" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Title" ColumnName="Title" />
                 <ScalarProperty Name="FilePath" ColumnName="FilePath" />
+                <ScalarProperty Name="MemberID" ColumnName="MemberID" />
                 <ScalarProperty Name="HistoryID" ColumnName="HistoryID" />
                 <ScalarProperty Name="PatientID" ColumnName="PatientID" />
                 <ScalarProperty Name="Created" ColumnName="Created" />
@@ -1777,6 +1876,21 @@
               <MappingFragment StoreEntitySet="ProcedureTypes">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Modified" ColumnName="Modified" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProgressNotes">
+            <EntityTypeMapping TypeName="PatientMgmtModel.ProgressNote">
+              <MappingFragment StoreEntitySet="ProgressNotes">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="FilePath" ColumnName="FilePath" />
+                <ScalarProperty Name="HistoryID" ColumnName="HistoryID" />
+                <ScalarProperty Name="PatientID" ColumnName="PatientID" />
                 <ScalarProperty Name="Created" ColumnName="Created" />
                 <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
                 <ScalarProperty Name="Modified" ColumnName="Modified" />

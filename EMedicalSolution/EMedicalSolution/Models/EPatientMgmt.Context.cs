@@ -42,6 +42,7 @@ namespace EMedicalSolution.Models
         public virtual DbSet<Patient> Patients { get; set; }
         public virtual DbSet<PatientSymtom> PatientSymtoms { get; set; }
         public virtual DbSet<ProcedureType> ProcedureTypes { get; set; }
+        public virtual DbSet<ProgressNote> ProgressNotes { get; set; }
         public virtual DbSet<Staff> Staffs { get; set; }
         public virtual DbSet<Status> Statuses { get; set; }
         public virtual DbSet<Symptom> Symptoms { get; set; }

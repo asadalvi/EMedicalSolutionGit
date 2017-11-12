@@ -957,5 +957,77 @@ namespace EMedicalSolution.Controllers
 
             return View();
         }
+
+        //progress notes
+        public FileResult DownloadProgrssNoteReport(string fileName)
+        {
+            var filePath = Path.Combine(Server.MapPath("/Files/Notes/"), fileName);
+            return File(filePath, MimeMapping.GetMimeMapping(filePath), fileName);
+        }
+
+        [HttpPost]
+        public ActionResult uploadProgressNote(HttpPostedFileBase[] notePath, string[] notetitle, int pHistoryId)
+        {
+            bool status = false;
+            if (notePath != null)
+            {
+                var allowedExtensions = new[] { ".Jpg", ".png", ".jpg", "jpeg", ".rar", ".zip", ".pdf", ".doc", ".docx", ".xls", ".xlsx" }; //Allowe Extensions
+                int i = -1;
+                foreach (var file in notePath)
+                {
+                    i++;
+                    if (file != null && file.ContentLength > 0)
+                    {
+                        //oTests[i].ReportPath = files[i].ToString(); //getting complete url  
+                        var fileName = Path.GetFileName(file.FileName); //getting only file name(ex-ganesh.jpg)  
+                        var ext = Path.GetExtension(file.FileName); //getting the extension(ex-.jpg)  
+
+                        if (allowedExtensions.Contains(ext)) //check what type of extension  
+                        {
+                            ProgressNote pNote = new ProgressNote();
+                            string name = Path.GetFileNameWithoutExtension(fileName); //getting file name without extension  
+                            using (PatientMgmtEntities db = new PatientMgmtEntities())
+                            {
+                                int id = db.PatientReports.Max(p => (int?)p.ID) ?? 0 + 1;
+                                string myfile = "Notes_" + id + ext; //appending the name with id  
+                                                                      // store the file inside ~/project folder(Img)  
+                                var path = Path.Combine(Server.MapPath("~/Files/Notes"), myfile);
+                                file.SaveAs(path);
+                                pNote.FilePath = path;
+                                pNote.HistoryID = pHistoryId;
+                                pNote.Title = notetitle[i];
+                                pNote.Created = DateTime.Now;
+                                pNote.CreatedBy = Convert.ToInt32(Session["userID"].ToString());
+                                db.ProgressNotes.Add(pNote);
+                                db.SaveChanges();
+                            }
+                        }
+
+                    } //checking file is not empty 
+                } // for loop end
+                status = true;
+            }
+            return Json(status, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        public ActionResult GetProgressNote(int pHistoryId)
+        {
+            //PatientMgmtEntities db = new PatientMgmtEntities();
+            {
+                List<ProgressNote> reports = db.ProgressNotes.Where(h => h.HistoryID == pHistoryId).OrderByDescending(a => a.Created).ToList();
+                return Json(new
+                {
+                    data = reports.Select(p => new
+                    {
+                        p.ID,
+                        p.Title,
+                        p.FilePath,
+                        p.Created
+                    }
+                )
+                }, JsonRequestBehavior.AllowGet);
+            }
+        }
     }
 }

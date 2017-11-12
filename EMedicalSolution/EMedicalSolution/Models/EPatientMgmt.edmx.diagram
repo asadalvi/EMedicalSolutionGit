@@ -4,29 +4,30 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="141a0c249def41a493b4c28a4aa86cff" Name="Diagram1">
-        <EntityTypeShape EntityType="PatientMgmtModel.Disease" Width="1.5" PointX="6" PointY="4.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="PatientMgmtModel.DiseaseType" Width="1.5" PointX="3.75" PointY="5" IsExpanded="true" />
-        <EntityTypeShape EntityType="PatientMgmtModel.InsuranceCardPicture" Width="1.5" PointX="3" PointY="13.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="PatientMgmtModel.InsuranceType" Width="1.5" PointX="3.75" PointY="9.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="PatientMgmtModel.IntakeFormHead" Width="1.5" PointX="6" PointY="20.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="PatientMgmtModel.InterferingCondition" Width="1.5" PointX="9" PointY="6.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="PatientMgmtModel.MedicalNecessity" Width="1.5" PointX="3.75" PointY="18.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="PatientMgmtModel.Office" Width="1.5" PointX="3.75" PointY="21.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="PatientMgmtModel.PatientDiseas" Width="1.5" PointX="8.25" PointY="13.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="PatientMgmtModel.PatientHistory" Width="1.5" PointX="6" PointY="11.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="PatientMgmtModel.PatientInterferingCondition" Width="1.5" PointX="11.25" PointY="13.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="PatientMgmtModel.PatientNecessity" Width="1.5" PointX="8.25" PointY="9.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="PatientMgmtModel.PatientProcedure" Width="1.5" PointX="8.25" PointY="17.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="PatientMgmtModel.PatientReport" Width="1.5" PointX="11.25" PointY="9.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="PatientMgmtModel.Patient" Width="1.5" PointX="0.75" PointY="13.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="PatientMgmtModel.PatientSymtom" Width="1.5" PointX="11.25" PointY="17.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="PatientMgmtModel.ProcedureType" Width="1.5" PointX="6" PointY="25.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="PatientMgmtModel.Staff" Width="1.5" PointX="6" PointY="29.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="PatientMgmtModel.Status" Width="1.5" PointX="3.75" PointY="25.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="PatientMgmtModel.Symptom" Width="1.5" PointX="9" PointY="22.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="PatientMgmtModel.UserRole" Width="1.5" PointX="6" PointY="34.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="PatientMgmtModel.User" Width="1.5" PointX="8.25" PointY="29.75" IsExpanded="true" />
+      <Diagram DiagramId="7ad293d5bc6f4288bfd27c44188ac1fd" Name="Diagram1">
+        <EntityTypeShape EntityType="PatientMgmtModel.Disease" Width="1.5" PointX="6" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="PatientMgmtModel.DiseaseType" Width="1.5" PointX="3.75" PointY="7.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="PatientMgmtModel.InsuranceCardPicture" Width="1.5" PointX="3" PointY="15.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="PatientMgmtModel.InsuranceType" Width="1.5" PointX="3.75" PointY="11.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="PatientMgmtModel.IntakeFormHead" Width="1.5" PointX="6" PointY="22.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="PatientMgmtModel.InterferingCondition" Width="1.5" PointX="9" PointY="8.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="PatientMgmtModel.MedicalNecessity" Width="1.5" PointX="3.75" PointY="20.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="PatientMgmtModel.Office" Width="1.5" PointX="3.75" PointY="23.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="PatientMgmtModel.PatientDiseas" Width="1.5" PointX="8.25" PointY="15.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="PatientMgmtModel.PatientHistory" Width="1.5" PointX="6" PointY="13.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="PatientMgmtModel.PatientInterferingCondition" Width="1.5" PointX="11.25" PointY="15.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="PatientMgmtModel.PatientNecessity" Width="1.5" PointX="8.25" PointY="12" IsExpanded="true" />
+        <EntityTypeShape EntityType="PatientMgmtModel.PatientProcedure" Width="1.5" PointX="8.25" PointY="19.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="PatientMgmtModel.PatientReport" Width="1.5" PointX="11.25" PointY="11.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="PatientMgmtModel.Patient" Width="1.5" PointX="0.75" PointY="15.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="PatientMgmtModel.PatientSymtom" Width="1.5" PointX="11.25" PointY="19.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="PatientMgmtModel.ProcedureType" Width="1.5" PointX="6" PointY="27.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="PatientMgmtModel.ProgressNote" Width="1.5" PointX="14.25" PointY="15.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="PatientMgmtModel.Staff" Width="1.5" PointX="6" PointY="31.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="PatientMgmtModel.Status" Width="1.5" PointX="3.75" PointY="28" IsExpanded="true" />
+        <EntityTypeShape EntityType="PatientMgmtModel.Symptom" Width="1.5" PointX="9" PointY="24.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="PatientMgmtModel.UserRole" Width="1.5" PointX="6" PointY="36.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PatientMgmtModel.User" Width="1.5" PointX="8.25" PointY="32" IsExpanded="true" />
         <AssociationConnector Association="PatientMgmtModel.FK_Diseases_DiseaseTypes" ManuallyRouted="false" />
         <AssociationConnector Association="PatientMgmtModel.FK_PatientDiseases_Diseases" ManuallyRouted="false" />
         <AssociationConnector Association="PatientMgmtModel.FK_InsuranceCardPictures_PatientHistory" ManuallyRouted="false" />
@@ -47,9 +48,11 @@
         <AssociationConnector Association="PatientMgmtModel.FK_PatientProcedures_PatientHistory" ManuallyRouted="false" />
         <AssociationConnector Association="PatientMgmtModel.FK_PatientReports_PatientHistory" ManuallyRouted="false" />
         <AssociationConnector Association="PatientMgmtModel.FK_PatientSymtoms_PatientHistory" ManuallyRouted="false" />
+        <AssociationConnector Association="PatientMgmtModel.FK_ProgressNotes_PatientHistory" ManuallyRouted="false" />
         <AssociationConnector Association="PatientMgmtModel.FK_PatientNecessities_Patients" ManuallyRouted="false" />
         <AssociationConnector Association="PatientMgmtModel.FK_PatientProcedures_ProcedureTypes" ManuallyRouted="false" />
         <AssociationConnector Association="PatientMgmtModel.FK_PatientReports_Patients" ManuallyRouted="false" />
+        <AssociationConnector Association="PatientMgmtModel.FK_ProgressNotes_Patients" ManuallyRouted="false" />
         <AssociationConnector Association="PatientMgmtModel.FK_PatientSymtoms_Symptoms" ManuallyRouted="false" />
         <AssociationConnector Association="PatientMgmtModel.FK_Users_Staff" ManuallyRouted="false" />
         <AssociationConnector Association="PatientMgmtModel.FK_Users_Users" ManuallyRouted="false" />

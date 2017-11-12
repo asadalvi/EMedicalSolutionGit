@@ -258,6 +258,26 @@
                         $(this).parent().remove();
                         x--;
                     })
+                    //for notes
+
+                    var n_max_fields = 10; //maximum input boxes allowed
+                    var n_wrapper = $(".n_input_fields_wrap"); //Fields wrapper
+                    var n_add_button = $(".n_add_field_button"); //Add button ID
+
+                    var x = 0; //initlal text box count
+                    $(n_add_button).click(function (e) { //on add input button click
+                        e.preventDefault();
+                        if (x < n_max_fields) { //max input box allowed
+                            x++; //text box increment
+                            $(n_wrapper).append('<div><input type="file" class="js-note-files" name="notePath" id="[' + x + '].notePath" /><input type="text" class="js-note-title" name="notetitle" id="[' + x + '].notetitle" /><a href="#" class="remove_field">Remove</a></div>'); //add input box
+                        }
+                    });
+
+                    $(n_wrapper).on("click", ".remove_field", function (e) { //user click on remove text
+                        e.preventDefault();
+                        $(this).parent().remove();
+                        x--;
+                    })
                     //------------------- END of multiple reports ------------------
                 });
                 
@@ -367,6 +387,54 @@
                         });
                     } else { $(document).find(".saveError").css("display", "block"); }
                 });
+
+                //progress note
+                $('#addProgressNote').click(function () {
+                    $formData = new FormData();
+                    var pHistoryId = $("#pHistoryId").val();
+                    var selectFileCheckedn = false;
+                    var selectTextCheckedn = false;
+                    $('.js-note-files').each(function () {
+                        console.log("id", this.id);
+                        var $file = document.getElementById(this.id);
+                        console.log($file, "file path", $file.files.length);
+
+                        if ($file.files.length > 0) {
+                            for (var i = 0; i < $file.files.length; i++) {
+                                $formData.append('notePath', $file.files[i]);
+                                selectFileCheckedn = true;
+                            }
+                        }
+                    });
+                    $(".js-note-title").each(function (x, y) {
+                        $formData.append($(y).attr("name"), $(y).val());
+                        selectTextCheckedn = true
+                    });
+                    if (selectFileCheckedn && selectTextCheckedn) {
+                        $(".ajax_loader_save").css("display", "block");
+                        $(document).find(".saveError").css("display", "none");
+                        $.ajax({
+                            url: '/Patients/uploadProgressNote?pHistoryId=' + pHistoryId,
+                            type: 'POST',
+                            data: $formData,
+                            dataType: 'json',
+                            contentType: false,
+                            enctype: 'multipart/form-data',
+                            processData: false,
+                            success: function ($data) {
+                                $(".ajax_loader_save").css("display", "none");
+                                setTimeout(function () {
+                                    $(document).find(".saveError").css("display", "none");
+                                    $(".sw-btn-next").removeClass("disabled");
+                                    $(".sw-btn-next").css("pointer-events", "auto");
+                                }, 10);
+                                oNotesTable.ajax.reload();
+                            }
+                        });
+                    } else { $(document).find(".saveError").css("display", "block"); }
+                });
+                //upload prog end
+
                 $(document).on('click', '.sw-btn-prev', function (e) {
                     $(document).find(".saveError").css("display", "none");
                     setTimeout(function () {
