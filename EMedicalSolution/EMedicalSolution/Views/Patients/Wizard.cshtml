@@ -53,7 +53,7 @@
                 <li>
                     <a href="#step-2">
                         Step 2<br />
-                        <small>Choice of Procedures</small>
+                        <small>Procedures type</small>
                     </a>
                 </li>
                 <li>
@@ -65,7 +65,7 @@
                 <li>
                     <a href="#step-4">
                         Step 4<br />
-                        <small>Upload Test Report</small>
+                        <small>Upload Report</small>
                     </a>
                 </li>
                 <li>
@@ -83,10 +83,15 @@
                 <li>
                     <a href="#step-7">
                         Step 7<br />
+                        <small>Progress Note</small>
+                    </a>
+                </li>
+                <li>
+                    <a href="#step-8">
+                        Step 8<br />
                         <small>Results interpretation</small>
                     </a>
                 </li>
-
             </ul>
 
             <div>
@@ -109,8 +114,11 @@
                     @Html.Partial("orderForm") 
                 </div>
                 <div id="step-7" class="pre-scrollable">
+                    @Html.Partial("progressNote") 
+                </div>         
+                <div id="step-8" class="pre-scrollable">
                     @Html.Partial("resultInterpretation") 
-                </div>              
+                </div>      
                 </div>
 
                 </div>

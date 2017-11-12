@@ -313,6 +313,7 @@
     </Content>
     <Content Include="Web1.Debug.config" />
     <Content Include="Web1.Release.config" />
+    <Content Include="Views\Patients\progressNote.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
