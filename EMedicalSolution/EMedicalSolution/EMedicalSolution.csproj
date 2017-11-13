@@ -203,6 +203,9 @@
     <Compile Include="Models\ProcedureType.cs">
       <DependentUpon>EPatientMgmt.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ProgressNote.cs">
+      <DependentUpon>EPatientMgmt.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Staff.cs">
       <DependentUpon>EPatientMgmt.tt</DependentUpon>
     </Compile>
@@ -228,7 +231,15 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Content Include="favicon.ico" />
+    <Content Include="Files\Reports\Report_1.png" />
+    <Content Include="Files\Reports\Report_3.png" />
+    <Content Include="Files\Reports\Report_4.jpg" />
+    <Content Include="Files\Reports\Report_5.jpg" />
+    <Content Include="Files\Reports\Report_6.jpg" />
+    <Content Include="Files\Signatures\Signature_1.png" />
+    <Content Include="Files\Signatures\Signature_3.png" />
     <Content Include="Global.asax" />
+    <Content Include="Files\Reports\Report_2.pdf" />
     <EntityDeploy Include="Models\EPatientMgmt.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>EPatientMgmt.Designer.cs</LastGenOutput>
@@ -305,9 +316,12 @@
     </Content>
     <Content Include="Web1.Debug.config" />
     <Content Include="Web1.Release.config" />
+    <Content Include="Views\Patients\progressNote.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Files\Cards\" />
+    <Folder Include="Files\Notes\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

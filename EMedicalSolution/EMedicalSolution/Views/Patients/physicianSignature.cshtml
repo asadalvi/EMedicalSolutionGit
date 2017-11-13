@@ -20,8 +20,8 @@
     $(document).ready(function () {
         $(document).find("#signaturePasswordError").css("display", "none");
         $('#click_approveButton').removeAttr("href");
-        $("#physcianApproalDataText").val($(document).find("#physicianRemarksValue").val());
-        physicianRemarks = $(document).find("#physicianRemarksValue").val();
+        $("#physcianApproalDataText").val($(document).find(".physicianRemarksValue").val());
+        physicianRemarks = $(document).find(".physicianRemarksValue").val();
     });
                 $(document).find('#approvedPhysicianForm').on('click', function (e) {
                     var pHistoryId = $("#pHistoryId").val();

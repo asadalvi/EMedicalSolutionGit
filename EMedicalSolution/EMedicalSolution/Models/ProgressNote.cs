@@ -12,12 +12,11 @@ namespace EMedicalSolution.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class InsuranceCardPicture
+    public partial class ProgressNote
     {
         public int ID { get; set; }
         public string Title { get; set; }
         public string FilePath { get; set; }
-        public string MemberID { get; set; }
         public int HistoryID { get; set; }
         public Nullable<int> PatientID { get; set; }
         public System.DateTime Created { get; set; }

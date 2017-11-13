@@ -1,0 +1,88 @@
+﻿<h3>Upload Reports</h3>
+@*@using (Html.BeginForm("uploadProgressNote", "Patients", FormMethod.Post, new { id = "UploadprogNote" }))
+{*@
+    <div class="w3-row w3-margin-bottom">
+        <div class="w3-row">
+            <div class="n_input_fields_wrap">
+                <input type="file" class="js-note-files" name="notePath" id="[0].notePath" />
+                <input type="text" class="js-note-title" name="notetitle" id="[0].notetitle" />
+                <button class="n_add_field_button w3-btn w3-cyan">+ Add More</button>
+            </div>
+            <div class="ajax_loader_save" style="display:none;margin-top: -110px; margin-left: 300px;"><img src="~/Images/ajax_loader.png" /></div>
+            <p id="uploadNoteError" class="saveError" style="font-size:large;color:red;display:none">Please upload at least one progress note</p>
+            <div class="w3-row w3-margin-top">
+                <div class="w3-third" style="float: none; margin: auto">
+                    <button class="w3-btn-block w3-green" id="addProgressNote" type="button">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">Uploaded Progress Note</div>
+        <input type="hidden" value="0" id="next_button_toggle_6" />
+        <table class="table" id="notestDataTable" style="width:100%">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Download</th>
+                    <th>Created</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+@*}*@
+ 
+
+<style>
+    .n_input_fields_wrap input {
+        display: inline;
+        margin: 0 8px !important;
+        padding: 6px !important;
+    }
+</style>
+
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<script src="~/Scripts/jquery.dataTables.min.js"></script>
+<script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+<script src="~/Scripts/date.format.js"></script>
+
+<script>
+    //$(document).ready(function () {
+    var pHistoryId = $("#pHistoryId").val();
+    var oNotesTable;
+        if (pHistoryId !== undefined && pHistoryId !== null && pHistoryId !== "") {
+            oNotesTable = $("#notestDataTable").DataTable({
+                "ajax": {
+                    "url": '/Patients/GetProgressNote/?pHistoryId=' + pHistoryId,
+                    "type": 'get',
+                    "datatype": "json"
+                },
+                "columns": [
+                    { "data": "Title", "autoWidth": true },
+                    {
+                        "data": "FilePath", "render": function (data) {
+                            var filename = data.split('\\').pop();
+                            return '<span class="fa fa-download">  <a  href="/Patients/DownloadProgrssNoteReport/?fileName=' + filename + '">  Download<a></span>';
+                        }
+                    },
+                    {
+                        "data": "Created", "autoWidth": true, "render": function (data) {
+                            if (data !== undefined) {
+                                $("#next_button_toggle_6").val("1");
+                            } else {
+                                $("#next_button_toggle_6").val("0");
+                            }
+                            var date = new Date(parseInt(data.substr(6)));
+                            var sdate = date.format("mmm d, yyyy");
+                            return sdate;
+                        }
+                    }
+                ]
+            });
+        }
+    //});
+
+</script>

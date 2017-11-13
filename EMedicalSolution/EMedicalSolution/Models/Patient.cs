@@ -21,6 +21,7 @@ namespace EMedicalSolution.Models
             this.PatientHistories = new HashSet<PatientHistory>();
             this.PatientNecessities = new HashSet<PatientNecessity>();
             this.PatientReports = new HashSet<PatientReport>();
+            this.ProgressNotes = new HashSet<ProgressNote>();
         }
     
         public int ID { get; set; }
@@ -45,5 +46,7 @@ namespace EMedicalSolution.Models
         public virtual ICollection<PatientNecessity> PatientNecessities { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PatientReport> PatientReports { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ProgressNote> ProgressNotes { get; set; }
     }
 }

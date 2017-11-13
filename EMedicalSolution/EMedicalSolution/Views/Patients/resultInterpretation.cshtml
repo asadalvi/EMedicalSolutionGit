@@ -1,4 +1,4 @@
-﻿<h2>Step 7 Content</h2>
+﻿<h2>Step 8 Content</h2>
 Result Interpretation by Specialist
 @using (Html.BeginForm("resultInterpretation", "Patients", FormMethod.Post, new { id = "resultInterpretation" }))
 {
@@ -12,12 +12,26 @@ Result Interpretation by Specialist
                     <p>Approve by Dr. @Model.StaffNameVM.SpecialistName </p>
                     <p><strong>Remarks:</strong> @Model.StaffNameVM.SpecialistRemarks</p>
                 </div>
+                <div class="update-specialist-remarks hidden" style="height:220px;">
+                    <label>Specialist Remarks:</label><br />
+                    <textarea rows="4" cols="56" type="text" name="specialistRemarks" class="specialistRemarksValue"> </textarea>
+                    <div class="ajax_loader_save" style="display:none;margin-top: -180px; margin-left: 300px;"><img src="~/Images/ajax_loader.png" /></div>
+                    <p id="specialistRemarksError" class="saveError" style="font-size:large;color:red;display:none">Please enter remarks.</p>
+
+                    <div class="w3-row">
+                        <div class="w3-twothird w3-right">
+                            <button class="w3-btn w3-orange" id="specialist_approveButton_update" type="button">Approve</button>
+                        </div>
+                    </div>
+                </div>
+                <a style="cursor:pointer;font-size:large;text-decoration:underline" id="update_specialist_resean_btn">Update Remarks</a>
+
             }
             else {
                 if (Session["role"] != null && Session["role"].ToString() == "3") //3 for specialist
                 {
                     <label>Specialist Remarks:</label><br />
-                    <textarea rows="4" cols="56" type="text" name="specialistRemarks" id="specialistRemarksValue"> </textarea>
+                    <textarea rows="4" cols="56" type="text" name="specialistRemarks" class="specialistRemarksValue"> </textarea>
                     <div class="ajax_loader_save" style="display:none;margin-top: -180px; margin-left: 300px;"><img src="~/Images/ajax_loader.png" /></div>
                     <p id="specialistRemarksError" class="saveError" style="font-size:large;color:red;display:none">Please enter remarks.</p>
 
@@ -58,7 +72,8 @@ Result Interpretation by Specialist
     $(document).find('#saveSpecialistData').on('click', function (e) {
         $(document).find(".saveError").css("display", "none");
         var pHistoryId = $("#pHistoryId").val();
-        var specialistRemarks = $("#specialistRemarksValue").val();
+        var specialistRemarks = $(".specialistRemarksValue").val();
+        console.log(specialistRemarks,"the val is", pHistoryId)
         if (specialistRemarks !== undefined && specialistRemarks !== null && specialistRemarks !== "") {
             $(".ajax_loader_save").css("display", "block");
             $.ajax({
@@ -79,5 +94,46 @@ Result Interpretation by Specialist
                 }
             })
         } else { $(document).find(".saveError").css("display", "block"); }
+    });
+    //update remarks
+    $('#update_specialist_resean_btn').on('click', function (e) {
+        $(document).find(".update-specialist-remarks").removeClass("hidden");
+        //$(document).find(".physicianRemarksValue").html()
+
+    });
+
+    $('#specialist_approveButton_update').on('click', function (e) {
+        var val_upd = $(document).find(".physicianRemarksValue").val();
+        if (val_upd !== undefined && val_upd !== null && val_upd !== "") {
+            $(document).find("#update_specialist_resean_btn").css("display", "block");
+            //edit specialist remarks
+            $(document).find(".saveError").css("display", "none");
+        var pHistoryId = $("#pHistoryId").val();
+        var specialistRemarks = $(".specialistRemarksValue").val();
+        if (specialistRemarks !== undefined && specialistRemarks !== null && specialistRemarks !== "") {
+            $(".ajax_loader_save").css("display", "block");
+            $.ajax({
+                type: "POST",
+                url: "/Patients/resultInterpretation/?pHistoryId=" + pHistoryId + "&specialistRemarks=" + specialistRemarks,
+                // data: $('#' + parentForm).serialize(),
+                success: function (data) {
+                    console.log(data);
+                    if (data) {
+                        // alert("success");
+                        $(".ajax_loader_save").css("display", "none");
+                        $(document).find(".saveError").css("display", "none");
+                        $(document).find("#saveSpecialistData").css("display", "none");
+                        $(document).find(".update-specialist-remarks").addClass("hidden");
+                        $("#ApprovedbySpecialist").css('display', 'block');
+                        $("#specialistRemarksTextBox").css('display', 'none');
+                    }
+                }
+            })
+        } else { $(document).find(".saveError").css("display", "block"); }
+
+        } else {
+            $(document).find("#update_specialist_resean_btn").css("display", "none");
+            $('#specialist_approveButton_update').removeAttr("href");
+        }
     });
 </script>

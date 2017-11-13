@@ -12,6 +12,8 @@ using HiQPdf;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data.SqlClient;
+using System.Net.Mail;
+using System.Net.Mime;
 
 namespace EMedicalSolution.Controllers
 {
@@ -205,6 +207,7 @@ namespace EMedicalSolution.Controllers
                                     PatientName = p.FirstName + " " + p.LastName,
                                     DOB = p.DOB,
                                     Title = i.Title,
+                                    MemberID = pc.MemberID,
                                     Status = lfStatus.Title,
                                     filename = pc.FilePath,
                                     ClinicName = off.Title,
@@ -222,6 +225,7 @@ namespace EMedicalSolution.Controllers
                         p.PatientName,
                         p.DOB,
                         p.Title,
+                        p.MemberID,
                         p.ClinicName, 
                         p.Status,
                         p.PhysicianName,
@@ -498,7 +502,7 @@ namespace EMedicalSolution.Controllers
 
         }
         [HttpPost]
-        public ActionResult SavePatientInsuranceType(HttpPostedFileBase filePath, string insuranceTitle, int pId, int typeid)
+        public ActionResult SavePatientInsuranceType(HttpPostedFileBase filePath, string insuranceTitle,string insuranceMemberId, int pId, int typeid)
         {
             bool status = false;
             PatientHistory ph = new PatientHistory();
@@ -513,6 +517,7 @@ namespace EMedicalSolution.Controllers
             string lastName = "";
             insureCard.PatientID = pId;
             insureCard.Title = insuranceTitle;
+            insureCard.MemberID = insuranceMemberId;
             insureCard.Created = DateTime.Now;
             insureCard.CreatedBy = Convert.ToInt32(Session["userID"].ToString());
             using (PatientMgmtEntities db = new PatientMgmtEntities())
@@ -855,6 +860,45 @@ namespace EMedicalSolution.Controllers
                             pHistory.SpecialistID = Convert.ToInt32(Session["userID"].ToString());
                             pHistory.StatusID = 6; //Approved by Specialist
                             db.SaveChanges();
+
+                            string htmlToConvert = RenderViewAsString("orderBill", pHistoryId);
+
+                            // the base URL to resolve relative images and css
+                            String thisPageUrl = this.ControllerContext.HttpContext.Request.Url.AbsoluteUri;
+                            String baseUrl = thisPageUrl.Substring(0, thisPageUrl.Length - "Patients/ConvertPatientToPdf".Length);
+
+                            // instantiate the HiQPdf HTML to PDF converter
+                            HtmlToPdf htmlToPdfConverter = new HtmlToPdf();
+
+                            // render the HTML code as PDF in memory
+                            byte[] pdfBuffer = htmlToPdfConverter.ConvertHtmlToMemory(htmlToConvert, baseUrl);
+
+                            // send the PDF file to browser
+                            // FileResult fileResult = new FileContentResult(pdfBuffer, "application/pdf");
+                            // fileResult.FileDownloadName = "orderForm.pdf";
+                            //return fileResult;
+                            Stream stream = new MemoryStream(pdfBuffer);
+                            ContentType ct = new ContentType(MediaTypeNames.Application.Pdf);
+                            var attachmnt = new Attachment(stream, ct);
+                            attachmnt.ContentType.MediaType = MediaTypeNames.Application.Pdf;
+                            attachmnt.Name = "superbill.pdf";
+                            MailMessage mail = new MailMessage();
+                            SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com");
+                            mail.From = new MailAddress("testmailnaveed@gmail.com");
+                            mail.To.Add("naveed.shah194@gmail.com");
+                            mail.Subject = "Test Mail - 1";
+                            mail.Body = "mail with attachment";
+
+                            //System.Net.Mail.Attachment attachment;
+                            //attachment = new System.Net.Mail.Attachment("G:\\ocr_test\\README.TXT");
+                            //mail.Attachments.Add(attachment);
+                            mail.Attachments.Add(attachmnt);
+                            SmtpServer.Port = 587;
+                            SmtpServer.Credentials = new System.Net.NetworkCredential("testmailnaveed@gmail.com", "naveed1234");
+                            SmtpServer.EnableSsl = true;
+
+                            SmtpServer.Send(mail);
+
                         }
                         status = true;
                     }
@@ -912,6 +956,78 @@ namespace EMedicalSolution.Controllers
             Response.End();
 
             return View();
+        }
+
+        //progress notes
+        public FileResult DownloadProgrssNoteReport(string fileName)
+        {
+            var filePath = Path.Combine(Server.MapPath("/Files/Notes/"), fileName);
+            return File(filePath, MimeMapping.GetMimeMapping(filePath), fileName);
+        }
+
+        [HttpPost]
+        public ActionResult uploadProgressNote(HttpPostedFileBase[] notePath, string[] notetitle, int pHistoryId)
+        {
+            bool status = false;
+            if (notePath != null)
+            {
+                var allowedExtensions = new[] { ".Jpg", ".png", ".jpg", "jpeg", ".rar", ".zip", ".pdf", ".doc", ".docx", ".xls", ".xlsx" }; //Allowe Extensions
+                int i = -1;
+                foreach (var file in notePath)
+                {
+                    i++;
+                    if (file != null && file.ContentLength > 0)
+                    {
+                        //oTests[i].ReportPath = files[i].ToString(); //getting complete url  
+                        var fileName = Path.GetFileName(file.FileName); //getting only file name(ex-ganesh.jpg)  
+                        var ext = Path.GetExtension(file.FileName); //getting the extension(ex-.jpg)  
+
+                        if (allowedExtensions.Contains(ext)) //check what type of extension  
+                        {
+                            ProgressNote pNote = new ProgressNote();
+                            string name = Path.GetFileNameWithoutExtension(fileName); //getting file name without extension  
+                            using (PatientMgmtEntities db = new PatientMgmtEntities())
+                            {
+                                int id = db.PatientReports.Max(p => (int?)p.ID) ?? 0 + 1;
+                                string myfile = "Notes_" + id + ext; //appending the name with id  
+                                                                      // store the file inside ~/project folder(Img)  
+                                var path = Path.Combine(Server.MapPath("~/Files/Notes"), myfile);
+                                file.SaveAs(path);
+                                pNote.FilePath = path;
+                                pNote.HistoryID = pHistoryId;
+                                pNote.Title = notetitle[i];
+                                pNote.Created = DateTime.Now;
+                                pNote.CreatedBy = Convert.ToInt32(Session["userID"].ToString());
+                                db.ProgressNotes.Add(pNote);
+                                db.SaveChanges();
+                            }
+                        }
+
+                    } //checking file is not empty 
+                } // for loop end
+                status = true;
+            }
+            return Json(status, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        public ActionResult GetProgressNote(int pHistoryId)
+        {
+            //PatientMgmtEntities db = new PatientMgmtEntities();
+            {
+                List<ProgressNote> reports = db.ProgressNotes.Where(h => h.HistoryID == pHistoryId).OrderByDescending(a => a.Created).ToList();
+                return Json(new
+                {
+                    data = reports.Select(p => new
+                    {
+                        p.ID,
+                        p.Title,
+                        p.FilePath,
+                        p.Created
+                    }
+                )
+                }, JsonRequestBehavior.AllowGet);
+            }
         }
     }
 }

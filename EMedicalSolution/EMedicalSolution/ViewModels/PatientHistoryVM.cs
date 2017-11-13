@@ -11,6 +11,7 @@ namespace EMedicalSolution.ViewModels
         public string PatientName { get; set; }
         public DateTime DOB { get; set; }
         public string Title { get; set; }
+        public string MemberID { get; set; }
         public string filename { get; set; }
         public string ClinicName { get; set; }
         public string PhysicianName { get; set; }
