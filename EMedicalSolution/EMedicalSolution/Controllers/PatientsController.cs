@@ -833,7 +833,7 @@ namespace EMedicalSolution.Controllers
                     }
                 }
             }
-            return new JsonResult { Data = new { status = status, namePhyscian = namePhyscian } };
+            return new JsonResult { Data = new { status = status, namePhyscian = namePhyscian, physicianRemarks = physicianRemarks } };
             // return Json(status, JsonRequestBehavior.AllowGet);
         }
 

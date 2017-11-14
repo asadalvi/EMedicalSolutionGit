@@ -15,7 +15,7 @@
     <div id="physicianRemarksTextBox">
         @if (Model != null && Model.PatientHistoryVM11 != null && Model.PatientHistoryVM11.isApprovedByPhysician != null && Model.PatientHistoryVM11.isApprovedByPhysician == true && Model.StaffNameVM != null && Model.StaffNameVM.PhycisianName != null)
         {
-
+            <input type="hidden" id="p_loadedValue" value="@Model.StaffNameVM.PhycisianName" />
             pType = "1";
             <input type="hidden" value="@pType" id="next_button_toggle_5" />
 
@@ -23,19 +23,7 @@
                 <h3>Physician Approval</h3>
                 <p>Approve by Dr. @Model.StaffNameVM.PhycisianName </p>
                 <p><strong>Reason:</strong> @Model.StaffNameVM.PhysicianRemarks</p>
-                 </div>
-            <div class="update-physician-remarks hidden" style="height:220px;">
-                <label>Physician Remarks:</label><br />
-                <textarea rows="4" cols="56" name="physicianRemarks" class="physicianRemarksValue"> </textarea><br />
-                <p class="saveError" style="font-size:large;color:red;display:none">Please enter about the patient</p>
-                <div class="w3-row">
-                    <div class="w3-twothird w3-right">
-                        <a class="popup w3-btn w3-orange" id="click_approveButton_update">Update</a>
-                    </div>
-                </div>
-            </div>
-            <a style="cursor:pointer;font-size:large;text-decoration:underline" id="update_physician_resean_btn">Update Reason</a>
-
+                 </div>            
         }
         else {
             if (Session["role"] != null && Session["role"].ToString() == "2") //2 for specialist
@@ -57,14 +45,34 @@
     </div>
     if (Session["role"] != null && Session["Name"] != null && Session["role"].ToString() == "2")  //Physician id 2
     {
-        <div class="w3-panel w3-hover-blue w3-green w3-round-xxlarge" id="Approvedbyphysician" style="display:none">
-            <h3>Success</h3>
-            <p>Approve by Dr. @Session["Name"].ToString() </p>
-        </div>
-    }
+        <div class="w3-panel w3-hover-blue w3-light-blue w3-round-xxlarge" id="Approvedbyphysician" style="display:none">
+            <h3>Physician Approval</h3>
+            <p>Approve by Dr. <span id="Approvedbyphysician_dr"></span> </p>
+            <p><strong>Reason:</strong><span id="Approvedbyphysician_remarks"></span></p>
 
+        </div>
+
+    <div class="update-physician-remarks hidden" style="height:220px;">
+        <label>Physician Remarks:</label><br />
+        <textarea rows="4" cols="56" name="physicianRemarks" class="physicianRemarksValue"> </textarea><br />
+        <p class="saveError" style="font-size:large;color:red;display:none">Please enter about the patient</p>
+        <div class="w3-row">
+            <div class="w3-twothird w3-right">
+                <a class="popup w3-btn w3-orange" id="click_approveButton_update">Update</a>
+            </div>
+        </div>
+    </div>
+    <div id="update_physician_resean_btn" style="display:none">
+        <a style="cursor:pointer;font-size:large;text-decoration:underline;">Update Reason</a>
+    </div>
+    }
 }
 <script>
+    $(document).ready(function () {
+        if($("#p_loadedValue").val() !== undefined){
+            $("#update_physician_resean_btn").css('display', 'block');
+        }
+    });
 
     $('#PhysicianApproval').on('click', 'a.popup', function (e) {
         e.preventDefault();
@@ -76,6 +84,7 @@
     $('#click_approveButton').on('click', function (e) {
         var val = $(document).find(".physicianRemarksValue").val();
         if (val !== undefined && val !== null && val !== "") {
+            $(document).find("#update_physician_resean_btn").css("display", "block");
             $(document).find(".saveError").css("display", "none");
             $('#click_approveButton').attr("href", "/Patients/physicianSignature");
 
@@ -96,6 +105,7 @@
         var val_upd = $(document).find(".physicianRemarksValue").val();
         if (val_upd !== undefined && val_upd !== null && val_upd !== "") {
             $(document).find("#update_physician_resean_btn").css("display", "block");
+            $(document).find(".saveError").css("display", "none");
             $('#click_approveButton_update').attr("href", "/Patients/physicianSignature");
 
         } else {

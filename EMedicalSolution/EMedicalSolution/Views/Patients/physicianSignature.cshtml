@@ -44,9 +44,12 @@
                                         success: function (Data) {
                                             if (Data.status) {
                                                 alert("success");
-                                                $("#Approvedbyphysician").css('display', 'block');
-                                                $("#Approvedbyphysician").text("Approve by " + Data.namePhyscian)
+                                                $("#Approvedbyphysician").css('display', 'block');                                                
+                                                $("#Approvedbyphysician_dr").text(Data.namePhyscian)
+                                                $("#Approvedbyphysician_remarks").text(Data.physicianRemarks)
                                                 $("#physicianRemarksTextBox").css('display', 'none');
+                                                $(document).find(".update-physician-remarks").addClass("hidden");
+                                                $(document).find("#update_physician_resean_btn").css('display', 'block');
                                                 setTimeout(function () {
                                                     $(".sw-btn-next").removeClass("disabled");
                                                     $(".sw-btn-next").css("pointer-events", "auto");
