@@ -896,7 +896,6 @@ namespace EMedicalSolution.Controllers
                             SmtpServer.Port = 587;
                             SmtpServer.Credentials = new System.Net.NetworkCredential("testmailnaveed@gmail.com", "naveed1234");
                             SmtpServer.EnableSsl = true;
-
                             SmtpServer.Send(mail);
 
                         }
