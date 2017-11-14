@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="emedical321_PatientMgmtModelStoreContainer" CdmEntityContainer="PatientMgmtEntities">
+  <EntityContainerMapping StorageEntityContainer="PatientMgmtModelStoreContainer" CdmEntityContainer="PatientMgmtEntities">
     <EntitySetMapping Name="Diseases">
-      <EntityTypeMapping TypeName="emedical321_PatientMgmtModel.Disease">
+      <EntityTypeMapping TypeName="PatientMgmtModel.Disease">
         <MappingFragment StoreEntitySet="Diseases">
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="Title" ColumnName="Title" />
@@ -15,7 +15,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="DiseaseTypes">
-      <EntityTypeMapping TypeName="emedical321_PatientMgmtModel.DiseaseType">
+      <EntityTypeMapping TypeName="PatientMgmtModel.DiseaseType">
         <MappingFragment StoreEntitySet="DiseaseTypes">
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="Title" ColumnName="Title" />
@@ -27,11 +27,12 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="InsuranceCardPictures">
-      <EntityTypeMapping TypeName="emedical321_PatientMgmtModel.InsuranceCardPicture">
+      <EntityTypeMapping TypeName="PatientMgmtModel.InsuranceCardPicture">
         <MappingFragment StoreEntitySet="InsuranceCardPictures">
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="Title" ColumnName="Title" />
           <ScalarProperty Name="FilePath" ColumnName="FilePath" />
+          <ScalarProperty Name="MemberID" ColumnName="MemberID" />
           <ScalarProperty Name="HistoryID" ColumnName="HistoryID" />
           <ScalarProperty Name="PatientID" ColumnName="PatientID" />
           <ScalarProperty Name="Created" ColumnName="Created" />
@@ -42,7 +43,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="InsuranceTypes">
-      <EntityTypeMapping TypeName="emedical321_PatientMgmtModel.InsuranceType">
+      <EntityTypeMapping TypeName="PatientMgmtModel.InsuranceType">
         <MappingFragment StoreEntitySet="InsuranceTypes">
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="Title" ColumnName="Title" />
@@ -54,7 +55,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="IntakeFormHeads">
-      <EntityTypeMapping TypeName="emedical321_PatientMgmtModel.IntakeFormHead">
+      <EntityTypeMapping TypeName="PatientMgmtModel.IntakeFormHead">
         <MappingFragment StoreEntitySet="IntakeFormHead">
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="HistoryID" ColumnName="HistoryID" />
@@ -69,7 +70,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="InterferingConditions">
-      <EntityTypeMapping TypeName="emedical321_PatientMgmtModel.InterferingCondition">
+      <EntityTypeMapping TypeName="PatientMgmtModel.InterferingCondition">
         <MappingFragment StoreEntitySet="InterferingConditions">
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="Title" ColumnName="Title" />
@@ -81,7 +82,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="MedicalNecessities">
-      <EntityTypeMapping TypeName="emedical321_PatientMgmtModel.MedicalNecessity">
+      <EntityTypeMapping TypeName="PatientMgmtModel.MedicalNecessity">
         <MappingFragment StoreEntitySet="MedicalNecessities">
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="ICD10Code" ColumnName="ICD10Code" />
@@ -94,7 +95,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Offices">
-      <EntityTypeMapping TypeName="emedical321_PatientMgmtModel.Office">
+      <EntityTypeMapping TypeName="PatientMgmtModel.Office">
         <MappingFragment StoreEntitySet="Offices">
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="Title" ColumnName="Title" />
@@ -110,7 +111,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="PatientDiseases">
-      <EntityTypeMapping TypeName="emedical321_PatientMgmtModel.PatientDiseas">
+      <EntityTypeMapping TypeName="PatientMgmtModel.PatientDiseas">
         <MappingFragment StoreEntitySet="PatientDiseases">
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="HistoryID" ColumnName="HistoryID" />
@@ -124,7 +125,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="PatientHistories">
-      <EntityTypeMapping TypeName="emedical321_PatientMgmtModel.PatientHistory">
+      <EntityTypeMapping TypeName="PatientMgmtModel.PatientHistory">
         <MappingFragment StoreEntitySet="PatientHistory">
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="PatientID" ColumnName="PatientID" />
@@ -149,7 +150,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="PatientInterferingConditions">
-      <EntityTypeMapping TypeName="emedical321_PatientMgmtModel.PatientInterferingCondition">
+      <EntityTypeMapping TypeName="PatientMgmtModel.PatientInterferingCondition">
         <MappingFragment StoreEntitySet="PatientInterferingCondition">
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="HistoryID" ColumnName="HistoryID" />
@@ -163,7 +164,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="PatientNecessities">
-      <EntityTypeMapping TypeName="emedical321_PatientMgmtModel.PatientNecessity">
+      <EntityTypeMapping TypeName="PatientMgmtModel.PatientNecessity">
         <MappingFragment StoreEntitySet="PatientNecessities">
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="NecessityID" ColumnName="NecessityID" />
@@ -177,7 +178,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="PatientProcedures">
-      <EntityTypeMapping TypeName="emedical321_PatientMgmtModel.PatientProcedure">
+      <EntityTypeMapping TypeName="PatientMgmtModel.PatientProcedure">
         <MappingFragment StoreEntitySet="PatientProcedures">
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="HistoryID" ColumnName="HistoryID" />
@@ -192,7 +193,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="PatientReports">
-      <EntityTypeMapping TypeName="emedical321_PatientMgmtModel.PatientReport">
+      <EntityTypeMapping TypeName="PatientMgmtModel.PatientReport">
         <MappingFragment StoreEntitySet="PatientReports">
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="Title" ColumnName="Title" />
@@ -207,7 +208,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Patients">
-      <EntityTypeMapping TypeName="emedical321_PatientMgmtModel.Patient">
+      <EntityTypeMapping TypeName="PatientMgmtModel.Patient">
         <MappingFragment StoreEntitySet="Patients">
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="FirstName" ColumnName="FirstName" />
@@ -226,7 +227,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="PatientSymtoms">
-      <EntityTypeMapping TypeName="emedical321_PatientMgmtModel.PatientSymtom">
+      <EntityTypeMapping TypeName="PatientMgmtModel.PatientSymtom">
         <MappingFragment StoreEntitySet="PatientSymtoms">
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="HistoryID" ColumnName="HistoryID" />
@@ -240,7 +241,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="ProcedureTypes">
-      <EntityTypeMapping TypeName="emedical321_PatientMgmtModel.ProcedureType">
+      <EntityTypeMapping TypeName="PatientMgmtModel.ProcedureType">
         <MappingFragment StoreEntitySet="ProcedureTypes">
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="Title" ColumnName="Title" />
@@ -251,8 +252,23 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="ProgressNotes">
+      <EntityTypeMapping TypeName="PatientMgmtModel.ProgressNote">
+        <MappingFragment StoreEntitySet="ProgressNotes">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="FilePath" ColumnName="FilePath" />
+          <ScalarProperty Name="HistoryID" ColumnName="HistoryID" />
+          <ScalarProperty Name="PatientID" ColumnName="PatientID" />
+          <ScalarProperty Name="Created" ColumnName="Created" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="Modified" ColumnName="Modified" />
+          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="Staffs">
-      <EntityTypeMapping TypeName="emedical321_PatientMgmtModel.Staff">
+      <EntityTypeMapping TypeName="PatientMgmtModel.Staff">
         <MappingFragment StoreEntitySet="Staff">
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="FirstName" ColumnName="FirstName" />
@@ -273,7 +289,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Statuses">
-      <EntityTypeMapping TypeName="emedical321_PatientMgmtModel.Status">
+      <EntityTypeMapping TypeName="PatientMgmtModel.Status">
         <MappingFragment StoreEntitySet="Statuses">
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="Title" ColumnName="Title" />
@@ -281,7 +297,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Symptoms">
-      <EntityTypeMapping TypeName="emedical321_PatientMgmtModel.Symptom">
+      <EntityTypeMapping TypeName="PatientMgmtModel.Symptom">
         <MappingFragment StoreEntitySet="Symptoms">
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="Title" ColumnName="Title" />
@@ -293,7 +309,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="UserRoles">
-      <EntityTypeMapping TypeName="emedical321_PatientMgmtModel.UserRole">
+      <EntityTypeMapping TypeName="PatientMgmtModel.UserRole">
         <MappingFragment StoreEntitySet="UserRoles">
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="Title" ColumnName="Title" />
@@ -301,7 +317,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Users">
-      <EntityTypeMapping TypeName="emedical321_PatientMgmtModel.User">
+      <EntityTypeMapping TypeName="PatientMgmtModel.User">
         <MappingFragment StoreEntitySet="Users">
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="Username" ColumnName="Username" />
