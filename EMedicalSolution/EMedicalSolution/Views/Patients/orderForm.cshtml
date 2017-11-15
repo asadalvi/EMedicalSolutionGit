@@ -22,7 +22,9 @@
             <div class="w3-panel w3-hover-blue w3-light-blue w3-round-xxlarge">
                 <h3>Physician Approval</h3>
                 <p>Approve by Dr. @Model.StaffNameVM.PhycisianName </p>
-                <p><strong>Reason:</strong> @Model.StaffNameVM.PhysicianRemarks</p>
+                <p><strong>Reason:</strong> @Model.StaffNameVM.PhysicianRemarks 
+                    @if (Session["role"] != null && Session["role"].ToString() == "2") //2 for specialist
+                    {<span class="update_physician_resean_btn" style="padding-left:10px;"><i class="fa fa-pencil-square-o" aria-hidden="true" title="Update physician remarks"></i></span>}</p>
                  </div>            
         }
         else {
@@ -48,7 +50,7 @@
         <div class="w3-panel w3-hover-blue w3-light-blue w3-round-xxlarge" id="Approvedbyphysician" style="display:none">
             <h3>Physician Approval</h3>
             <p>Approve by Dr. <span id="Approvedbyphysician_dr"></span> </p>
-            <p><strong>Reason:</strong><span id="Approvedbyphysician_remarks"></span></p>
+            <p><strong>Reason:</strong><span id="Approvedbyphysician_remarks"></span><span class="update_physician_resean_btn"  style="padding-left:10px;"><i class="fa fa-pencil-square-o" aria-hidden="true" title="Update physician remarks"></i></span></p>
 
         </div>
 
@@ -62,17 +64,10 @@
             </div>
         </div>
     </div>
-    <div id="update_physician_resean_btn" style="display:none">
-        <a style="cursor:pointer;font-size:large;text-decoration:underline;">Update Reason</a>
-    </div>
+  
     }
 }
 <script>
-    $(document).ready(function () {
-        if($("#p_loadedValue").val() !== undefined){
-            $("#update_physician_resean_btn").css('display', 'block');
-        }
-    });
 
     $('#PhysicianApproval').on('click', 'a.popup', function (e) {
         e.preventDefault();
@@ -83,8 +78,7 @@
     //submission form -------start-----------
     $('#click_approveButton').on('click', function (e) {
         var val = $(document).find(".physicianRemarksValue").val();
-        if (val !== undefined && val !== null && val !== "") {
-            $(document).find("#update_physician_resean_btn").css("display", "block");
+        if (val !== undefined && val !== null && val !== "") {            
             $(document).find(".saveError").css("display", "none");
             $('#click_approveButton').attr("href", "/Patients/physicianSignature");
 
@@ -95,21 +89,19 @@
     });
 
     //show updation-----------
-    $('#update_physician_resean_btn').on('click', function (e) {
+    $('.update_physician_resean_btn').on('click', function (e) {
         $(document).find(".update-physician-remarks").removeClass("hidden");
-        //$(document).find(".physicianRemarksValue").html()
+        $(this).parents("div").eq(0).css("display", "none");
         
     });
     //update remarks
     $('#click_approveButton_update').on('click', function (e) {
         var val_upd = $(document).find(".physicianRemarksValue").val();
         if (val_upd !== undefined && val_upd !== null && val_upd !== "") {
-            $(document).find("#update_physician_resean_btn").css("display", "block");
             $(document).find(".saveError").css("display", "none");
             $('#click_approveButton_update').attr("href", "/Patients/physicianSignature");
 
         } else {
-            $(document).find("#update_physician_resean_btn").css("display", "none");
             $('#click_approveButton_update').removeAttr("href");
         }
     });
