@@ -872,31 +872,24 @@ namespace EMedicalSolution.Controllers
 
                             // render the HTML code as PDF in memory
                             byte[] pdfBuffer = htmlToPdfConverter.ConvertHtmlToMemory(htmlToConvert, baseUrl);
-
-                            // send the PDF file to browser
-                            // FileResult fileResult = new FileContentResult(pdfBuffer, "application/pdf");
-                            // fileResult.FileDownloadName = "orderForm.pdf";
-                            //return fileResult;
-                            Stream stream = new MemoryStream(pdfBuffer);
-                            ContentType ct = new ContentType(MediaTypeNames.Application.Pdf);
-                            var attachmnt = new Attachment(stream, ct);
-                            attachmnt.ContentType.MediaType = MediaTypeNames.Application.Pdf;
-                            attachmnt.Name = "superbill.pdf";
-                            MailMessage mail = new MailMessage();
-                            SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com");
-                            mail.From = new MailAddress("testmailnaveed@gmail.com");
-                            mail.To.Add("naveed.shah194@gmail.com");
-                            mail.Subject = "Test Mail - 1";
-                            mail.Body = "mail with attachment";
-
-                            //System.Net.Mail.Attachment attachment;
-                            //attachment = new System.Net.Mail.Attachment("G:\\ocr_test\\README.TXT");
-                            //mail.Attachments.Add(attachment);
-                            mail.Attachments.Add(attachmnt);
-                            SmtpServer.Port = 587;
-                            SmtpServer.Credentials = new System.Net.NetworkCredential("testmailnaveed@gmail.com", "naveed1234");
-                            SmtpServer.EnableSsl = true;
-                            SmtpServer.Send(mail);
+                            
+                            //Stream stream = new MemoryStream(pdfBuffer);
+                            //ContentType ct = new ContentType(MediaTypeNames.Application.Pdf);
+                            //var attachmnt = new Attachment(stream, ct);
+                            //attachmnt.ContentType.MediaType = MediaTypeNames.Application.Pdf;
+                            //attachmnt.Name = "superbill.pdf";
+                            //MailMessage mail = new MailMessage();
+                            //SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com");
+                            //mail.From = new MailAddress("testmailnaveed@gmail.com");
+                            //mail.To.Add("naveed.shah194@gmail.com");
+                            //mail.Subject = "Test Mail - 1";
+                            //mail.Body = "mail with attachment";
+                            
+                            //mail.Attachments.Add(attachmnt);
+                            //SmtpServer.Port = 587;
+                            //SmtpServer.Credentials = new System.Net.NetworkCredential("testmailnaveed@gmail.com", "naveed1234");
+                            //SmtpServer.EnableSsl = true;
+                            //SmtpServer.Send(mail);
 
                         }
                         status = true;

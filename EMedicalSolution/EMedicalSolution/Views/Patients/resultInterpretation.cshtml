@@ -12,7 +12,11 @@ Result Interpretation by Specialist
                 <div class="w3-panel w3-hover-blue w3-light-blue w3-round-xxlarge">
                     <h3>Specialist Approval</h3>
                     <p>Approve by Dr. @Model.StaffNameVM.SpecialistName </p>
-                    <p><strong>Remarks:</strong> @Model.StaffNameVM.SpecialistRemarks</p>
+                    <p>
+                        <strong>Remarks:</strong> @Model.StaffNameVM.SpecialistRemarks
+                        @if (Session["role"] != null && Session["role"].ToString() == "3") //2 for specialist
+                    {<span class="update_specialist_resean_btn" style="padding-left:10px;"><i class="fa fa-pencil-square-o" aria-hidden="true" title="Update specialist remarks"></i></span>}
+                    </p>
                 </div>                
             }
             else {
@@ -46,35 +50,29 @@ Result Interpretation by Specialist
         @if (Session["role"] != null && Session["Name"] != null && Session["role"].ToString() == "3")  //Specialist id 3
         {
             <div class="w3-panel w3-hover-blue w3-green w3-round-xxlarge" id="ApprovedbySpecialist" style="display:none">
-                <h3>Success</h3>
+                <h3>Specialist Remarks:</h3>
                 <p>Approve by Dr. @Session["Name"].ToString() </p>
-                <p><strong>Remarks:</strong><span id="sp_name"> </span></p>
+                <p><strong>Remarks:</strong><span id="sp_name"> </span><span class="update_specialist_resean_btn" style="padding-left:10px;"><i class="fa fa-pencil-square-o" aria-hidden="true" title="Update specialist remarks"></i></span></p>
             </div>
             <div class="update-specialist-remarks hidden" style="height:220px;">
                 <label>Specialist Remarks:</label><br />
-                <textarea rows="4" cols="56" type="text" name="specialistRemarks" class="specialistRemarksValue"> </textarea>
+                <textarea rows="4" cols="56" type="text" name="specialistRemarks" class="specialistRemarksValue_update"> </textarea>
                 <div class="ajax_loader_save" style="display:none;margin-top: -180px; margin-left: 300px;"><img src="~/Images/ajax_loader.png" /></div>
                 <p id="specialistRemarksError" class="saveError" style="font-size:large;color:red;display:none">Please enter remarks.</p>
 
                 <div class="w3-row">
                     <div class="w3-twothird w3-right">
-                        <button class="w3-btn w3-orange" id="specialist_approveButton_update" type="button">Approve</button>
+                        <button class="w3-btn w3-orange" id="specialist_approveButton_update" type="button">Update</button>
                     </div>
                 </div>
             </div>
-                <a style="cursor:pointer;font-size:large;text-decoration:underline;display:none" id="update_specialist_resean_btn">Update Remarks</a>
-
         }
     </div>
     @*<input type="submit" value="Convert To PDF" />*@
 
 }
 <script>
-    $(document).ready(function () {
-        if ($("#r_loadedValue").val() !== undefined) {
-            $("#update_specialist_resean_btn").css('display', 'block');
-        }
-    });
+
     //submission form -------start-----------
     $(document).find('#saveSpecialistData').on('click', function (e) {
         $(document).find(".saveError").css("display", "none");
@@ -94,33 +92,32 @@ Result Interpretation by Specialist
                         $(".ajax_loader_save").css("display", "none");
                         $(document).find(".saveError").css("display", "none");
                         $(document).find("#saveSpecialistData").css("display", "none");
-
+                        $(document).find(".specialistRemarksValue").val("");
                         $("#ApprovedbySpecialist").css('display', 'block');
                         $("#sp_name").text(specialistRemarks);
                         
                         $("#specialistRemarksTextBox").css('display', 'none');
-                        $("#update_specialist_resean_btn").css('display', 'block');
                     }
                 }
             })
         } else { $(document).find(".saveError").css("display", "block"); }
     });
     //update remarks
-    $('#update_specialist_resean_btn').on('click', function (e) {
+    $('.update_specialist_resean_btn').on('click', function (e) {
         $(document).find(".update-specialist-remarks").removeClass("hidden");
-        //$(document).find(".physicianRemarksValue").html()
+        $(this).parents("div").eq(0).css("display", "none");
+        $(document).find(".specialistRemarksValue").val("");
+        $(document).find(".specialistRemarksValue_update").val("");
 
     });
 
     $('#specialist_approveButton_update').on('click', function (e) {
-        var val_upd = $(document).find(".specialistRemarksValue").val();
+        var val_upd = $(document).find(".specialistRemarksValue_update").val();
         if (val_upd !== undefined && val_upd !== null && val_upd !== "") {
-            $(document).find("#update_specialist_resean_btn").css("display", "block");
-            //edit specialist remarks
+               //edit specialist remarks
             $(document).find(".saveError").css("display", "none");
         var pHistoryId = $("#pHistoryId").val();
-        var specialistRemarks = $(".specialistRemarksValue").val();
-        alert(specialistRemarks)
+        var specialistRemarks = $(".specialistRemarksValue_update").val();
         if (specialistRemarks !== undefined && specialistRemarks !== null && specialistRemarks !== "") {
             $(".ajax_loader_save").css("display", "block");
             $.ajax({
@@ -136,16 +133,15 @@ Result Interpretation by Specialist
                         $(document).find("#saveSpecialistData").css("display", "none");
                         $(document).find(".update-specialist-remarks").addClass("hidden");
                         $("#ApprovedbySpecialist").css('display', 'block');
+                        $(document).find(".specialistRemarksValue_update").val("");
                         $("#sp_name").text(specialistRemarks);
                         $("#specialistRemarksTextBox").css('display', 'none');
-                        $("#update_specialist_resean_btn").css('display', 'block');
-                    }
+                       }
                 }
             })
         } else { $(document).find(".saveError").css("display", "block"); }
 
         } else {
-            $(document).find("#update_specialist_resean_btn").css("display", "none");
             $('#specialist_approveButton_update').removeAttr("href");
         }
     });
