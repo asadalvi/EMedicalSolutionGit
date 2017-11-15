@@ -244,6 +244,7 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>EPatientMgmt.Designer.cs</LastGenOutput>
     </EntityDeploy>
+    <Content Include="Images\ajax_loader.svg" />
     <Content Include="Models\EPatientMgmt.edmx.diagram">
       <DependentUpon>EPatientMgmt.edmx</DependentUpon>
     </Content>
@@ -324,7 +325,9 @@
     <Folder Include="Files\Notes\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="packages.config" />
+    <Content Include="packages.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
