@@ -246,3 +246,38 @@ G:\emedical solution\EMedicalSolutionGit\EMedicalSolution\EMedicalSolution\bin\S
 G:\emedical solution\EMedicalSolutionGit\EMedicalSolution\EMedicalSolution\bin\HiQPdf.dep
 G:\emedical solution\EMedicalSolutionGit\EMedicalSolution\EMedicalSolution\obj\Debug\EMedicalSolution.dll
 G:\emedical solution\EMedicalSolutionGit\EMedicalSolution\EMedicalSolution\obj\Debug\EMedicalSolution.pdb
+D:\Asad files\Clients Projects\EMedicalSolution\EMedicalSolutionGit\EMedicalSolution\EMedicalSolution\bin\EMedicalSolution.dll.config
+D:\Asad files\Clients Projects\EMedicalSolution\EMedicalSolutionGit\EMedicalSolution\EMedicalSolution\bin\EMedicalSolution.dll
+D:\Asad files\Clients Projects\EMedicalSolution\EMedicalSolutionGit\EMedicalSolution\EMedicalSolution\bin\EMedicalSolution.pdb
+D:\Asad files\Clients Projects\EMedicalSolution\EMedicalSolutionGit\EMedicalSolution\EMedicalSolution\bin\EntityFramework.dll
+D:\Asad files\Clients Projects\EMedicalSolution\EMedicalSolutionGit\EMedicalSolution\EMedicalSolution\bin\EntityFramework.SqlServer.dll
+D:\Asad files\Clients Projects\EMedicalSolution\EMedicalSolutionGit\EMedicalSolution\EMedicalSolution\bin\HiQPdf.Free.dll
+D:\Asad files\Clients Projects\EMedicalSolution\EMedicalSolutionGit\EMedicalSolution\EMedicalSolution\bin\Microsoft.Web.Infrastructure.dll
+D:\Asad files\Clients Projects\EMedicalSolution\EMedicalSolutionGit\EMedicalSolution\EMedicalSolution\bin\Newtonsoft.Json.dll
+D:\Asad files\Clients Projects\EMedicalSolution\EMedicalSolutionGit\EMedicalSolution\EMedicalSolution\bin\System.Net.Http.Formatting.dll
+D:\Asad files\Clients Projects\EMedicalSolution\EMedicalSolutionGit\EMedicalSolution\EMedicalSolution\bin\System.Web.Helpers.dll
+D:\Asad files\Clients Projects\EMedicalSolution\EMedicalSolutionGit\EMedicalSolution\EMedicalSolution\bin\System.Web.Http.dll
+D:\Asad files\Clients Projects\EMedicalSolution\EMedicalSolutionGit\EMedicalSolution\EMedicalSolution\bin\System.Web.Http.WebHost.dll
+D:\Asad files\Clients Projects\EMedicalSolution\EMedicalSolutionGit\EMedicalSolution\EMedicalSolution\bin\System.Web.Mvc.dll
+D:\Asad files\Clients Projects\EMedicalSolution\EMedicalSolutionGit\EMedicalSolution\EMedicalSolution\bin\System.Web.Razor.dll
+D:\Asad files\Clients Projects\EMedicalSolution\EMedicalSolutionGit\EMedicalSolution\EMedicalSolution\bin\System.Web.WebPages.Deployment.dll
+D:\Asad files\Clients Projects\EMedicalSolution\EMedicalSolutionGit\EMedicalSolution\EMedicalSolution\bin\System.Web.WebPages.dll
+D:\Asad files\Clients Projects\EMedicalSolution\EMedicalSolutionGit\EMedicalSolution\EMedicalSolution\bin\System.Web.WebPages.Razor.dll
+D:\Asad files\Clients Projects\EMedicalSolution\EMedicalSolutionGit\EMedicalSolution\EMedicalSolution\bin\EntityFramework.xml
+D:\Asad files\Clients Projects\EMedicalSolution\EMedicalSolutionGit\EMedicalSolution\EMedicalSolution\bin\EntityFramework.SqlServer.xml
+D:\Asad files\Clients Projects\EMedicalSolution\EMedicalSolutionGit\EMedicalSolution\EMedicalSolution\bin\HiQPdf.Free.xml
+D:\Asad files\Clients Projects\EMedicalSolution\EMedicalSolutionGit\EMedicalSolution\EMedicalSolution\bin\Newtonsoft.Json.xml
+D:\Asad files\Clients Projects\EMedicalSolution\EMedicalSolutionGit\EMedicalSolution\EMedicalSolution\bin\System.Net.Http.Formatting.xml
+D:\Asad files\Clients Projects\EMedicalSolution\EMedicalSolutionGit\EMedicalSolution\EMedicalSolution\bin\System.Web.Helpers.xml
+D:\Asad files\Clients Projects\EMedicalSolution\EMedicalSolutionGit\EMedicalSolution\EMedicalSolution\bin\System.Web.Http.xml
+D:\Asad files\Clients Projects\EMedicalSolution\EMedicalSolutionGit\EMedicalSolution\EMedicalSolution\bin\System.Web.Http.WebHost.xml
+D:\Asad files\Clients Projects\EMedicalSolution\EMedicalSolutionGit\EMedicalSolution\EMedicalSolution\bin\System.Web.Mvc.xml
+D:\Asad files\Clients Projects\EMedicalSolution\EMedicalSolutionGit\EMedicalSolution\EMedicalSolution\bin\System.Web.Razor.xml
+D:\Asad files\Clients Projects\EMedicalSolution\EMedicalSolutionGit\EMedicalSolution\EMedicalSolution\bin\System.Web.WebPages.xml
+D:\Asad files\Clients Projects\EMedicalSolution\EMedicalSolutionGit\EMedicalSolution\EMedicalSolution\bin\System.Web.WebPages.Deployment.xml
+D:\Asad files\Clients Projects\EMedicalSolution\EMedicalSolutionGit\EMedicalSolution\EMedicalSolution\bin\System.Web.WebPages.Razor.xml
+D:\Asad files\Clients Projects\EMedicalSolution\EMedicalSolutionGit\EMedicalSolution\EMedicalSolution\bin\HiQPdf.dep
+D:\Asad files\Clients Projects\EMedicalSolution\EMedicalSolutionGit\EMedicalSolution\EMedicalSolution\obj\Debug\EMedicalSolution.csprojResolveAssemblyReference.cache
+D:\Asad files\Clients Projects\EMedicalSolution\EMedicalSolutionGit\EMedicalSolution\EMedicalSolution\obj\Debug\EMedicalSolution.csproj.CoreCompileInputs.cache
+D:\Asad files\Clients Projects\EMedicalSolution\EMedicalSolutionGit\EMedicalSolution\EMedicalSolution\obj\Debug\EMedicalSolution.dll
+D:\Asad files\Clients Projects\EMedicalSolution\EMedicalSolutionGit\EMedicalSolution\EMedicalSolution\obj\Debug\EMedicalSolution.pdb

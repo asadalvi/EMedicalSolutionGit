@@ -13,7 +13,7 @@ Result Interpretation by Specialist
                     <h3>Specialist Approval</h3>
                     <p>Approve by Dr. @Model.StaffNameVM.SpecialistName </p>
                     <p>
-                        <strong>Remarks:</strong> @Model.StaffNameVM.SpecialistRemarks
+                        <strong>Remarks:&nbsp;</strong> @Model.StaffNameVM.SpecialistRemarks
                         @if (Session["role"] != null && Session["role"].ToString() == "3") //2 for specialist
                     {<span class="update_specialist_resean_btn" style="padding-left:10px;"><i class="fa fa-pencil-square-o" aria-hidden="true" title="Update specialist remarks"></i></span>}
                     </p>
@@ -22,7 +22,7 @@ Result Interpretation by Specialist
             else {
                 if (Session["role"] != null && Session["role"].ToString() == "3") //3 for specialist
                 {
-                    <label>Specialist Remarks:</label><br />
+                    <label>Specialist Remarks:&nbsp;</label><br />
                     <textarea rows="4" cols="56" type="text" name="specialistRemarks" class="specialistRemarksValue"> </textarea>
                     <div class="ajax_loader_save" style="display:none;margin-top: -180px; margin-left: 300px;"><img src="~/Images/ajax_loader.svg" /></div>
                     <p id="specialistRemarksError" class="saveError" style="font-size:large;color:red;display:none">Please enter remarks.</p>
@@ -50,12 +50,12 @@ Result Interpretation by Specialist
         @if (Session["role"] != null && Session["Name"] != null && Session["role"].ToString() == "3")  //Specialist id 3
         {
             <div class="w3-panel w3-hover-blue w3-green w3-round-xxlarge" id="ApprovedbySpecialist" style="display:none">
-                <h3>Specialist Remarks:</h3>
+                <h3>Specialist Remarks:&nbsp;</h3>
                 <p>Approve by Dr. @Session["Name"].ToString() </p>
-                <p><strong>Remarks:</strong><span id="sp_name"> </span><span class="update_specialist_resean_btn" style="padding-left:10px;"><i class="fa fa-pencil-square-o" aria-hidden="true" title="Update specialist remarks"></i></span></p>
+                <p><strong>Remarks:&nbsp;</strong><span id="sp_name"> </span><span class="update_specialist_resean_btn" style="padding-left:10px;"><i class="fa fa-pencil-square-o" aria-hidden="true" title="Update specialist remarks"></i></span></p>
             </div>
             <div class="update-specialist-remarks hidden" style="height:220px;">
-                <label>Specialist Remarks:</label><br />
+                <label>Specialist Remarks:&nbsp;</label><br />
                 <textarea rows="4" cols="56" type="text" name="specialistRemarks" class="specialistRemarksValue_update"> </textarea>
                 <div class="ajax_loader_save" style="display:none;margin-top: -180px; margin-left: 300px;"><img src="~/Images/ajax_loader.svg" /></div>
                 <p id="specialistRemarksError" class="saveError" style="font-size:large;color:red;display:none">Please enter remarks.</p>

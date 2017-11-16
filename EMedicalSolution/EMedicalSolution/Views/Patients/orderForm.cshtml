@@ -31,7 +31,7 @@
         else {
             if (Session["role"] != null && Session["role"].ToString() == "2") //2 for specialist
             {
-                <label>Physician Remarks:</label><br />
+                <label>Physician Remarks:&nbsp;</label><br />
                 <textarea rows="4" cols="56" name="physicianRemarks" class="physicianRemarksValue"> </textarea><br />
                 <p class="saveError" style="font-size:large;color:red;display:none">Please enter about the patient</p>
                 <div class="w3-row">
@@ -55,7 +55,7 @@
         </div>
 
     <div class="update-physician-remarks hidden" style="height:220px;">
-        <label>Physician Remarks:</label><br />
+        <label>Physician Remarks:&nbsp;</label><br />
         <textarea rows="4" cols="56" name="physicianRemarks" class="physicianRemarksValue_update"> </textarea><br />
         <p class="saveError" style="font-size:large;color:red;display:none">Please enter about the patient</p>
         <div class="w3-row">
