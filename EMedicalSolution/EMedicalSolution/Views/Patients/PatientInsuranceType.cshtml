@@ -15,7 +15,7 @@
         <div class="w3-row">
             @foreach (var item in Model)
                 {
-                <div class="w3-half">
+                <div class="w3-quarter">
                     @Html.RadioButtonFor(a => item.ID, item.ID, new { @class = "w3-radio", @Name = "typeId" }) @item.Title <br />
                 </div>
             }
@@ -23,22 +23,27 @@
 
         <div class="w3-row w3-margin-top">
 
-            <label class="w3-text-green">Upload Insurance Card</label><br>
+            
 
-            <div class="w3-half">
+            <div class="w3-third">
+                <label class="w3-text-green">Upload Insurance Card</label><br>
                 <input type="file" name="filePath" id="insuranceCardfile" multiple="multiple" />
             </div>
 
-            <div class="w3-half">
-                Card Title: <input type="text" name="insuranceTitle" id="insuranceTitle" />
+            
+            <div class="w3-third">
+                <label class="w3-text-green">Card Title</label><br>
+                <input type="text" name="insuranceTitle" id="insuranceTitle" />
+            </div>
+
+            
+            <div class="w3-third">
+                <label class="w3-text-green">Member ID</label><br>
+                <input type="text" name="insuranceMemberId" id="insuranceMemberId" />
             </div>
 
         </div>
-        <div class="w3-row w3-margin-top">
-            <div class="w3-center">
-                Member Id: <input type="text" name="insuranceMemberId" id="insuranceMemberId" />
-            </div>
-            </div>
+            
 
             <div class="w3-row w3-margin-top w3-center w3-margin-bottom">
                 

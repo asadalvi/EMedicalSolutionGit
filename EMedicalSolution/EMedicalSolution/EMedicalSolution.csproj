@@ -259,7 +259,6 @@
       <DependentUpon>EPatientMgmt.edmx</DependentUpon>
       <LastGenOutput>EPatientMgmt.cs</LastGenOutput>
     </Content>
-    <Content Include="Views\Web.config" />
     <Content Include="Views\Patients\patient.cshtml" />
     <Content Include="Views\Patients\Delete.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
@@ -312,11 +311,7 @@
     <Content Include="Views\Patients\patientInfo.cshtml" />
     <Content Include="Views\Reports\PatientReports.cshtml" />
     <Content Include="Views\Reports\HistoryList.cshtml" />
-    <Content Include="Web.config">
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="Web1.Debug.config" />
-    <Content Include="Web1.Release.config" />
+    <Content Include="Views\Web.config" />
     <Content Include="Views\Patients\progressNote.cshtml" />
   </ItemGroup>
   <ItemGroup>
