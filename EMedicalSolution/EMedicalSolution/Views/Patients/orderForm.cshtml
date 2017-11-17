@@ -101,6 +101,7 @@
     });
     //update remarks
     $('#click_approveButton_update').on('click', function (e) {
+        
         var val_upd = $(document).find(".physicianRemarksValue_update").val();
         if (val_upd !== undefined && val_upd !== null && val_upd !== "") {
             $(document).find("#p_remaks_value").val(val_upd);

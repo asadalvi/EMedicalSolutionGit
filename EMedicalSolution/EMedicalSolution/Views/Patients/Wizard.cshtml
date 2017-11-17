@@ -180,7 +180,7 @@
                     // Toolbar extra buttons
                     var btnFinish = $('<button></button>').text('Finish')
                                                      .addClass('btn btn-info')
-                                                     .on('click', function () { alert('Finish Clicked'); });
+                                                     .on('click', function () { toastr.success("Finish clicked"); });
                     var btnCancel = $('<button></button>').text('Cancel')
                                                      .addClass('btn btn-danger')
                                                      .on('click', function () {
@@ -191,7 +191,10 @@
                                                              dataType: 'json',
                                                              processData: false,
                                                              success: function ($data) {
-                                                                 alert("Success, fields are cleared");
+                                                                 toastr.success("Success, fields are cleared");
+                                                             },
+                                                             error: function () {
+                                                                 toastr.error("Error, The request can not be completed due to some error!");
                                                              }
                                                          });
                                                          //$('#smartwizard').smartWizard("reset");
@@ -328,7 +331,7 @@
                             success: function (data) {
                                 console.log(data);
                                 if (data) {
-                                    //alert("success");
+                                    toastr.success("Data save successfully!");
                                     $(".ajax_loader_save").css("display", "none");
                                     $(document).find(".saveError").css("display", "none");
                                     setTimeout(function () {
@@ -336,6 +339,9 @@
                                         $(".sw-btn-next").css("pointer-events", "auto");
                                     }, 10);
                                 }
+                            },
+                            error: function () {
+                                toastr.error("Error, The request can not be completed due to some error!");
                             }
                         })
                     } else { $(document).find(".saveError").css("display", "block"); }
@@ -376,6 +382,7 @@
                             enctype: 'multipart/form-data',
                             processData: false,
                             success: function ($data) {
+                                toastr.success("Data save successfully!");
                                 $(".ajax_loader_save").css("display", "none");
                                 setTimeout(function () {
                                     $(document).find(".saveError").css("display", "none");
@@ -383,6 +390,9 @@
                                     $(".sw-btn-next").css("pointer-events", "auto");
                                 }, 10);
                                 oReportTable.ajax.reload();
+                            },
+                            error: function () {
+                                toastr.error("Error, The request can not be completed due to some error!");
                             }
                         });
                     } else { $(document).find(".saveError").css("display", "block"); }
@@ -422,6 +432,7 @@
                             enctype: 'multipart/form-data',
                             processData: false,
                             success: function ($data) {
+                                toastr.success("Data save successfully!");
                                 $(".ajax_loader_save").css("display", "none");
                                 setTimeout(function () {
                                     $(document).find(".saveError").css("display", "none");
@@ -429,6 +440,9 @@
                                     $(".sw-btn-next").css("pointer-events", "auto");
                                 }, 10);
                                 oNotesTable.ajax.reload();
+                            },
+                            error: function ($data) {
+                                toastr.error("Error, The request can not be completed due to some error!");
                             }
                         });
                     } else { $(document).find(".saveError").css("display", "block"); }

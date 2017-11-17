@@ -35,6 +35,7 @@
                             url: "/Patients/physicianSignature/?pHistoryId=" + pHistoryId + "&physiciasnSignature=" + physiciasnSignature,
                             success: function (data) {
                                 if (data) {
+
                                     // $("#savephysicianData").css('display', 'block');                               
                                     $(".ui-dialog-titlebar-close").trigger("click");
                                     //var physicianRemarks = $("#physcianApproalDataText").val();
@@ -44,6 +45,7 @@
                                         // data: $('#' + parentForm).serialize(),
                                         success: function (Data) {
                                             if (Data.status) {
+                                                toastr.success("Data save successfully!");
                                                 $(document).find(".physicianRemarksValue").val('');
                                                 $("#Approvedbyphysician").css('display', 'block');                                                
                                                 $("#Approvedbyphysician_dr").text(Data.namePhyscian)
@@ -56,7 +58,9 @@
                                                 }, 10);
                                             }
                                         },
-
+                                        error: function ($data) {
+                                            toastr.error("Error, The request can not be completed due to some error!");
+                                        }
                                     })
                                 }
                                 else {

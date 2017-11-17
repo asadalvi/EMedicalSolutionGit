@@ -88,7 +88,7 @@ Result Interpretation by Specialist
                 success: function (data) {
                     console.log(data);
                     if (data) {
-                        // alert("success");
+                        toastr.success("Data save successfully!");
                         $(".ajax_loader_save").css("display", "none");
                         $(document).find(".saveError").css("display", "none");
                         $(document).find("#saveSpecialistData").css("display", "none");
@@ -98,6 +98,9 @@ Result Interpretation by Specialist
                         
                         $("#specialistRemarksTextBox").css('display', 'none');
                     }
+                },
+                error: function ($data) {
+                    toastr.error("Error, The request can not be completed due to some error!");
                 }
             })
         } else { $(document).find(".saveError").css("display", "block"); }
@@ -125,7 +128,7 @@ Result Interpretation by Specialist
                 url: "/Patients/resultInterpretation/?pHistoryId=" + pHistoryId + "&specialistRemarks=" + specialistRemarks,
                 // data: $('#' + parentForm).serialize(),
                 success: function (data) {
-                    console.log(data);
+                    toastr.success("Data save successfully!");
                     if (data) {
                         // alert("success");
                         $(".ajax_loader_save").css("display", "none");
@@ -137,6 +140,9 @@ Result Interpretation by Specialist
                         $("#sp_name").text(specialistRemarks);
                         $("#specialistRemarksTextBox").css('display', 'none');
                        }
+                },
+                error: function ($data) {
+                    toastr.error("Error, The request can not be completed due to some error!");
                 }
             })
         } else { $(document).find(".saveError").css("display", "block"); }

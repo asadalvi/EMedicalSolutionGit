@@ -83,10 +83,13 @@
             enctype: 'multipart/form-data',
             processData: false,
             success: function ($data) {
-                //$('#partialPatientInsuranceType').css('display', 'none');
+                toastr.success("Data save successfully!");
                 $('#partialPatientInsuranceType').html('');
                 oTable.ajax.reload();
 
+            },
+            error: function ($data) {
+                toastr.error("Error, The request can not be completed due to some error!");
             }
         });
     });
