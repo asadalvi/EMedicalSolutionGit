@@ -17,15 +17,17 @@ Result Interpretation by Specialist
                         @if (Session["role"] != null && Session["role"].ToString() == "3") //2 for specialist
                     {<span class="update_specialist_resean_btn" style="padding-left:10px;"><i class="fa fa-pencil-square-o" aria-hidden="true" title="Update specialist remarks"></i></span>}
                     </p>
-                </div>                
+                </div>
             }
             else {
                 if (Session["role"] != null && Session["role"].ToString() == "3") //3 for specialist
                 {
                     <label>Specialist Remarks:&nbsp;</label><br />
-                    <textarea rows="4" cols="56" type="text" name="specialistRemarks" class="specialistRemarksValue"> </textarea>
+                    <div>
+                        <textarea rows="4" cols="56" type="text" name="specialistRemarks" class="specialistRemarksValue"> </textarea>
+                    </div>
                     <div class="ajax_loader_save" style="display:none;margin-top: -180px; margin-left: 300px;"><img src="~/Images/ajax_loader.svg" /></div>
-                    <p id="specialistRemarksError" class="saveError" style="font-size:large;color:red;display:none">Please enter remarks.</p>
+                    <div id="specialistRemarksError" class="saveError" style="font-size:large;color:red;display:none;float:left">Please enter remarks.</div>
 
                     <div class="w3-row">
                         <div class="w3-twothird w3-right">
@@ -56,9 +58,11 @@ Result Interpretation by Specialist
             </div>
             <div class="update-specialist-remarks hidden" style="height:220px;">
                 <label>Specialist Remarks:&nbsp;</label><br />
-                <textarea rows="4" cols="56" type="text" name="specialistRemarks" class="specialistRemarksValue_update"> </textarea>
+            <div>
+            <textarea rows="4" cols="56" type="text" name="specialistRemarks" class="specialistRemarksValue_update"> </textarea>
+        </div>
                 <div class="ajax_loader_save" style="display:none;margin-top: -180px; margin-left: 300px;"><img src="~/Images/ajax_loader.svg" /></div>
-                <p id="specialistRemarksError" class="saveError" style="font-size:large;color:red;display:none">Please enter remarks.</p>
+                <p id="specialistRemarksError" class="saveError" style="font-size:large;color:red;display:none;float:left;">Please enter remarks.</p>
 
                 <div class="w3-row">
                     <div class="w3-twothird w3-right">
@@ -78,8 +82,7 @@ Result Interpretation by Specialist
         $(document).find(".saveError").css("display", "none");
         var pHistoryId = $("#pHistoryId").val();
         var specialistRemarks = $(".specialistRemarksValue").val();
-        console.log(specialistRemarks,"the val is", pHistoryId)
-        if (specialistRemarks !== undefined && specialistRemarks !== null && specialistRemarks !== "") {
+        if (specialistRemarks.trim() !== undefined && specialistRemarks.trim() !== null && specialistRemarks.trim() !== "") {
             $(".ajax_loader_save").css("display", "block");
             $.ajax({
                 type: "POST",
@@ -116,7 +119,7 @@ Result Interpretation by Specialist
 
     $('#specialist_approveButton_update').on('click', function (e) {
         var val_upd = $(document).find(".specialistRemarksValue_update").val();
-        if (val_upd !== undefined && val_upd !== null && val_upd !== "") {
+        if (val_upd.trim() !== undefined && val_upd.trim() !== null && val_upd.trim() !== "") {
                //edit specialist remarks
             $(document).find(".saveError").css("display", "none");
         var pHistoryId = $("#pHistoryId").val();
@@ -148,6 +151,7 @@ Result Interpretation by Specialist
         } else { $(document).find(".saveError").css("display", "block"); }
 
         } else {
+            $(document).find(".saveError").css("display", "block");
             $('#specialist_approveButton_update').removeAttr("href");
         }
     });
