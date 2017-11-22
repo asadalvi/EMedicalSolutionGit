@@ -93,6 +93,7 @@ button.toast-close-button {
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
 }
+
 #toast-container > div {
   position: relative;
   overflow: hidden;
