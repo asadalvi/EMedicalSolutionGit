@@ -26,6 +26,7 @@ namespace EMedicalSolution.Models
         public int CreatedBy { get; set; }
         public Nullable<System.DateTime> Modified { get; set; }
         public Nullable<int> ModifiedBy { get; set; }
+        public string CPTcode { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PatientProcedure> PatientProcedures { get; set; }

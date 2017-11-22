@@ -137,89 +137,89 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Disease.cs">
-      <DependentUpon>EPatientMgmt.tt</DependentUpon>
+      <DependentUpon>PatientMgmt.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DiseaseType.cs">
-      <DependentUpon>EPatientMgmt.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\EPatientMgmt.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>EPatientMgmt.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\EPatientMgmt.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>EPatientMgmt.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\EPatientMgmt.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>EPatientMgmt.edmx</DependentUpon>
+      <DependentUpon>PatientMgmt.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Extended\Patient.cs" />
     <Compile Include="Models\InsuranceCardPicture.cs">
-      <DependentUpon>EPatientMgmt.tt</DependentUpon>
+      <DependentUpon>PatientMgmt.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\InsuranceType.cs">
-      <DependentUpon>EPatientMgmt.tt</DependentUpon>
+      <DependentUpon>PatientMgmt.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\IntakeFormHead.cs">
-      <DependentUpon>EPatientMgmt.tt</DependentUpon>
+      <DependentUpon>PatientMgmt.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\InterferingCondition.cs">
-      <DependentUpon>EPatientMgmt.tt</DependentUpon>
+      <DependentUpon>PatientMgmt.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\MedicalNecessity.cs">
-      <DependentUpon>EPatientMgmt.tt</DependentUpon>
+      <DependentUpon>PatientMgmt.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Office.cs">
-      <DependentUpon>EPatientMgmt.tt</DependentUpon>
+      <DependentUpon>PatientMgmt.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Patient.cs">
-      <DependentUpon>EPatientMgmt.tt</DependentUpon>
+      <DependentUpon>PatientMgmt.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\PatientDiseas.cs">
-      <DependentUpon>EPatientMgmt.tt</DependentUpon>
+      <DependentUpon>PatientMgmt.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\PatientHistory.cs">
-      <DependentUpon>EPatientMgmt.tt</DependentUpon>
+      <DependentUpon>PatientMgmt.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\PatientInterferingCondition.cs">
-      <DependentUpon>EPatientMgmt.tt</DependentUpon>
+      <DependentUpon>PatientMgmt.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PatientMgmt.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PatientMgmt.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PatientMgmt.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PatientMgmt.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PatientMgmt.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PatientMgmt.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\PatientNecessity.cs">
-      <DependentUpon>EPatientMgmt.tt</DependentUpon>
+      <DependentUpon>PatientMgmt.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\PatientProcedure.cs">
-      <DependentUpon>EPatientMgmt.tt</DependentUpon>
+      <DependentUpon>PatientMgmt.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\PatientReport.cs">
-      <DependentUpon>EPatientMgmt.tt</DependentUpon>
+      <DependentUpon>PatientMgmt.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\PatientSymtom.cs">
-      <DependentUpon>EPatientMgmt.tt</DependentUpon>
+      <DependentUpon>PatientMgmt.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ProcedureType.cs">
-      <DependentUpon>EPatientMgmt.tt</DependentUpon>
+      <DependentUpon>PatientMgmt.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ProgressNote.cs">
-      <DependentUpon>EPatientMgmt.tt</DependentUpon>
+      <DependentUpon>PatientMgmt.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Staff.cs">
-      <DependentUpon>EPatientMgmt.tt</DependentUpon>
+      <DependentUpon>PatientMgmt.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Status.cs">
-      <DependentUpon>EPatientMgmt.tt</DependentUpon>
+      <DependentUpon>PatientMgmt.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Symptom.cs">
-      <DependentUpon>EPatientMgmt.tt</DependentUpon>
+      <DependentUpon>PatientMgmt.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\User.cs">
-      <DependentUpon>EPatientMgmt.tt</DependentUpon>
+      <DependentUpon>PatientMgmt.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UserRole.cs">
-      <DependentUpon>EPatientMgmt.tt</DependentUpon>
+      <DependentUpon>PatientMgmt.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Utility.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -298,30 +298,30 @@
     <Content Include="Files\Signatures\Signature_3.png" />
     <Content Include="Global.asax" />
     <Content Include="Files\Reports\Report_2.pdf" />
-    <EntityDeploy Include="Models\EPatientMgmt.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>EPatientMgmt.Designer.cs</LastGenOutput>
-    </EntityDeploy>
     <Content Include="Images\ajax_loader.svg" />
-    <Content Include="Models\EPatientMgmt.edmx.diagram">
-      <DependentUpon>EPatientMgmt.edmx</DependentUpon>
-    </Content>
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap.min.css.map" />
     <Content Include="Content\toastr.scss" />
     <Content Include="Content\toastr.less" />
-    <None Include="Properties\PublishProfiles\eMedicalSolution.pubxml" />
-    <Content Include="Models\EPatientMgmt.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>EPatientMgmt.edmx</DependentUpon>
-      <LastGenOutput>EPatientMgmt.Context.cs</LastGenOutput>
+    <EntityDeploy Include="Models\PatientMgmt.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>PatientMgmt.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\PatientMgmt.edmx.diagram">
+      <DependentUpon>PatientMgmt.edmx</DependentUpon>
     </Content>
-    <Content Include="Models\EPatientMgmt.tt">
+    <None Include="Properties\PublishProfiles\eMedicalSolution.pubxml" />
+    <Content Include="Models\PatientMgmt.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>EPatientMgmt.edmx</DependentUpon>
-      <LastGenOutput>EPatientMgmt.cs</LastGenOutput>
+      <DependentUpon>PatientMgmt.edmx</DependentUpon>
+      <LastGenOutput>PatientMgmt.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\PatientMgmt.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>PatientMgmt.edmx</DependentUpon>
+      <LastGenOutput>PatientMgmt.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\toastr.js" />
     <Content Include="Scripts\toastr.min.js" />

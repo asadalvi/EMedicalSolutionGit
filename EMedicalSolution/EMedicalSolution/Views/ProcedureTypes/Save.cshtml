@@ -14,6 +14,11 @@
         @Html.ValidationMessageFor(a => a.ID)
     </div>
     <div class="w3-row w3-margin-top">
+        <label class="w3-text-green">CPTcode</label>
+        @Html.TextBoxFor(a => a.CPTcode, new { @class = "w3-input w3-border" })
+        @Html.ValidationMessageFor(a => a.CPTcode)
+    </div>
+    <div class="w3-row w3-margin-top">
         <label class="w3-text-green">Title</label>
         @Html.TextBoxFor(a => a.Title, new { @class = "w3-input w3-border" })
         @Html.ValidationMessageFor(a => a.Title)

@@ -29,6 +29,7 @@ namespace EMedicalSolution.Controllers
                     data = oProcedureTypes.Select(s => new
                     {
                         s.ID,
+                        s.CPTcode,
                         s.Title,
                         s.Created,
                         s.CreatedBy
@@ -64,6 +65,7 @@ namespace EMedicalSolution.Controllers
                         if (v != null)
                         {
                             v.Title = oProcedureType.Title;
+                            v.CPTcode = oProcedureType.CPTcode;
                             v.Created = DateTime.Now;
                             v.CreatedBy = Convert.ToInt32(Session["userID"].ToString());
                         }
