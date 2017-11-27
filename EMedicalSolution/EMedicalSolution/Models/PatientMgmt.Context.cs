@@ -32,6 +32,7 @@ namespace EMedicalSolution.Models
         public virtual DbSet<IntakeFormHead> IntakeFormHeads { get; set; }
         public virtual DbSet<InterferingCondition> InterferingConditions { get; set; }
         public virtual DbSet<MedicalNecessity> MedicalNecessities { get; set; }
+        public virtual DbSet<NecessitiesProcedureMapping> NecessitiesProcedureMappings { get; set; }
         public virtual DbSet<Office> Offices { get; set; }
         public virtual DbSet<PatientDiseas> PatientDiseases { get; set; }
         public virtual DbSet<PatientHistory> PatientHistories { get; set; }

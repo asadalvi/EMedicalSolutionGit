@@ -158,6 +158,9 @@
     <Compile Include="Models\MedicalNecessity.cs">
       <DependentUpon>PatientMgmt.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\NecessitiesProcedureMapping.cs">
+      <DependentUpon>PatientMgmt.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Office.cs">
       <DependentUpon>PatientMgmt.tt</DependentUpon>
     </Compile>

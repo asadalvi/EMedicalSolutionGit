@@ -17,6 +17,7 @@ namespace EMedicalSolution.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public MedicalNecessity()
         {
+            this.NecessitiesProcedureMappings = new HashSet<NecessitiesProcedureMapping>();
             this.PatientHistories = new HashSet<PatientHistory>();
         }
     
@@ -28,6 +29,8 @@ namespace EMedicalSolution.Models
         public Nullable<System.DateTime> Modified { get; set; }
         public Nullable<int> ModifiedBy { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<NecessitiesProcedureMapping> NecessitiesProcedureMappings { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PatientHistory> PatientHistories { get; set; }
     }
