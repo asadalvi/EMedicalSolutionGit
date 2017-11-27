@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="emedical321_PatientMgmtModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="emedical321_PatientMgmtModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Diseases">
           <Key>
             <PropertyRef Name="ID" />
@@ -90,6 +90,14 @@
           <Property Name="CreatedBy" Type="int" Nullable="false" />
           <Property Name="Modified" Type="datetime" />
           <Property Name="ModifiedBy" Type="int" />
+        </EntityType>
+        <EntityType Name="NecessitiesProcedureMapping">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProcedureID" Type="int" Nullable="false" />
+          <Property Name="NecessityID" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Offices">
           <Key>
@@ -234,11 +242,11 @@
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Title" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CPTcode" Type="varchar" MaxLength="100" />
           <Property Name="Created" Type="datetime" Nullable="false" />
           <Property Name="CreatedBy" Type="int" Nullable="false" />
           <Property Name="Modified" Type="datetime" />
           <Property Name="ModifiedBy" Type="int" />
-          <Property Name="CPTcode" Type="varchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="ProgressNotes">
           <Key>
@@ -346,6 +354,30 @@
             </Principal>
             <Dependent Role="InsuranceCardPictures">
               <PropertyRef Name="PatientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NecessitiesProcedureMapping_MedicalNecessities">
+          <End Role="MedicalNecessities" Type="Self.MedicalNecessities" Multiplicity="1" />
+          <End Role="NecessitiesProcedureMapping" Type="Self.NecessitiesProcedureMapping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MedicalNecessities">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="NecessitiesProcedureMapping">
+              <PropertyRef Name="NecessityID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NecessitiesProcedureMapping_ProcedureTypes">
+          <End Role="ProcedureTypes" Type="Self.ProcedureTypes" Multiplicity="1" />
+          <End Role="NecessitiesProcedureMapping" Type="Self.NecessitiesProcedureMapping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProcedureTypes">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="NecessitiesProcedureMapping">
+              <PropertyRef Name="ProcedureID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -657,6 +689,7 @@
           <EntitySet Name="IntakeFormHead" EntityType="Self.IntakeFormHead" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="InterferingConditions" EntityType="Self.InterferingConditions" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MedicalNecessities" EntityType="Self.MedicalNecessities" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="NecessitiesProcedureMapping" EntityType="Self.NecessitiesProcedureMapping" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Offices" EntityType="Self.Offices" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PatientDiseases" EntityType="Self.PatientDiseases" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PatientHistory" EntityType="Self.PatientHistory" Schema="dbo" store:Type="Tables" />
@@ -684,6 +717,14 @@
           <AssociationSet Name="FK_InsuranceCardPictures_Patients" Association="Self.FK_InsuranceCardPictures_Patients">
             <End Role="Patients" EntitySet="Patients" />
             <End Role="InsuranceCardPictures" EntitySet="InsuranceCardPictures" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NecessitiesProcedureMapping_MedicalNecessities" Association="Self.FK_NecessitiesProcedureMapping_MedicalNecessities">
+            <End Role="MedicalNecessities" EntitySet="MedicalNecessities" />
+            <End Role="NecessitiesProcedureMapping" EntitySet="NecessitiesProcedureMapping" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NecessitiesProcedureMapping_ProcedureTypes" Association="Self.FK_NecessitiesProcedureMapping_ProcedureTypes">
+            <End Role="ProcedureTypes" EntitySet="ProcedureTypes" />
+            <End Role="NecessitiesProcedureMapping" EntitySet="NecessitiesProcedureMapping" />
           </AssociationSet>
           <AssociationSet Name="FK_PatientDiseases_Diseases" Association="Self.FK_PatientDiseases_Diseases">
             <End Role="Diseases" EntitySet="Diseases" />
@@ -886,7 +927,18 @@
           <Property Name="CreatedBy" Type="Int32" Nullable="false" />
           <Property Name="Modified" Type="DateTime" Precision="3" />
           <Property Name="ModifiedBy" Type="Int32" />
+          <NavigationProperty Name="NecessitiesProcedureMappings" Relationship="Self.FK_NecessitiesProcedureMapping_MedicalNecessities" FromRole="MedicalNecessities" ToRole="NecessitiesProcedureMapping" />
           <NavigationProperty Name="PatientHistories" Relationship="Self.FK_PatientHistory_MedicalNecessities" FromRole="MedicalNecessities" ToRole="PatientHistory" />
+        </EntityType>
+        <EntityType Name="NecessitiesProcedureMapping">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProcedureID" Type="Int32" Nullable="false" />
+          <Property Name="NecessityID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="MedicalNecessity" Relationship="Self.FK_NecessitiesProcedureMapping_MedicalNecessities" FromRole="NecessitiesProcedureMapping" ToRole="MedicalNecessities" />
+          <NavigationProperty Name="ProcedureType" Relationship="Self.FK_NecessitiesProcedureMapping_ProcedureTypes" FromRole="NecessitiesProcedureMapping" ToRole="ProcedureTypes" />
         </EntityType>
         <EntityType Name="Office">
           <Key>
@@ -1066,11 +1118,12 @@
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CPTcode" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="CreatedBy" Type="Int32" Nullable="false" />
           <Property Name="Modified" Type="DateTime" Precision="3" />
           <Property Name="ModifiedBy" Type="Int32" />
-          <Property Name="CPTcode" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="NecessitiesProcedureMappings" Relationship="Self.FK_NecessitiesProcedureMapping_ProcedureTypes" FromRole="ProcedureTypes" ToRole="NecessitiesProcedureMapping" />
           <NavigationProperty Name="PatientProcedures" Relationship="Self.FK_PatientProcedures_ProcedureTypes" FromRole="ProcedureTypes" ToRole="PatientProcedures" />
         </EntityType>
         <EntityType Name="ProgressNote">
@@ -1263,6 +1316,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_NecessitiesProcedureMapping_MedicalNecessities">
+          <End Role="MedicalNecessities" Type="Self.MedicalNecessity" Multiplicity="1" />
+          <End Role="NecessitiesProcedureMapping" Type="Self.NecessitiesProcedureMapping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MedicalNecessities">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="NecessitiesProcedureMapping">
+              <PropertyRef Name="NecessityID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_PatientHistory_MedicalNecessities">
           <End Role="MedicalNecessities" Type="Self.MedicalNecessity" Multiplicity="0..1" />
           <End Role="PatientHistory" Type="Self.PatientHistory" Multiplicity="*" />
@@ -1272,6 +1337,18 @@
             </Principal>
             <Dependent Role="PatientHistory">
               <PropertyRef Name="MedicalNecessitiesID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NecessitiesProcedureMapping_ProcedureTypes">
+          <End Role="ProcedureTypes" Type="Self.ProcedureType" Multiplicity="1" />
+          <End Role="NecessitiesProcedureMapping" Type="Self.NecessitiesProcedureMapping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProcedureTypes">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="NecessitiesProcedureMapping">
+              <PropertyRef Name="ProcedureID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1499,6 +1576,7 @@
           <EntitySet Name="IntakeFormHeads" EntityType="Self.IntakeFormHead" />
           <EntitySet Name="InterferingConditions" EntityType="Self.InterferingCondition" />
           <EntitySet Name="MedicalNecessities" EntityType="Self.MedicalNecessity" />
+          <EntitySet Name="NecessitiesProcedureMappings" EntityType="Self.NecessitiesProcedureMapping" />
           <EntitySet Name="Offices" EntityType="Self.Office" />
           <EntitySet Name="PatientDiseases" EntityType="Self.PatientDiseas" />
           <EntitySet Name="PatientHistories" EntityType="Self.PatientHistory" />
@@ -1551,9 +1629,17 @@
             <End Role="InterferingConditions" EntitySet="InterferingConditions" />
             <End Role="PatientInterferingCondition" EntitySet="PatientInterferingConditions" />
           </AssociationSet>
+          <AssociationSet Name="FK_NecessitiesProcedureMapping_MedicalNecessities" Association="Self.FK_NecessitiesProcedureMapping_MedicalNecessities">
+            <End Role="MedicalNecessities" EntitySet="MedicalNecessities" />
+            <End Role="NecessitiesProcedureMapping" EntitySet="NecessitiesProcedureMappings" />
+          </AssociationSet>
           <AssociationSet Name="FK_PatientHistory_MedicalNecessities" Association="Self.FK_PatientHistory_MedicalNecessities">
             <End Role="MedicalNecessities" EntitySet="MedicalNecessities" />
             <End Role="PatientHistory" EntitySet="PatientHistories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NecessitiesProcedureMapping_ProcedureTypes" Association="Self.FK_NecessitiesProcedureMapping_ProcedureTypes">
+            <End Role="ProcedureTypes" EntitySet="ProcedureTypes" />
+            <End Role="NecessitiesProcedureMapping" EntitySet="NecessitiesProcedureMappings" />
           </AssociationSet>
           <AssociationSet Name="FK_PatientHistory_Offices" Association="Self.FK_PatientHistory_Offices">
             <End Role="Offices" EntitySet="Offices" />
@@ -1727,6 +1813,15 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="NecessitiesProcedureMappings">
+            <EntityTypeMapping TypeName="emedical321_PatientMgmtModel.NecessitiesProcedureMapping">
+              <MappingFragment StoreEntitySet="NecessitiesProcedureMapping">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ProcedureID" ColumnName="ProcedureID" />
+                <ScalarProperty Name="NecessityID" ColumnName="NecessityID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Offices">
             <EntityTypeMapping TypeName="emedical321_PatientMgmtModel.Office">
               <MappingFragment StoreEntitySet="Offices">
@@ -1878,11 +1973,11 @@
               <MappingFragment StoreEntitySet="ProcedureTypes">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="CPTcode" ColumnName="CPTcode" />
                 <ScalarProperty Name="Created" ColumnName="Created" />
                 <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
                 <ScalarProperty Name="Modified" ColumnName="Modified" />
                 <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
-                <ScalarProperty Name="CPTcode" ColumnName="CPTcode" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

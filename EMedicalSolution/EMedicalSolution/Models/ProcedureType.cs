@@ -17,17 +17,20 @@ namespace EMedicalSolution.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public ProcedureType()
         {
+            this.NecessitiesProcedureMappings = new HashSet<NecessitiesProcedureMapping>();
             this.PatientProcedures = new HashSet<PatientProcedure>();
         }
     
         public int ID { get; set; }
         public string Title { get; set; }
+        public string CPTcode { get; set; }
         public System.DateTime Created { get; set; }
         public int CreatedBy { get; set; }
         public Nullable<System.DateTime> Modified { get; set; }
         public Nullable<int> ModifiedBy { get; set; }
-        public string CPTcode { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<NecessitiesProcedureMapping> NecessitiesProcedureMappings { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PatientProcedure> PatientProcedures { get; set; }
     }

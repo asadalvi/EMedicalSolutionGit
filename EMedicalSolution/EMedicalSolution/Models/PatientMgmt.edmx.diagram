@@ -4,15 +4,16 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="3d28cd84da85440cbbdeac3465fea17f" Name="Diagram1">
+      <Diagram DiagramId="47f8a00f210d42229b92cca761b9c7fa" Name="Diagram1">
         <EntityTypeShape EntityType="emedical321_PatientMgmtModel.Disease" Width="1.5" PointX="6" PointY="7.125" IsExpanded="true" />
         <EntityTypeShape EntityType="emedical321_PatientMgmtModel.DiseaseType" Width="1.5" PointX="3.75" PointY="7.25" IsExpanded="true" />
         <EntityTypeShape EntityType="emedical321_PatientMgmtModel.InsuranceCardPicture" Width="1.5" PointX="3" PointY="15.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="emedical321_PatientMgmtModel.InsuranceType" Width="1.5" PointX="3.75" PointY="11.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="emedical321_PatientMgmtModel.InsuranceType" Width="1.5" PointX="3.75" PointY="11.375" IsExpanded="true" />
         <EntityTypeShape EntityType="emedical321_PatientMgmtModel.IntakeFormHead" Width="1.5" PointX="6" PointY="22.625" IsExpanded="true" />
         <EntityTypeShape EntityType="emedical321_PatientMgmtModel.InterferingCondition" Width="1.5" PointX="9" PointY="8.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="emedical321_PatientMgmtModel.MedicalNecessity" Width="1.5" PointX="3.75" PointY="20.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="emedical321_PatientMgmtModel.Office" Width="1.5" PointX="3.75" PointY="23.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="emedical321_PatientMgmtModel.MedicalNecessity" Width="1.5" PointX="3.75" PointY="20.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="emedical321_PatientMgmtModel.NecessitiesProcedureMapping" Width="1.5" PointX="12.625" PointY="24.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="emedical321_PatientMgmtModel.Office" Width="1.5" PointX="3.75" PointY="24" IsExpanded="true" />
         <EntityTypeShape EntityType="emedical321_PatientMgmtModel.PatientDiseas" Width="1.5" PointX="8.25" PointY="15.875" IsExpanded="true" />
         <EntityTypeShape EntityType="emedical321_PatientMgmtModel.PatientHistory" Width="1.5" PointX="6" PointY="13.875" IsExpanded="true" />
         <EntityTypeShape EntityType="emedical321_PatientMgmtModel.PatientInterferingCondition" Width="1.5" PointX="11.25" PointY="15.875" IsExpanded="true" />
@@ -21,13 +22,13 @@
         <EntityTypeShape EntityType="emedical321_PatientMgmtModel.PatientReport" Width="1.5" PointX="11.25" PointY="11.875" IsExpanded="true" />
         <EntityTypeShape EntityType="emedical321_PatientMgmtModel.Patient" Width="1.5" PointX="0.75" PointY="15.25" IsExpanded="true" />
         <EntityTypeShape EntityType="emedical321_PatientMgmtModel.PatientSymtom" Width="1.5" PointX="11.25" PointY="19.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="emedical321_PatientMgmtModel.ProcedureType" Width="1.5" PointX="6" PointY="27.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="emedical321_PatientMgmtModel.ProcedureType" Width="1.5" PointX="6" PointY="27.125" IsExpanded="true" />
         <EntityTypeShape EntityType="emedical321_PatientMgmtModel.ProgressNote" Width="1.5" PointX="14.25" PointY="15.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="emedical321_PatientMgmtModel.Staff" Width="1.5" PointX="6" PointY="31.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="emedical321_PatientMgmtModel.Staff" Width="1.5" PointX="6" PointY="31.5" IsExpanded="true" />
         <EntityTypeShape EntityType="emedical321_PatientMgmtModel.Status" Width="1.5" PointX="3.75" PointY="28" IsExpanded="true" />
         <EntityTypeShape EntityType="emedical321_PatientMgmtModel.Symptom" Width="1.5" PointX="9" PointY="24.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="emedical321_PatientMgmtModel.UserRole" Width="1.5" PointX="6" PointY="36.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="emedical321_PatientMgmtModel.User" Width="1.5" PointX="8.25" PointY="32" IsExpanded="true" />
+        <EntityTypeShape EntityType="emedical321_PatientMgmtModel.UserRole" Width="1.5" PointX="6" PointY="36.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="emedical321_PatientMgmtModel.User" Width="1.5" PointX="8.25" PointY="32.125" IsExpanded="true" />
         <AssociationConnector Association="emedical321_PatientMgmtModel.FK_Diseases_DiseaseTypes" ManuallyRouted="false" />
         <AssociationConnector Association="emedical321_PatientMgmtModel.FK_PatientDiseases_Diseases" ManuallyRouted="false" />
         <AssociationConnector Association="emedical321_PatientMgmtModel.FK_InsuranceCardPictures_PatientHistory" ManuallyRouted="false" />
@@ -37,7 +38,9 @@
         <AssociationConnector Association="emedical321_PatientMgmtModel.FK_PatientInterferingCondition_IntakeFormHead" ManuallyRouted="false" />
         <AssociationConnector Association="emedical321_PatientMgmtModel.FK_PatientSymtoms_IntakeFormHead" ManuallyRouted="false" />
         <AssociationConnector Association="emedical321_PatientMgmtModel.FK_PatientInterferingCondition_InterferingConditions" ManuallyRouted="false" />
+        <AssociationConnector Association="emedical321_PatientMgmtModel.FK_NecessitiesProcedureMapping_MedicalNecessities" ManuallyRouted="false" />
         <AssociationConnector Association="emedical321_PatientMgmtModel.FK_PatientHistory_MedicalNecessities" ManuallyRouted="false" />
+        <AssociationConnector Association="emedical321_PatientMgmtModel.FK_NecessitiesProcedureMapping_ProcedureTypes" ManuallyRouted="false" />
         <AssociationConnector Association="emedical321_PatientMgmtModel.FK_PatientHistory_Offices" ManuallyRouted="false" />
         <AssociationConnector Association="emedical321_PatientMgmtModel.FK_Staff_Offices" ManuallyRouted="false" />
         <AssociationConnector Association="emedical321_PatientMgmtModel.FK_PatientDiseases_PatientHistory" ManuallyRouted="false" />
