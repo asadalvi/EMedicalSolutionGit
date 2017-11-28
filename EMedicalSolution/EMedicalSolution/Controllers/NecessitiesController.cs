@@ -37,13 +37,21 @@ namespace EMedicalSolution.Controllers
                 }, JsonRequestBehavior.AllowGet);
             }
         }
-
+        public class Select2Result
+            {
+                public int id { get; set; }
+                public string text { get; set; }
+            } 
         [HttpGet]
         public ActionResult Save(int id)
         {
             using (PatientMgmtEntities db = new PatientMgmtEntities())
             {
                 var v = db.MedicalNecessities.Where(a => a.ID == id).FirstOrDefault();
+
+                //var groupedSkills = (from s in db.ProcedureTypes group s by s.ID).ToDictionary(x => x.Key, x => x.ToList());
+                 ViewBag.proTypes = db.ProcedureTypes.ToList();
+
                 return View(v);
             }
 

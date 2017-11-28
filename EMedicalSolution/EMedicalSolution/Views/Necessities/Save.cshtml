@@ -1,4 +1,6 @@
-﻿@model EMedicalSolution.Models.MedicalNecessity
+﻿
+
+@model EMedicalSolution.Models.MedicalNecessity
 
 <h2>Save</h2>
 
@@ -10,7 +12,7 @@
     }
         <div class="w3-row w3-margin-top">
         <label class="w3-text-green">ID</label>
-        @Html.TextBoxFor(a => a.ID, new { @class = "w3-input w3-border", Readonly="readonly" })
+        @Html.TextBoxFor(a => a.ID, new { @class = "w3-input w3-border", Readonly = "readonly" })
         @Html.ValidationMessageFor(a => a.ID)
     </div>
     <div class="w3-row w3-margin-top">
@@ -24,8 +26,22 @@
         @Html.TextAreaFor(a => a.Description, new { @class = "w3-input w3-border" })
         @Html.ValidationMessageFor(a => a.Description)
     </div>
+    var pLists = (List<EMedicalSolution.Models.ProcedureType>)ViewBag.proTypes;
 
     <div class="w3-row  w3-margin-top">
-        <input class="w3-btn-block w3-green" type="submit" value="Save" />
+        <select id="multipleSelectPlist" data-placeholder="Select an option" multiple style="min-width:220px;max-width:220px;">
+            @foreach (var item in pLists)
+            {
+                <option value="@item.ID">@item.Title</option>
+            }
+        </select>
     </div>
-}
+    <div class="w3-row  w3-margin-top">
+        <input class="w3-btn-block w3-green" type="submit" value="Save" />
+    </div>    
+        }
+        <script type="text/javascript">
+            setTimeout(function () {
+                $("#multipleSelectPlist").select2();
+            }, 100);
+        </script>
