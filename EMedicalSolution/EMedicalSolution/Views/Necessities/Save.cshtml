@@ -4,7 +4,7 @@
 
 <h2>Save</h2>
 
-@using (Html.BeginForm("save", "Necessities", FormMethod.Post, new { id = "popupForm" }))
+@using (Html.BeginForm("save", "Necessities", FormMethod.Post, new { id = "save_necessityMappings" }))
 {
     if (Model != null && Model.ID > 0)
     {
@@ -17,14 +17,17 @@
     </div>
     <div class="w3-row w3-margin-top">
         <label class="w3-text-green">ICD10Code</label>
-        @Html.TextBoxFor(a => a.ICD10Code, new { @class = "w3-input w3-border" })
+        @Html.TextBoxFor(a => a.ICD10Code, new { @class = "w3-input w3-border", id="codetypes_nes" })
         @Html.ValidationMessageFor(a => a.ICD10Code)
+        <span id="ncs_code" style="color:red;display:none;">this field is required*</span>
     </div>
 
     <div class="w3-row w3-margin-top">
         <label class="w3-text-green">Description</label>
-        @Html.TextAreaFor(a => a.Description, new { @class = "w3-input w3-border" })
+        @Html.TextAreaFor(a => a.Description, new { @class = "w3-input w3-border" ,id="destypes_nes" })
         @Html.ValidationMessageFor(a => a.Description)
+        <span id="ncs_Description" style="color:red;display:none;">this field is required*</span>
+
     </div>
     var pLists = (List<EMedicalSolution.Models.ProcedureType>)ViewBag.proTypes;
 
@@ -37,11 +40,62 @@
         </select>
     </div>
     <div class="w3-row  w3-margin-top">
-        <input class="w3-btn-block w3-green" type="submit" value="Save" />
+        <input class="w3-btn-block w3-green" type="button" value="Save" id="submit_mapping" />
     </div>    
         }
         <script type="text/javascript">
             setTimeout(function () {
                 $("#multipleSelectPlist").select2();
+                var ProceduresId = "";
+                $('#multipleSelectPlist').on('change', function () {
+                    //console.log('Selected Value : ' + $(this).val() + ' - Selected Text : ' + $('#multipleSelectPlist option:selected').text());
+                    ProceduresId = $(this).val();
+                });
+                $("#submit_mapping").on("click", function (e) {
+                    var ncs_Description = $("#destypes_nes").val();
+                    var ncs_code = $("#codetypes_nes").val();
+                    if (ncs_code === undefined || ncs_code === null || ncs_code === "") {
+                        $("#ncs_code").css("display", "block");
+                        return false;
+                    } else {
+                        $("#ncs_code").css("display", "none");
+                    }
+                    if (ncs_Description === undefined || ncs_Description === null || ncs_Description === "")
+                    {
+                        $("#ncs_Description").css("display", "block");
+                        return false;
+                    } else
+                    {
+                        $("#ncs_Description").css("display", "none");
+                    }
+                   
+                $.ajax({
+                        type: "POST",
+                        url: "/Necessities/save/?ProceduresId=" + ProceduresId,
+                        data: $('#save_necessityMappings').serialize(),
+                        success: function (data) {
+                            $("#ncs_Description").css("display", "none");
+                            $("#ncs_Description").css("display", "none");
+                            //console.log(data);
+                            if (data) {
+                                $("#ncs_Description").css("display", "none");
+                                $("#ncs_code").css("display", "none");
+                                toastr.success("Data save successfully!");
+                            //    $(".ajax_loader_save").css("display", "none");
+                            //    $(document).find(".saveError").css("display", "none");
+                            //    $(document).find("#saveSpecialistData").css("display", "none");
+                            //    $(document).find(".specialistRemarksValue").val("");
+                            //    $("#ApprovedbySpecialist").css('display', 'block');
+                            //    $("#sp_name").text(specialistRemarks);
+
+                            //    $("#specialistRemarksTextBox").css('display', 'none');
+                            }
+                        },
+                        error: function ($data) {
+                            toastr.error("Error, The request can not be completed due to some error!");
+                        }
+                })  
+                });
             }, 100);
+
         </script>

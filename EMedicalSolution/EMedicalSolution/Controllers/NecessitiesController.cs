@@ -58,10 +58,13 @@ namespace EMedicalSolution.Controllers
         }
 
         [HttpPost]
-        public ActionResult Save(MedicalNecessity necessity)
+        public ActionResult Save(MedicalNecessity necessity,string ProceduresId)
         {
             bool status = false;
+            var ptList = ProceduresId.Split(',');
 
+            NecessitiesProcedureMapping mapps = new NecessitiesProcedureMapping(); 
+            //int[] ptListAll = Array.ConvertAll(ptList, c => (int)Char.GetNumericValue(c));
             if (ModelState.IsValid)
             {
                 using (PatientMgmtEntities db = new PatientMgmtEntities())
@@ -86,6 +89,17 @@ namespace EMedicalSolution.Controllers
                         db.MedicalNecessities.Add(necessity);
                     }
                     db.SaveChanges();
+                    int last_id = necessity.ID;
+                    if (ptList.Length > 0)
+                    {
+                        for (var i = 0; i < ptList.Length; i++)
+                        {
+                            mapps.NecessityID = last_id;
+                            mapps.ProcedureID = Convert.ToInt32(ptList[i]);
+                            db.NecessitiesProcedureMappings.Add(mapps);
+                            db.SaveChanges();
+                        }
+                    }
                     status = true;
                 }
 
