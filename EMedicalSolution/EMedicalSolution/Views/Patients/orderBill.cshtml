@@ -176,13 +176,13 @@
                 <thead>
                     <tr>
                         <td style="width: 4%">&#x2716;</td>
-                        <td style="width: 20%">Description</td>
+                        <td style="width: 30%">Description</td>
                         <td style="width: 9%">Code</td>
                         <td style="width: 4%">MOD</td>
-                        <td style="width: 20%">Description</td>
+                        <td style="width: 15%">Description</td>
                         <td style="width: 9%">Code</td>
                         <td style="width: 4%">MOD</td>
-                        <td style="width: 20%">Description</td>
+                        <td style="width: 15%">Description</td>
                         <td style="width: 9%">Code</td>
                     </tr>
                 </thead>
@@ -193,259 +193,49 @@
                         <td>DIAGNOSIS</td>
                     </tr>
 
-                    @*@if (Model != null && Model.objSymptomVM1 != null)
+                    @foreach (var ICD10 in Model.objMedicalNecessity1)
+                    {
+                        <tr>
+
+                            <td>&#x2716;</td>
+                            <td>@ICD10.Description</td>
+                            <td>@ICD10.ICD10Code</td>
+                            <td></td>
+                            <td> </td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    }
+
+
+                    <tr class="bg-grey">
+                        <td></td>
+                        <td>TMFLOW</td>
+                    </tr>
+
+
+                    @foreach (var CPTs in Model.PatientProceduresVM1)
+                    {
+                        var cptStr = CPTs.CPTcode.ToString();
+                        var cptArr = cptStr.Split(',');
+                        foreach (string cptcode in cptArr)
                         {
-                            int i = 0;
-                            foreach (var symptom in Model.objSymptomVM1)
-                            {
-                                if (i == 0)
-                                {
-                                    @:<tr>
-                                  }
-                                if (ViewBag.HistoryID != symptom.HistoryID)
-                                {
-                                    if (i == 0)
-                                    {
+                            <tr>
+                                <td>&#x2716;</td>
+                                <td>@CPTs.Title</td>
+                                <td>@cptcode</td>
+                                <td></td>
+                                <td> </td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                        }
+                    }
 
-                                        <td>&#x2716;</td>
-                                        <td> @symptom.Title</td>
-                                            <td>G1000000</td>
-                                        i = 1; continue;
-
-                                    }
-                                    if (i == 1)
-                                    {
-
-                                        <td>&#x2716;</td>
-                                        <td> @symptom.Title</td>
-                                                    <td>G1000000</td>
-                                        i = 2; continue;
-
-                                    }
-                                    if (i == 2)
-                                    {
-
-                                        <td>&#x2716;</td>
-                                        <td> @symptom.Title</td>
-                                                <td>G1000000</td>
-                                        i = 0; continue;
-
-                                    }
-                                    if (i == 2)
-                                    {
-                                        @:</tr>
-                                  }
-
-                                }
-                            }
-                        }*@
-                    <tr>
-                        <td>&#x2716;</td>
-                        <td>Obstructive Sleep Apnea</td>
-                        <td>G47.33</td>
-                        <td>&#x2716;</td>
-                        <td>HYPERSOMNIA W/SLEEP APNEA</td>
-                        <td>G47.30</td>
-                        <td>&#x2716;</td>
-                        <td>SNORING</td>
-                        <td>R06.83</td>
-                    </tr>
-                    <tr>
-                        <td>&#x2716;</td>
-                        <td>Sleep Related Nonobstructive Alveolar Hypoventilation</td>
-                        <td>G47.34</td>
-                        <td>&#x2716;</td>
-                        <td>RECURRENT HYPERSOMNIA </td>
-                        <td>G47.13</td>
-                        <td>&#x2716;</td>
-                        <td>Central Apnea </td>
-                        <td>G47.31</td>
-                    </tr>
-                    <tr>
-                        <td>&#x2716;</td>
-                        <td>Obesity Hypoventilation Syndrome (Morbid Obesity)</td>
-                        <td>E66.2</td>
-
-                        <td>&#x2716;</td>
-                        <td>HYPERSOMNIA</td>
-                        <td>G47.10</td>
-
-                        <td>&#x2716;</td>
-                        <td>Sleep Paralysis</td>
-                        <td>G47.53</td>
-
-                    </tr>
-
-                    <tr class="bg-grey">
-                        <td></td>
-                        <td>SLEEP STUDIES</td>
-                    </tr>
-                    <tr>
-                        <td>&#x2716;</td>
-                        <td>Polysomnagraphy (PSG) – 1st night</td>
-                        <td>95810</td>
-                        <td>&#x2716;</td>
-                        <td>Split Night Cpap Titration</td>
-                        <td>95811</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-
-                    </tr>
-                    <tr>
-                        <td>&#x2716;</td>
-                        <td>Cpap Titration – 2nd night</td>
-                        <td>95811</td>
-                        <td>&#x2716;</td>
-                        <td>CPAP/BIPAP Titration</td>
-                        <td>95811</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-
-                    </tr>
-                    <tr>
-                        <td>&#x2716;</td>
-                        <td>PAP NAP (DESENZITATION</td>
-                        <td>95807</td>
-
-                        <td>&#x2716;</td>
-                        <td>HST X 3 NIGHTS</td>
-                        <td>95800</td>
-
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-
-                    <tr class="bg-grey">
-                        <td></td>
-                        <td>CPAP & SUPPLIES</td>
-                    </tr>
-                    <tr>
-                        <td>&#x2716;</td>
-                        <td>CPAP full face mask</td>
-                        <td>A7030</td>
-                        <td>&#x2716;</td>
-                        <td>CPAP full face mask</td>
-                        <td>E0601</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-
-                    </tr>
-                    <tr>
-                        <td>&#x2716;</td>
-                        <td> Replacement facemask interface</td>
-                        <td>A7031</td>
-                        <td>&#x2716;</td>
-                        <td> BIPAP w/o backup</td>
-                        <td>E0470</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-
-                    </tr>
-                    <tr>
-                        <td>&#x2716;</td>
-                        <td>Replacement nasal cushion</td>
-                        <td>A7032</td>
-                        <td></td>
-                        <td>BIPAP w/ backup</td>
-                        <td>E0471</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-
-                    </tr>
-                    <tr>
-                        <td>&#x2716;</td>
-                        <td>Replacement nasal pillows/td>
-                        <td>A7033</td>
-                        <td>&#x2716;</td>
-                        <td>Humidifier heated </td>
-                        <td>E0562</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-
-                    </tr>
-                    <tr>
-                        <td>&#x2716;</td>
-                        <td>Nasal application device </td>
-                        <td>A7034</td>
-                        <td>&#x2716;</td>
-                        <td>HEATED TUBING</td>
-                        <td>A4604</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-
-                    </tr>
-                    <tr>
-                        <td>&#x2716;</td>
-                        <td>POS airway press headgear</td>
-                        <td>A7035</td>
-                        <td>&#x2716;</td>
-                        <td>Battery X 3 Nights</td>
-                        <td>A4630</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-
-                    </tr>
-                    <tr>
-                        <td>&#x2716;</td>
-                        <td>POS airway pressure tubing</td>
-                        <td>A7037</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-
-                    </tr>
-                    <tr>
-                        <td>&#x2716;</td>
-                        <td>POS airway pressure filter</td>
-                        <td>A7038</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-
-                        <td></td>
-                        <td></td>
-                        <td></td>
-
-                    </tr>
-                    <tr>
-                        <td>&#x2716;</td>
-                        <td>PAP oral interface </td>
-                        <td>A7044</td>
-
-                        <td></td>
-                        <td></td>
-                        <td></td>
-
-                        <td></td>
-                        <td></td>
-                        <td></td>
-
-
-                    </tr>
-                    <tr>
-                        <td>&#x2716;</td>
-                        <td>Replacement exhalation port </td>
-                        <td>A7045</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
                 </tbody>
             </table>
 

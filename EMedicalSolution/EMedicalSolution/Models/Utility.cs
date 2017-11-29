@@ -29,6 +29,7 @@ namespace EMedicalSolution.Models
                                                    {
                                                        ID = p.ID,
                                                        Title = p.Title,
+                                                       CPTcode = p.CPTcode,
                                                        ProcedureTypeID = pn.ProcedureTypeID,
                                                        HistoryID = pn.HistoryID
                                                    }).ToList();
