@@ -37,34 +37,29 @@ namespace EMedicalSolution.Controllers
                 }, JsonRequestBehavior.AllowGet);
             }
         }
-        public class Select2Result
-            {
-                public int id { get; set; }
-                public string text { get; set; }
-            } 
+       
         [HttpGet]
         public ActionResult Save(int id)
         {
             using (PatientMgmtEntities db = new PatientMgmtEntities())
             {
                 var v = db.MedicalNecessities.Where(a => a.ID == id).FirstOrDefault();
+                var p = string.Join(",", db.NecessitiesProcedureMappings.Where(x => x.NecessityID == id).Select(x => x.ProcedureID).ToList());
 
-                //var groupedSkills = (from s in db.ProcedureTypes group s by s.ID).ToDictionary(x => x.Key, x => x.ToList());
-                 ViewBag.proTypes = db.ProcedureTypes.ToList();
-
+                ViewBag.procedureTypeIDs = p;
+                ViewBag.proTypes = db.ProcedureTypes.ToList();
                 return View(v);
             }
 
         }
 
         [HttpPost]
-        public ActionResult Save(MedicalNecessity necessity,string ProceduresId)
+        public ActionResult Save(MedicalNecessity necessity, string procedureTypeIDs)
         {
             bool status = false;
-            var ptList = ProceduresId.Split(',');
+            var procedureTypeIDsArr = procedureTypeIDs.Split(',');
 
-            NecessitiesProcedureMapping mapps = new NecessitiesProcedureMapping(); 
-            //int[] ptListAll = Array.ConvertAll(ptList, c => (int)Char.GetNumericValue(c));
+
             if (ModelState.IsValid)
             {
                 using (PatientMgmtEntities db = new PatientMgmtEntities())
@@ -89,16 +84,21 @@ namespace EMedicalSolution.Controllers
                         db.MedicalNecessities.Add(necessity);
                     }
                     db.SaveChanges();
+
                     int last_id = necessity.ID;
-                    if (ptList.Length > 0)
+                    db.NecessitiesProcedureMappings.RemoveRange(db.NecessitiesProcedureMappings.Where(x => x.NecessityID == last_id));
+                    NecessitiesProcedureMapping mapps = new NecessitiesProcedureMapping();
+                    //db.SaveChanges();
+                    if (procedureTypeIDsArr.Length > 0)
                     {
-                        for (var i = 0; i < ptList.Length; i++)
+                        for (var i = 0; i < procedureTypeIDsArr.Length; i++)
                         {
                             mapps.NecessityID = last_id;
-                            mapps.ProcedureID = Convert.ToInt32(ptList[i]);
+                            mapps.ProcedureID = Convert.ToInt32(procedureTypeIDsArr[i]);
                             db.NecessitiesProcedureMappings.Add(mapps);
                             db.SaveChanges();
                         }
+
                     }
                     status = true;
                 }
@@ -131,6 +131,7 @@ namespace EMedicalSolution.Controllers
             bool status = false;
             using (PatientMgmtEntities db = new PatientMgmtEntities())
             {
+                db.NecessitiesProcedureMappings.RemoveRange(db.NecessitiesProcedureMappings.Where(x => x.NecessityID == id));
                 var v = db.MedicalNecessities.Where(a => a.ID == id).FirstOrDefault();
                 if (v != null)
                 {

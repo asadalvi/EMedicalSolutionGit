@@ -30,6 +30,7 @@ namespace EMedicalSolution.ViewModels
     {
         public int ID { get; set; }
         public string Title { get; set; }
+        public string CPTcode { get; set; }
         public int HistoryID { get; set; }
         public int ProcedureTypeID { get; set; }
     }
