@@ -45,7 +45,7 @@
 <script src="~/Scripts/date.format.js"></script>
 
 <script>
-  
+   
         var patientId = $("#historyList_patientID").val();
         var pName = $("#ViewBag_PatienName").val();
         if (pName !== undefined && pName !== "") {
@@ -100,5 +100,10 @@
         $('#loadInsuranceTypeForm').click(function () {
             $('#partialPatientInsuranceType').load('@Url.Action("PatientInsuranceType", "Patients", new { id = ViewBag.patientID })');
         });
+    //setTimeout(function () {
+    //    //set the popup position
+    //    console.log("gG", $('#patients-tab').parent('div'))
+    //    $('#patients-tab').parent('div').css("margin-left", "290px !important;");
+    //}, 200);
 
 </script>
