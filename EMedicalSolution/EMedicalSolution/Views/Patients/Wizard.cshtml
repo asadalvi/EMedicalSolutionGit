@@ -323,7 +323,7 @@
                     if (selectAnyChecked) {
                         $(".ajax_loader_save").css("display", "block");
                         $(document).find(".saveError").css("display", "none");
-                        $.ajax({
+                          $.ajax({
                             type: "POST",
                             enctype: "multipart/form-data",
                             url: "/Patients/" + parentForm + "/?pHistoryId=" + pHistoryId,
@@ -338,6 +338,17 @@
                                         $(".sw-btn-next").removeClass("disabled");
                                         $(".sw-btn-next").css("pointer-events", "auto");
                                     }, 10);
+                                    //the below conditions is for if we add or remove a procedure type 
+                                    //then accordingly we will add it in dropdown for necessity page
+                                    if(parentForm ==="procedureTypes")
+                                        {
+                                        $('#selectThisProcedures').html('');
+                                        var newhtml = '<option selected="" disabled="">--select a procedure--</option>';
+                                        $('#procedureTypes input:checkbox.procedure_Type:checked').each(function () {
+                                           newhtml += '<option value="'+$(this).attr('value')+'">'+ $(this).next('label').text()+'</option>'
+                                        });
+                                        $('#selectThisProcedures').html(newhtml);
+                                        }
                                 }
                             },
                             error: function () {

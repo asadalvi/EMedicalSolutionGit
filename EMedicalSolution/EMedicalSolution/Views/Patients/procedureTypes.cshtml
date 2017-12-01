@@ -12,12 +12,12 @@
         pType = "1";
         <input type="hidden" value="@pType" id="next_button_toggle_1" />
         <input class="w3-check procedure_Type" type="checkbox" name="procedureType" value=@procedure.ID checked required />
-        @procedure.Title
-        }
-        else {
+        <label> @procedure.Title</label>
+            }
+            else {
         <input class="w3-check procedure_Type" type="checkbox" name="procedureType" value=@procedure.ID required />
-        @procedure.Title
-        }
+        <label> @procedure.Title</label>
+            }
 
         <br />
         }

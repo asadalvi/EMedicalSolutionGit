@@ -1,26 +1,49 @@
-﻿
-@{ string mType = "0";}
+﻿@{ string mType = "0";}
+@model EMedicalSolution.ViewModels.patientIntakeViewModel
+
+<div class="w3-row  w3-margin-top">
+    <label class="w3-text-green">Select Procedure Type</label><br />
+    <select id="selectThisProcedures" data-placeholder="Select Procedures" class="w3-input w3-border" style="min-width:220px;max-width:220px;">
+        <option selected disabled>--select a procedure--</option>
+            @if (Model != null && Model.PatientProceduresVM1 != null)
+            {
+                foreach (var procedure in Model.PatientProceduresVM1)
+                {
+                    if (procedure.HistoryID > 0)
+                    {
+                        <option value="@procedure.ID">@procedure.Title</option>
+                    }
+                }
+            } 
+</select>
+    <input type="hidden" name="procedureTypeIDs" id="procedureTypeIDs" value="@ViewBag.procedureTypeIDs" />
+</div>
+
 @using (Html.BeginForm("SaveMedicalNecessities", "Patients", FormMethod.Post, new { id = "SaveMedicalNecessities" }))
 {
     <h3>Primary Diagnosis</h3>
 
     if (Model.objMedicalNecessity1 != null)
     {
-        <div class="w3-responsive checkbox-container">
+        <div class="w3-responsive checkbox-container" id="checkbox-container-neces">
             @foreach (var necessity in Model.objMedicalNecessity1)
             {
                 if (necessity.HistoryID > 0)
                 {
                     mType = "1";
                     <input type="hidden" value="@mType" id="next_button_toggle_4" />
-                    <input type="checkbox" name="necessities" class="necessities" value="@necessity.ID" checked />  @(necessity.ICD10Code + " - " + necessity.Description)
+                    <div class="checkbox-parent-@necessity.ID" style="display:none;">
+                        <input type="checkbox" name="necessities" class="necessities" value="@necessity.ID" checked />  @(necessity.ICD10Code + " - " + necessity.Description)
+                    </div>
                 }
                 else {
-                    <input type="checkbox" name="necessities" class="necessities" value="@necessity.ID" />  @(necessity.ICD10Code + " - " + necessity.Description)
-                }<br />
-            }
-        </div>
-    }
+                    <div class="checkbox-parent-@necessity.ID" style="display:none;">
+                        <input type="checkbox" name="necessities" class="necessities" value="@necessity.ID" />  @(necessity.ICD10Code + " - " + necessity.Description)
+                        </div>
+                        }<br />
+                        }
+                    </div>
+                }
 
     <h4>Secondary Diagnosis</h4>
     if (Model.PatientHistoryVM11 != null && Model.PatientHistoryVM11.SecondaryNecessities != null && Model.PatientHistoryVM11.SecondaryNecessities != "")
@@ -40,6 +63,41 @@
 }
 
 <style>
-    .checkbox-container { border:2px solid #ccc; width:600px; height: 130px; overflow-y: scroll; background:rgba(247, 247, 247, 0.92); }
+    .checkbox-container { border:0px solid #ccc; width:600px; max-height: 130px; overflow-y: scroll; background:rgba(247, 247, 247, 0.92); }
 </style>
+<script type="text/javascript">
+    $('#selectThisProcedures').on('change', function () {
+        $('#checkbox-container-neces input:checkbox.necessities').each(function () {
+            $(this).parent('div').css('display', 'none');            
+        });
+        $.ajax({
+            type: "POST",
+            url: "/Patients/GetNecessityCode/?procId=" + this.value,
+            success: function (data) {
+                if (data) {                    
+                    if (data.data.length > 0) {
+                         
+                        for (var i = 0; i < data.data.length; i++) {
+                            var myclass = (".checkbox-parent-" + data.data[i]);
+                            $("" + myclass).css("display", "block");
+                          
+                        }
+                         
+                    }
+                        toastr.success("Data save successfully!");
+                    //    $(".ajax_loader_save").css("display", "none");
+                    //    $(document).find(".saveError").css("display", "none");
+                    //    $(document).find("#saveSpecialistData").css("display", "none");
+                    //    $(document).find(".specialistRemarksValue").val("");
+                    //    $("#ApprovedbySpecialist").css('display', 'block');
+                    //    $("#sp_name").text(specialistRemarks);
 
+                    //    $("#specialistRemarksTextBox").css('display', 'none');
+                }
+            },
+            error: function ($data) {
+                toastr.error("Error, The request can not be completed due to some error!");
+            }
+        });
+})
+    </script>

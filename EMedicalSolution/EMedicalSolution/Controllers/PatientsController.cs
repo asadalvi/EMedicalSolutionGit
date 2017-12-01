@@ -1021,5 +1021,19 @@ namespace EMedicalSolution.Controllers
                 }, JsonRequestBehavior.AllowGet);
             }
         }
+        //get necessities against procedures id
+        [HttpPost]
+        public ActionResult GetNecessityCode(int procId)
+        {
+            patientIntakeViewModel intakeView = new patientIntakeViewModel();          
+            var pAll = from ns in db.MedicalNecessities
+                                              where ns.NecessitiesProcedureMappings.Any(c => c.ProcedureID == procId)
+                                              select ns.ID;
+
+         return Json(new
+                {
+                    data = pAll
+         }, JsonRequestBehavior.AllowGet);
+        }
     }
 }
