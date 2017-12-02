@@ -439,10 +439,12 @@
     <Content Include="Views\Patients\patientInfo.cshtml" />
     <Content Include="Views\Reports\PatientReports.cshtml" />
     <Content Include="Views\Reports\HistoryList.cshtml" />
-    <Content Include="Views\Web.config" />
     <Content Include="Views\Patients\progressNote.cshtml" />
-    <Content Include="Web.config" />
+    <Content Include="Views\Web.config" />
     <Content Include="Views\Necessities\Save - Copy.cshtml" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
