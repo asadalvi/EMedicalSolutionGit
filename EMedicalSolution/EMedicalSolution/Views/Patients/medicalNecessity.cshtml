@@ -18,57 +18,61 @@
 </select>
     <input type="hidden" name="procedureTypeIDs" id="procedureTypeIDs" value="@ViewBag.procedureTypeIDs" />
 </div>
-
-@using (Html.BeginForm("SaveMedicalNecessities", "Patients", FormMethod.Post, new { id = "SaveMedicalNecessities" }))
-{
-    <h3>Primary Diagnosis</h3>
-
-    if (Model.objMedicalNecessity1 != null)
+<div style="min-height:300px !important;">
+    @using (Html.BeginForm("SaveMedicalNecessities", "Patients", FormMethod.Post, new { id = "SaveMedicalNecessities" }))
     {
-        <div class="w3-responsive checkbox-container" id="checkbox-container-neces">
-            @foreach (var necessity in Model.objMedicalNecessity1)
-            {
-                if (necessity.HistoryID > 0)
+        <h3>Primary Diagnosis</h3>
+
+        if (Model.objMedicalNecessity1 != null)
+        {
+            <div class="w3-responsive checkbox-container" id="checkbox-container-neces">
+                @foreach (var necessity in Model.objMedicalNecessity1)
                 {
-                    mType = "1";
-                    <input type="hidden" value="@mType" id="next_button_toggle_4" />
-                    <div class="checkbox-parent-@necessity.ID" style="display:none;">
-                        <input type="checkbox" name="necessities" class="necessities" value="@necessity.ID" checked />  @(necessity.ICD10Code + " - " + necessity.Description)
-                    </div>
+                    if (necessity.HistoryID > 0)
+                    {
+                        mType = "1";
+                        <input type="hidden" value="@mType" id="next_button_toggle_4" />
+                        <span class="checkbox-parent-@necessity.ID" style="display:none;">
+                            <input type="checkbox" name="necessities" class="necessities" value="@necessity.ID" checked />  @(necessity.ICD10Code + " - " + necessity.Description)
+                        </span>
+                    }
+                    else {
+                        <span class="checkbox-parent-@necessity.ID" style="display:none;">
+                            <input type="checkbox" name="necessities" class="necessities" value="@necessity.ID" />  @(necessity.ICD10Code + " - " + necessity.Description)
+                        </span>
+                    }
                 }
-                else {
-                    <div class="checkbox-parent-@necessity.ID" style="display:none;">
-                        <input type="checkbox" name="necessities" class="necessities" value="@necessity.ID" />  @(necessity.ICD10Code + " - " + necessity.Description)
-                        </div>
-                        }<br />
-                        }
-                    </div>
-                }
+            </div>
+        }
 
-    <h4>Secondary Diagnosis</h4>
-    if (Model.PatientHistoryVM11 != null && Model.PatientHistoryVM11.SecondaryNecessities != null && Model.PatientHistoryVM11.SecondaryNecessities != "")
-    {
-        <input type="text" name="txtsecondary" disabled="disabled" value="@Model.PatientHistoryVM11.SecondaryNecessities" id="secondaryDiagnosis" />
-    }
-    else {
-        <input type="text" name="txtsecondary" disabled="disabled" id="secondaryDiagnosis" />
-    }
-    <div class="ajax_loader_save" style="display:none;margin-top: -180px; margin-left: 300px;"><img src="~/Images/ajax_loader.svg" /></div>
-    <p id="MedicalNecessityError" class="saveError" style="font-size:large;color:red;display:none">Please select at least one option</p>
-    <div class="w3-row  w3-margin-top">
-        <div class="w3-third" style="float: none; margin: auto">
-            <button class="w3-btn-block w3-green submitForm" type="button">Save</button>
+        <h4>Secondary Diagnosis</h4>
+        if (Model.PatientHistoryVM11 != null && Model.PatientHistoryVM11.SecondaryNecessities != null && Model.PatientHistoryVM11.SecondaryNecessities != "")
+        {
+            <input type="text" name="txtsecondary" disabled="disabled" value="@Model.PatientHistoryVM11.SecondaryNecessities" id="secondaryDiagnosis" />
+        }
+        else {
+            <input type="text" name="txtsecondary" disabled="disabled" id="secondaryDiagnosis" />
+        }
+        <div class="ajax_loader_save" style="display:none;margin-top: -180px; margin-left: 300px;"><img src="~/Images/ajax_loader.svg" /></div>
+        <p id="MedicalNecessityError" class="saveError" style="font-size:large;color:red;display:none">Please select at least one option</p>
+        <div class="w3-row  w3-margin-top">
+            <div class="w3-third" style="float: none; margin: auto">
+                <button class="w3-btn-block w3-green submitForm" type="button">Save</button>
             </div>
         </div>
-}
 
+    }
+</div>
 <style>
     .checkbox-container { border:0px solid #ccc; width:600px; max-height: 130px; overflow-y: scroll; background:rgba(247, 247, 247, 0.92); }
+    .toggle-check-box-hidden {  margin: 0; padding: 0; width: 0; height: 0; } 
 </style>
 <script type="text/javascript">
     $('#selectThisProcedures').on('change', function () {
         $('#checkbox-container-neces input:checkbox.necessities').each(function () {
-            $(this).parent('div').css('display', 'none');            
+            $(this).parent('span').css('display', 'none');
+            $(this).parent('span').addClass("toggle-check-box-hidden");
+            $(".checkbox-container").css("border", "0px solid #ccc");
         });
         $.ajax({
             type: "POST",
@@ -80,11 +84,12 @@
                         for (var i = 0; i < data.data.length; i++) {
                             var myclass = (".checkbox-parent-" + data.data[i]);
                             $("" + myclass).css("display", "block");
-                          
+                            $("" + myclass).removeClass("toggle-check-box-hidden");
+                            $(".checkbox-container").css("border", "2px solid #ccc");
                         }
                          
                     }
-                        toastr.success("Data save successfully!");
+                    //    toastr.success("Data save successfully!");
                     //    $(".ajax_loader_save").css("display", "none");
                     //    $(document).find(".saveError").css("display", "none");
                     //    $(document).find("#saveSpecialistData").css("display", "none");
