@@ -278,7 +278,6 @@ D:\Asad files\Clients Projects\EMedicalSolution\EMedicalSolutionGit\EMedicalSolu
 D:\Asad files\Clients Projects\EMedicalSolution\EMedicalSolutionGit\EMedicalSolution\EMedicalSolution\bin\System.Web.WebPages.Deployment.xml
 D:\Asad files\Clients Projects\EMedicalSolution\EMedicalSolutionGit\EMedicalSolution\EMedicalSolution\bin\System.Web.WebPages.Razor.xml
 D:\Asad files\Clients Projects\EMedicalSolution\EMedicalSolutionGit\EMedicalSolution\EMedicalSolution\bin\HiQPdf.dep
-D:\Asad files\Clients Projects\EMedicalSolution\EMedicalSolutionGit\EMedicalSolution\EMedicalSolution\obj\Debug\EMedicalSolution.csprojResolveAssemblyReference.cache
 D:\Asad files\Clients Projects\EMedicalSolution\EMedicalSolutionGit\EMedicalSolution\EMedicalSolution\obj\Debug\EMedicalSolution.csproj.CoreCompileInputs.cache
 D:\Asad files\Clients Projects\EMedicalSolution\EMedicalSolutionGit\EMedicalSolution\EMedicalSolution\obj\Debug\EMedicalSolution.dll
 D:\Asad files\Clients Projects\EMedicalSolution\EMedicalSolutionGit\EMedicalSolution\EMedicalSolution\obj\Debug\EMedicalSolution.pdb
