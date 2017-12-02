@@ -43,6 +43,7 @@
                     }
                 }
             </div>
+            <div id="no-necessity-available" style="display:none;color:red;">Necessities not available against this procedure</div>
         }
 
         <h4>Secondary Diagnosis</h4>
@@ -73,6 +74,7 @@
             $(this).parent('span').css('display', 'none');
             $(this).parent('span').addClass("toggle-check-box-hidden");
             $(".checkbox-container").css("border", "0px solid #ccc");
+            $("#no-necessity-available").css('display', 'none');
         });
         $.ajax({
             type: "POST",
@@ -86,8 +88,11 @@
                             $("" + myclass).css("display", "block");
                             $("" + myclass).removeClass("toggle-check-box-hidden");
                             $(".checkbox-container").css("border", "2px solid #ccc");
+                            $("#no-necessity-available").css('display', 'none');
                         }
                          
+                    } else {
+                        $("#no-necessity-available").css('display', 'block');
                     }
                     //    toastr.success("Data save successfully!");
                     //    $(".ajax_loader_save").css("display", "none");
