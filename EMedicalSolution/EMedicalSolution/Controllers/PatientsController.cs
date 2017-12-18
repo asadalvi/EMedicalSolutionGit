@@ -870,6 +870,15 @@ namespace EMedicalSolution.Controllers
                             // instantiate the HiQPdf HTML to PDF converter
                             HtmlToPdf htmlToPdfConverter = new HtmlToPdf();
 
+                            htmlToPdfConverter.Document.PageSize = PdfPageSize.A4;
+                            htmlToPdfConverter.Document.PageOrientation = PdfPageOrientation.Portrait;
+
+                            // set PDF page margins 
+                            htmlToPdfConverter.Document.Margins = new PdfMargins(0, 0, 0, 0);
+
+                            // set a wait time before starting the conversion 
+                            htmlToPdfConverter.WaitBeforeConvert = int.Parse("2"); //seconds
+
                             // render the HTML code as PDF in memory
                             byte[] pdfBuffer = htmlToPdfConverter.ConvertHtmlToMemory(htmlToConvert, baseUrl);
 
