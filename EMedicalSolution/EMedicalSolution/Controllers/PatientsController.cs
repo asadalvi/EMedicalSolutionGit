@@ -860,51 +860,69 @@ namespace EMedicalSolution.Controllers
                             pHistory.SpecialistID = Convert.ToInt32(Session["userID"].ToString());
                             pHistory.StatusID = 6; //Approved by Specialist
                             db.SaveChanges();
-
-                            string htmlToConvert = RenderViewAsString("orderBill", pHistoryId);
-
-                            // the base URL to resolve relative images and css
-                            String thisPageUrl = this.ControllerContext.HttpContext.Request.Url.AbsoluteUri;
-                            String baseUrl = thisPageUrl.Substring(0, thisPageUrl.Length - "Patients/ConvertPatientToPdf".Length);
-
-                            // instantiate the HiQPdf HTML to PDF converter
-                            HtmlToPdf htmlToPdfConverter = new HtmlToPdf();
-
-                            htmlToPdfConverter.Document.PageSize = PdfPageSize.A4;
-                            htmlToPdfConverter.Document.PageOrientation = PdfPageOrientation.Portrait;
-
-                            // set PDF page margins 
-                            htmlToPdfConverter.Document.Margins = new PdfMargins(0, 0, 0, 0);
-
-                            // set a wait time before starting the conversion 
-                            htmlToPdfConverter.WaitBeforeConvert = int.Parse("2"); //seconds
-
-                            // render the HTML code as PDF in memory
-                            byte[] pdfBuffer = htmlToPdfConverter.ConvertHtmlToMemory(htmlToConvert, baseUrl);
-
-                            Stream stream = new MemoryStream(pdfBuffer);
-                            ContentType ct = new ContentType(MediaTypeNames.Application.Pdf);
-                            var attachmnt = new Attachment(stream, ct);
-                            attachmnt.ContentType.MediaType = MediaTypeNames.Application.Pdf;
-                            attachmnt.Name = "superbill.pdf";
-                            MailMessage mail = new MailMessage();
-                            SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com");
-                            mail.From = new MailAddress("testmailnaveed@gmail.com");
-                            mail.To.Add("naveed.shah194@gmail.com");
-                            mail.Subject = "Test Mail - 1";
-                            mail.Body = "mail with attachment";
-
-                            mail.Attachments.Add(attachmnt);
-                            SmtpServer.Port = 587;
-                            SmtpServer.Credentials = new System.Net.NetworkCredential("testmailnaveed@gmail.com", "naveed1234");
-                            SmtpServer.EnableSsl = true;
-                            SmtpServer.Send(mail);
-
                         }
                         status = true;
                     }
                 }
             }
+            return Json(status, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public ActionResult Finish(int pHistoryId)
+        {
+            bool status = false;
+            if (ModelState.IsValid)
+            {
+                //string[] myType = procedureType.Split(',');
+                using (PatientMgmtEntities db = new PatientMgmtEntities())
+                {                   
+                    if (pHistoryId > 0)
+                    {
+
+                        string htmlToConvert = RenderViewAsString("orderBill", pHistoryId);
+
+                        // the base URL to resolve relative images and css
+                        String thisPageUrl = this.ControllerContext.HttpContext.Request.Url.AbsoluteUri;
+                        String baseUrl = thisPageUrl.Substring(0, thisPageUrl.Length - "Patients/ConvertPatientToPdf".Length);
+
+                        // instantiate the HiQPdf HTML to PDF converter
+                        HtmlToPdf htmlToPdfConverter = new HtmlToPdf();
+
+                        htmlToPdfConverter.Document.PageSize = PdfPageSize.A4;
+                        htmlToPdfConverter.Document.PageOrientation = PdfPageOrientation.Portrait;
+
+                        // set PDF page margins 
+                        htmlToPdfConverter.Document.Margins = new PdfMargins(0, 0, 0, 0);
+
+                        // set a wait time before starting the conversion 
+                        htmlToPdfConverter.WaitBeforeConvert = int.Parse("2"); //seconds
+
+                        // render the HTML code as PDF in memory
+                        byte[] pdfBuffer = htmlToPdfConverter.ConvertHtmlToMemory(htmlToConvert, baseUrl);
+
+                        Stream stream = new MemoryStream(pdfBuffer);
+                        ContentType ct = new ContentType(MediaTypeNames.Application.Pdf);
+                        var attachmnt = new Attachment(stream, ct);
+                        attachmnt.ContentType.MediaType = MediaTypeNames.Application.Pdf;
+                        attachmnt.Name = "superbill.pdf";
+                        MailMessage mail = new MailMessage();
+                        SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com");
+                        mail.From = new MailAddress("testmailnaveed@gmail.com");
+                        mail.To.Add("naveed.shah194@gmail.com");
+                        mail.Subject = "Test Mail - 1";
+                        mail.Body = "mail with attachment";
+
+                        mail.Attachments.Add(attachmnt);
+                        SmtpServer.Port = 587;
+                        SmtpServer.Credentials = new System.Net.NetworkCredential("testmailnaveed@gmail.com", "naveed1234");
+                        SmtpServer.EnableSsl = true;
+                        SmtpServer.Send(mail);
+
+                    }
+                    status = true;
+                    }
+                }
             return Json(status, JsonRequestBehavior.AllowGet);
         }
         //history views

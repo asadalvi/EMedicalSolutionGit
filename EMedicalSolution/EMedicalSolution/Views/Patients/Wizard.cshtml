@@ -146,7 +146,10 @@
                     var pHistoryId = 0;
                     // Step show event
                     $("#smartwizard").on("showStep", function (e, anchorObject, stepNumber, stepDirection, stepPosition) {
-                        // alert("You are on step "+stepNumber+" now");
+                         
+                        if (stepNumber == 4) {
+                            $(".finish-button").removeClass("disabled")
+                        }
                         stepNumbersForm = stepNumber;
                           numberOFSteps = stepNumber;
                           if (numberOFSteps == 0) {
@@ -179,8 +182,8 @@
 
                     // Toolbar extra buttons
                     var btnFinish = $('<button></button>').text('Finish')
-                                                     .addClass('btn btn-info')
-                                                     .on('click', function () { toastr.success("Finish clicked"); });
+                                                     .addClass('btn btn-info finish-button disabled')
+                                                     .on('click', function () { if ($(this).hasClass("disabled")) { return false;} });
                     var btnCancel = $('<button></button>').text('Cancel')
                                                      .addClass('btn btn-danger')
                                                      .on('click', function () {
@@ -293,6 +296,9 @@
                     var selectAnyChecked = false;
                     var selectintakeRefer = false;
                     var selectintakeSymptom = false;
+                    if (stepNumbersForm == 4) {
+                        $(".finish-button").removeClass("disabled")
+                    }
                     if (stepNumbersForm !== undefined && stepNumbersForm == 2) {
                         $('#intakeInterferingCondition input[type="checkbox"]').each(function () {
                             if ($(this).is(":checked")) {
@@ -486,7 +492,27 @@
                     OpenPopup($(this).attr('href'), "", "physician_signature");
                     });
                    
-           
+                //Finish click
+                    $(document).on('click', '.finish-button', function (e) {
+                        var pHistoryId = $("#pHistoryId").val();
+                        $.ajax({
+                            url: '/Patients/Finish?pHistoryId=' + pHistoryId,
+                            type: 'POST',
+                            dataType: 'json',
+                            contentType: false,
+                            enctype: 'multipart/form-data',
+                            processData: false,
+                            success: function ($data) {
+                              
+                                window.open('/Patients/orderReport/' + pHistoryId,'_blank'); 
+                             //    window.location.href = '/Patients/orderReport/' + pHistoryId;
+                              //  toastr.success("Data save successfully!");
+                            },
+                            error: function ($data) {
+                                toastr.error("Error, The request can not be completed due to some error!");
+                            }
+                        });
+                    });
             </script>
                      
         }
