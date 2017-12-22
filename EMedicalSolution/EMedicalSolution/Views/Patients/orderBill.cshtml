@@ -6,12 +6,21 @@
             background: darkgray;
         }
 
-        .page-div {
-            width: 8.27in;
-            float: none;
-            margin: auto;
-            font-family: "Arial", "serif";
+        page[size="A4"] {
             background: white;
+            width: 20.5cm;
+            height: 29.7cm;
+            display: block;
+            margin: 0 auto;
+            margin-bottom: 0.5cm;
+            box-shadow: 0 0 0.5cm rgba(0,0,0,0.5);
+        }
+
+        @@media print {
+            body, page[size="A4"] {
+                margin: 0;
+                box-shadow: 0;
+            }
         }
 
         .content-area {
@@ -92,140 +101,114 @@
     </style>
 
 </head>
+<page size="A4">
+    @using (Html.BeginForm("ConvertPatientToPdf", "Patients", FormMethod.Post, new { id = "PhysicianApproval" }))
+    {
+        <input type="hidden" value="@ViewBag.HistoryID" name="orderFormHistoryId" />
+        <input type="hidden" value="orderBill" name="orderFormType" />
+        <div class="page-div" id="super_bill_report">
 
-@using (Html.BeginForm("ConvertPatientToPdf", "Patients", FormMethod.Post, new { id = "PhysicianApproval" }))
-{
-    <input type="hidden" value="@ViewBag.HistoryID" name="orderFormHistoryId" />
-    <input type="hidden" value="orderBill" name="orderFormType" />
-    <div class="page-div" id="super_bill_report">
+            <div class="content-area">
 
-        <div class="content-area">
+                <h3>Advanced Clinic Testing</h3>
+                <h4 class="h4-superbill" style="margin:20px;">Home Sleep Study and Allergy Test Specialist</h4>
+                <h6>4551 Pleasant Hill Rd, Kissimmee, FL 34746</h6>
+                <h6>Phone: (281) 693-5289 Fax: (281)693-3111</h6>
 
-            <h3>Advanced Clinic Testing</h3>
-            <h4 class="h4-superbill" style="margin:20px;">Home Sleep Study and Allergy Test Specialist</h4>
-            <h6>4551 Pleasant Hill Rd, Kissimmee, FL 34746</h6>
-            <h6>Phone: (281) 693-5289 Fax: (281)693-3111</h6>
-
-            <table cellspacing="0">
-                <tbody>
-                    <tr>
-                        <td style="width: 40%"><b>Date of service:</b> @Model.PatientHistoryVM11.Created.ToString("MM/dd/yyyy") </td>
-                        <td style="width: 30%"><b>Insurance: P</b> BLS PPO</td>
-                        <td style="width: 30%" class="bg-grey"><b>Billing Information</b></td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <b>Last Name:</b> @if (Model != null && Model.objPatient != null && Model.objPatient.LastName != null)
-                            {
-                                <span>@Model.objPatient.LastName</span>
-                            }
-                        </td>
-                        <td><b>Insurance:</b> S</td>
-                        <td>Copay/Coins</td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <b>First Name:</b>
-                            @if (Model != null && Model.objPatient != null && Model.objPatient.FirstName != null)
-                            {
-                                <span>@Model.objPatient.FirstName</span>
-                            }
-                        </td>
-                        <td>
-                            <b>Physician's Name:</b>
-                            @if (Model != null && Model.StaffNameVM != null && Model.StaffNameVM.PhycisianName != null)
-                            {
-                                <span>Dr. @Model.StaffNameVM.PhycisianName</span>
-                            }
-                        </td>
-                        <td>Deductible</td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <b>Time in:</b>
-                            @if (Model != null && Model.PatientHistoryVM11 != null && Model.PatientHistoryVM11.Created != null)
-                            {
-                                <span>@Model.PatientHistoryVM11.Created.ToString("hh:mm tt")</span>
-                            }
-                        </td>
-                        <td></td>
-                        <td>CC, Cash, Cheque #</td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <b>DOB:</b> @if (Model != null && Model.objPatient != null && Model.objPatient.DOB != null)
-                            {
-                                <span>@Model.objPatient.DOB.ToString("MM/dd/yyyy")</span>
-                            }
-                        </td>
-                        <td>
-                            <b>Age:</b>
-
-                            @{
-                                var age = DateTime.Now.Year - Model.objPatient.DOB.Year;
-                                <span>@age</span>
-                            }
-                        </td>
-                        <td>Total Paid:</td>
-                    </tr>
-                </tbody>
-            </table>
-
-            <table cellspacing="0">
-
-                <thead>
-                    <tr>
-                        <td style="width: 4%">&#x2716;</td>
-                        <td style="width: 30%">Description</td>
-                        <td style="width: 9%">Code</td>
-                        <td style="width: 4%">MOD</td>
-                        <td style="width: 15%">Description</td>
-                        <td style="width: 9%">Code</td>
-                        <td style="width: 4%">MOD</td>
-                        <td style="width: 15%">Description</td>
-                        <td style="width: 9%">Code</td>
-                    </tr>
-                </thead>
-
-                <tbody>
-                    <tr class="bg-grey">
-                        <td></td>
-                        <td>DIAGNOSIS</td>
-                    </tr>
-
-                    @foreach (var ICD10 in Model.objMedicalNecessity1)
-                    {
+                <table cellspacing="0">
+                    <tbody>
                         <tr>
-
-                            <td>&#x2716;</td>
-                            <td>@ICD10.Description</td>
-                            <td>@ICD10.ICD10Code</td>
-                            <td></td>
-                            <td> </td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
+                            <td style="width: 40%"><b>Date of service:</b> @Model.PatientHistoryVM11.Created.ToString("MM/dd/yyyy") </td>
+                            <td style="width: 30%"><b>Insurance: P</b> BLS PPO</td>
+                            <td style="width: 30%" class="bg-grey"><b>Billing Information</b></td>
                         </tr>
-                    }
+                        <tr>
+                            <td>
+                                <b>Last Name:</b> @if (Model != null && Model.objPatient != null && Model.objPatient.LastName != null)
+                                {
+                                    <span>@Model.objPatient.LastName</span>
+                                }
+                            </td>
+                            <td><b>Insurance:</b> S</td>
+                            <td>Copay/Coins</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <b>First Name:</b>
+                                @if (Model != null && Model.objPatient != null && Model.objPatient.FirstName != null)
+                                {
+                                    <span>@Model.objPatient.FirstName</span>
+                                }
+                            </td>
+                            <td>
+                                <b>Physician's Name:</b>
+                                @if (Model != null && Model.StaffNameVM != null && Model.StaffNameVM.PhycisianName != null)
+                                {
+                                    <span>Dr. @Model.StaffNameVM.PhycisianName</span>
+                                }
+                            </td>
+                            <td>Deductible</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <b>Time in:</b>
+                                @if (Model != null && Model.PatientHistoryVM11 != null && Model.PatientHistoryVM11.Created != null)
+                                {
+                                    <span>@Model.PatientHistoryVM11.Created.ToString("hh:mm tt")</span>
+                                }
+                            </td>
+                            <td></td>
+                            <td>CC, Cash, Cheque #</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <b>DOB:</b> @if (Model != null && Model.objPatient != null && Model.objPatient.DOB != null)
+                                {
+                                    <span>@Model.objPatient.DOB.ToString("MM/dd/yyyy")</span>
+                                }
+                            </td>
+                            <td>
+                                <b>Age:</b>
 
+                                @{
+                                    var age = DateTime.Now.Year - Model.objPatient.DOB.Year;
+                                    <span>@age</span>
+                                }
+                            </td>
+                            <td>Total Paid:</td>
+                        </tr>
+                    </tbody>
+                </table>
 
-                    <tr class="bg-grey">
-                        <td></td>
-                        <td>TMFLOW</td>
-                    </tr>
+                <table cellspacing="0">
 
+                    <thead>
+                        <tr>
+                            <td style="width: 4%">&#x2716;</td>
+                            <td style="width: 30%">Description</td>
+                            <td style="width: 9%">Code</td>
+                            <td style="width: 4%">MOD</td>
+                            <td style="width: 15%">Description</td>
+                            <td style="width: 9%">Code</td>
+                            <td style="width: 4%">MOD</td>
+                            <td style="width: 15%">Description</td>
+                            <td style="width: 9%">Code</td>
+                        </tr>
+                    </thead>
 
-                    @foreach (var CPTs in Model.PatientProceduresVM1)
-                    {
-                        var cptStr = CPTs.CPTcode.ToString();
-                        var cptArr = cptStr.Split(',');
-                        foreach (string cptcode in cptArr)
+                    <tbody>
+                        <tr class="bg-grey">
+                            <td></td>
+                            <td>DIAGNOSIS</td>
+                        </tr>
+
+                        @foreach (var ICD10 in Model.objMedicalNecessity1)
                         {
                             <tr>
+
                                 <td>&#x2716;</td>
-                                <td>@CPTs.Title</td>
-                                <td>@cptcode</td>
+                                <td>@ICD10.Description</td>
+                                <td>@ICD10.ICD10Code</td>
                                 <td></td>
                                 <td> </td>
                                 <td></td>
@@ -234,45 +217,77 @@
                                 <td></td>
                             </tr>
                         }
-                    }
 
-                </tbody>
-            </table>
 
-            <p style="font-size:11px">
-                Payment Type:
-                <span>&#x2716;</span>
-                Cash
-                <span>&#x2714;</span>
-                Cheque
-                <span>&#x2716;</span>
-                Credit Card
-            </p>
+                        <tr class="bg-grey">
+                            <td></td>
+                            <td>TMFLOW</td>
+                        </tr>
 
-            <p style="font-size:11px">
-                Total Amount:
-                <span>$_________</span>
-                Monthly Payment:
-                <span>$________</span>
-            </p>
 
-            <p style="font-size:12px; text-align:justify">
-                I HEREBY AUTHORIZE MY INSURANCE BENEFITS TO BE PAID DIRECTLY TO <span>____________ ______________</span> AND I AM RESPONSIBLE
-                FOR ANY NON-COVERED SERVICES. I ALSO AUTHORIZE THE RELEASE OF ANY INFORMATION REQUIRED FOR THE PROCESSING OF
-                THE CLAIM.
-            </p>
+                        @foreach (var CPTs in Model.PatientProceduresVM1)
+                        {
+                            var cptStr = "-";
+                            if (CPTs.CPTcode != null)
+                            {
+                                cptStr = CPTs.CPTcode.ToString();
+                            }
+                            var cptArr = cptStr.Split(',');
+                            foreach (string cptcode in cptArr)
+                            {
+                                <tr>
+                                    <td>&#x2716;</td>
+                                    <td>@CPTs.Title</td>
+                                    <td>@cptcode</td>
+                                    <td></td>
+                                    <td> </td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                            }
 
-            <p id="notice">
-                <i>
-                    Advanced Clinic Testing LLC 4551 Pleasant Hill Rd, Kissimmee, FL 34746 Phone: (281) 693-5289
-                    Fax: (281)693-3111
-                </i>
-            </p>
+                        }
+
+                    </tbody>
+                </table>
+
+                <p style="font-size:11px">
+                    Payment Type:
+                    <span>&#x2716;</span>
+                    Cash
+                    <span>&#x2714;</span>
+                    Cheque
+                    <span>&#x2716;</span>
+                    Credit Card
+                </p>
+
+                <p style="font-size:11px">
+                    Total Amount:
+                    <span>$_________</span>
+                    Monthly Payment:
+                    <span>$________</span>
+                </p>
+
+                <p style="font-size:12px; text-align:justify">
+                    I HEREBY AUTHORIZE MY INSURANCE BENEFITS TO BE PAID DIRECTLY TO <span>____________ ______________</span> AND I AM RESPONSIBLE
+                    FOR ANY NON-COVERED SERVICES. I ALSO AUTHORIZE THE RELEASE OF ANY INFORMATION REQUIRED FOR THE PROCESSING OF
+                    THE CLAIM.
+                </p>
+
+                <p id="notice">
+                    <i>
+                        Advanced Clinic Testing LLC 4551 Pleasant Hill Rd, Kissimmee, FL 34746 Phone: (281) 693-5289
+                        Fax: (281)693-3111
+                    </i>
+                </p>
+
+            </div>
 
         </div>
-
-    </div>
-    @*<div class="w3-row w3-padding-16">
-            <input type="submit" value="print report" />
-        </div>*@
-                                }
+        @*<div class="w3-row w3-padding-16">
+                <input type="submit" value="print report" />
+            </div>*@
+                                    }
+</page>

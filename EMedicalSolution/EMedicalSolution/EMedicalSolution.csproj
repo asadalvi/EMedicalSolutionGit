@@ -293,22 +293,16 @@
     <Content Include="Content\wizard\smart_wizard_theme_circles.css" />
     <Content Include="Content\wizard\smart_wizard_theme_dots.css" />
     <Content Include="favicon.ico" />
-    <Content Include="Files\Reports\Report_1.png" />
-    <Content Include="Files\Reports\Report_3.png" />
-    <Content Include="Files\Reports\Report_4.jpg" />
-    <Content Include="Files\Reports\Report_5.jpg" />
-    <Content Include="Files\Reports\Report_6.jpg" />
-    <Content Include="Files\Signatures\Signature_1.png" />
-    <Content Include="Files\Signatures\Signature_3.png" />
     <Content Include="Global.asax" />
-    <Content Include="Files\Reports\Report_2.pdf" />
-    <Content Include="Images\ajax_loader.svg" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap.min.css.map" />
     <Content Include="Content\toastr.scss" />
     <Content Include="Content\toastr.less" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <EntityDeploy Include="Models\PatientMgmt.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>PatientMgmt.Designer.cs</LastGenOutput>
@@ -385,9 +379,6 @@
     <Content Include="Views\Patients\progressNote.cshtml" />
     <Content Include="Views\Web.config" />
     <Content Include="Views\Necessities\Save - Copy.cshtml" />
-    <Content Include="Web.config">
-      <SubType>Designer</SubType>
-    </Content>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -397,8 +388,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Files\Cards\" />
-    <Folder Include="Files\Notes\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">

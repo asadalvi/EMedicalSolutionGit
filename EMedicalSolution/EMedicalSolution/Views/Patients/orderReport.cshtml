@@ -8,13 +8,22 @@
             background: darkgray;
         }
 
-        .page-div {
-            width: 8.27in;
-            float: none;
-            margin: auto;
-            font-family: "Arial", "serif";
+        page[size="A4"] {
             background: white;
+            width: 20.5cm;
+            height: 29.7cm;
+            display: block;
+            margin: 0 auto;
+            margin-bottom: 0.5cm;
+            box-shadow: 0 0 0.5cm rgba(0,0,0,0.5);
         }
+        @@media print {
+            body, page[size="A4"] {
+                margin: 0;
+                box-shadow: 0;
+                
+                }
+            }
 
         .content-area {
             padding: 0.5cm 1cm;
@@ -34,14 +43,6 @@
             color: darkgray;
         }
 
-
-        /*table {
-            width: 100%;
-            margin-top: 0.5cm;
-            margin-bottom: 0.5cm;
-            font-size: 18px;
-            border: 1px black solid;
-        }*/
         #notice {
             text-align: center;
             margin-top: 1cm;
@@ -86,151 +87,153 @@
     </style>
 
 </head>
-@using (Html.BeginForm("ConvertPatientToPdf", "Patients", FormMethod.Post, new { id = "PhysicianApproval" }))
-{
-    <input type="hidden" value="@ViewBag.HistoryID" name="orderFormHistoryId" />
-    <input type="hidden" value="orderReport" name="orderFormType" />
 
-    <div class="page-div" id="order_form_report" style="display:block">
+<page size="A4">
+    @using (Html.BeginForm("ConvertPatientToPdf", "Patients", FormMethod.Post, new { id = "PhysicianApproval" }))
+    {
+        <input type="hidden" value="@ViewBag.HistoryID" name="orderFormHistoryId" />
+        <input type="hidden" value="orderReport" name="orderFormType" />
 
-        <div class="content-area">
+        <div class="page-div" id="order_form_report" style="display:block">
 
-            <h3 style="padding:6px;">DIAGNOSTIC EVALUATION</h3>
-            <h4 style="margin:10px;">OFFER FORM</h4>
+            <div class="content-area">
 
-            <div id="patientDetails">
-                <table cellpadding="6">
-                    <tbody>
-                        <tr>
-                            <td>
-                                <b>Patient's Name:</b>
-                                @if (Model != null && Model.objPatient != null && Model.objPatient.FirstName != null)
-                                {
-                                    <span>@Model.objPatient.FirstName @Model.objPatient.LastName</span>
-                                }
-                            </td>
-                            <td>
-                                <b>Sex:</b>
-                                @if (Model != null && Model.objPatient != null && Model.objPatient.Gender != null)
-                                {
-                                    <span>@Model.objPatient.Gender</span>
-                                }
-                            </td>
-                            <td>
+                <h3 style="padding:6px;">DIAGNOSTIC EVALUATION</h3>
+                <h4 style="margin:10px;">ORDER FORM</h4>
 
-                                <b>DOB:</b>
-                                <span>@Model.objPatient.DOB.ToString("MM/dd/yyyy")</span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
+                <div id="patientDetails">
+                    <table cellpadding="6">
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <b>Patient's Name:</b>
+                                    @if (Model != null && Model.objPatient != null && Model.objPatient.FirstName != null)
+                                    {
+                                        <span>@Model.objPatient.FirstName @Model.objPatient.LastName</span>
+                                    }
+                                </td>
+                                <td>
+                                    <b>Sex:</b>
+                                    @if (Model != null && Model.objPatient != null && Model.objPatient.Gender != null)
+                                    {
+                                        <span>@Model.objPatient.Gender</span>
+                                    }
+                                </td>
+                                <td>
 
-                                <b>Ordering </b>
-                                <br />
-                                <b>MD/PA/NP:</b>
-                                @if (Model != null && Model.StaffNameVM != null && Model.StaffNameVM.PhycisianName != null)
-                                {
-                                    <span>Dr. @Model.StaffNameVM.PhycisianName</span>
-                                }
-                            </td>
-                            <td>
-                                <b>Physician's Signature:</b><br />
-                                
+                                    <b>DOB:</b>
+                                    <span>@Model.objPatient.DOB.ToString("MM/dd/yyyy")</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+
+                                    <b>Ordering </b>
+                                    <br />
+                                    <b>MD/PA/NP:</b>
+                                    @if (Model != null && Model.StaffNameVM != null && Model.StaffNameVM.PhycisianName != null)
+                                    {
+                                        <span>Dr. @Model.StaffNameVM.PhycisianName</span>
+                                    }
+                                </td>
+                                <td>
+                                    <b>Physician's Signature:</b><br />
+
                                     @if (Model != null && Model.StaffNameVM != null && Model.StaffNameVM.SignatureFilePath != null)
                                     {
-                                            <img class="db_img" width="160" height="64" src="@Url.Content("~/Files/Signatures/" + System.IO.Path.GetFileName(Model.StaffNameVM.SignatureFilePath))">
+                                        <img class="db_img" width="160" height="64" src="@Url.Content("~/Files/Signatures/" + System.IO.Path.GetFileName(Model.StaffNameVM.SignatureFilePath))">
                                     }
                                     else if (Model != null && Model.StaffNameVM != null && Model.StaffNameVM.PhycisianName != null)
                                     {
-                                            <span>Dr. @Model.StaffNameVM.PhycisianName</span>
+                                        <span>Dr. @Model.StaffNameVM.PhycisianName</span>
                                     }
 
 
-                            </td>
-                            <td>
-                                <b>Date:</b>
-                                @if (Model != null && Model.objPatient != null && Model.objPatient.Created != null)
-                                {
-                                    <span>@Model.PatientHistoryVM11.Created.ToString("MM/dd/yyyy")</span>
-                                }
-                            </td>
+                                </td>
+                                <td>
+                                    <b>Date:</b>
+                                    @if (Model != null && Model.objPatient != null && Model.objPatient.Created != null)
+                                    {
+                                        <span>@Model.PatientHistoryVM11.Created.ToString("MM/dd/yyyy")</span>
+                                    }
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+
+                <p>
+                    <i>
+                        Insurance card clear copy, patient demographics, state issued identification, ordering provider signature,
+                        and indication(s) for exam must be included or attached with this order. Incomplete orders without this
+                        information will be returned for completion.
+                    </i>
+                </p>
+
+                <table cellpadding="10">
+                    <tbody>
+                        <tr>
+                            <td rowspan="2" style="text-align:left"> [ ] ANS Evaluation</td>
+                            <td>@*&#x2714;*@</td>
+                            <td><strong>Using Tilt Table</strong></td>
+                            <td><strong>95924 + 95923</strong></td>
+                        </tr>
+                        <tr>
+
+                            <td>&#x2716;</td>
+                            <td><strong>Without Tilt Table</strong></td>
+                            <td><strong>95921 + 95923 + 95943 or 95924 + 95923</strong></td>
+                        </tr>
+                        <tr>
+                            <td colspan="3" style="text-align:left"> [ ] Arterial Evaluation</td>
+                            <td><strong>93922</strong></td>
                         </tr>
                     </tbody>
                 </table>
 
+                <p><i>Physician requires company to handle Billing <strong>x</strong> Global Technical only</i></p>
+
+                <p><b>Physician is ordering the test for the following reason(s):</b></p>
+
+                <p><b>[ ] ANS evaluation:</b> Indications, reasons, symptoms and/or diagnosis codes for exam:</p>
+
+                <p>
+                    1)
+                    <span>95943</span>
+                </p>
+                <p>
+                    2)
+                    <span>95923</span>
+                </p>
+
+
+
+                <p><b>[ ] Arterial evaluation:</b> Indications, reasons, symptoms and/or diagnosis codes for exam:</p>
+
+                <p>
+                    1)
+                    <span>93922</span>
+                </p>
+
+                <p>
+                    Special Instructions
+                    <span>_________________________________________________________________________</span>
+                    <span>_________________________________________________________________________</span>
+                    <span>_________________________________________________________________________</span>
+                </p>
+
+                <p id="notice"><i>Please send this completed order to our office</i></p>
+
             </div>
 
-            <p>
-                <i>
-                    Insurance card clear copy, patient demographics, state issued identification, ordering provider signature,
-                    and indication(s) for exam must be included or attached with this order. Incomplete orders without this
-                    information will be returned for completion.
-                </i>
-            </p>
-
-            <table cellpadding="10">
-                <tbody>
-                    <tr>
-                        <td rowspan="2" style="text-align:left"> [ ] ANS Evaluation</td>
-                        <td>@*&#x2714;*@</td>
-                        <td><strong>Using Tilt Table</strong></td>
-                        <td><strong>95924 + 95923</strong></td>
-                    </tr>
-                    <tr>
-
-                        <td>&#x2716;</td>
-                        <td><strong>Without Tilt Table</strong></td>
-                        <td><strong>95921 + 95923 + 95943 or 95924 + 95923</strong></td>
-                    </tr>
-                    <tr>
-                        <td colspan="3" style="text-align:left"> [ ] Arterial Evaluation</td>
-                        <td><strong>93922</strong></td>
-                    </tr>
-                </tbody>
-            </table>
-
-            <p><i>Physician requires company to handle Billing <strong>x</strong> Global Technical only</i></p>
-
-            <p><b>Physician is ordering the test for the following reason(s):</b></p>
-
-            <p><b>[ ] ANS evaluation:</b> Indications, reasons, symptoms and/or diagnosis codes for exam:</p>
-
-            <p>
-                1)
-                <span>95943</span>
-            </p>
-            <p>
-                2)
-                <span>95923</span>
-            </p>
-
-
-
-            <p><b>[ ] Arterial evaluation:</b> Indications, reasons, symptoms and/or diagnosis codes for exam:</p>
-
-            <p>
-                1)
-                <span>93922</span>
-            </p>
-
-            <p>
-                Special Instructions
-                <span>_________________________________________________________________________</span>
-                <span>_________________________________________________________________________</span>
-                <span>_________________________________________________________________________</span>
-            </p>
-
-            <p id="notice"><i>Please send this completed order to our office</i></p>
-
         </div>
-
-    </div>
         @*<div class="w3-row w3-padding-16">
-            <input type="submit" value="print report" />
-        </div>*@
-}
+                <input type="submit" value="print report" />
+            </div>*@
+    }
 
-
+</page>
 
 
 
