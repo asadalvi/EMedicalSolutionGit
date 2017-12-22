@@ -35,6 +35,7 @@ namespace EMedicalSolution.ViewModels
         public int ProcedureTypeID { get; set; }
     }
 
+
     public class PatientNecessitiesVM
     {
         public int ID { get; set; }
