@@ -17,6 +17,7 @@ namespace EMedicalSolution.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Disease()
         {
+            this.DiseasesProcedureMpiapngs = new HashSet<DiseasesProcedureMpiapng>();
             this.PatientDiseases = new HashSet<PatientDiseas>();
         }
     
@@ -29,6 +30,8 @@ namespace EMedicalSolution.Models
         public Nullable<int> ModifiedBy { get; set; }
     
         public virtual DiseaseType DiseaseType { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DiseasesProcedureMpiapng> DiseasesProcedureMpiapngs { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PatientDiseas> PatientDiseases { get; set; }
     }

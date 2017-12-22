@@ -1,25 +1,50 @@
-﻿@model EMedicalSolution.Models.Symptom
-
+﻿@model EMedicalSolution.Models.Disease
 <h2>Save</h2>
-
-@using (Html.BeginForm("save", "Symptoms", FormMethod.Post, new { id = "popupForm" }))
+@using (Html.BeginForm("save", "Diseases", FormMethod.Post, new { id = "popupForm" }))
 {
     if (Model != null && Model.ID > 0)
     {
-    @Html.HiddenFor(a => a.ID)
+        @Html.HiddenFor(a => a.ID)
     }
-        <div class="w3-row w3-margin-top">
+    <div class="w3-row w3-margin-top">
         <label class="w3-text-green">ID</label>
-        @Html.TextBoxFor(a => a.ID, new { @class = "w3-input w3-border", Readonly="readonly" })
+        @Html.TextBoxFor(a => a.ID, new { @class = "w3-input w3-border", Readonly = "readonly" })
         @Html.ValidationMessageFor(a => a.ID)
     </div>
+
     <div class="w3-row w3-margin-top">
         <label class="w3-text-green">Title</label>
-        @Html.TextBoxFor(a => a.Title, new { @class = "w3-input w3-border" })
+        @Html.TextAreaFor(a => a.Title, new { @class = "w3-input w3-border" })
         @Html.ValidationMessageFor(a => a.Title)
+
     </div>
-   
+    var pLists = (List<EMedicalSolution.Models.ProcedureType>)ViewBag.proTypes;
+
+    <div class="w3-row  w3-margin-top">
+        <label class="w3-text-green">Select Procedure Type</label><br />
+        <select id="multipleSelectPlist" data-placeholder="Select Procedures" class="w3-input w3-border" multiple style="min-width:220px;max-width:220px;">
+            @foreach (var item in pLists)
+            {
+                <option value="@item.ID">@item.Title</option>
+            }
+        </select>
+        <input type="hidden" name="procedureTypeIDs" id="procedureTypeIDs" value="@ViewBag.procedureTypeIDs" />
+    </div>
     <div class="w3-row  w3-margin-top">
         <input class="w3-btn-block w3-green" type="submit" value="Save" />
     </div>
 }
+
+<script type="text/javascript">
+    setTimeout(function () {
+        $("#multipleSelectPlist").select2();
+
+        var selectedProceduresArr = $("#procedureTypeIDs").val().split(',');
+        $("#multipleSelectPlist").select2('val', selectedProceduresArr);  //Pre-Selected values
+
+        $('#multipleSelectPlist').on('change', function () {
+            //console.log('Selected Value : ' + $(this).val() + ' - Selected Text : ' + $('#multipleSelectPlist option:selected').text());
+            $("#procedureTypeIDs").val($(this).val());
+        });
+    }, 100);
+</script>

@@ -19,6 +19,14 @@ namespace EMedicalSolution.Models
         public int ProcedureTypeID { get; set; }
         public string FilePath { get; set; }
         public Nullable<System.DateTime> FileDate { get; set; }
+        public string PhysicianRemarks { get; set; }
+        public Nullable<bool> isApprovedByPhysician { get; set; }
+        public Nullable<int> PhysicianID { get; set; }
+        public Nullable<System.DateTime> PhysicianApprovedDate { get; set; }
+        public string SpecialistRemarks { get; set; }
+        public Nullable<bool> isApprovedBySpecialist { get; set; }
+        public Nullable<int> SpecialistID { get; set; }
+        public Nullable<System.DateTime> SpecialistApprovedDate { get; set; }
         public System.DateTime Created { get; set; }
         public int CreatedBy { get; set; }
         public Nullable<System.DateTime> Modified { get; set; }

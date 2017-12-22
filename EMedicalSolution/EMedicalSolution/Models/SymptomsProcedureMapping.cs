@@ -12,13 +12,13 @@ namespace EMedicalSolution.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class NecessitiesProcedureMapping
+    public partial class SymptomsProcedureMapping
     {
         public int ID { get; set; }
         public int ProcedureID { get; set; }
-        public int NecessityID { get; set; }
+        public int SymptomID { get; set; }
     
-        public virtual MedicalNecessity MedicalNecessity { get; set; }
         public virtual ProcedureType ProcedureType { get; set; }
+        public virtual Symptom Symptom { get; set; }
     }
 }

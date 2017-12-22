@@ -43,15 +43,20 @@ namespace EMedicalSolution.Controllers
             using (PatientMgmtEntities db = new PatientMgmtEntities())
             {
                 var v = db.Diseases.Where(a => a.ID == id).FirstOrDefault();
+                var p = string.Join(",", db.DiseasesProcedureMpiapngs.Where(x => x.DiseaseID == id).Select(x => x.ProcedureID).ToList());
+
+                ViewBag.procedureTypeIDs = p;
+                ViewBag.proTypes = db.ProcedureTypes.ToList();
                 return View(v);
             }
 
         }
 
         [HttpPost]
-        public ActionResult Save(Disease oDisease)
+        public ActionResult Save(Disease oDisease, string procedureTypeIDs)
         {
             bool status = false;
+            var procedureTypeIDsArr = procedureTypeIDs.Split(',');
 
             if (ModelState.IsValid)
             {
@@ -64,19 +69,36 @@ namespace EMedicalSolution.Controllers
                         if (v != null)
                         {
                             v.Title = oDisease.Title;
+                            v.DiseaseTypeID = 3;//static data
+
                             v.Created = DateTime.Now;
                             v.CreatedBy = Convert.ToInt32(Session["userID"].ToString());
                         }
-
                     }
                     else
                     {
                         //save
+                        oDisease.DiseaseTypeID = 3;//static data
                         oDisease.Created = DateTime.Now;
                         oDisease.CreatedBy = Convert.ToInt32(Session["userID"].ToString());
                         db.Diseases.Add(oDisease);
                     }
                     db.SaveChanges();
+
+                    int last_id = oDisease.ID;
+                    DiseasesProcedureMpiapng mapps = new DiseasesProcedureMpiapng();
+                    //db.SaveChanges();
+                    if (procedureTypeIDsArr.Length > 0)
+                    {
+                        for (var i = 0; i < procedureTypeIDsArr.Length; i++)
+                        {
+                            mapps.DiseaseID = last_id;
+                            mapps.ProcedureID = Convert.ToInt32(procedureTypeIDsArr[i]);
+                            db.DiseasesProcedureMpiapngs.Add(mapps);
+                            db.SaveChanges();
+                        }
+
+                    }
                     status = true;
                 }
 

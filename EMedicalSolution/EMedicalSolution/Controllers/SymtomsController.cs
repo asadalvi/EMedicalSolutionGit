@@ -43,15 +43,21 @@ namespace EMedicalSolution.Controllers
             using (PatientMgmtEntities db = new PatientMgmtEntities())
             {
                 var v = db.Symptoms.Where(a => a.ID == id).FirstOrDefault();
+                var p = string.Join(",", db.SymptomsProcedureMappings.Where(x => x.SymptomID == id).Select(x => x.ProcedureID).ToList());
+
+                ViewBag.procedureTypeIDs = p;
+                ViewBag.proTypes = db.ProcedureTypes.ToList();
                 return View(v);
             }
 
         }
 
         [HttpPost]
-        public ActionResult Save(Symptom symptom)
+        public ActionResult Save(Symptom symptom, string procedureTypeIDs)
         {
             bool status = false;
+            var procedureTypeIDsArr = procedureTypeIDs.Split(',');
+
 
             if (ModelState.IsValid)
             {
@@ -67,7 +73,6 @@ namespace EMedicalSolution.Controllers
                             v.Created = DateTime.Now;
                             v.CreatedBy = Convert.ToInt32(Session["userID"].ToString());
                         }
-
                     }
                     else
                     {
@@ -77,28 +82,26 @@ namespace EMedicalSolution.Controllers
                         db.Symptoms.Add(symptom);
                     }
                     db.SaveChanges();
+
+                    int last_id = symptom.ID;
+                    SymptomsProcedureMapping mapps = new SymptomsProcedureMapping();
+                    //db.SaveChanges();
+                    if (procedureTypeIDsArr.Length > 0)
+                    {
+                        for (var i = 0; i < procedureTypeIDsArr.Length; i++)
+                        {
+                            mapps.SymptomID = last_id;
+                            mapps.ProcedureID = Convert.ToInt32(procedureTypeIDsArr[i]);
+                            db.SymptomsProcedureMappings.Add(mapps);
+                            db.SaveChanges();
+                        }
+
+                    }
                     status = true;
                 }
 
             }
             return new JsonResult { Data = new { status = status } };
-        }
-
-        [HttpGet]
-        public ActionResult Delete(int id)
-        {
-            using (PatientMgmtEntities db = new PatientMgmtEntities())
-            {
-                var v = db.Symptoms.Where(a => a.ID == id).FirstOrDefault();
-                if (v != null)
-                {
-                    return View(v);
-                }
-                else
-                {
-                    return HttpNotFound();
-                }
-            }
         }
 
         [HttpPost]

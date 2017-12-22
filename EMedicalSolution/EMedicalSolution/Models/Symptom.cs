@@ -18,6 +18,7 @@ namespace EMedicalSolution.Models
         public Symptom()
         {
             this.PatientSymtoms = new HashSet<PatientSymtom>();
+            this.SymptomsProcedureMappings = new HashSet<SymptomsProcedureMapping>();
         }
     
         public int ID { get; set; }
@@ -29,5 +30,7 @@ namespace EMedicalSolution.Models
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PatientSymtom> PatientSymtoms { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<SymptomsProcedureMapping> SymptomsProcedureMappings { get; set; }
     }
 }

@@ -26,6 +26,7 @@ namespace EMedicalSolution.Models
         }
     
         public virtual DbSet<Disease> Diseases { get; set; }
+        public virtual DbSet<DiseasesProcedureMpiapng> DiseasesProcedureMpiapngs { get; set; }
         public virtual DbSet<DiseaseType> DiseaseTypes { get; set; }
         public virtual DbSet<InsuranceCardPicture> InsuranceCardPictures { get; set; }
         public virtual DbSet<InsuranceType> InsuranceTypes { get; set; }
@@ -47,6 +48,7 @@ namespace EMedicalSolution.Models
         public virtual DbSet<Staff> Staffs { get; set; }
         public virtual DbSet<Status> Statuses { get; set; }
         public virtual DbSet<Symptom> Symptoms { get; set; }
+        public virtual DbSet<SymptomsProcedureMapping> SymptomsProcedureMappings { get; set; }
         public virtual DbSet<UserRole> UserRoles { get; set; }
         public virtual DbSet<User> Users { get; set; }
     }
