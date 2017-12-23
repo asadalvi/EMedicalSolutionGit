@@ -281,3 +281,4 @@ G:\emedical solution\EMedicalSolutionGit\EMedicalSolution\EMedicalSolution\bin\S
 G:\emedical solution\EMedicalSolutionGit\EMedicalSolution\EMedicalSolution\bin\HiQPdf.dep
 G:\emedical solution\EMedicalSolutionGit\EMedicalSolution\EMedicalSolution\obj\Debug\EMedicalSolution.dll
 G:\emedical solution\EMedicalSolutionGit\EMedicalSolution\EMedicalSolution\obj\Debug\EMedicalSolution.pdb
+G:\emedical solution\EMedicalSolutionGit\EMedicalSolution\EMedicalSolution\obj\Debug\EMedicalSolution.csprojResolveAssemblyReference.cache
