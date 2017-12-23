@@ -497,6 +497,7 @@
                    
                 //Finish click
                     $(document).on('click', '.finish-button', function (e) {
+                        $(".ajax_loader_save").css("display", "block");
                         var pHistoryId = $("#pHistoryId").val();
                         $.ajax({
                             url: '/Patients/Finish?pHistoryId=' + pHistoryId,
@@ -506,7 +507,7 @@
                             enctype: 'multipart/form-data',
                             processData: false,
                             success: function ($data) {
-                              
+                                $(".ajax_loader_save").css("display", "none");
                                 window.open('/Patients/orderReport/' + pHistoryId,'_blank'); 
                              //    window.location.href = '/Patients/orderReport/' + pHistoryId;
                               //  toastr.success("Data save successfully!");
