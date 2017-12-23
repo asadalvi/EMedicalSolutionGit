@@ -1062,5 +1062,40 @@ namespace EMedicalSolution.Controllers
                     data = pAll
          }, JsonRequestBehavior.AllowGet);
         }
+
+        //get necessities against procedures id
+        [HttpPost]
+        public ActionResult GetSymptomsDiseasesProType(int pHistoryId)
+        {
+            var pids = from p in db.ProcedureTypes
+                       join pn in db.PatientProcedures on p.ID equals pn.ProcedureTypeID
+                       where pn.HistoryID == pHistoryId
+                       select pn.ProcedureTypeID;
+            //int[] prodids;
+            //foreach (var app in pids)
+            //{
+            //    prodids[app] = pids;
+            //}
+
+            // int domain = "1,2";
+            //int[] prodids = pids.Split(',');
+
+            //var records = context.Records.Where(r => domains.Contains(r.Domain)).ToList();
+
+
+            //var Allsymptom = db.SymptomsProcedureMappings.Where(r => pids.Contains(r.SymptomID)).ToList();
+
+
+            var Allsymptom = (from ns in db.SymptomsProcedureMappings.Where(c => pids.Contains(c.ProcedureID))
+                             select ns.SymptomID).Distinct();
+            var Alldiseases = (from ns in db.DiseasesProcedureMpiapngs
+                              .Where(c => pids.Contains(c.ProcedureID))
+                               select ns.DiseaseID).Distinct();
+            return new JsonResult { Data = new { Allsymptom = Allsymptom, Alldiseases = Alldiseases } };
+            //return Json(new
+            //{
+            //    data = pids
+            //}, JsonRequestBehavior.AllowGet);
+        }
     }
 }

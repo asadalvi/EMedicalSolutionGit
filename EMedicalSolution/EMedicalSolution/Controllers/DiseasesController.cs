@@ -86,6 +86,7 @@ namespace EMedicalSolution.Controllers
                     db.SaveChanges();
 
                     int last_id = oDisease.ID;
+                    db.DiseasesProcedureMpiapngs.RemoveRange(db.DiseasesProcedureMpiapngs.Where(x => x.DiseaseID == last_id));
                     DiseasesProcedureMpiapng mapps = new DiseasesProcedureMpiapng();
                     //db.SaveChanges();
                     if (procedureTypeIDsArr.Length > 0)
@@ -130,6 +131,7 @@ namespace EMedicalSolution.Controllers
             bool status = false;
             using (PatientMgmtEntities db = new PatientMgmtEntities())
             {
+                db.DiseasesProcedureMpiapngs.RemoveRange(db.DiseasesProcedureMpiapngs.Where(x => x.DiseaseID == id));
                 var v = db.Diseases.Where(a => a.ID == id).FirstOrDefault();
                 if (v != null)
                 {

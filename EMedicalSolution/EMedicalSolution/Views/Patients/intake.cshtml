@@ -45,23 +45,33 @@
         <div>
             <label>Symptoms</label>
         </div>
-        @if (Model != null && Model.objSymptomVM1 != null)
-        {
-            foreach (var symptom in Model.objSymptomVM1)
+        <div class="w3-responsive symptom-containers" id="checkbox-container-symptom">
+
+            @if (Model != null && Model.objSymptomVM1 != null)
             {
-                <div class="w3-third" id="intakeSymptom">
-                    @if (symptom.HistoryID > 0)
+                foreach (var symptom in Model.objSymptomVM1)
+                {
+                    <div class="w3-third" id="intakeSymptom">
+                        @if (symptom.HistoryID > 0)
                     {
+                    <span class="checkbox-symptom-@symptom.ID" style="display:none;">
                         <input class="w3-radio" type="checkbox" name="symptom" value="@symptom.ID" checked /> @symptom.Title
+                    </span>
                     }
                     else {
+                    <span class="checkbox-symptom-@symptom.ID" style="display:none;">
                         <input class="w3-radio" type="checkbox" name="symptom" value="@symptom.ID" /> @symptom.Title
-                    }
-                </div>
+                    </span>
+                        }
+                    </div>
 
+                }
             }
-        }
-    </div>
+            </div>
+        </div>
+
+
+
     <br>
     <div class="w3-row">
         <div>
@@ -69,27 +79,33 @@
                 Disease
             </label>
         </div>
+        <div class="w3-responsive" id="checkbox-container-disease">
 
-        @if (Model != null && Model.objPatientDiseaseVM != null)
-        {
-            foreach (var disease in Model.objPatientDiseaseVM)
+            @if (Model != null && Model.objPatientDiseaseVM != null)
             {
-                <div class="w3-third" id="intakeDisease">
-                    @if (disease.HistoryID > 0)
-                    {
-                        <input class="w3-radio" type="checkbox" name="disease" value="@disease.ID" checked /> @disease.Title
-                    }
-                    else {
-                        <input class="w3-radio" type="checkbox" name="disease" value="@disease.ID" /> @disease.Title
-                    }
-                </div>
+                foreach (var disease in Model.objPatientDiseaseVM)
+                {
+                    <div class="w3-third" id="intakeDisease">
+                        @if (disease.HistoryID > 0)
+                        {
+                            <span class="checkbox-diseases-@disease.ID" style="display:none;">
+                                <input class="w3-radio" type="checkbox" name="disease" value="@disease.ID" checked /> @disease.Title
+                            </span>
+                        }
+                        else {
+                            <span class="checkbox-diseases-@disease.ID" style="display:none;">
+                                <input class="w3-radio" type="checkbox" name="disease" value="@disease.ID" /> @disease.Title
+                            </span>
+                        }
+                    </div>
+                }
             }
-        }
-    </div>
+            </div>
+        </div>
     <div class="ajax_loader_save" style="display:none;margin-top: -180px; margin-left: 200px;z-index:300"><img src="~/Images/ajax_loader.svg" /></div>
     <p id="intakeError" class="saveError" style="font-size:large;color:red;display:none">Please select at least one option</p>
     <div class="w3-row w3-margin-top">
-        <div class="w3-third" style="float: none; margin: auto">
+        <div class="w3-third" style="float: none; margin: auto;margin-bottom:30px;">
             <button class="w3-btn-block w3-green submitForm" type="button">Save</button>
         </div>
     </div>

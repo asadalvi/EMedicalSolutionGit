@@ -84,6 +84,7 @@ namespace EMedicalSolution.Controllers
                     db.SaveChanges();
 
                     int last_id = symptom.ID;
+                    db.SymptomsProcedureMappings.RemoveRange(db.SymptomsProcedureMappings.Where(x => x.SymptomID == last_id));
                     SymptomsProcedureMapping mapps = new SymptomsProcedureMapping();
                     //db.SaveChanges();
                     if (procedureTypeIDsArr.Length > 0)
@@ -111,6 +112,7 @@ namespace EMedicalSolution.Controllers
             bool status = false;
             using (PatientMgmtEntities db = new PatientMgmtEntities())
             {
+                db.SymptomsProcedureMappings.RemoveRange(db.SymptomsProcedureMappings.Where(x => x.SymptomID == id));
                 var v = db.Symptoms.Where(a => a.ID == id).FirstOrDefault();
                 if (v != null)
                 {

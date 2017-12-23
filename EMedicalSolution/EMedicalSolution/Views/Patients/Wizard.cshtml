@@ -146,7 +146,10 @@
                     var pHistoryId = 0;
                     // Step show event
                     $("#smartwizard").on("showStep", function (e, anchorObject, stepNumber, stepDirection, stepPosition) {
-                         
+                       
+                        if (stepNumber == 2) {
+                            getSymptomAndDiseaseFroProcedure()
+                        }
                         if (stepNumber == 4) {
                             $(".finish-button").removeClass("disabled")
                         }
@@ -513,6 +516,54 @@
                             }
                         });
                     });
+                    getSymptomAndDiseaseFroProcedure = function () {
+                 
+                             
+                            $(document).find('#checkbox-container-symptom .w3-radio').each(function () {
+                                $(this).parent('span').css('display', 'none');
+                                //$("#no-necessity-available").css('display', 'none');
+                            });
+                            $(document).find('#checkbox-container-disease .w3-radio').each(function () {
+                                $(this).parent('span').css('display', 'none');
+                                //$("#no-necessity-available").css('display', 'none');
+                            });
+
+                        var pHistoryId = $("#pHistoryId").val();
+                        $.ajax({
+                            url: '/Patients/GetSymptomsDiseasesProType?pHistoryId=' + pHistoryId,
+                            type: 'POST',
+                            dataType: 'json',
+                            contentType: false,
+                            enctype: 'multipart/form-data',
+                            processData: false,
+                            success: function (Data) {
+                                if(Data !== undefined){
+                                //symptom show
+                                    if (Data.Allsymptom.length > 0) {
+
+                                        for (var i = 0; i < Data.Allsymptom.length; i++) {
+                                            var myclass = (".checkbox-symptom-" + Data.Allsymptom[i]);
+                                        $("" + myclass).css("display", "block");
+                                        //$("#no-necessity-available").css('display', 'none');
+                                    }
+
+                                }
+                                //diseases show
+                                    if (Data.Alldiseases.length > 0) {
+
+                                    for (var i = 0; i < Data.Alldiseases.length; i++) {
+                                        var myclass = (".checkbox-diseases-" + Data.Alldiseases[i]);
+                                        $("" + myclass).css("display", "block");
+                                        //$("#no-necessity-available").css('display', 'none');
+                                    }
+                                }
+                                }
+                            },
+                            error: function ($data) {
+                                toastr.error("Error, The request can not be completed due to some error!");
+                            }
+                        });
+                    }
             </script>
                      
         }
