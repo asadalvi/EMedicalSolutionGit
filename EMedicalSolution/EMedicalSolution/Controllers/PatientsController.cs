@@ -909,9 +909,9 @@ namespace EMedicalSolution.Controllers
                         MailMessage mail = new MailMessage();
                         SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com");
                         mail.From = new MailAddress("testmailnaveed@gmail.com");
-                        mail.To.Add("naveed.shah194@gmail.com");
-                        mail.Subject = "Test Mail - 1";
-                        mail.Body = "mail with attachment";
+                        mail.To.Add("asad.awan69@gmail.com");
+                        mail.Subject = "A Supper Bill generated";
+                        mail.Body = "Supper bill of a paitient has been attached herewith:";
 
                         mail.Attachments.Add(attachmnt);
                         SmtpServer.Port = 587;
